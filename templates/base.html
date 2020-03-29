@@ -27,7 +27,7 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
-
+	{% block header %} {% endblock header %}
         {% block content %}{% endblock %}
 
         {# Global javascript #}
