@@ -69,7 +69,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             verbose_name=_('date joined'),
             default=timezone.now
     )
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
