@@ -31,6 +31,8 @@ class HomePage(Page):
             [
                 ("brands", blocks.BrandsBlock()),
             ],
+            verbose_name=_("corps"),
+            help_text=_("corps de page"),
             null=True,
             blank=True,
     )
@@ -48,3 +50,6 @@ class HomePage(Page):
     class Meta:
         verbose_name = _("page d'accueil")
         verbose_name_plural = _("pages d'accueil")
+
+    def get_admin_display_title(self):
+        return _("Accueil")
