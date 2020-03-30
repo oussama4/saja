@@ -19,7 +19,9 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/saja.css' %}">
-
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
+   	
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
@@ -27,12 +29,17 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
-	{% block header %} {% endblock header %}
+	
+	{% include 'header.html' %}
+
         {% block content %}{% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/saja.js' %}"></script>
-
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/uikit.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/uikit-icons.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit-icons.min.js"></script>
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
