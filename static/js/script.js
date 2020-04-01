@@ -1,6 +1,6 @@
 // Google Maps
 
-function initMap() {
+ function initMap() {
   var elements = document.querySelectorAll('.js-map');
   Array.prototype.forEach.call(elements, function(el) {
     var lat = +el.dataset.latitude,
@@ -12,7 +12,7 @@ function initMap() {
         center: { lat: lat, lng: lng },
         disableDefaultUI: true
       });
-      var marker = new google.maps.Marker({
+     var marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
         position: { lat: lat, lng: lng }
@@ -20,7 +20,13 @@ function initMap() {
     }
   });
 }
-
+//      var map;
+//      function initMap() {
+//        map = new google.maps.Map(document.getElementById('js-map'), {
+//          center: {lat: -34.397, lng: 150.644}
+//          zoom: 8
+//        });
+//      }
 // Change view
 
 (function() {

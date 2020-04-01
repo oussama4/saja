@@ -16,6 +16,7 @@
         </title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/saja.css' %}">
@@ -30,12 +31,13 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 	
-	{% include 'header.html' %}
-
+	{% include 'partials/toolbar.html' %}
+	{% include 'partials/navbar.html'  %}
         {% block content %}{% endblock %}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+	<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyBJP4V-yCmlX5tkQ9mWAA2IoaCfBb91iRA&callback=initMap" async defer></script>
 	<script type="text/javascript" src="{% static 'js/uikit.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/uikit-icons.js' %}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit.min.js"></script>
