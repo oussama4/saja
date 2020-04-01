@@ -1,0 +1,129 @@
+{% load static wagtailuserbar menu_tags %}
+
+{% get_menu "main" as navigation %}
+
+<div class= "uk-navbar-container tm-navbar-container" uk-sticky="cls-active: tm-navbar-container-fixed">
+ <div class="uk-container" uk-navbar>
+ <div class="uk-nav-left">	 
+  <button class="uk-navbar-toggle uk-hidden@m uk-display-inline-block" uk-toggle="target: #nav-offcanvas" uk-navbar-toggle-icon></button>
+  <a class="uk-navbar-item uk-logo uk-display-inline-block " href="/">
+   <img src="{% static 'img/saja.png' %}" width="90" height="32" alt="Logo">
+  </a>
+  <nav class="uk-visible@m uk-display-inline-block">
+   <ul class="uk-navbar-nav">
+    {% for item in navigation.menu_items.all %}
+     <li>
+	     <a href="{{item.link}}">{{item.title}}</a>
+     </li>
+    {% endfor %}
+    <li>
+     <a href="#">brands<span uk-icon="icon:chevron-down; ratio: .75" class="uk-margin-xsmall-left"></a>
+     <div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical" uk-drop="pos:bottom-justify; delay-show: 125;
+      		delay-hide:50; duration: 75;boundary: .tm-navbar-container; boundary-align: true; pos: bottom-justify; flip: x">
+      <div class="uk-container uk-container-small uk-margin-top uk-margin-bottom">
+	<ul class="uk-grid-small uk-child-width-1-6" uk-grid>
+	 <li>
+	  <div class="tm-ratio tm-ratio-4-3">
+	   <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="#" title="XPEL">
+	    <figure class="tm-media-box-wrap">
+	     <img src="{% static 'img/logo-xpel.png' %}" alt="xpel">
+	    </figure>
+	   </a>
+	  </div>
+	 </li>
+	 <li>
+	  <div class="tm-ratio tm-ratio-4-3">
+	   <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="#" title="hp">
+	    <figure class="tm-media-box-wrap">
+	     <img src="{% static 'img/hp.png' %}" alt="hp">
+	    </figure>
+	   </a>
+	  </div>
+	 </li>
+	 <li>
+	  <div class="tm-ratio tm-ratio-4-3">
+	   <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="#" title="drammock">
+	    <figure class="tm-media-box-wrap">
+	     <img src="{% static 'img/drammock.png' %}" alt="drammock">
+	    </figure>
+	   </a>
+	  </div>
+	 </li>
+	 <li>
+	  <div class="tm-ratio tm-ratio-4-3">
+	   <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="#" title="ROQVEL">
+	    <figure class="tm-media-box-wrap">
+	     <img src="{% static 'img/ROQVEL.png' %}" alt="roqvel">
+	    </figure>
+	   </a>
+	  </div>
+	 </li>
+	</ul>
+        <div class="uk-text-center uk-margin">
+	 <a class="uk-link-muted uk-text-uppercase" href="#">
+          <span >See all brands</span>
+          <span uk-icon="icon:chevron-right; ratio: .75"><span>
+	 </a>
+	</div>
+       </div>
+      </div>
+     </li>
+      <li>
+       <a href="#">About</a>
+     </li>
+     <li>
+      <a href="#">Contacts</a>
+     </li>
+     <li>
+      <a href="#">Blog</a>
+     </li>
+    </ul>		
+   </nav>
+  </div>
+  <div class="uk-navbar-right">
+<!-- serch icon and dropdown -->	  
+   <a class="uk-navbar-toggle tm-navbar-button" href="#" uk-search-icon></a>
+   <div class="uk-navbar-dropdown uk-padding-small uk-margin-remove" uk-drop="mode: click; 
+   	cls-drop:uk-navbar-dropdown; boundary: .tm-navbar-container;boundary-align:true; pos: bottom-justify; flip:x">
+    <div class="uk-container">
+     <div class="uk-grid-small uk-flex-middle" uk-grid>
+      <div class="uk-width-expand">
+<!--pay attention this is a form (search)-->
+       <form class="uk-search uk-search-navbar uk-width-1-1">
+	<input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+       </form>
+      </div>
+      <div class="uk-width-auto">
+       <a class="uk-navbar-dropdown-close" href="#" uk-close></a>
+     </div>
+    </div>
+   </div>
+  </div>
+  </a>
+  <!--  #account link -->
+  <a class="uk-navbar-item uk-lind-muted tm-navbar-button" href="#" uk-icon="user"></a>
+  <div class="uk-padding-small uk-margin-remove" uk-dropdown="pos: bottom-right; offset: -10; delay-hide:200;" style="min-width: 150px;">
+   <ul class="uk-nav uk-dropdown-nav">
+    <li>
+     <a href="#" >Orders<span>(3)</span></a>
+    </li>
+    <li>
+     <a href="#" >WishList<span>(5)</span></a>
+    </li>
+    <li>
+     <a href="#" >Settings</a>
+    </li>
+    <li class="uk-nav-divider"></li>
+    <li>
+     <a href="#">Log out</a>
+    </li>
+   </ul>
+  </div>
+  <!-- this is the icon of cart -->
+  <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas" onclick="return false">
+	  <span uk-icon="cart"></span>
+	  <span class="uk-badge">3</span>
+  </a>
+ </div>
+</div>
+</div>
