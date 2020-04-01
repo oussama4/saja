@@ -1,6 +1,9 @@
 {% load static wagtailuserbar menu_tags %}
 
-{% get_menu "main" as navigation %}
+{% get_menu "xpel" as xpelCat %}
+{% get_menu "roqvel" as roqvelCat %}
+{% get_menu "drammock" as drammockCat %}
+{% get_menu "healthpoint" as healthpoitCat %}
 
 <div class= "uk-navbar-container tm-navbar-container" uk-sticky="cls-active: tm-navbar-container-fixed">
  <div class="uk-container" uk-navbar>
@@ -11,11 +14,82 @@
   </a>
   <nav class="uk-visible@m uk-display-inline-block">
    <ul class="uk-navbar-nav">
-    {% for item in navigation.menu_items.all %}
      <li>
-	     <a href="{{item.link}}">{{item.title}}</a>
+	     <a href="catalog">Catalog<span uk-icon="icon:chevron-down; ratio:.75;" class="uk-margin-xsmall-left"></span></a>
+       <div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical"
+                    uk-drop="pos: bottom-justify;
+                            delay-show: 125;
+                            delay-hide: 50;
+                            duration: 75;
+                            boundary: .tm-navbar-container;
+                            boundary-align: true; 
+                            pos: bottom-justify; 
+			    flip: x">
+	 <div class="uk-container">
+          <ul class="uk-navbar-dropdown-grid uk-child-width-1-4" uk-grid>
+ <!-- brands category-->
+	   <li>
+	    <div class="uk-margin-top.uk-margin-bottom">
+	     <a href="#" class="uk-link-reset">
+		<div class="uk-text-bolder">Xpel</div>
+		<ul class="uk-nav uk-nav-default">
+		{% for item in xpelCat.menu_items.all %}
+		  <li>
+	           <a href="{{item.link}}" >{{item.title }}</a>
+		  </li>
+		 {% endfor %}
+		</ul>
+	     </a>
+	    </div>
+	   </li>
+	   <li>
+	    <div class="uk-margin-top.uk-margin-bottom">
+	     <a href="#" class="uk-link-reset">
+		<div class="uk-text-bolder">Roqvel</div>
+		<ul class="uk-nav uk-nav-default">
+		{% for item in roqvelCat.menu_items.all %}
+		  <li>
+			  <a href="{{item.link}}" >{{item.title }}</a>
+		  </li>
+		 {% endfor %}
+		</ul>
+	     </a>
+	    </div>
+	   </li>
+	   <li>
+	    <div class="uk-margin-top.uk-margin-bottom">
+	     <a href="#" class="uk-link-reset">
+		<div class="uk-text-bolder">Drammok</div>
+		<ul class="uk-nav uk-nav-default">
+		{% for item in drammockCat.menu_items.all %}
+		  <li>
+			  <a href="{{item.link}}" >{{item.title }}</a>
+		  </li>
+		 {% endfor %}
+		</ul>
+	     </a>
+	    </div>
+	   </li>
+	   <li>
+	    <div class="uk-margin-top.uk-margin-bottom">
+	     <a href="#" class="uk-link-reset">
+		<div class="uk-text-bolder">Healthpoint</div>
+		<ul class="uk-nav uk-nav-default">
+		{% for item in healthpoitCat.menu_items.all %}
+		  <li>
+			  <a href="{{item.link}}" >{{item.title }}</a>
+		  </li>
+		 {% endfor %}
+		</ul>
+	     </a>
+	    </div>
+	   </li>
+ 
+	  </ul>
+	 </div>
+       </div>
+<!--    </a>-->
      </li>
-    {% endfor %}
     <li>
      <a href="#">brands<span uk-icon="icon:chevron-down; ratio: .75" class="uk-margin-xsmall-left"></a>
      <div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical" uk-drop="pos:bottom-justify; delay-show: 125;
