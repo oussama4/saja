@@ -33,6 +33,7 @@ class CarouselImages(Orderable):
     ]
 
 class HomePage(Page):
+    template = 'home/home_page.html'
     max_count = 1
 
     body = StreamField(

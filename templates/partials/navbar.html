@@ -13,9 +13,9 @@
    <ul class="uk-navbar-nav">
     {% for item in navigation.menu_items.all %}
      <li>
-	<a href="item.link_page">item.link_title</a>
+	     <a href="{{item.link}}">{{item.title}}</a>
      </li>
-    {% endfor%}
+    {% endfor %}
     <li>
      <a href="#">brands<span uk-icon="icon:chevron-down; ratio: .75" class="uk-margin-xsmall-left"></a>
      <div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical" uk-drop="pos:bottom-justify; delay-show: 125;
