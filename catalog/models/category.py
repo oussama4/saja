@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class Categorie(models.Model):
-    name = models.CharField(verbose_name=_("Titre"), max_length=50)
+class Category(models.Model):
+    name = models.CharField(verbose_name=_("Nom"), max_length=50)
     slug = models.SlugField()
     description = models.TextField(
             verbose_name=_("Description"),
@@ -30,8 +30,8 @@ class Categorie(models.Model):
     )
 
     class Meta:
-        verbose_name = _("produit")
-        verbose_name_plural = _("produits")
+        verbose_name = _("Catégorie")
+        verbose_name_plural = _("Catégories")
 
     def __str__(self):
         return self.title
