@@ -1,0 +1,96 @@
+{% load wagtailcore_tags footer_tags menu_tags %}
+
+{% get_menu "xpel" as xpelCat %}
+{% get_menu "drammock" as drammockCat %}
+{% get_menu "roqvel" as roqvelCat %}
+{% get_menu "healthpoint" as healthpointCat %}
+
+{% get_footer "MagasineInfo" as info %}
+
+<div id="nav-offcanvas" uk-offcanvas="overlay:true">
+ <aside class="uk-offcanvas-bar uk-padding-remove">
+  <div class="uk-card uk-card-default uk-card-small tm-shadow-remove">
+   <header class="uk-card-header uk-flex uk-flex-middle">
+     <div>
+        <a class="uk-link-muted uk-text-bold" href="#">{{ info.footer_items.all.0.title }}</a>
+	<div class="uk-text-xsmall uk-text-muted" style="margin-top: -2px;">
+          <div>{{ info.footer_items.all.1.title }}</div>
+          <div>{{ info.footer_items.all.2.title }}</div>
+	</div>
+     </div>
+   </header>
+   <nav class="uk-card-small uk-card-body">
+    <ul class="uk-nav-default uk-nav-parent-icon uk-list-divider" uk-nav >
+     <li class="uk-parent">
+	<a href="#">Catalog</a>
+	<ul class="uk-nav-sub">
+         <li>
+	  <a href="#" class="uk-text-lead">Xpel</a>
+	   <ul>
+	    {% for item in xpelCat.menu_items.all %}
+	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
+	    {% endfor %}
+	  </ul>
+	 </li>
+	 <li>
+	  <a href="#" class="uk-text-lead">Roqvel</a>
+	   <ul>
+	    {% for item in roqvelCat.menu_items.all %}
+	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
+	    {% endfor %}
+	  </ul>
+	 </li>
+         <li>
+	  <a href="#" class="uk-text-lead">Drammock</a>
+	   <ul>
+	    {% for item in drammockCat.menu_items.all %}
+	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
+	    {% endfor %}
+	  </ul>
+	 </li>
+         <li>
+	  <a href="#" class="uk-text-lead">Healthpoint</a>
+	   <ul>
+	    {% for item in healthpointCat.menu_items.all %}
+	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
+	    {% endfor %}
+	  </ul>
+	 </li>
+       </ul>
+     </li>
+     <li class="uk-parent">
+	<a href="#" >Marques</a>
+	 <ul class="uk-nav-sub uk-list-divider">
+	   <li><a href="xpel" class="uk-text-left"><span>Xpel</span></a></li>
+	   <li><a href="roqvel" class="uk-text-left"><span>Roqvel</span></a></li>
+	   <li><a href="drammock" class="uk-text-left">Drammock</a></li>
+	   <li><a href="healthpoint" class="uk-text-left">Healthpoint</a></li>
+	 </ul>	
+     </li>
+     <li><a href="about">A Propos</a></li>
+     <li><a href="contact">Contacts</a></li>
+    </ul>
+   </nav>
+   <nav class="uk-card-body">
+    <ul class="uk-iconnav uk-flex-center">
+	{% if settings.tools.MediasSociauxParametre.facebook %}
+	<li>
+		<a href="{{settings.tools.MediasSociauxParametre.facebook}}" title="facebook"><span uk-icon="facebook"></span></a>
+	</li>
+        {% endif %}
+	{% if settings.tools.MediasSociauxParametre.instagram %}
+	<li>
+	 <a href="{{settings.tools.MediasSociauxParametre.instagram}}" title="instagram"><span uk-icon="instagram"></span></a>
+	</li>
+        {% endif %}
+	{% if settings.tools.MediasSociauxParametre.youtube %}
+	<li>
+	 <a href="{{settings.tools.MediasSociauxParametre.youtube}}" title="youtube"><span uk-icon="youtube"></span></a>
+	</li>
+        {% endif %}
+    </ul>
+
+   </nav>
+  </div>
+ </aside>
+</div>
