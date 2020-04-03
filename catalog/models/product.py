@@ -1,4 +1,7 @@
 from django.db import models
 
-class Product(models.Model):
-    pass
+from wagtail.core.models import Page
+
+class Product(Page):
+    subpage_types = []
+
