@@ -6,8 +6,7 @@ from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 class Category(Page):
-    subpage_types = ["catalog.Product"]
-    parent_page_types = ["catalog.Brand"]
+    subpage_types = ["catalog.Product", "catalog.Category"]
 
     description = models.TextField(
             verbose_name=_("Description"),
