@@ -8,14 +8,8 @@ from wagtail.core.models import Page
 
 class Product(Page):
     
-    product_title = models.CharField(
-            verbose_name = _("titre"),
-            blank=True,
-            null=True,
-            max_length=100
-        )
 
- #   product_slug = AutoSlugField(populate_from="product_title", editable=True)
+#   product_slug = AutoSlugField(populate_from="product_title", editable=True)
 
     product_image = models.ForeignKey(
             "wagtailimages.Image",
@@ -38,3 +32,11 @@ class Product(Page):
         verbose_name_plural = _("produits")
 
 
+<<<<<<< HEAD
+=======
+from wagtail.core.models import Page
+
+class Product(Page):
+    subpage_types = []
+
+>>>>>>> dev

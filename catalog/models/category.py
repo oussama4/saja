@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-class Category(models.Model):
-    title = models.CharField(verbose_name=_("titre"), max_length=100)
-    slug = models.SlugField()
+class Category(Page):
+    subpage_types = ["catalog.Product", "catalog.Category"]
+
     description = models.TextField(
             verbose_name=_("Description"),
             blank=True,
@@ -19,27 +20,10 @@ class Category(models.Model):
             related_name="+",
             on_delete=models.SET_NULL,
     )
-    parent = models.ForeignKey(
-            "self",
-            blank=True,
-            null=True,
-            related_name="children",
-            on_delete=models.CASCADE,
-    )
-    brand = models.ForeignKey(
-            "catalog.Brand",
-            verbose_name=_("Marque"),
-            related_name="categories",
-            on_delete=models.CASCADE,
-    )
 
-    panels = [
-            FieldPanel("title"),
-            FieldPanel("slug"),
+    content_panels = Page.content_panels + [
             FieldPanel("description"),
-            FieldPanel("parent"),
             ImageChooserPanel("image"),
-            PageChooserPanel("brand"),
     ]
 
     class Meta:
@@ -48,4 +32,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["ancestors"] = self.get_ancestors(inclusive=True)[1:]
+        return context
 

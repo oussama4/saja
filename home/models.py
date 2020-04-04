@@ -23,7 +23,7 @@ class CarouselImages(Orderable):
     carousel_image = models.ForeignKey(
             "wagtailimages.Image",
             null=True,
-            blank=False,
+            blank=True,
             on_delete=models.SET_NULL,
             related_name="+",
     )
@@ -49,7 +49,7 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
             MultiFieldPanel(
                 [
-                    InlinePanel("carousel_images", max_num=5, min_num=1, label=_("Image")),
+                    InlinePanel("carousel_images", max_num=5, min_num=0, label=_("Image")),
                 ],
                 heading=_("images de carrousel")
             ),

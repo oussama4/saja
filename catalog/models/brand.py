@@ -28,12 +28,6 @@ class Brand(RoutablePageMixin, Page):
 
     template = "brand/parent_band.html"
 
-    custom_title = models.CharField(
-            max_length = 100,
-            blank = False,
-            null = False,
-            help_text = _("remplace le titre par defaut")
-         )
 
     content_panels = Page.content_panels + [
             MultiFieldPanel([

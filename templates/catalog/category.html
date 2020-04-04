@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+	<div class="uk-container uk-margin">
+	    <ul class="uk-breadcrumb">
+		{% for ancestor in ancestors %}
+			<li><a href={% pageurl ancestor %}> {{ ancestor.title }} </a></li>
+		{% endfor %}
+	    </ul>
+	</div>
+{% endblock %}
