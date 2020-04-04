@@ -33,3 +33,8 @@ class Category(Page):
     def __str__(self):
         return self.title
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["ancestors"] = self.get_ancestors(inclusive=True)[1:]
+        return context
+
