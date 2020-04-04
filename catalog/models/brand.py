@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel 
@@ -8,7 +9,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from modelcluster.fields import ParentalKey 
 
 
-class CarouselImageBrand(Orderable):
+class CarouselBrandImage(Orderable):
 
     brand = ParentalKey("catalog.brand", related_name = "carousel_images")
     carousel_image = models.ForeignKey(
@@ -39,15 +40,17 @@ class Brand(RoutablePageMixin, Page):
                 FieldPanel("custom_title"),
                 ],heading = _("titre")
             ),
-            InlinePanel("carousel_image", max_num=3, min_num=1, label = _("image")),
+            InlinePanel("carousel_images", max_num=3, min_num=1, label = _("image")),
         ]
 
     def get_context(self, request, *args, **kwargs):
 
         context = super().get_context(request, *args, **kwargs)
 
-
     
+    class Meta:
+        verbose_name = "_(Marque)"
+        verbose_name_plural = "_(Marques)"
 
     
     
