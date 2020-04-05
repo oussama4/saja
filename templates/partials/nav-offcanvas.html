@@ -14,8 +14,10 @@
      <div>
         <a class="uk-link-muted uk-text-bold" href="#">{{ info.footer_items.all.0.title }}</a>
 	<div class="uk-text-xsmall uk-text-muted" style="margin-top: -2px;">
+		{%if info%}
           <div>{{ info.footer_items.all.1.title }}</div>
           <div>{{ info.footer_items.all.2.title }}</div>
+	        {%endif%}
 	</div>
      </div>
    </header>
@@ -27,33 +29,41 @@
          <li>
 	  <a href="#" class="uk-text-lead">Xpel</a>
 	   <ul>
+		   {%if xpelCat%}
 	    {% for item in xpelCat.menu_items.all %}
 	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
 	    {% endfor %}
+	    	   {%endif%}
 	  </ul>
 	 </li>
 	 <li>
 	  <a href="#" class="uk-text-lead">Roqvel</a>
 	   <ul>
+		   {%if roqvelCat%}
 	    {% for item in roqvelCat.menu_items.all %}
 	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
 	    {% endfor %}
+	           {%endif%}
 	  </ul>
 	 </li>
          <li>
 	  <a href="#" class="uk-text-lead">Drammock</a>
 	   <ul>
+		   {%if drammockCat%}
 	    {% for item in drammockCat.menu_items.all %}
 	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
 	    {% endfor %}
+	    	  {%endif%}
 	  </ul>
 	 </li>
          <li>
 	  <a href="#" class="uk-text-lead">Healthpoint</a>
 	   <ul>
+		   {%if healthpointCat%}
 	    {% for item in healthpointCat.menu_items.all %}
 	     <li> <a href="{{ item.link }}">{{ item.title }}</a></li>
 	    {% endfor %}
+	    	   {%endif%}
 	  </ul>
 	 </li>
        </ul>
@@ -61,10 +71,10 @@
      <li class="uk-parent">
 	<a href="#" >Marques</a>
 	 <ul class="uk-nav-sub uk-list-divider">
-	   <li><a href="xpel" class="uk-text-left"><span>Xpel</span></a></li>
-	   <li><a href="roqvel" class="uk-text-left"><span>Roqvel</span></a></li>
-	   <li><a href="drammock" class="uk-text-left">Drammock</a></li>
-	   <li><a href="healthpoint" class="uk-text-left">Healthpoint</a></li>
+	   <li><a href="/xpel" class="uk-text-left"><span>Xpel</span></a></li>
+	   <li><a href="/roqvel" class="uk-text-left"><span>Roqvel</span></a></li>
+	   <li><a href="/drammock" class="uk-text-left">Drammock</a></li>
+	   <li><a href="/healthpoint" class="uk-text-left">Healthpoint</a></li>
 	 </ul>	
      </li>
      <li><a href="about">A Propos</a></li>

@@ -31,11 +31,14 @@ INSTALLED_APPS = [
     'search',
     'tools',
 
+    'django_extensions',
+
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     
     'wagtail.contrib.settings',
+    'wagtail.contrib.routable_page',
 
     'wagtail.embeds',
     'wagtail.sites',
@@ -170,6 +173,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+SHELL_PLUS_MODEL_IMPORTS_RESOLVER = 'django_extensions.collision_resolvers.FullPathCR'
+SHELL_PLUS = "ipython"
 
 # Wagtail settings
 

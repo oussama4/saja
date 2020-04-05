@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content%}
+<div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
+  <div uk-slider>
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+    <ul class="uk-slider-items uk-grid uk-grid-match" uk-height-viewport="offset-top: false; offset-bottom: 50">
+      {% for loop_cycle in self.carousel_images.all %}
+	{% image loop_cycle.carousel_image fill-1400x700 as img %}
+	<li class="uk-width-1-1">
+	 <div class="uk-panel">
+	   <img src="{{ img.url}}"  alt="{{ img.alt}}" class=""  uk-cover>
+	 </div>
+	</li>
+      {% endfor %}
+    </ul>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+    </div>
+    <ul class=" uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+  </div>
+   <div class="uk-text-center">
+     <ul class="uk-breadcrumb uk-flex-center uk-margin-remove">
+     {% for ancestor in ancestors %}
+       <li><a href="{% pageurl ancestor %}">{{ ancestor.title }}</a></li>
+     {% endfor %}
+     </ul>
+     <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ self.title| title }}</h1>
+     <div class="uk-text-meta uk-margin-xsmall-top">
+	<p>{{ itemsSum}} Produit</p>
+     </div>
+  </div>
+</div>
+
+<div class="uk-container uk-margin">
+    
+      <div uk-grid>
+       {% if products %}
+	<div class="uk-grid-medium" uk-grid>
+	 {% include './products-grid.html' %}
+	</div>
+       {% endif %}
+
+	<div>
+
+	</div>
+      </div>
+</div>
+
+{% endblock content %}
