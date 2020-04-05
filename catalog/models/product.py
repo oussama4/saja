@@ -7,7 +7,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.models import Page
 
 class Product(Page):
-    
+    subpage_types = []    
 
 #   product_slug = AutoSlugField(populate_from="product_title", editable=True)
 
@@ -18,11 +18,12 @@ class Product(Page):
             on_delete=models.SET_NULL,
             help_text=_("image de produit")
         )
+    product_description = models.TextField(verbose_name=_("Description"), blank=True,null=True)
+
     product_price = models.FloatField(verbose_name=_("le prix"), blank=True,null=True)
 
     content_panels = Page.content_panels + [
-            FieldPanel("product_title"),
-#            FieldPanel("product_slug"),
+            FieldPanel("product_description"), 
             ImageChooserPanel("product_image"),
             FieldPanel("product_price"),
         ]
@@ -32,11 +33,3 @@ class Product(Page):
         verbose_name_plural = _("produits")
 
 
-<<<<<<< HEAD
-=======
-from wagtail.core.models import Page
-
-class Product(Page):
-    subpage_types = []
-
->>>>>>> dev

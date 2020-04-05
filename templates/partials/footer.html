@@ -35,9 +35,11 @@
 	<div>
 		Nos Services 
 	 <ul class="uk-nav uk-nav-default">
+	 {% if services %}
 	  {% for item in services.footer_items.all %}
 	  <li><a href="{{ item.link}}">{{ item.title }}</a></li>
 	  {% endfor %}
+	 {% endif %}
 	 </ul>
 	</div>
 
@@ -48,6 +50,7 @@
     <div>
 	    SAJA COSMETICS
     <ul class="uk-list uk-text-small">
+	 {% if saja %}
 	 {% for item in saja.footer_items.all %}
 	<li>
 		<a class="uk-link-muted" href="{%if not item.link  %}# {% else %} {{ item.link }} {% endif %}">
@@ -55,6 +58,7 @@
 	  </a>
 	</li>
 	{% endfor %}
+	{% endif %}
     </ul>
     </div>
    </nav>
@@ -67,19 +71,19 @@
       <li>
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="receiver"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{{ info.footer_items.all.0.title }}</span>
+	   <span class=tm-pseudo">{% if info %}{{ info.footer_items.all.0.title }}{%endif%}</span>
 	</a>
       </li>
       <li>
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="location"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{{ info.footer_items.all.1.title }}</span>
+	   <span class=tm-pseudo">{%if info%}{{ info.footer_items.all.1.title }}{%endif%}</span>
 	</a>
       </li>
       <li>
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="clock"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{{ info.footer_items.all.2.title }}</span>
+	   <span class=tm-pseudo">{%if info%}{{ info.footer_items.all.2.title }}{%endif%}</span>
 	</a>
       </li>     
       <li>
