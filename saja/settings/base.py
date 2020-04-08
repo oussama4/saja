@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'search',
     'tools',
 
+    'widget_tweaks',
+
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
