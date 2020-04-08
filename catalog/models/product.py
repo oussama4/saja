@@ -21,7 +21,7 @@ class ProductImages(Orderable):
     )
     product_image = models.ForeignKey(
             "wagtailimages.Image",
-            verbose_name=_("image de produit"),
+            verbose_name=_("extrat image pour produit"),
             related_name="+",
             null=True,
             blank=True,
@@ -57,6 +57,7 @@ class Product(Page):
             validators=[MaxValueValidator(90)]
     )
 
+
     content_panels = Page.content_panels + [
             FieldPanel("description"),
             MultiFieldPanel(
@@ -79,6 +80,7 @@ class Product(Page):
     def price(self):
         if self.has_discount:
             #TODO calculate price
-            pass
+
+            return price
         return self.base_price
 

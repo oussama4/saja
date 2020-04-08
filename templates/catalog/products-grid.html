@@ -45,11 +45,11 @@
 		<div class="uk-grid-margin uk-first-column">
 		    <div class="uk-grid-collapse uk-child-width-1-3 tm-products-grid js-products-grid" uk-grid="uk-grid">	
 		     {% for product in products %}
-			 {% image product.product_images.all[0].product_image fill-900x400 as img %}
+			 {% image product.product_image fill-900x400 as img %}
 			<article class="tm-product-card uk-first-column">
 			    <div class="tm-product-card-media">
 				<div class="tm-ratio tm-ratio-4-3">
-				    <a class="tm-media-box" href="product.html">
+					<a class="tm-media-box" href="{{ product.url }}">
 				     <figure class="tm-media-box-wrap">
 					     <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
 				     </figure>
@@ -61,7 +61,7 @@
 					<div class="uk-text-meta uk-margin-xsmall-bottom">{{ product.title }}</div>
 				    <h3 class="tm-product-card-title">
 					<a class="uk-link-heading" href="product.html">
-						{{ product.description }}</a>
+						{{ product.description |richtext }}</a>
 				    </h3>
 				</div>
 			    
