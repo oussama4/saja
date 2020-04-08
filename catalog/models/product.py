@@ -1,3 +1,5 @@
+import decimal
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
@@ -78,7 +80,8 @@ class Product(Page):
     @property
     def price(self):
         if self.has_discount:
-            #TODO calculate price
-            pass
+            rest_percent = (100 - self.discount_percent) / 100
+            discount_price = self.base_price * decimal.Decimal(rest_percent)
+            return discount_price.quantize(decimal.Decimal('.00'))
         return self.base_price
 
