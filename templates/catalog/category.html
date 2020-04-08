@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static  wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-	<div class="uk-container uk-margin">
-	    <ul class="uk-breadcrumb">
-		{% for ancestor in ancestors %}
-			<li><a href={% pageurl ancestor %}> {{ ancestor.title }} </a></li>
-		{% endfor %}
-	    </ul>
-	</div>
+<div class="uk-container uk-margin">
+   {% include './breadcrumb.html'%}
+</div>
+
+<div class="uk-container uk-margin">
+    
+      <div class="uk-grid-medium uk-grid" uk-grid>
+	{% if categories %}
+	  {% include './navCategory.html' %}
+	{% endif %}
+
+       {% if products %}
+	 {% include './products-grid.html' %}
+       {% endif %}
+      </div>
+</div>
+
 {% endblock %}

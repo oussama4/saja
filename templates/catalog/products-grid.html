@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="uk-width-expend">
-  <div class="uk-grid-medium uk-child-width-1-1 uk-grid-stack" uk-grid>
+<div class="uk-width-expand">
+  <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
 <!--items-->
     <div>
 	<div class="uk-card uk-card-default uk-card-small tm-ignore-container">
@@ -26,7 +26,7 @@
 			<div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
 			    <!--//- Filters button-->
 			    <button class="uk-button uk-button-default uk-button-small uk-hidden@m" uk-toggle="target: #filters">
-				<span class="uk-margin-xsmall-right uk-icon" uk-icon="icon: settings; ratio: .75;">
+				<span class="uk-margin-xsmall-right uk-icon uk-text-uppercase" uk-icon="icon: settings; ratio: .75;">filtters
 			    </button>
 			    <!-- //- Change view-->
 			    <div class="tm-change-view uk-margin-small-left">
@@ -78,13 +78,13 @@
 						js-added-to" title="Add to favorites">
 						<span uk-icon="icon: heart; ratio: .75;"
 						class="uk-icon"></span>
-						<span class="tm-product-card-action-text">Ajouter à favoris</span>
+						<span class=" tm-product-card-action-text">Ajouter à favoris</span>
 					    </a>
 
 					</div>
 					<button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
 						<span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
-						<span class="tm-product-card-add-button-text">Ajouter au panier </span>
+						<span class="uk-text-small tm-product-card-add-button-text">Ajouter au panier </span>
 					</button>
 				    </div>
 				</div>
@@ -105,9 +105,13 @@
 	     <li><a href="?page={{ products.previous_page_number }}"><span uk-pagination-previous></span><a></li>
 	   {% endif %}
 	   {% for page in products.paginator.page_range %}
-	     <li class="{% if page == products.number %} uk-active {% endif %}"><a href="?page={{page}}">{{ page }}</a></li>
+	    {% if page == products.number %}
+	     <li class=" uk-active"><a href="?page={{page}}">{{ page }}</a></li>
+	    {% elif page > products.number|add:'-4' and page < products.number|add:'4' %}
+	     <li><a href="?page={{ page }}">{{page}}</a></li>
+	    {% endif %}
 	   {% endfor %}
-	   {% if products.has_next %}
+	   {% if products.has_next  %}
 	     <li><a href="?page={{ products.next_page_number }}"><span uk-pagination-next></span></a></li>
 	   {% endif %}
 	  </ul>
