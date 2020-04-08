@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+	<div class="uk-container uk-margin">
+	    <div uk-grid>
+	    	<div class="uk-position-relative uk-visible-toggle uk-dark uk-width-1-2" 
+		     tabindex="-1" uk-slideshow="ratio: 16:16">
+	            <ul class="uk-slideshow-items">
+		    	{% for img in page.product_images.all %}
+		    	    {% image img.product_image original as pimg %} 
+	            	    <li> <img data-src="{{ pimg.url }}" alt="{{ pimg.alt }}" 
+					width="{{ pimg.width }}px" height="{{ pimg.height }}px" uk-img uk-cover/> </li>
+		    	{% endfor %}
+	            </ul>
+
+		    <a class="uk-position-center-left uk-position-small uk-hidden-hover" 
+			href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+		    <a class="uk-position-center-right uk-position-small uk-hidden-hover" 
+			href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+			
+		    <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+	    	</div>
+		<div class="uk-width-1-2">
+		    <h1> {{ page.title }} </h1>
+		    <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded uk-grid-small uk-child-width-1-1">
+		        <div class="uk-first-column">
+			    {% if page.has_discount %}
+			    	<del class="uk-text-meta"> {{ page.base_price }} DH </del>
+			    {% endif %}
+		            <div class="uk-text-lead">
+				{{ page.price }} DH
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	    </div>
+
+	    <div class="uk-margin">
+	        <div class="uk-text-lead uk-text-bolder">
+		    Description
+	        </div>
+		<p> {{ page.description|richtext }} </p>
+	    </div>
+	</div>
+{% endblock %}
