@@ -6,6 +6,7 @@ from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from .product import Product
+
 class Category(Page):
     subpage_types = ["catalog.Product", "catalog.Category"]
 
@@ -38,7 +39,6 @@ class Category(Page):
             else:
                 brandCat = all_categories.descendant_of(self.get_parent())
 
-           # brandCat = all_categories.descendant_of(self)
             filtred_cat = {}
         
             for item in brandCat:
