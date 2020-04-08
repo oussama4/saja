@@ -85,3 +85,6 @@ class Product(Page):
             return discount_price.quantize(decimal.Decimal('.00'))
         return self.base_price
 
+    @property
+    def first_image(self):
+        return self.product_images.first()
