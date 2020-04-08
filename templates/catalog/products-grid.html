@@ -45,7 +45,7 @@
 		<div class="uk-grid-margin uk-first-column">
 		    <div class="uk-grid-collapse uk-child-width-1-3 tm-products-grid js-products-grid" uk-grid="uk-grid">	
 		     {% for product in products %}
-			 {% image product.product_image fill-900x400 as img %}
+			 {% image product.product_images.all[0].product_image fill-900x400 as img %}
 			<article class="tm-product-card uk-first-column">
 			    <div class="tm-product-card-media">
 				<div class="tm-ratio tm-ratio-4-3">
@@ -61,14 +61,16 @@
 					<div class="uk-text-meta uk-margin-xsmall-bottom">{{ product.title }}</div>
 				    <h3 class="tm-product-card-title">
 					<a class="uk-link-heading" href="product.html">
-						{{ product.product_description }}</a>
+						{{ product.description }}</a>
 				    </h3>
 				</div>
 			    
 				<div class="tm-product-card-shop">
 				    <div class="tm-product-card-prices">
-					<del class="uk-text-meta">{{ product.product_price |add:100}}DH</del>
-					<div class="tm-product-card-price">{{ product.product_price}}</div>
+					{% if product.has_discount %}
+					<del class="uk-text-meta">{{ product.base_price}}DH</del>
+					{% endif %}
+					<div class="tm-product-card-price">{{ product.price}}</div>
 				    </div>
 				    <div class="tm-product-card-add">
 					<div class="uk-text-meta tm-product-card-actions">

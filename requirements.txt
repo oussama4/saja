@@ -2,3 +2,14 @@ psycopg2>=2.8,<2.9
 Django>=2.2,<2.3
 wagtail>=2.7,<2.8
 python-dotenv==0.12.0
+
+
+{#{% get_menu "xpel" as xpelCat %}
+{% get_menu "roqvel" as roqvelCat %}
+{% get_menu "drammock" as drammockCat %}
+{% get_menu "healthpoint" as healthpoitCat %}#}
+
+{% get_footer "NosServices" as services %}
+{% get_footer "SAJA COSMETICS" as saja %}
+{% get_footer "MagasineInfo" as info %}
+
