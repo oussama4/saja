@@ -178,19 +178,25 @@
   <a class="uk-navbar-item uk-lind-muted tm-navbar-button" href="#" uk-icon="user"></a>
   <div class="uk-padding-small uk-margin-remove" uk-dropdown="pos: bottom-right; offset: -10; delay-hide:200;" style="min-width: 150px;">
    <ul class="uk-nav uk-dropdown-nav">
-    <li>
-     <a href="#" >Orders<span>(3)</span></a>
-    </li>
-    <li>
-     <a href="#" >WishList<span>(5)</span></a>
-    </li>
-    <li>
-     <a href="#" >Settings</a>
-    </li>
-    <li class="uk-nav-divider"></li>
-    <li>
-     <a href="#">Log out</a>
-    </li>
+    {% if request.user.is_authenticated %}
+    	<li>
+     	    <a href="#" >Orders<span>(3)</span></a>
+    	</li>
+    	<li>
+     	    <a href="#" >Settings</a>
+    	</li>
+    	<li class="uk-nav-divider"></li>
+    	<li>
+	    <a href="{% url 'logout' %}"> Se déconnecter </a>
+	</li>
+    {% else %}
+    	<li>
+	    <a href="{% url 'signup' %}"> Créez votre compte </a>
+	</li>
+	    <a href="{% url 'login' %}"> Se connecter </a>
+	<li>
+	</li>
+    {% endif %}
    </ul>
   </div>
   <!-- this is the icon of cart -->

@@ -58,10 +58,10 @@
 			    </div>
 			    <div class="tm-product-card-body">
 				<div class="tm-product-card-info">
-					<div class="uk-text-meta uk-margin-xsmall-bottom">{{ product.title }}</div>
+					<div class="uk-text-meta uk-margin-xsmall-bottom">{{ product.get_parent.title }}</div>
 				    <h3 class="tm-product-card-title">
 					<a class="uk-link-heading" href="product.html">
-						{{ product.description |richtext }}</a>
+						{{ product.title }}</a>
 				    </h3>
 				</div>
 			    

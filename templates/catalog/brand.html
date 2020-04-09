@@ -23,19 +23,20 @@
   {% include './breadcrumb.html' %}
 </div>
 
-<div class="uk-container uk-margin">
+<div class=" uk-margin" style="border-style: double ;border-width:8px;border-color:#fff3e6;">
+<div style="background:#fff3e6;padding:10px">
    <div class="uk-text-capitalize uk-text-center">
-	<p class="title">{{ self.best_title }}</p>
+	<p class="title">{{ self.group_title }}</p>
    </div>
-   <div class="uk-child-width-1-4@m " uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
+   <div class="uk-child-width-1-4@m " style="background: #fff3e6" uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
 	   
-          {% for product in self.carousel_products.all %}
-	    {% image product.carousel_product.first_image.product_image fill-400x200 as img %}
+          {% for product in self.group_products.all %}
+	    {% image product.group_product.first_image.product_image fill-400x200 as img %}
 	   <div>
 		<div class="uk-card tm-product-card ">
 		    <div class=" tm-product-card-media">
 			<div class="tm-ratio tm-ratio-4-3">
-			   <a class="tm-media-box" href="{{ product.carousel_product.url }}">
+			   <a class="tm-media-box" href="{{ product.group_product.url }}">
 			      <figure class="tm-media-box-wrap">
 			           <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
 			      </figure>
@@ -43,22 +44,22 @@
 		  	</div>
 		    </div>
 		    <div>
-			<div class=" tm-product-card-body">
-			  <div class="tm-product-card-info">
-			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.carousel_product.title }}</div>
-			    <h3 class="tm-product-card-title">
-				    <a href="{{ product.carousel_product.url }}" class="uk-link-heading">
-					    {{ product.carousel_product.description|richtext }}
+			<div class=" tm-product-card-body" style="height:16vh;">
+			  <div class="tm-product-card-info" style="max-height:6vh">
+			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.group_product.get_parent.title }}</div>
+			    <h3 class="tm-product-card-title" style="margin:0;">
+				    <a href="{{ product.group_product.url }}" class="uk-link-heading">
+					    {{ product.group_product.title |slice:'35'}}
 				    </a>
 			    </h3>
 			   </div>
 
-			    <div class="tm-product-card-shop" >
+			    <div class="tm-product-card-shop"  style="bottom: 2vh;position:absolute;width: 18vw;">
 				    <div class="tm-product-card-prices">
-					{% if product.carousel_product.has_discount %}
-					<del class="uk-text-meta">{{ product.carousel_product.base_price}}DH</del>
+					{% if product.group_product.has_discount %}
+					<del class="uk-text-meta">{{ product.group_product.base_price}}DH</del>
 					{% endif %}
-					<div class="tm-product-card-price">{{ product.carousel_product.price}}</div>
+					<div class="tm-product-card-price">{{ product.group_product.price}}</div>
 				    </div>
 				    <div class="tm-product-card-add">
 					<div class="uk-text-meta tm-product-card-actions">
@@ -80,6 +81,7 @@
  		
 
    </div>
+</div>
 </div>
 
 {% endblock content %}
