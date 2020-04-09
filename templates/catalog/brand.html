@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content%}
 <div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-	   uk-slideshow="autoplay: true;min-height: 200; max-height: 500; animation: fade" >
+	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
     <ul class="uk-slideshow-items" >
       {% for loop_cycle in self.carousel_images.all %}
@@ -24,7 +24,62 @@
 </div>
 
 <div class="uk-container uk-margin">
+   <div class="uk-text-capitalize uk-text-center">
+	<p class="title">{{ self.best_title }}</p>
+   </div>
+   <div class="uk-child-width-1-4@m " uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
+	   
+          {% for product in self.carousel_products.all %}
+	    {% image product.carousel_product.first_image.product_image fill-400x200 as img %}
+	   <div>
+		<div class="uk-card tm-product-card ">
+		    <div class=" tm-product-card-media">
+			<div class="tm-ratio tm-ratio-4-3">
+			   <a class="tm-media-box" href="{{ product.carousel_product.url }}">
+			      <figure class="tm-media-box-wrap">
+			           <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
+			      </figure>
+		          </a>
+		  	</div>
+		    </div>
+		    <div>
+			<div class=" tm-product-card-body">
+			  <div class="tm-product-card-info">
+			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.carousel_product.title }}</div>
+			    <h3 class="tm-product-card-title">
+				    <a href="{{ product.carousel_product.url }}" class="uk-link-heading">
+					    {{ product.carousel_product.description|richtext }}
+				    </a>
+			    </h3>
+			   </div>
 
+			    <div class="tm-product-card-shop" >
+				    <div class="tm-product-card-prices">
+					{% if product.carousel_product.has_discount %}
+					<del class="uk-text-meta">{{ product.carousel_product.base_price}}DH</del>
+					{% endif %}
+					<div class="tm-product-card-price">{{ product.carousel_product.price}}</div>
+				    </div>
+				    <div class="tm-product-card-add">
+					<div class="uk-text-meta tm-product-card-actions">
+					    <a class="tm-product-card-action tm-action-button-active" title="Add to favorites">
+						<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
+					    </a>
+					</div>
+					<a class="uk-button uk-button-primary tm-product-card-add-button tm-shine">
+					    <span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
+					</a>
+				    </div>
+				</div>
+
+			</div>
+		    </div>
+		</div>
+		</div>
+           {% endfor %}
+ 		
+
+   </div>
 </div>
 
 {% endblock content %}
