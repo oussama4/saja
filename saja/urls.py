@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^signup/$', users_views.SignUp.as_view(), name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    url(r'^profile/address/$', users_views.create_address, name='address'),
     url(r'^profile/$', users_views.profile, name='profile'),
 
     # For anything not caught by a more specific rule above, hand over to
