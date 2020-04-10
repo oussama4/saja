@@ -5,6 +5,16 @@ from django.utils import timezone
 from django.conf import settings
 from django.urls import reverse
 
+
+class Address(models.Model):
+    addr = models.CharField(verbose_name=_("adresse"), max_length=255)
+    phone = models.CharField(verbose_name=_("numéro de téléphone"), max_length=50)
+
+    class Meta:
+        verbose_name = _("adresse")
+        verbose_name_plural = _("adresses")
+
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -36,6 +46,7 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name=_('adresse email'),
@@ -45,12 +56,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         }
     )
     first_name = models.CharField(
-            verbose_name=_('Prénom'),
-            max_length=30
+            verbose_name=_('Prénom'), max_length=30
     )
     last_name = models.CharField(
-            verbose_name=_('nom de famille'),
-            max_length=30
+            verbose_name=_('nom de famille'), max_length=30
     )
     is_staff = models.BooleanField(
         verbose_name=_('staff status'),
@@ -66,9 +75,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(
-            verbose_name=_('date joined'),
-            default=timezone.now
+            verbose_name=_('date joined'), default=timezone.now
     )
+    address = models.ForeignKey(
+            Address, related_name="+", null=True, blank=True, on_delete=models.SET_NULL
+    )
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -95,3 +107,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
