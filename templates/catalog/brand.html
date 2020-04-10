@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load i18n  static wagtailcore_tags wagtailimages_tags %}
+
 
 {% block content%}
 <div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
@@ -20,15 +21,15 @@
     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center "></ul>
     </div>
   </div>
-  {% include './breadcrumb.html' %}
 </div>
 
-<div class=" uk-margin" style="border-style: double ;border-width:8px;border-color:#fff3e6;">
-<div style="background:#fff3e6;padding:10px">
+<div class=" uk-margin-bottom" style="background:linear-gradient(190deg,#fff,#fff3e6);border-style: double ;border-width:8px;border-color:#fff3e6;">
+	{% include './breadcrumb.html' %}
+<div style="padding:10px">
    <div class="uk-text-capitalize uk-text-center">
 	<p class="title">{{ self.group_title }}</p>
    </div>
-   <div class="uk-child-width-1-4@m " style="background: #fff3e6" uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
+   <div class="uk-child-width-1-4@m " uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
 	   
           {% for product in self.group_products.all %}
 	    {% image product.group_product.first_image.product_image fill-400x200 as img %}
@@ -79,9 +80,34 @@
 		</div>
            {% endfor %}
  		
-
    </div>
 </div>
 </div>
+	<div class=" uk-width-1-1 uk-margin-bottom" uk-grid>
+	   <div class= "uk-card uk-card-default uk-width-1-1 uk-card-small">
+		 <header class= "uk-card-header">
+		    <h2 class="uk-text-center">{% trans 'Categories' %}</h2>
+		 </header>
+		<div class= "uk-card-body uk-child-width-expand@s uk-grid-divider uk-child-width-1-4@m" uk-grid>
+		{% if categories %}
+		 {% for key, value in categories.items %}
+		    <div style="">
+			<h4 class="uk-link-muted"><a href="{{ key.url }}">{{ key.title }}</a></h4>
+        		<ul class="uk-list " >
+			 {% for subCat in value %}
+			    <li class="uk-margin-remove"><a href="{{ subCat.url }}">{{ subCat.title }}</a></li>
+			 {% endfor %}
+        		</ul>
+   		    </div>
+		 {% endfor %}
+	        {% endif %}
+		</div>
+	   </div>
+	</div>
 
+<div class="uk-margin-bottom uk-child-width-1-2@m uk-grid-match" uk-grid>
+{% for block in self.body %}    
+    {% include_block block%}   
+{% endfor %}          
+</div>
 {% endblock content %}

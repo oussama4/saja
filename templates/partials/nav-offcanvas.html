@@ -1,8 +1,11 @@
-{% load wagtailcore_tags footer_tags menu_tags %}
+{% load i18n wagtailcore_tags footer_tags menu_tags %}
 
+{% get_menu "xpel" as xpelCat %}
+{% get_menu "roqvel" as roqvelCat %}
+{% get_menu "drammock" as drammockCat %}
+{% get_menu "healthpoint" as healthpoitCat %}
 
-
-
+{% get_footer "MagasineInfo" as info %}
 
 <div id="nav-offcanvas" uk-offcanvas="overlay:true">
  <aside class="uk-offcanvas-bar uk-padding-remove">
@@ -21,7 +24,7 @@
    <nav class="uk-card-small uk-card-body">
     <ul class="uk-nav-default uk-nav-parent-icon uk-list-divider" uk-nav >
      <li class="uk-parent">
-	<a href="#">Catalog</a>
+	     <a href="#">{% trans 'Catalog' %}</a>
 	<ul class="uk-nav-sub">
          <li>
 	  <a href="#" class="uk-text-lead">Xpel</a>
@@ -66,7 +69,7 @@
        </ul>
      </li>
      <li class="uk-parent">
-	<a href="#" >Marques</a>
+	     <a href="#" >{% trans 'Marques' %}</a>
 	 <ul class="uk-nav-sub uk-list-divider">
 	   <li><a href="/xpel" class="uk-text-left"><span>Xpel</span></a></li>
 	   <li><a href="/roqvel" class="uk-text-left"><span>Roqvel</span></a></li>
@@ -74,8 +77,8 @@
 	   <li><a href="/healthpoint" class="uk-text-left">Healthpoint</a></li>
 	 </ul>	
      </li>
-     <li><a href="about">A Propos</a></li>
-     <li><a href="contact">Contacts</a></li>
+     <li><a href="about">{% trans 'A Propos' %}</a></li>
+     <li><a href="contact">{% trans 'Contacts' %}</a></li>
     </ul>
    </nav>
    <nav class="uk-card-body">

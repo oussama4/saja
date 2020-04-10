@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
-{% load static  wagtailcore_tags wagtailimages_tags %}
+{% load static i18n  wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 <div class="uk-container uk-margin">
    {% include './breadcrumb.html'%}
+   <p class="uk-text-center">{{ itemsSum}} {% trans 'Produit' %}</p>
 </div>
 
 <div class="uk-container uk-margin">

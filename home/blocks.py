@@ -22,8 +22,8 @@ class BrandsBlock(blocks.StructBlock):
 
 class BrandConnect(blocks.StructBlock):
 
-    Media_title = blocks.CharBlock(required = True,max_length=60,help_text=_("le titre de paragraphe"))
-    Media_text = blocks.RichTextBlock(
+    media_title = blocks.CharBlock(required = True,max_length=60,help_text=_("le titre de paragraphe"))
+    media_text = blocks.RichTextBlock(
             required = True,
             features=['h2', 'h3', 'bold', 'italic', 'link'],
             help_text=_("le paragraphe de  medias sociaux partie")
@@ -52,7 +52,7 @@ class BrandParagraph(blocks.StructBlock):
     image = ImageChooserBlock(required=False,help_text=_("image"))
 
     class Meta:
-        template = "catalog/brand_paragraph"
+        template = "catalog/brand_paragraph.html"
         icon = "openquote"
         label = _("Paragraphe")
 

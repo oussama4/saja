@@ -1,4 +1,4 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
 
 <div class="uk-width-expand">
   <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
@@ -11,22 +11,22 @@
 		    <div class="uk-grid-small uk-flex-middle" uk-grid="uk-grid">
 			<!--Sorting-->
 			<div class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
-			    <span class="uk-margin-small-right uk-text-muted">Trier par</span>
+				<span class="uk-margin-small-right uk-text-muted">{% trans 'Trier par' %}</span>
 			    <ul class="uk-subnav uk-margin-remove">
 				<li class="uk-active uk-padding-remove">
-				    <a class="uk-text-lowercase" href="#">Pertinent
+					<a class="uk-text-lowercase" href="#">{% trans 'Pertinent' %}
 				    <span class="uk-margin-xsmall-left uk-icon" uk-icon="icon:chevron-down;ratio:.5;"></span>
 				    </a>
 				</li>
-				<li><a class="uk-text-lowercase" href="#">prix</a></li>
-				<li><a class="uk-text-lowercase" href="#">Le plus récent</a></li>
+				<li><a class="uk-text-lowercase" href="#">{% trans 'prix' %}</a></li>
+				<li><a class="uk-text-lowercase" href="#">{% trans 'Le plus récent' %}</a></li>
 			    </ul>
 			</div>
 			<!-- Filters button & change view-->
 			<div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
 			    <!--//- Filters button-->
 			    <button class="uk-button uk-button-default uk-button-small uk-hidden@m" uk-toggle="target: #filters">
-				<span class="uk-margin-xsmall-right uk-icon uk-text-uppercase" uk-icon="icon: settings; ratio: .75;">filtters
+				    <span class="uk-margin-xsmall-right uk-icon uk-text-uppercase" uk-icon="icon: settings; ratio: .75;">{% trans 'filtters' %}
 			    </button>
 			    <!-- //- Change view-->
 			    <div class="tm-change-view uk-margin-small-left">
@@ -80,13 +80,13 @@
 						js-added-to" title="Add to favorites">
 						<span uk-icon="icon: heart; ratio: .75;"
 						class="uk-icon"></span>
-						<span class=" tm-product-card-action-text">Ajouter à favoris</span>
+						<span class=" tm-product-card-action-text">{% trans 'Ajouter à favoris' %}</span>
 					    </a>
 
 					</div>
 					<button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
 						<span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
-						<span class="uk-text-small tm-product-card-add-button-text">Ajouter au panier </span>
+						<span class="uk-text-small tm-product-card-add-button-text">{% trans 'Ajouter au panier' %} </span>
 					</button>
 				    </div>
 				</div>
