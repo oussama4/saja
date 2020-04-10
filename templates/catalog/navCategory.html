@@ -1,0 +1,58 @@
+{% load i18n %} 
+<aside id="filters" class="uk-width-1-4 tm-aside-column tm-filters" uk-offcanvas="overlay: true container: false;">
+    <div class="uk-offcanvas-bar uk-padding-remove">
+      <div class="uk-card uk-card-default uk-card-small uk-flex uk-flex-column uk-height-1-1">
+       <header class="uk-card-header uk-flex uk-flex-middle ">
+	 <div class="uk-grid-small uk-flex-1" uk-grid>
+	   <div class="uk-width-expand">
+		   <div class="uk-h3">{% trans 'filtres' %}</div>
+	   </div>
+	   <button class="uk-offcanvas-close" type="button" uk-close><button>
+	 </div>
+       </header>
+       <div class="uk-margin-remove uk-flex-1 uk-overflow-auto"
+	    uk-accordion="multiple:true; targets: > .js-accordion-section" 
+     	    style="flex-basis:auto;">
+	   <section class="uk-card-body uk-open js-accordion-section">
+		   <h4 class="uk-accordion-title uk-margin-remove">{% trans 'Prix' %}</h4>
+	     <div class="uk-accordion-content">
+		<div class="uk-grid-small uk-child-width-1-2 uk-text-small" uk-grid>
+		  <div>
+		    <div class="uk-inline">
+			    <span class="uk-form-icon uk-text-xsmall">{% trans 'De' %}</span>
+		      <input class="uk-input" type="number" >
+		    </div>
+		  </div>
+		  <div>
+		    <div class="uk-inline">
+			    <span class="uk-form-icon uk-text-xsmall">{% trans 'À' %}</span>
+		      <input class="uk-input" type="number">
+		    </div>
+		  </div>
+		 </div>
+		</div>
+	   </section>
+	   <section class="uk-card-small uk-card-body">
+		   <h4 class="uk-margin-small-bottom">{% trans 'Categories' %}</h4>
+	     <ul class="uk-nav uk-nav-default uk-nav-parent-icon" uk-nav>
+	      {% if categories%}
+		{% for key, value in categories.items %}
+		<li class="uk-parent">
+			<a href="#">{{ key.title }}</a>
+			<div uk-dropdown="pos: right;boundary-align:true;mode:click">
+			  <ul class="uk-dropdown-nav uk-nav">
+			    {% for subCat in value %}
+			    <li><a href="{{ subCat.url }}">{{ subCat.title }}</a></li>
+			    {% endfor %} 
+			  </ul>
+			</div>
+		</li>
+		{% endfor %}
+	       {% endif %}
+	     </ul>
+	   </section>
+
+       </div>
+      </div>
+    </div>
+  </aside>

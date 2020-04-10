@@ -1,17 +1,19 @@
-{% load static wagtailcore_tags wagtailuserbar  footer_tags %}
+{% load i18n static wagtailcore_tags wagtailuserbar  footer_tags %}
 
 {% get_footer "NosServices" as services %}
 {% get_footer "SAJA COSMETICS" as saja %}
 {% get_footer "MagasineInfo" as info %}
+
+
 <section class=" footer uk-width-1-1 uk-padding-remove-bottom uk-section uk-section-secondary uk-section-small uk-light">
  <div class="uk-container">
   <div class="uk-grid-medium uk-child-width-1-1 uk-child-width-1-4@m" uk-grid>
    <div>
     <a class="uk-logo" href="/"><img src="{% static 'img/saja.png' %}" width="90" height="32"></a>
-    <p class="uk-text-small">est un grossiste proposant une grande
+    <p class="uk-text-small">{% trans 'est un grossiste proposant une grande
   	 variété d'articles de luxe.
    	 Nous sommes un fournisseur 
-	 fiable de produits de beauté</p>
+	 fiable de produits de beauté' %}</p>
     <ul class="uk-iconnav">
 	{% if settings.tools.MediasSociauxParametre.facebook %}
 	<li>
@@ -33,7 +35,7 @@
    <div>
      <nav class="uk-grid-small uk-child-width-1-2" uk-grid >
 	<div>
-		Nos Services 
+		{% trans 'Nos Services' %} 
 	 <ul class="uk-nav uk-nav-default">
 	 {% if services %}
 	  {% for item in services.footer_items.all %}
@@ -48,7 +50,7 @@
    <div>
    <nav class= uk-grid-small uk-child-width-1-2 uk-grid>
     <div>
-	    SAJA COSMETICS
+	    {% trans 'SAJA COSMETICS' %}
     <ul class="uk-list uk-text-small">
 	 {% if saja %}
 	 {% for item in saja.footer_items.all %}
@@ -66,7 +68,7 @@
    <div>
     <nav class= uk-grid-small uk-child-width-1-2 uk-grid>
     <div>
-	    MAGASINE
+	    {% trans 'MAGASINE' %}
      <ul class="uk-list uk-text-small">
       <li>
 	 <a class="uk-link-muted" href="#">

@@ -1,0 +1,50 @@
+
+
+{% load wagtailcore_tags i18n %}
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body"  uk-scrollspy="cls: uk-animation-fade; repeat: true">
+		<h3 class="uk-card-title">{{self.newsletter_title}}</h3>
+		<p>{{ self.newsletter_text|richtext }}</p>
+		<form class="uk-form-stacked">
+		  <label>
+			<div class="uk-form-label uk-text-muted">
+				{% trans 'Abonnez-vous pour Nos actualités' %}
+			</div>
+			<div class="uk-inline uk-width-1-1">
+			   <a class="uk-form-icon uk-form-icon-flip uk-icon" href="#" uk-icon="mail"></a>
+			     <input class="uk-input" type="email" placeholder="Your email" required="">
+			</div>
+			<p class="uk-form-label uk-text-meta uk-text-justify">
+			{% trans 'En cliquant, vous acceptez de recevoir nos newsletters conformément à notre
+		       	politique de confidentialité. Vous pourrez vous désinscrire à tout moment depuis 
+			votre compte client ou en contactant notre service client' %}
+			</p>
+		  </label>
+		</form>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-default uk-card-body" style="background:#ffcf99" uk-scrollspy="cls: uk-animation-fade; repeat: true">
+		<h3 class="uk-card-title">{{ self.media_title }}</h3>
+		<p>{{self.media_text }}</p>
+		<ul class="uk-iconnav">
+		  {% if settings.tools.MediasSociauxParametre.facebook %}
+		   <li>
+		     <a href="{{settings.tools.MediasSociauxParametre.facebook}}" title="facebook"><span uk-icon="icon:facebook; ratio:2"></span></a>
+		   </li>
+		  {% endif %}
+		  {% if settings.tools.MediasSociauxParametre.instagram %}
+		   <li>
+		     <a href="{{settings.tools.MediasSociauxParametre.instagram}}" title="instagram"><span uk-icon="icon:instagram;ratio:2"></span></a>
+		   </li>
+		  {% endif %}
+		  {% if settings.tools.MediasSociauxParametre.youtube %}
+		   <li>
+		     <a href="{{settings.tools.MediasSociauxParametre.youtube}}" title="youtube"><span uk-icon="icon:youtube; ratio:2"></span></a>
+		   </li>
+	    	  {% endif %}
+		</ul>
+        </div>
+    </div>
+

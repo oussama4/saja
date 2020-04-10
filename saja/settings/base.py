@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     'search',
     'tools',
 
+
+    'django_extensions',
+
     'widget_tweaks',
 
     'wagtail.contrib.modeladmin',

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 	<div class="uk-container uk-margin">
@@ -39,7 +38,7 @@
 
 	    <div class="uk-margin">
 	        <div class="uk-text-lead uk-text-bolder">
-		    Description
+			{% trans 'Description' %}
 	        </div>
 		<p> {{ page.description|richtext }} </p>
 	    </div>

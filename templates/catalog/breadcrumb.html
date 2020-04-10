@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+<div class="uk-text-center">
+     <ul class="uk-breadcrumb uk-flex-center uk-margin-remove">
+      {% for ancestor in ancestors %}
+       <li><a href="{% pageurl ancestor %}">{{ ancestor.title }}</a></li>
+      {% endfor %}
+     </ul>
+     <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ self.title| title }}</h1>
+     <div class="uk-text-meta uk-margin-xsmall-top">
+     </div>
+</div>
+

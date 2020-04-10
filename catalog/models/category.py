@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+
+from .product import Product
 
 class Category(Page):
     subpage_types = ["catalog.Product", "catalog.Category"]
@@ -26,15 +28,46 @@ class Category(Page):
             ImageChooserPanel("image"),
     ]
 
+    def get_context(self, request, *args, **kwargs):
+
+            context = super().get_context(request, *args, **kwargs)
+            all_categories = Category.objects.live().public()
+            all_products = Product.objects.live().public().order_by("-last_published_at").descendant_of(self)
+            brandCat = None 
+            if self.get_parent().content_type == self.content_type:
+                brandCat = all_categories.descendant_of(self.get_parent().get_parent())
+            else:
+                brandCat = all_categories.descendant_of(self.get_parent())
+
+            filtred_cat = {}
+        
+            for item in brandCat:
+                if not item.get_parent().content_type == self.content_type:
+                    filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, brandCat))
+
+
+            #pagination
+            paginator = Paginator(all_products, 12)
+            page = request.GET.get("page")
+            
+            try:
+                products = paginator.page(page)
+            except PageNotAnInteger:
+                products = paginator.page(1)
+            except EmptyPage:
+                products = paginator.page(paginator.num_pages)
+
+            context['products'] = products 
+            context['itemsSum'] = len(all_products)
+            context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
+            context['categories'] = filtred_cat 
+            return context
+
+
     class Meta:
-        verbose_name = _("Catégorie")
-        verbose_name_plural = _("Catégories")
+            verbose_name = _("Catégorie")
+            verbose_name_plural = _("Catégories")
 
     def __str__(self):
-        return self.title
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context["ancestors"] = self.get_ancestors(inclusive=True)[1:]
-        return context
+            return self.title
 
