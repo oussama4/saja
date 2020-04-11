@@ -31,7 +31,7 @@ class Address(models.Model):
         verbose_name_plural = _("adresses")
 
     def __str__(self):
-        '\n'.join(line1, line2, postal_code + city, phone)
+        return f'{self.line1} \n {self.line2} \n {self.postal_code}  {self.city} \n {self.phone}'
 
 
 class UserManager(BaseUserManager):
