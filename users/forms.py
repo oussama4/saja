@@ -72,5 +72,5 @@ class AddressCreateForm(forms.ModelForm):
 
     class Meta:
         model = Address
-        fields = ('addr', 'phone')
+        fields = ('line1', 'line2', 'postal_code', 'city', 'phone')
 

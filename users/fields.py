@@ -10,8 +10,7 @@ class MAPostalCodeField(models.CharField):
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 5
-        kwargs['min_length'] = 5
-        super().__init__(*args, *kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class PhoneNumberField(models.CharField):
