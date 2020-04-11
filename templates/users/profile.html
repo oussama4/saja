@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
-	Bienvenu dans votre profile
+    <div class="uk-container uk-margin">
+	<ul class="uk-nav uk-nav-default">
+	    <li class="uk-active"><a href="#"> {% trans "informations personnelles" %} </a></li>
+	    <li><a href="{% url 'address' %}"> {% trans "adresse" %} </a></li>
+	</ul>
+    </div>
 {% endblock %}

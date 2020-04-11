@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import gettext_lazy as _
 
-from .models import User
+from .models import User, Address
+
 
 class UserCreationForm(forms.ModelForm):
     """
@@ -38,6 +39,7 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
+
 class UserChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's
@@ -54,3 +56,11 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class AddressCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Address
+        fields = ('addr', 'phone')
+
