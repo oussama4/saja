@@ -87,7 +87,7 @@ class Brand(RoutablePageMixin, Page):
 
     def get_context(self,request,*args,**kwargs):
         
-        all_categories = Category.objects.live().public()
+        all_categories = Category.objects.live().public().descendant_of(self)
         filtred_cat = {}
         for item in all_categories:
             if item.get_parent().content_type == self.content_type:
