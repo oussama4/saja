@@ -56,7 +56,7 @@ class GroupOfProducts(Orderable):
             PageChooserPanel("group_product")
         ]
 
-@login_required
+
 class Brand(RoutablePageMixin, Page):
 
     template = "catalog/brand.html"
