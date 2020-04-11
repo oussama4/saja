@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.decorators import login_required
 
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.admin.edit_handlers import (
@@ -56,7 +55,7 @@ class GroupOfProducts(Orderable):
             PageChooserPanel("group_product")
         ]
 
-@login_required
+
 class Brand(RoutablePageMixin, Page):
 
     template = "catalog/brand.html"
