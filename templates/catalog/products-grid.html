@@ -49,7 +49,7 @@
 			<article class="tm-product-card ">
 			    <div class="tm-product-card-media">
 				<div class="tm-ratio tm-ratio-4-3">
-					<a class="tm-media-box" href="{{ product.url }}">
+					<a class="tm-media-box" href="{% pageurl product %}">
 				     <figure class="tm-media-box-wrap">
 					     <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
 				     </figure>
@@ -58,9 +58,9 @@
 			    </div>
 			    <div class="tm-product-card-body">
 				<div class="tm-product-card-info">
-					<div class="uk-text-meta uk-margin-xsmall-bottom">{{ product.get_parent.title }}</div>
+					<div class="uk-text-meta uk-margin-xsmall-bottom"><a class="uk-link-heading" href="{% pageurl product.get_parent %}">{{ product.get_parent.title }}</a></div>
 				    <h3 class="tm-product-card-title">
-					<a class="uk-link-heading" href="product.html">
+					    <a class="uk-link-heading" href="{% pageurl product%}">
 						{{ product.title }}</a>
 				    </h3>
 				</div>

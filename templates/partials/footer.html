@@ -10,11 +10,8 @@
   <div class="uk-grid-medium uk-child-width-1-1 uk-child-width-1-4@m" uk-grid>
    <div>
     <a class="uk-logo" href="/"><img src="{% static 'img/saja.png' %}" width="90" height="32"></a>
-    <p class="uk-text-small">{% trans 'est un grossiste proposant une grande
-  	 variété d'articles de luxe.
-   	 Nous sommes un fournisseur 
-	 fiable de produits de beauté' %}</p>
-    <ul class="uk-iconnav">
+    <p class="uk-text-small">{% trans "est un grossiste proposant une grande variété d'articles de luxe.  Nous sommes un fournisseur fiable de produits de beauté" %}</p>
+    <ul class="uk-iconnav"> 
 	{% if settings.tools.MediasSociauxParametre.facebook %}
 	<li>
 	 <a href="{{settings.tools.MediasSociauxParametre.facebook}}" title="facebook"><span uk-icon="facebook"></span></a>

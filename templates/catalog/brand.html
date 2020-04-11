@@ -37,7 +37,7 @@
 		<div class="uk-card tm-product-card ">
 		    <div class=" tm-product-card-media">
 			<div class="tm-ratio tm-ratio-4-3">
-			   <a class="tm-media-box" href="{{ product.group_product.url }}">
+			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
 			      <figure class="tm-media-box-wrap">
 			           <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
 			      </figure>
@@ -49,7 +49,7 @@
 			  <div class="tm-product-card-info" style="max-height:6vh">
 			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.group_product.get_parent.title }}</div>
 			    <h3 class="tm-product-card-title" style="margin:0;">
-				    <a href="{{ product.group_product.url }}" class="uk-link-heading">
+				    <a href="{% pageurl product.group_product %}" class="uk-link-heading">
 					    {{ product.group_product.title |slice:'35'}}
 				    </a>
 			    </h3>
@@ -92,10 +92,10 @@
 		{% if categories %}
 		 {% for key, value in categories.items %}
 		    <div style="">
-			<h4 class="uk-link-muted"><a href="{{ key.url }}">{{ key.title }}</a></h4>
+			<h4 class="uk-link-muted"><a href="{% pageurl key %}">{{ key.title }}</a></h4>
         		<ul class="uk-list " >
 			 {% for subCat in value %}
-			    <li class="uk-margin-remove"><a href="{{ subCat.url }}">{{ subCat.title }}</a></li>
+			    <li class="uk-margin-remove"><a href="{% pageurl subCat %}">{{ subCat.title }}</a></li>
 			 {% endfor %}
         		</ul>
    		    </div>

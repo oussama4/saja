@@ -1,4 +1,4 @@
-{% load i18n %} 
+{% load i18n wagtailcore_tags%} 
 <aside id="filters" class="uk-width-1-4 tm-aside-column tm-filters" uk-offcanvas="overlay: true container: false;">
     <div class="uk-offcanvas-bar uk-padding-remove">
       <div class="uk-card uk-card-default uk-card-small uk-flex uk-flex-column uk-height-1-1">
@@ -42,7 +42,7 @@
 			<div uk-dropdown="pos: right;boundary-align:true;mode:click">
 			  <ul class="uk-dropdown-nav uk-nav">
 			    {% for subCat in value %}
-			    <li><a href="{{ subCat.url }}">{{ subCat.title }}</a></li>
+			    <li><a href="{% pageurl subCat %}">{{ subCat.title }}</a></li>
 			    {% endfor %} 
 			  </ul>
 			</div>
