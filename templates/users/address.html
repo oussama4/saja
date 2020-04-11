@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="uk-container uk-margin">
+    	{% if request.user.has_address %}
+	    <div class="uk-card uk-card-default">
+		<div class="uk-card-body">
+		    <p> {{ request.user.address }} </p>
+		</div>
+		<div class="uk-card-footer">
+		    <a href="{% url 'address_change' %}" class="uk-button"> {% trans "changer" %} </a>
+		</div>
+	    </div>
+    	{% else %}
+    	    <div class="uk-text-lead">
+	    	{% trans "vous n'avez pas encore d'adresse" %}
+		<a href="{% url 'address_create' %}"> {% trans "en créer un ici" %} </a>
+    	    </div>
+    	{% endif %}
+    </div>
+        
+{% endblock %}

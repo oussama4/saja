@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
+from django.views import generic as generic_views
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
@@ -20,7 +21,10 @@ urlpatterns = [
     url(r'^signup/$', users_views.SignUp.as_view(), name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
-    url(r'^profile/address/$', users_views.create_address, name='address'),
+    url(r'^profile/address/create/$', users_views.create_address, name='address_create'),
+    url(r'^profile/address/$',
+        generic_views.TemplateView.as_view(template_name='users/address.html'),
+        name='address'),
     url(r'^profile/$', users_views.profile, name='profile'),
 
     # For anything not caught by a more specific rule above, hand over to

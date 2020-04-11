@@ -14,7 +14,7 @@ class MAPostalCodeField(models.CharField):
 
 
 class PhoneNumberField(models.CharField):
-    default_validators = [RegexValidator(r'^$(\\+|0)?([0-9]){6,13}', _("Invalid phone number"))]
+    default_validators = [RegexValidator(r'^(\+|0)?([0-9]){6,13}$', _("Invalid phone number"))]
     description = _("Phone number")
 
     def __init__(self, *args, **kwargs):

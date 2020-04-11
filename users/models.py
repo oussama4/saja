@@ -30,6 +30,9 @@ class Address(models.Model):
         verbose_name = _("adresse")
         verbose_name_plural = _("adresses")
 
+    def __str__(self):
+        '\n'.join(line1, line2, postal_code + city, phone)
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -123,4 +126,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def has_address(self):
+        """ checks if a user has an address """
+
+        if self.address:
+            return True
+        return False
 
