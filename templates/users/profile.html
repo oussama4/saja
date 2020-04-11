@@ -4,9 +4,9 @@
 
 {% block content %}
     <div class="uk-container uk-margin">
-	<ul class="uk-nav uk-nav-default">
-	    <li class="uk-active"><a href="#"> {% trans "informations personnelles" %} </a></li>
-	    <li><a href="{% url 'address' %}"> {% trans "adresse" %} </a></li>
+	<ul class="uk-nav uk-nav-primary">
+	    <li class=""><a class="uk-button" href="#"> {% trans "informations personnelles" %} </a></li>
+	    <li><a class="uk-button" href="{% url 'address' %}"> {% trans "adresse" %} </a></li>
 	</ul>
     </div>
 {% endblock %}

@@ -187,10 +187,7 @@
    <ul class="uk-nav uk-dropdown-nav">
     {% if request.user.is_authenticated %}
     	<li>
-     	    <a href="#" >Orders<span>(3)</span></a>
-    	</li>
-    	<li>
-     	    <a href="#" >Settings</a>
+	    <a href="{% url 'profile' %}" > {% trans "Profile" %} </a>
     	</li>
     	<li class="uk-nav-divider"></li>
     	<li>
