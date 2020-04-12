@@ -39,6 +39,7 @@ class HomePage(Page):
     body = StreamField(
             [
                 ("brands", blocks.BrandsBlock()),
+                ("connect", blocks.BrandConnect()),
             ],
             verbose_name=_("corps"),
             help_text=_("corps de page"),

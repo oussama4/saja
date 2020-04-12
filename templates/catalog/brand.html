@@ -4,7 +4,7 @@
 
 {% block content%}
 <div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
-   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
+   <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
 	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
     <ul class="uk-slideshow-items" >
@@ -17,7 +17,7 @@
     </ul>
     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-    <div class="uk-position-bottom-center uk-position-small">
+    <div class="">
     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center "></ul>
     </div>
   </div>
@@ -32,7 +32,7 @@
    <div class="uk-child-width-1-4@m " uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
 	   
           {% for product in self.group_products.all %}
-	    {% image product.group_product.first_image.product_image fill-400x200 as img %}
+	    {% image product.group_product.first_image.product_image fill-250x160 as img %}
 	   <div>
 		<div class="uk-card tm-product-card ">
 		    <div class=" tm-product-card-media">
@@ -105,9 +105,9 @@
 	   </div>
 	</div>
 
-<div class="uk-margin-bottom uk-child-width-1-2@m uk-grid-match" uk-grid>
+
 {% for block in self.body %}    
     {% include_block block%}   
 {% endfor %}          
-</div>
+
 {% endblock content %}
