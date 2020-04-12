@@ -17,11 +17,12 @@ urlpatterns = [
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'', include('allauth.urls')),
 
     url(r'^search/$', search_views.search, name='search'),
-    url(r'^signup/$', users_views.SignUp.as_view(), name='signup'),
-    url(r'^login/$', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    # url(r'^signup/$', users_views.SignUp.as_view(), name='signup'),
+    # url(r'^login/$', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    # url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^profile/address/create/$', users_views.create_address, name='address_create'),
     path('profile/address/change/<int:pk>', users_views.ChangeAddress.as_view(), name='address_change'),
     url(r'^profile/address/$',
