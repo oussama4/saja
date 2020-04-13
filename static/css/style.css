@@ -1,3 +1,30 @@
+@media onle screen and(max-width: 900px){
+	 
+
+}
+.uk-transition-flip{
+    transition: transform 1s, opacity 0.6s;
+}
+.upper{
+    opacity: 0;
+    transition: transform 1s, opacity 0.7s;
+    transform: rotateY(180deg);
+}
+
+
+.uk-transition-tog:hover .uk-transition-flip,
+.uk-transition-tog:focus .uk-transition-flip,
+.uk-transition-active.uk-active .uk-transition-flip {
+    opacity:0;
+    transform: rotateY(180deg);
+}
+.uk-transition-tog:hover .upper,
+.uk-transition-tog:focus .upper,
+.uk-transition-active.uk-active .upper {
+    opacity: 1;
+    transform: rotateY(0deg);
+}
+
 .uk-animation-slide-top {
     animation-name: uk-fade-top
 }
