@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'tools',
 
     'widget_tweaks',
+    'django_extensions',
 
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',

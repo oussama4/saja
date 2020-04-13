@@ -3,7 +3,7 @@
 {% load wagtailcore_tags i18n %}
 <div class="uk-margin-bottom uk-child-width-1-2@m uk-grid-match" uk-grid>
     <div>
-        <div class="uk-card uk-card-default uk-card-body"  uk-scrollspy="cls: uk-animation-fade; repeat: true">
+        <div class="uk-card uk-card-default uk-card-body"  uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
 		<h3 class="uk-card-title">{{self.newsletter_title}}</h3>
 		<p>{{ self.newsletter_text|richtext }}</p>
 		<form class="uk-form-stacked">
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-card-body" style="background:#ffcf99" uk-scrollspy="cls: uk-animation-fade; repeat: true">
+        <div class="uk-card uk-card-default uk-card-body" style="background:#ffcf99" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
 		<h3 class="uk-card-title">{{ self.media_title }}</h3>
 		<p>{{self.media_text }}</p>
 		<ul class="uk-iconnav">

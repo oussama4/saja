@@ -35,7 +35,7 @@
 	    {% image product.group_product.first_image.product_image fill-250x160 as img %}
 	   <div>
 		<div class="uk-card tm-product-card ">
-		    <div class=" tm-product-card-media">
+		    <div class=" tm-product-card-media uk-inline-clip uk-transition-toggle" tabindex="0">
 			<div class="tm-ratio tm-ratio-4-3">
 			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
 			      <figure class="tm-media-box-wrap">
@@ -83,8 +83,9 @@
    </div>
 </div>
 </div>
+	<div class="uk-container">
 	<div class=" uk-width-1-1 uk-margin-bottom" uk-grid>
-	   <div class= "uk-card uk-card-default uk-width-1-1 uk-card-small">
+	   <div class= "uk-card uk-padding-remove uk-card-default uk-width-1-1 uk-card-small">
 		 <header class= "uk-card-header">
 		    <h2 class="uk-text-center">{% trans 'Categories' %}</h2>
 		 </header>
@@ -103,6 +104,7 @@
 	        {% endif %}
 		</div>
 	   </div>
+	</div>
 	</div>
 
 
