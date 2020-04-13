@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<ul class="uk-tab uk-tab-left uk-subnav-pill">
+    <li {% if info %} class="uk-active" {% endif %}>
+	<a href="{% url 'profile' %}"> {% trans "info" %} </a> 
+    </li>
+    <li {% if address %} class="uk-active" {% endif %}>
+	<a href="{% url 'address' %}"> {% trans "adresse" %} </a> 
+    </li>
+</ul>

@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'tools',
 
     'widget_tweaks',
-    'django_extensions',
 
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
@@ -206,6 +205,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 SITE_ID = 1
 
