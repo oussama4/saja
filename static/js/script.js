@@ -29,6 +29,19 @@
 //      }
 // Change view
 
+function toggle (e){
+	var slide= document.querySelectorAll('.visibility');
+	if(e.id=="id"){
+		slide.forEach(el => {
+			el.style.display='block';
+		});
+	}else{
+		slide.forEach(el => {
+			el.style.display='none';
+		});
+	}
+}
+
 (function() {
   var container = document.getElementById('products');
 

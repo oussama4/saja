@@ -18,11 +18,10 @@ from modelcluster.fields import ParentalKey
 
 from home import blocks 
 from .product import Product
-from .category import Category
+from .category import Category 
 
 class CarouselBrandImage(Orderable):
 
-    parent_page_types = ["home.Homepage"]
     subpage_types = ["catalog.category"]
 
     brand = ParentalKey("catalog.brand", related_name = "carousel_images")
@@ -59,6 +58,7 @@ class GroupOfProducts(Orderable):
 class Brand(RoutablePageMixin, Page):
 
     template = "catalog/brand.html"
+    parent_page_types = ["home.Homepage"]
     subpage_types = ["catalog.category"]
         
     group_title = models.CharField(verbose_name=_("titre de groupe"), max_length= 100,null=True)
