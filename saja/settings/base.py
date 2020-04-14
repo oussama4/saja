@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -171,7 +170,6 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
     os.path.join(BASE_DIR, 'static'),
 ]
 
