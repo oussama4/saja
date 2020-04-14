@@ -3,8 +3,9 @@
 
 
 {% block content%}
-<div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
-   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
+<div class="brandBack" >
+<div  class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
+   <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
 	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
     <ul class="uk-slideshow-items" >
@@ -15,15 +16,14 @@
 	</li>
       {% endfor %}
     </ul>
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-    <div class="uk-position-bottom-center uk-position-small">
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    <div class="">
     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center "></ul>
     </div>
   </div>
 </div>
-
-<div class=" uk-margin-bottom" style="background:linear-gradient(190deg,#fff,#fff3e6);border-style: double ;border-width:8px;border-color:#fff3e6;">
+<div class=" uk-margin-bottom" style="background:transparent;">
 	{% include './breadcrumb.html' %}
 <div style="padding:10px">
    <div class="uk-text-capitalize uk-text-center">
@@ -32,10 +32,10 @@
    <div class="uk-child-width-1-4@m " uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
 	   
           {% for product in self.group_products.all %}
-	    {% image product.group_product.first_image.product_image fill-400x200 as img %}
+	    {% image product.group_product.first_image.product_image fill-250x160 as img %}
 	   <div>
 		<div class="uk-card tm-product-card ">
-		    <div class=" tm-product-card-media">
+		    <div class=" tm-product-card-media uk-inline-clip uk-transition-toggle" tabindex="0">
 			<div class="tm-ratio tm-ratio-4-3">
 			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
 			      <figure class="tm-media-box-wrap">
@@ -83,8 +83,9 @@
    </div>
 </div>
 </div>
+	<div class="uk-container">
 	<div class=" uk-width-1-1 uk-margin-bottom" uk-grid>
-	   <div class= "uk-card uk-card-default uk-width-1-1 uk-card-small">
+	   <div class= "uk-card uk-padding-remove uk-card-default uk-width-1-1 uk-card-small">
 		 <header class= "uk-card-header">
 		    <h2 class="uk-text-center">{% trans 'Categories' %}</h2>
 		 </header>
@@ -104,8 +105,9 @@
 		</div>
 	   </div>
 	</div>
+	</div>
 
-<div class="uk-margin-bottom uk-child-width-1-2@m uk-grid-match" uk-grid>
+
 {% for block in self.body %}    
     {% include_block block%}   
 {% endfor %}          

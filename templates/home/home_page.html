@@ -1,8 +1,85 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailimages_tags wagtailcore_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}
+
+{% endblock %}
 
 {% block content %}
+<div class="uk-margin">
+
+     <div class= "uk-width-1-1 uk-margin-remove uk-grid-medium uk-grid" uk-grid>
+
+	<div class="uk-flex-first@m uk-margin uk-width-1-1 uk-width-1-6@m">
+
+	  <div class="uk-margin uk-padding-remove uk-width-1-1 uk-child-width-1-2  uk-child-width-1-1@m " uk-grid>
+	   <div style="max-height:140px" class="tm-ratio tm-ratio-4-3  uk-card uk-card-body uk-box-shadow-hover-large"> 
+	    <a style="padding:10px"class="uk-link-muted uk-text-center uk-display-block tm-media-box" href="/roqvel" title="XPEL">
+	      <figure class="tm-media-box-wrap">
+	        <img src="{% static 'img/ROQVEL.png' %}" alt="xpel">
+	      </figure>
+	    </a>
+	   </div>
+
+           <div style="max-height:140px" class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
+	     <a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block tm-media-box" href="/healthpoint" title="hp">
+	      <figure class="tm-media-box-wrap">
+	        <img src="{% static 'img/hp.png' %}" alt="hp">
+	      </figure>
+	     </a>
+	   </div>
+
+	  </div>
+
+	  </div>
+
+	  <div class="uk-grid uk-flex-first uk-padding-remove  uk-margin-remove uk-width-expand uk-child-width-expand" uk-grid>
+	     
+		<div class="uk-padding-remove uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slideshow="center:true; autoplay:true;max-height:340">
+		<div>
+		    <ul class="uk-slideshow-items " >
+			    {% for i in page.carousel_images.all %}
+			     {% image i.carousel_image fill-900x400 as img %}
+			<li class="">
+				    <img src="{{ img.url }}" alt="{{ img.alt }}">
+			</li>
+			   {% endfor %}
+		    </ul>
+
+		    <a style="color:black;padding:5%" class=" uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-large" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+		    <a style="color:black" class="uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-large" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+		</div>
+			<div>
+			    <ul class="uk-slideshow-nav  uk-dotnav uk-flex-center"></ul>
+			</div>
+		</div>
+	  </div>
+
+       
+	<div class="uk-flex-first@m uk-margin uk-width-1-1 uk-width-1-6@m">
+	  
+	  <div class=" uk-padding-remove uk-margin-remove uk-width-1-1 uk-child-width-1-2  uk-child-width-1-1@m " uk-grid>
+	    <div style="max-height:140px" class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
+	      <a style="padding:10px"class="uk-link-muted uk-text-center uk-display-block tm-media-box" href="/drammock" title="drammock">
+	       <figure class="tm-media-box-wrap">
+	         <img src="{% static 'img/drammock.png' %}" alt="drammock">
+	       </figure>
+	      </a>
+	    </div>  
+	    <div style="max-height:140px" class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
+	      <a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block uk-padding-small tm-media-box" href="/xpel" title="ROQVEL">
+	        <figure class="tm-media-box-wrap">
+	          <img src="{% static 'img/logo-xpel.png' %}" alt="roqvel">
+	        </figure>
+	      </a>
+	    </div>
+	  </div>
+	</div>	  
+     </div>
+     </div>
+</div>
+  {% for block in self.body %}
+    {% include_block block %}
+  {% endfor %}
 
 {% endblock content %}

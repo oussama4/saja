@@ -2,45 +2,187 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-	<div class="uk-container uk-margin">
-	    <div uk-grid>
-	    	<div class="uk-position-relative uk-visible-toggle uk-dark uk-width-1-2" 
-		     tabindex="-1" uk-slideshow="ratio: 16:16">
-	            <ul class="uk-slideshow-items">
-		    	{% for img in page.product_images.all %}
-		    	    {% image img.product_image original as pimg %} 
-	            	    <li> <img data-src="{{ pimg.url }}" alt="{{ pimg.alt }}" 
-					width="{{ pimg.width }}px" height="{{ pimg.height }}px" uk-img uk-cover/> </li>
-		    	{% endfor %}
-	            </ul>
+<div class="brandBack">
+<div class="uk-container  ">
+  <div class="uk-margin-bottom uk-grid-medium uk-child-width-1-1 uk-grid" uk-grid>
+    <div class="uk-text-center">
+      {% include "../catalog/breadcrumb.html" %}
+    </div>
 
-		    <a class="uk-position-center-left uk-position-small uk-hidden-hover" 
-			href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-		    <a class="uk-position-center-right uk-position-small uk-hidden-hover" 
-			href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-			
-		    <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
-	    	</div>
-		<div class="uk-width-1-2">
-		    <h1> {{ page.title }} </h1>
-		    <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded uk-grid-small uk-child-width-1-1">
-		        <div class="uk-first-column">
-			    {% if page.has_discount %}
-			    	<del class="uk-text-meta"> {{ page.base_price }} DH </del>
-			    {% endif %}
-		            <div class="uk-text-lead">
-				{{ page.price }} DH
-		            </div>
-		        </div>
-		    </div>
-		</div>
-	    </div>
 
-	    <div class="uk-margin">
-	        <div class="uk-text-lead uk-text-bolder">
-			{% trans 'Description' %}
-	        </div>
-		<p> {{ page.description|richtext }} </p>
-	    </div>
-	</div>
+    <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+      <!--Product-->
+      <div>
+        <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+          <div class="uk-grid-small uk-grid-collapse uk-grid-match" uk-grid>
+            <!--Media-->
+            <div class="uk-width-1-1 uk-width-expand@m">
+              <div class="uk-grid-collapse uk-child-width-1-1" uk-slideshow="finite: true; ratio: 4:3;" uk-grid>
+                <!--Primary image-->
+                <div>
+                  <ul class="uk-slideshow-items" uk-lightbox>
+                    <li>
+                      {% image self.first_image.product_image original as img %}
+                      <a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img.url}}">
+                        <figure class="tm-media-box-wrap">
+                          <img src="{{img.url}}" alt="{{img.alt}}">
+                        </figure>
+                      </a>
+                      <figure class="tm-media-box-wrap">
+                        <span class="uk-text-muted" uk-icon="icon: image; ratio: 5"></span>
+                      </figure>
+                    </li>
+                    {% for pic in self.product_images.all|slice:'1:' %}
+                    {% image pic.product_image original as img2 %}
+                    <li><a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img2.url}}">
+                        <figure class="tm-media-box-wrap">
+                          <img src="{{img2.url}}" alt="{{img2.alt}}">
+                        </figure>
+                      </a>
+                    </li>
+                    {% endfor %}
+                    
+                  </ul>
+                </div>
+                <div>
+                  <div class="uk-card-body uk-flex uk-flex-center">
+                    <div class="uk-width-1-2 uk-visible@s">
+                      <div uk-slider="finite: true">
+                        <div class="uk-position-relative">
+                          <div class="uk-slider-container">
+                            <ul class="tm-slider-items uk-slider-items uk-child-width-1-4 uk-grid uk-grid-small">
+                              <li uk-slideshow-item="0">
+                                <div class="tm-ratio tm-ratio-1-1">
+                                  <a class="tm-media-box tm-media-box-frame" href="">
+                                    <figure class="tm-media-box-wrap">
+                                      <img src="{{img.url}}" alt="{{img.alt}}">
+                                    </figure>
+                                  </a>
+                                </div>
+                              </li>
+                              {% for pic in self.product_images.all|slice:"1:" %}
+                              {% image pic.product_image fill-150x100 as img3 %}
+                              <li uk-slideshow-item="{{forloop.counter}}">
+                                <div class="tm-ratio tm-ratio-1-1">
+                                  <a class="tm-media-box tm-media-box-frame" href="">
+                                    <figure class="tm-media-box-wrap">
+                                      <img src="{{img3.url}}" alt="{{img3.alt}}">
+                                    </figure>
+                                  </a>
+                                </div>
+                              </li>
+                              {% endfor %}
+                            </ul>
+                            <div>
+                              <a class="uk-position-center-left-out uk-position-small" href="" uk-slider-item="previous"
+                                uk-slidenav-previous></a>
+                              <a class="uk-position-center-left-out uk-position-small" href="" uk-slider-item="next"
+                                uk-slidenav-next></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="uk-slideshow-nav uk-dotnav uk-hidden@s"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="uk-padding uk-width-1-1 uk-width-1-3@m tm-product-info">
+              <div class="uk-card-body_class">
+                <div class="uk-margin">
+                  <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded">
+                    <div class="uk-grid-small uk-child-width-1-1" uk-grid>
+                      <!--Prices-->
+                      <div>
+                        {% if page.has_discount %}
+                        <del class="uk-text-meta"> {{ self.base_price }} DH </del>
+                        {% endif %}
+                        <div class="tm-product-price">{{ self.price }} DH </div>
+                      </div>
+                      <!--Add to cart-->
+                      <div>
+                        <div class="uk-grid-small" uk-grid>
+                          <!--Quantity-->
+                            <div class="uk-first-column">
+    				<a onclick="increment(-1, 'product')" uk-icon="icon: minus; ratio: .75" class="uk-icon">
+    				</a><input class="uk-input tm-quantity-input" min='1' max='10000' step="1" id="product" type="number"  value='1'>
+    				<a onclick="increment(+1, 'product')" uk-icon="icon: plus; ratio: .75" class="uk-icon"></a>
+                          </div>
+                          <!--Add to cart button-->
+                          <div>
+                            <button
+                              class="uk-button uk-button-primary tm-product-add-button tm-shine js-add-to-cart">{% trans "ajouter au panier" %}</button>
+                          </div>
+                          <!--Actions buttons-->
+                          <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">
+                            <a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to"
+                              href="" uk-tooltip="Add to favorites">
+                              <span uk-icon="icon: heart"></span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-margin">
+                  <div class="uk-padding-small uk-background-muted uk-border-rounded">
+                    <div class="uk-grid-small uk-child-width-1-1 uk-text-small" uk-grid>
+                      <!--Delivery-->
+                      <div>
+                        <div class="uk-grid-collapse" uk-grid>
+                          <span class="uk-margin-xsmall-right" uk-icon="icon: cart"></span>
+                          <div>
+                            <div class="uk-text-bolder">{% trans "Livraison" %}</div>
+                            <div class="uk-text-xsmall uk-text-muted">{% trans "Gratuit" %}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--Pick up-->
+                      <div>
+                        <div class="uk-grid-collapse" uk-grid>
+                          <span class="uk-margin-xsmall-right" uk-icon="icon: location"></span>
+                          <div>
+                            <div class="uk-text-bolder">{% trans "Ramasser Du Magasin"%}</div>
+                            <div class="uk-text-xsmall uk-text-muted">{% trans "En stock" %}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-margin">
+                  <div class="uk-text-lead uk-text-bolder">
+                    {% trans 'Description' %}
+                  </div>
+                  <p> {{ page.description|richtext }} </p>
+                </div>
+                <div class="uk-margin">
+                  <div class="uk-grid-small" uk-grid>
+                    <!--Rating-->
+                    <div class="uk-flex uk-flex-middle">
+                      <ul class="uk-iconnav uk-margin-xsmall-bottom tm-rating">
+                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
+                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
+                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
+                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
+                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
+                      </ul>
+                      <div class="uk-margin-xsmall-left">
+                        <a class="uk-text-meta js-scroll-to-description" href="#description"
+                          onclick="UIkit.switcher('.js-product-switcher').show(3);">(2)</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock %}

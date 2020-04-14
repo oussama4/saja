@@ -5,14 +5,33 @@ from django.utils import timezone
 from django.conf import settings
 from django.urls import reverse
 
+from .fields import MAPostalCodeField, PhoneNumberField
 
 class Address(models.Model):
-    addr = models.CharField(verbose_name=_("adresse"), max_length=255)
-    phone = models.CharField(verbose_name=_("numéro de téléphone"), max_length=50)
+    line1 = models.CharField(
+            verbose_name=_("adresse 1"),
+            max_length=100,
+            help_text=_("appartement, suite, unité, etc")
+    )
+    line2 = models.CharField(
+            verbose_name=_("adresse 2"),
+            max_length=100,
+            help_text=_("adresse postale, boîte postale, etc")
+    )
+    postal_code = MAPostalCodeField(
+            verbose_name=_("code postal"),
+            null=True,
+            blank=True
+    )
+    city = models.CharField(verbose_name=_("ville"), max_length=40)
+    phone = PhoneNumberField(verbose_name=_("numéro de téléphone"))
 
     class Meta:
         verbose_name = _("adresse")
         verbose_name_plural = _("adresses")
+
+    def __str__(self):
+        return f'{self.line1} \n {self.line2} \n {self.postal_code}  {self.city} \n {self.phone}'
 
 
 class UserManager(BaseUserManager):
@@ -107,4 +126,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def has_address(self):
+        """ checks if a user has an address """
+
+        if self.address:
+            return True
+        return False
 

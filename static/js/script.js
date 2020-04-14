@@ -29,6 +29,44 @@
 //      }
 // Change view
 
+(function (){ 
+var mq = window.matchMedia('all and (max-width: 700px)');
+
+if(mq.matches) {
+
+	var upper = document.querySelectorAll('.upper');
+	var tog = document.querySelectorAll('.uk-transition-tog');
+	tog.forEach(el=>{
+		el.classList.remove('uk-transition-tog');
+	});
+	upper.forEach(el=>{
+		el.parentNode.removeChild(el);
+	})
+
+}
+}
+)();
+function toggle (e){
+	var upper= document.querySelectorAll('.upper');
+	var tog = document.querySelectorAll('.uk-transition-tog');
+	var flip = document.querySelectorAll('.flip');
+	if(e.id=="id"){
+		upper.forEach(el => {
+			el.style.display='block';
+		});
+		flip.forEach(el=>{
+			el.classList.add('uk-transition-flip');
+		});
+	}else{
+		flip.forEach(el => {
+		el.classList.remove('uk-transition-flip');
+		});
+		upper.forEach(el=>{
+			el.style.display='none';
+		});
+	}
+}
+
 (function() {
   var container = document.getElementById('products');
 

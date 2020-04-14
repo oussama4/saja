@@ -9,12 +9,35 @@ from modelcluster.models import ClusterableModel
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
+from wagtail.snippets.models import register_snippet
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.admin.edit_handlers import (
         FieldPanel,
         InlinePanel,
-        MultiFieldPanel
+        MultiFieldPanel,
+        TabbedInterface,
+        ObjectList,
 )
+
+@register_snippet
+class Attribute(models.Model):
+    """ a product attribute like color, size, etc """
+
+    name = models.CharField(verbose_name=_("Nom"), max_length=50)
+
+    panels = [
+            FieldPanel("name"),
+    ]
+
+    class Meta:
+        verbose_name = _("attribut de produit")
+        verbose_name_plural = _("attributs de produit")
+
+    def __str__(self):
+        return self.name
+
+
 
 class ProductImages(Orderable):
     product = ParentalKey(
@@ -59,9 +82,12 @@ class Product(Page):
             validators=[MaxValueValidator(90)]
     )
 
-
     content_panels = Page.content_panels + [
             FieldPanel("description"),
+            InlinePanel("product_images", label="images de produit"),
+    ]
+
+    price_panels = [
             MultiFieldPanel(
                 [
                     FieldPanel("base_price"),
@@ -69,10 +95,22 @@ class Product(Page):
                     FieldPanel("discount_percent"),
                 ],
                 heading=_("informations sur les prix"),
-                classname="collapsible collapsed"
             ),
-            InlinePanel("product_images", label="images de produit"),
     ]
+
+    attribute_panels = [
+            InlinePanel("attributes", label=_("attributs de produit"))
+    ]
+
+    edit_handler = TabbedInterface(
+            [
+                ObjectList(content_panels, heading=_('Contenu')),
+                ObjectList(price_panels, heading=_('Prix')),
+                ObjectList(attribute_panels, heading=_("Attributs de produit")),
+                ObjectList(Page.promote_panels, heading=_('Promotion')),
+                ObjectList(Page.settings_panels, heading=_('Paramètres')),
+            ]
+    )
 
     class Meta:
         verbose_name = _("Produit")
@@ -89,3 +127,17 @@ class Product(Page):
     @property
     def first_image(self):
         return self.product_images.first()
+
+
+class AttributeProduct(Orderable):
+    """ intermediate model that assocaites a product with an attribute """
+
+    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE)
+    product = ParentalKey(Product, on_delete=models.CASCADE, related_name="attributes")
+    value = models.CharField(verbose_name=_("valeur"), max_length=50, null=True, blank=True)
+
+    panels = [
+            SnippetChooserPanel("attribute"),
+            FieldPanel("value")
+    ]
+

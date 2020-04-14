@@ -4,9 +4,8 @@
 
 {% block content %}
     <div class="uk-container uk-margin">
-	<ul class="uk-nav uk-nav-primary">
-	    <li class=""><a class="uk-button" href="#"> {% trans "informations personnelles" %} </a></li>
-	    <li><a class="uk-button" href="{% url 'address' %}"> {% trans "adresse" %} </a></li>
-	</ul>
+	<div class="uk-width-1-6">
+	    {% include "partials/profile_tab.html" %}
+	</div>
     </div>
 {% endblock %}

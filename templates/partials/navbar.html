@@ -191,13 +191,13 @@
     	</li>
     	<li class="uk-nav-divider"></li>
     	<li>
-	    <a href="{% url 'logout' %}"> Se déconnecter </a>
+	    <a href="{% url 'account_logout' %}"> Se déconnecter </a>
 	</li>
     {% else %}
     	<li>
-	    <a href="{% url 'signup' %}"> Créez votre compte </a>
+	    <a href="{% url 'account_signup' %}"> Créez votre compte </a>
 	</li>
-	    <a href="{% url 'login' %}"> Se connecter </a>
+	    <a href="{% url 'account_login' %}"> Se connecter </a>
 	<li>
 	</li>
     {% endif %}

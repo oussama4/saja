@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="uk-container uk-margin uk-flex">
+	<div class="uk-margin-right uk-width-1-6">
+	    {% include "partials/profile_tab.html" with address="true" %}
+	</div>
+	<div class="uk-margin-large-left uk-width-1-3">
+    	{% if request.user.has_address %}
+	    <div class="uk-card uk-card-default">
+		<div class="uk-card-body">
+		    <p class=".uk-text-emphasis"> {{ request.user.address|linebreaks }} </p>
+		</div>
+		<div class="uk-card-footer">
+		    <a href="{% url 'address_change' request.user.address.pk %}" 
+			class="uk-button uk-button-default">
+		       	{% trans "changer" %}
+		    </a>
+		</div>
+	    </div>
+    	{% else %}
+    	    <div class="uk-text-lead">
+	    	{% trans "vous n'avez pas encore d'adresse" %}
+		<a href="{% url 'address_create' %}"> {% trans "en créer un ici" %} </a>
+    	    </div>
+    	{% endif %}
+	</div>
+    </div>
+        
+{% endblock %}

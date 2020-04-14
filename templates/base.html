@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar menu_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="fr">
@@ -19,11 +19,21 @@
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/saja.css' %}">
+	{% if  request.get_full_path|split == "xpel" %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/xpel.css' %}">
+	{% endif %}
+	{% if  request.get_full_path|split == "drammock" %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/drammock.css' %}">
+	{% endif %}
+	{% if  request.get_full_path|split == "roqvel" %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/roqvel.css' %}">
+	{% endif %}
+	{% if  request.get_full_path|split == "healthpoint" %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/healthpoint.css' %}">
+	{% endif %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> 
 	<link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
-   	
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">  	
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
@@ -31,10 +41,10 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
-
 	{% include 'partials/toolbar.html' %}
 	{% include 'partials/navbar.html'  %}
-        {% block content %}{% endblock %}
+	
+	{% block content %}{% endblock %}
 	{% include 'partials/nav-offcanvas.html' %}
 	{% include 'partials/footer.html' %}
         {# Global javascript #}
