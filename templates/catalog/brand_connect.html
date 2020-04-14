@@ -23,23 +23,23 @@
         </div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-card-body" style="background:#ffcf99" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
-		<h3 class="uk-card-title">{{ self.media_title }}</h3>
+        <div class="uk-card uk-card-default uk-card-body" style="background-image:linear-gradient(595deg, rgb(160, 153, 153) 12%, rgb(226, 226, 226) 75%);color:white" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
+		<h3 style="color:inherit" class="uk-card-title ">{{ self.media_title }}</h3>
 		<p>{{self.media_text }}</p>
 		<ul class="uk-iconnav">
 		  {% if settings.tools.MediasSociauxParametre.facebook %}
 		   <li>
-		     <a href="{{settings.tools.MediasSociauxParametre.facebook}}" title="facebook"><span uk-icon="icon:facebook; ratio:2"></span></a>
+		     <a href="{{settings.tools.MediasSociauxParametre.facebook}}" title="facebook"><span style="color:#0f6ecd" uk-icon="icon:facebook; ratio:2"></span></a>
 		   </li>
 		  {% endif %}
 		  {% if settings.tools.MediasSociauxParametre.instagram %}
 		   <li>
-		     <a href="{{settings.tools.MediasSociauxParametre.instagram}}" title="instagram"><span uk-icon="icon:instagram;ratio:2"></span></a>
+		     <a href="{{settings.tools.MediasSociauxParametre.instagram}}" title="instagram"><span style="color:black" uk-icon="icon:instagram;ratio:2"></span></a>
 		   </li>
 		  {% endif %}
 		  {% if settings.tools.MediasSociauxParametre.youtube %}
 		   <li>
-		     <a href="{{settings.tools.MediasSociauxParametre.youtube}}" title="youtube"><span uk-icon="icon:youtube; ratio:2"></span></a>
+		     <a href="{{settings.tools.MediasSociauxParametre.youtube}}" title="youtube"><span style="color:red" uk-icon="icon:youtube; ratio:2"></span></a>
 		   </li>
 	    	  {% endif %}
 		</ul>
