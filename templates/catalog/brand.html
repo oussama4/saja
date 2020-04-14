@@ -3,7 +3,8 @@
 
 
 {% block content%}
-<div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
+<div class="brandBack" >
+<div  class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
    <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
 	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
@@ -15,15 +16,14 @@
 	</li>
       {% endfor %}
     </ul>
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
     <div class="">
     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center "></ul>
     </div>
   </div>
 </div>
-
-<div class=" uk-margin-bottom" style="background:linear-gradient(190deg,#fff,#fff3e6);border-style: double ;border-width:8px;border-color:#fff3e6;">
+<div class=" uk-margin-bottom" style="background:transparent;">
 	{% include './breadcrumb.html' %}
 <div style="padding:10px">
    <div class="uk-text-capitalize uk-text-center">
@@ -111,5 +111,5 @@
 {% for block in self.body %}    
     {% include_block block%}   
 {% endfor %}          
-
+</div>
 {% endblock content %}

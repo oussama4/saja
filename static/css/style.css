@@ -159,7 +159,7 @@ uk-animation-slide-right {
     font-family: 'Merienda';
     font-size: 3em;
     font-weight: 900;
-    color: #f7974d;
+    color: white;
 }
 
 @keyframes uk-fade-left {
@@ -7991,7 +7991,7 @@ iframe.uk-cover {
 }
 
 .tm-quantity-input {
-    width: 60px;
+    width: 70px;
     margin: 0 5px;
     text-align: center
 }

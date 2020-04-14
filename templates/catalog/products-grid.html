@@ -46,18 +46,23 @@
 		    <div class="uk-grid-collapse uk-child-width-1-3 tm-products-grid js-products-grid" uk-grid="uk-grid">	
 		     {% for product in products %}
 			 {% image product.first_image.product_image fill-250x160 as img %}
-			<article class="tm-product-card uk-inline-clip uk-transition-tog" tabindex="0">
+			<article class="tm-product-card" tabindex="0">
 			
-			    <div class="tm-product-card-media flip uk-transition-flip">
-				<div class="tm-ratio tm-ratio-4-3">
+			    <div class="tm-product-card-media inline-clip uk-transition-tog">
+				<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 					<a class="tm-media-box" href="{% pageurl product %}">
 				     <figure class="tm-media-box-wrap">
 					     <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
 				     </figure>
 				    </a>
 				</div>
+                                <div class="uk-position-cover upper uk-overlay uk-overlay-default">
+				     <div style="">
+					    {{ product.description|richtext}}
+				     </div> 
+			        </div>
 			    </div>
-			    <div class="tm-product-card-body flip uk-transition-flip">
+			    <div class="tm-product-card-body ">
 				<div class="tm-product-card-info">
 					<div class="uk-text-meta uk-margin-xsmall-bottom"><a class="uk-link-heading" href="{% pageurl product.get_parent %}">{{ product.get_parent.title }}</a></div>
 				    <h3 class="tm-product-card-title">
@@ -93,21 +98,7 @@
 				</div>
 			    </div>
 			    
-			    <div class="uk-position-cover upper uk-overlay uk-overlay-default">
-				    <div style="">
-					    {{ product.description|richtext}}
-				    </div>
-                                    <div class="uk-text-meta  uk-width-1-1 uk-position-bottom">
-					    <a class="uk-flex uk-flex-center tm-product-card-action tm-action-button-active" title="Add to favorites">
-						<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
-						<span>{% trans 'Ajouter à favoris' %}</span>
-					    </a>
-				    
-
-				    <button class="uk-width-1-1 uk-button uk-button-large  uk-button-primary">{% trans 'Ajouter au panier' %}
-				    </button>
-				    </div>
-			    </div>
+			    
 			</article>
 			{% endfor %}
 		    </div>
