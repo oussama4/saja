@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n widget_tweaks %}
+
+{% block content %}
+    <div class="uk-container uk-margin uk-flex">
+		<div class="uk-margin-right uk-width-1-6">
+			{% include "partials/profile_tab.html" with info="true" %}
+		</div>
+		<div class="uk-margin-large-left uk-width-1-3">
+			<form method="post" novalidate>
+				{% csrf_token %}
+				{% for error in form.non_field_errors %}
+					<p class="uk-text-danger">{{ error }} </p>
+				{% endfor %}
+
+				{% for field in form %}
+				<div class="uk-margin">
+				{% for error in field.errors %}
+						<p class="uk-text-danger">{{ error }} </p>
+				{% endfor %}
+				<label for="{{ field.id_for_label }}" class="uk-form-label"> {{ field.label }} </label>
+				<div class="uk-form_controls">
+					{% render_field field placeholder=field.help_text class+="uk-input" %} 
+				</div>
+				</div>
+				{% endfor %}
+
+				<button class="uk-button uk-button-primary" type="submit"> {% trans "Enregistrez" %} </button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

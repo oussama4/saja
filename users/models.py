@@ -121,7 +121,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     def get_absolute_url(self):
-        return reverse('users:profile', args=[self.pk])
+        return reverse('profile')
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""

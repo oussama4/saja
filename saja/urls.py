@@ -25,6 +25,7 @@ urlpatterns = [
     # url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^profile/address/create/$', users_views.create_address, name='address_create'),
     path('profile/address/change/<int:pk>', users_views.ChangeAddress.as_view(), name='address_change'),
+    path('profile/info/change/<int:pk>', users_views.UserUpdate.as_view(), name='info_change'),
     url(r'^profile/address/$',
         generic_views.TemplateView.as_view(template_name='users/address.html'),
         name='address'),

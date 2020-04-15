@@ -2,9 +2,11 @@ from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
+from django.utils.translation import gettext_lazy as _
 
-from .models import Address
+from .models import Address, User
 from .forms import UserCreationForm, AddressCreateForm
 
 @login_required
@@ -16,6 +18,14 @@ class SignUp(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'users/signup.html'
+
+
+class UserUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['email', 'first_name', 'last_name']
+    success_url = reverse_lazy('profile')
+    success_message = _("vos informations personnelles ont été mises à jour avec succès")
+    template_name = 'users/user_change.html'
 
 
 class ChangeAddress(LoginRequiredMixin, UpdateView):

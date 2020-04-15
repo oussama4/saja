@@ -9,3 +9,22 @@
 	</div>
     </div>
 {% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript">
+		{% if messages %}
+			{% for msg in messages %}
+				{% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+					UIkit.notification(
+						{
+							message: '{{ msg }}',
+							status: 'success',
+							pos: 'top-center',
+							timeout: 3000
+						}
+					)
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</script>
+{% endblock %}

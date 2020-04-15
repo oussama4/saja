@@ -2,7 +2,7 @@
 
 <ul class="uk-tab uk-tab-left uk-subnav-pill">
     <li {% if info %} class="uk-active" {% endif %}>
-	<a href="{% url 'profile' %}"> {% trans "info" %} </a> 
+	<a href="{% url 'info_change' request.user.pk %}"> {% trans "information personel" %} </a> 
     </li>
     <li {% if address %} class="uk-active" {% endif %}>
 	<a href="{% url 'address' %}"> {% trans "adresse" %} </a> 
