@@ -170,9 +170,11 @@
      <div class="uk-grid-small uk-flex-middle" uk-grid>
       <div class="uk-width-expand">
 <!--pay attention this is a form (search)-->
-       <form class="uk-search uk-search-navbar uk-width-1-1">
-	<input class="uk-search-input" type="search" placeholder="Search..." autofocus>
-       </form>
+		<form class="uk-search uk-search-navbar uk-width-1-1" action="{% url 'search' %}" method="get">
+			<input type="search" class="uk-search-input" placeholder="{% trans "Recherche..." %}"
+					name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+			<button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
+		</form>
       </div>
       <div class="uk-width-auto">
        <a class="uk-navbar-dropdown-close" href="#" uk-close></a>
