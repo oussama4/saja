@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
 
+    'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -206,4 +207,15 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 SITE_ID = 1
+
+# search backends
+WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.search.backends.db',
+        },
+        'pgfts': {
+            'BACKEND': 'wagtail.contrib.postgres_search.backend',
+            'SEARCH_CONFIG': 'french',
+        },
+}
 
