@@ -4,6 +4,8 @@ from django.shortcuts import render
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
+from catalog.models import Product
+
 
 def search(request):
     search_query = request.GET.get('query', None)
@@ -11,16 +13,16 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = Product.objects.live().search(search_query)
         query = Query.get(search_query)
 
         # Record hit
         query.add_hit()
     else:
-        search_results = Page.objects.none()
+        search_results = Product.objects.none()
 
     # Pagination
-    paginator = Paginator(search_results, 10)
+    paginator = Paginator(search_results, 12)
     try:
         search_results = paginator.page(page)
     except PageNotAnInteger:
@@ -31,4 +33,5 @@ def search(request):
     return render(request, 'search/search.html', {
         'search_query': search_query,
         'search_results': search_results,
+        'results_count': len(search_results),
     })
