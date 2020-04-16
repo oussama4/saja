@@ -20,6 +20,63 @@
     }
   });
 }
+
+(function(){
+	var addItem = document.querySelectorAll('.add_to_cart');
+	addItem.forEach(el=>{
+		el.addEventListener('click', (e)=>{
+			var id = el.getAttribute('data-id')
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function () {
+				if (xhr.status >= 200 && xhr.status < 300){
+					var response = JSON.parse(xhr.responseText);
+					var badge = document.querySelector('#badge');
+					var listItems = document.querySelector('#listItems')
+					console.log(response.product[1]);	
+
+					badge.innerHTML = parseInt(badge.innerHTML) + 1 
+					var htmlItem =`
+					<li class="uk-visible-toggle">  
+               				    <article >     
+                  		              <div  class="uk-grid-small" uk-grid>
+
+						<div class="uk-width-1-4">
+						   <div class="tm-ratio tm-ratio-4-3">
+                        		     	     <a class="tm-media-box" href="#">
+                          				<figure class="tm-media-box-wrap">
+                            			  	  <img src="${response.product[1]}" alt="${response.product[0]}">
+                          				</figure>                       
+                        		     	    </a>   
+                      				   </div>   
+                    				</div>     
+                   
+                   				<div class="uk-width-expand">   
+                      				 <a class="uk-link-heading uk-text-small" href="$">${response.product[0]}</a>
+                      				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
+                        			 <div class="uk-text-bolder uk-text-small">${response.product[2]}</div>
+                        			 <div class="uk-text-meta uk-text-xsmall">${response.product[3]} × ${response.product[0]}</div>
+                      				 </div>   
+                    				</div>     
+                                
+                    				<div>      
+                      				  <a class="uk-icon-link uk-text-danger
+						   uk-invisible-hover" href="" uk-icon="icon: close; ratio: .75"
+						   uk-tooltip="Remove"></a>
+                    				</div> 
+					       </div>
+					     </article>
+					</li>`;
+					
+					listItems.innerHTML+=htmlItem;
+				}else {
+					console.log('The request failed!');
+				}
+			}
+			xhr.open('GET', '/add_to_cart/'+id,true);
+			xhr.send();
+		})
+	})
+})();
 //      var map;
 //      function initMap() {
 //        map = new google.maps.Map(document.getElementById('js-map'), {

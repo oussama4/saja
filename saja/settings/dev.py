@@ -13,7 +13,7 @@ ALLOWED_HOSTS = ['*']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # debug_toolbar
-INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar']
+INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar','django_extensions']
 MIDDLEWARE = MIDDLEWARE + [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'catalog',
     'search',
     'tools',
+    'checkout',
 
     'widget_tweaks',
 
