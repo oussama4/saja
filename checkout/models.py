@@ -21,7 +21,7 @@ class Cart(models.Model):
     
     @property
     def total_price(self):
-        return total(self.items)
+        return total(self.items.all())
 
 
 class CartItem(models.Model):

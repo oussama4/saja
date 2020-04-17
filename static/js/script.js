@@ -1,4 +1,29 @@
 // Google Maps
+function remove(e){
+	console.log('working');
+	var xhr = new XMLHttpRequest();
+	var id = e.getAttribute('data-id');
+	xhr.onload = function (){
+	if(xhr.status >= 200 && xhr.status < 300){
+		var response = JSON.parse(xhr.responseText);
+		if(response.delete){
+			console.log(id);
+			var listItems = document.querySelector('#listItems');
+			var badge = document.querySelector('#badge');
+			listItems.removeChild(document.querySelector(`li[data-id="${id}"]`));
+			document.querySelector('#totalPrice').innerHTML = response.total;
+			badge.innerHTML = parseInt(badge.innerHTML) - response.quantity
+			
+		}
+	}else{
+		console.log('the request failed!');
+		}
+	}
+
+	xhr.open('GET', '/remove_from_cart/'+id,true);
+	xhr.send();
+	
+};
 
  function initMap() {
   var elements = document.querySelectorAll('.js-map');
@@ -25,18 +50,31 @@
 	var addItem = document.querySelectorAll('.add_to_cart');
 	addItem.forEach(el=>{
 		el.addEventListener('click', (e)=>{
+			e.preventDefault()
 			var id = el.getAttribute('data-id')
 			var xhr = new XMLHttpRequest();
 			xhr.onload = function () {
 				if (xhr.status >= 200 && xhr.status < 300){
 					var response = JSON.parse(xhr.responseText);
 					var badge = document.querySelector('#badge');
-					var listItems = document.querySelector('#listItems')
-					console.log(response.product[1]);	
+					var listItems = document.querySelector('#listItems');
+					console.log(response);	
 
 					badge.innerHTML = parseInt(badge.innerHTML) + 1 
+					if(response.existe){
+						var item = document.querySelectorAll('.item')
+						item.forEach(el => {
+							if(el.getAttribute('data-id')==response.product[0]){
+							  el.querySelector('.total').innerHTML=response.product[1];
+							}
+						})
+
+					}
+
+					if(!response.existe){
+						console.log(id)
 					var htmlItem =`
-					<li class="uk-visible-toggle">  
+					<li data-id = "${id}" class="item uk-visible-toggle">  
                				    <article >     
                   		              <div  class="uk-grid-small" uk-grid>
 
@@ -51,23 +89,27 @@
                     				</div>     
                    
                    				<div class="uk-width-expand">   
-                      				 <a class="uk-link-heading uk-text-small" href="$">${response.product[0]}</a>
+                      				 <a class="uk-link-heading uk-text-small" href="">${response.product[0]}</a>
                       				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
                         			 <div class="uk-text-bolder uk-text-small">${response.product[2]}</div>
-                        			 <div class="uk-text-meta uk-text-xsmall">${response.product[3]} × ${response.product[0]}</div>
+                        			 	<div class="uk-text-meta uk-text-xsmall">
+								<span><span class='total'>${response.product[3]}</span>×${response.product[0]}</span>
+							</div>
                       				 </div>   
                     				</div>     
                                 
                     				<div>      
-                      				  <a class="uk-icon-link uk-text-danger
-						   uk-invisible-hover" href="" uk-icon="icon: close; ratio: .75"
-						   uk-tooltip="Remove"></a>
+                      				  <button data-id = "${id}" onclick="remove(this)" class="delete_from_cart uk-icon-link uk-text-danger uk-invisible-hover" uk-icon="icon: close; ratio: .75"
+						   uk-tooltip="{% trans 'supprimer' %}"></button>
                     				</div> 
 					       </div>
 					     </article>
 					</li>`;
-					
+						
 					listItems.innerHTML+=htmlItem;
+					}
+					document.querySelector('#totalPrice').innerHTML = response.total;
+					
 				}else {
 					console.log('The request failed!');
 				}
@@ -77,6 +119,7 @@
 		})
 	})
 })();
+
 //      var map;
 //      function initMap() {
 //        map = new google.maps.Map(document.getElementById('js-map'), {
@@ -170,18 +213,18 @@ function increment(incrementor, target) {
 // Scroll to description
 
 (function() {
-  UIkit.scroll('.js-scroll-to-description', {
-    duration: 300,
-    offset: 58
-  });
+//  UIkit.scroll('.js-scroll-to-description', {
+//    duration: 300,
+//    offset: 58
+//  });
 })();
 
 // Update sticky tabs
 
 (function() {
-  UIkit.util.on('.js-product-switcher', 'show', function() {
-    UIkit.update();
-  });
+//  UIkit.util.on('.js-product-switcher', 'show', function() {
+//    UIkit.update();
+//  });
 })();
 
 // Add to cart
