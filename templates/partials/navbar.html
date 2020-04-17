@@ -1,10 +1,4 @@
-{% load i18n static wagtailuserbar menu_tags %}
-
-{% get_menu "xpel" as xpelCat %}
-{% get_menu "roqvel" as roqvelCat %}
-{% get_menu "drammock" as drammockCat %}
-{% get_menu "healthpoint" as healthpoitCat %}
-
+{% load wagtailcore_tags i18n static wagtailuserbar menu_tags %}
 
 
 <div class= "uk-navbar-container tm-navbar-container" uk-sticky="cls-active: tm-navbar-container-fixed">
@@ -158,6 +152,10 @@
      <li>
 	     <a href="#">{% trans 'Contacts' %}</a>
      </li>
+	 {% top_levels as items %}
+	 {% for item in items %}
+	 	<li> <a href="{% pageurl item %}"> {{ item.title }} </a> </li>
+	 {% endfor %}
     </ul>		
    </nav>
   </div>

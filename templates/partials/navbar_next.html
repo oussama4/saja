@@ -1,0 +1,41 @@
+{% load wagtailcore_tags i18n static wagtailuserbar menu_tags %}
+
+<div class= "uk-navbar-container tm-navbar-container" uk-sticky="cls-active: tm-navbar-container-fixed">
+ <div class="uk-container" uk-navbar>
+ <div class="uk-nav-left">	 
+  <button class="uk-navbar-toggle uk-hidden@m uk-display-inline-block" uk-toggle="target: #nav-offcanvas" uk-navbar-toggle-icon></button>
+  <a class="uk-navbar-item uk-logo uk-display-inline-block " href="/">
+   <img src="{% static 'img/saja.png' %}" width="90" height="32" alt="Logo">
+  </a>
+  <nav class="uk-visible@m uk-display-inline-block">
+   <ul class="uk-navbar-nav">
+	   {% catalog_menu as catalog %}
+	   {% for brand in catalog %}
+			<li> 
+				<a href="{{ brand.url }}"> {{ brand.title }} </a> 
+				<div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
+					<div class="uk-navbar-dropdown-grid uk-child-width-1-5" uk-grid>
+						{% for pcat in brand.children %}
+							<div>
+								<ul class="uk-nav uk-navbar-dropdown-nav">
+									<li class="uk-active uk-nav-header">
+										<a href="{{ pcat.url }}"> {{ pcat.title }} </a>
+									</li>
+									<li class="uk-nav-divider"></li>
+									{% for scat in pcat.children %}
+										<li> 
+											<a href="{{ scat.url }}"> {{ scat.title }} </a> 
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</li>
+	   {% endfor %}
+   </ul>
+  </nav>
+ </div>
+ </div>
+</div>
