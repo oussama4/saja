@@ -37,5 +37,56 @@
    </ul>
   </nav>
  </div>
+  <div class="uk-navbar-right">
+<!-- serch icon and dropdown -->	  
+   <a class="uk-navbar-toggle tm-navbar-button" href="#" uk-search-icon></a>
+   <div class="uk-navbar-dropdown uk-padding-small uk-margin-remove" uk-drop="mode: click; 
+   	cls-drop:uk-navbar-dropdown; boundary: .tm-navbar-container;boundary-align:true; pos: bottom-justify; flip:x">
+    <div class="uk-container">
+     <div class="uk-grid-small uk-flex-middle" uk-grid>
+      <div class="uk-width-expand">
+<!--pay attention this is a form (search)-->
+		<form class="uk-search uk-search-navbar uk-width-1-1" action="{% url 'search' %}" method="get">
+			<input type="search" class="uk-search-input" placeholder="{% trans "Recherche..." %}"
+					name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+			<button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
+		</form>
+      </div>
+      <div class="uk-width-auto">
+       <a class="uk-navbar-dropdown-close" href="#" uk-close></a>
+     </div>
+    </div>
+   </div>
+  </div>
+  </a>
+  <!--  #account link -->
+  <a class="uk-navbar-item uk-lind-muted tm-navbar-button" href="#" uk-icon="user"></a>
+  <div class="uk-padding-small uk-margin-remove" uk-dropdown="pos: bottom-right; offset: -10; delay-hide:200;" style="min-width: 150px;">
+   <ul class="uk-nav uk-dropdown-nav">
+    {% if request.user.is_authenticated %}
+    	<li>
+	    <a href="{% url 'profile' %}" > {% trans "Profile" %} </a>
+    	</li>
+    	<li class="uk-nav-divider"></li>
+    	<li>
+	    <a href="{% url 'account_logout' %}"> Se déconnecter </a>
+	</li>
+    {% else %}
+    	<li>
+	    <a href="{% url 'account_signup' %}"> Créez votre compte </a>
+	</li>
+	    <a href="{% url 'account_login' %}"> Se connecter </a>
+	<li>
+	</li>
+    {% endif %}
+   </ul>
+  </div>
+  <!-- this is the icon of cart -->
+  <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas" onclick="return false">
+	  <span uk-icon="cart"></span>
+	  <span id="badge" class="uk-badge">{% if cart %}{{cart.total_quantity}}{%else%}0{% endif%}</span>
+  </a>
+ </div>
+</div>
  </div>
 </div>
