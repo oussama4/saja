@@ -2,6 +2,7 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
+{% csrf_token %}
 <div class="brandBack">
 <div class="uk-container  ">
   <div class="uk-margin-bottom uk-grid-medium uk-child-width-1-1 uk-grid" uk-grid>
@@ -105,14 +106,16 @@
                         <div class="uk-grid-small" uk-grid>
                           <!--Quantity-->
                             <div class="">
-    				<a onclick="increment(-1, 'product')" uk-icon="icon: minus; ratio: .75" class="uk-icon">
-    				</a><input class="uk-input tm-quantity-input" min='1' max='10000' step="1" id="product" type="number"  value='1'>
-    				<a onclick="increment(+1, 'product')" uk-icon="icon: plus; ratio: .75" class="uk-icon"></a> 
+    				 <a data-id="{{self.page_ptr_id}}" onclick="remove_item(this)" uk-icon="icon: minus; ratio: .75" class="uk-icon"></a>
+			<input class="uk-input tm-quantity-input" min='1'
+	  max='10000' step="1" data-id="{{self.page_ptr_id}}" type="number" readonly  value='1'>
+			<a data-id="{{ self.page_ptr_id }}" uk-icon="icon: plus; ratio: .75" class="add_to_cart uk-icon"></a> 
+	
                           </div>
                           <!--Add to cart button-->
                           <div>
-                            <button
-                              class="uk-button uk-button-primary tm-product-add-button tm-shine js-add-to-cart">{% trans "ajouter au panier" %}</button>
+				  <button data-id="{{self.page_ptr_id}}" 
+                              class="uk-button uk-button-primary add_to_cart tm-product-add-button tm-shine js-add-to-cart">{% trans "ajouter au panier" %}</button>
                           </div>
                           <!--Actions buttons-->
                           <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">

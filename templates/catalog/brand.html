@@ -3,6 +3,7 @@
 
 
 {% block content%}
+{% csrf_token %}
 <div class="brandBack" >
 <div  class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
    <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
@@ -68,7 +69,7 @@
 						<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
 					    </a>
 					</div>
-					<a class="uk-button uk-button-primary tm-product-card-add-button tm-shine">
+					<a data-id="{{ product.group_product.page_ptr_id}}" class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine">
 					    <span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
 					</a>
 				    </div>

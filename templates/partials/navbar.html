@@ -205,7 +205,7 @@
   <!-- this is the icon of cart -->
   <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas" onclick="return false">
 	  <span uk-icon="cart"></span>
-	  <span id="badge" class="uk-badge">0</span>
+	  <span id="badge" class="uk-badge">{% if cart %}{{cart.total_quantity}}{%else%}0{% endif%}</span>
   </a>
  </div>
 </div>

@@ -23,6 +23,18 @@ class Cart(models.Model):
     def total_price(self):
         return total(self.items.all())
 
+    @property
+    def total_quantity(self):
+        tq = 0
+        for item in self.items.all():
+            tq+=item.quantity
+        return tq
+    @property
+    def total_discount(self):
+        td = 0
+        for item in self.items.all():
+            td+=item.item_discount
+        return td 
 
 class CartItem(models.Model):
 
@@ -34,6 +46,12 @@ class CartItem(models.Model):
     @property
     def total_price(self):
         return self.quantity*self.product_id.price
+    @property
+    def item_discount(self):
+        t =0
+        if self.product_id.has_discount:
+           t= (self.product_id.base_price*self.quantity)*self.product_id.discount_percent/100
+        return t
 
     def __str__(self):
         return f"{self.quantity} x {self.product_id.title}"
