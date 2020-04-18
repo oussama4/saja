@@ -1,5 +1,104 @@
 // Google Maps
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+function remove(e){
+	var xhr = new XMLHttpRequest();
+	var id = e.getAttribute('data-id');
+	xhr.onload = function (){
+	if(xhr.status >= 200 && xhr.status < 300){
+		var response = JSON.parse(xhr.responseText);
+		if(response.delete){
+			var listItems = document.querySelector('#listItems');
+			var badge = document.querySelector('#badge');
+			var cart = document.querySelector('#cart');
+			listItems.removeChild(document.querySelector(`li[data-id="${id}"]`));
+			if(cart)
+				cart.removeChild(document.querySelector(`div[data-id="${id}"]`));
+			
+			document.querySelector('#totalPrice').innerHTML = response.total.toString();
+			badge.innerHTML = parseInt(badge.innerHTML) - response.quantity;
+			var totalCart = document.querySelector('#totalCart')
+                        if (totalCart)  totalCart.innerHTML = response.total;
+
+			var discount = document.querySelector("#discount")
+			if(discount) discount.innerHTML = response.discount;
+			var totalDiscount = document.querySelector('#totalDiscount')
+                        if (totalDiscount) totalDiscount.innerHTML = response.totalDiscount;
+
+		}
+	}else{
+		console.log('the request failed!');
+		}
+	}
+
+	//xhr.open('GET', '/remove_from_cart/'+id,true);
+	//xhr.send();
+	var csrftoken = getCookie('csrftoken');
+        xhr.open("POST", '/remove_from_cart/', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        xhr.send("id="+id);
+
+	
+};
+
+function remove_item(e){
+	var xhr = new XMLHttpRequest();
+	var id  = e.getAttribute('data-id');
+	xhr.onload = function(){
+		if(xhr.status >= 200 && xhr.status <= 300){
+			var response = JSON.parse(xhr.responseText);
+			var badge = document.querySelector('#badge');
+			badge.innerHTML = parseInt(badge.innerHTML) - 1;
+			document.querySelector('#totalPrice').innerHTML = response.total;
+			document.querySelector('#totalCart').innerHTML = response.total;
+			if(response.delete){
+				var listItems = document.querySelector('#listItems');
+                        	
+                        	var cart = document.querySelector('#cart');
+                        	listItems.removeChild(document.querySelector(`li[data-id="${id}"]`));
+                        	if(cart)
+                                	cart.removeChild(document.querySelector(`div[data-id="${id}"]`));
+                        	
+			}else if(!response.delete){
+				document.querySelector(`input[data-id="${id}"]`).value=response.quantity;
+				document.querySelector(`span[data-id="${id}"]`).innerHTML=response.quantity;
+				document.querySelector(`.totalItem[data-id="${id}"]`).innerHTML = response.totalItem;
+				document.querySelector("#discount").innerHTML = response.discount 
+                            	document.querySelector('#totalDiscount').innerHTML = response.totalDiscount;
+			}
+
+
+
+		}
+	}
+	//xhr.open('GET','/remove_item/'+id,true);
+	//xhr.send()
+	var csrftoken = getCookie('csrftoken');
+        xhr.open("POST", '/remove_item/', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        xhr.send("id="+id);
+
+
+}
+
  function initMap() {
   var elements = document.querySelectorAll('.js-map');
   Array.prototype.forEach.call(elements, function(el) {
@@ -20,6 +119,91 @@
     }
   });
 }
+
+(function(){
+	var addItem = document.querySelectorAll('.add_to_cart');
+	addItem.forEach(el=>{
+		el.addEventListener('click', (e)=>{
+			e.preventDefault()
+			var id = el.getAttribute('data-id')
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function () {
+				if (xhr.status >= 200 && xhr.status < 300){
+					var response = JSON.parse(xhr.responseText);
+					var badge = document.querySelector('#badge');
+					var listItems = document.querySelector('#listItems');	
+
+					badge.innerHTML = parseInt(badge.innerHTML) + 1 
+					if(response.existe){
+						document.querySelector(`span[data-id="${id}"]`).innerHTML=response.product[1];
+						var input = document.querySelector(`input[data-id="${id}"]`);
+						if (input) input.value=response.product[1];
+
+						var totalItem = document.querySelector(`.totalItem[data-id="${id}"]`);
+						if (totalItem)  totalItem.innerHTML = response.totalItem;
+
+						var totalCart = document.querySelector('#totalCart')
+						if (totalCart)  totalCart.innerHTML = response.total;
+
+						var discount =  document.querySelector("#discount")
+						if (discount)  discount.innerHTML = response.discount;
+						var totalDiscount = document.querySelector('#totalDiscount')
+                        			if (totalDiscount)  totalDiscount.innerHTML = response.totalDiscount; 
+					}
+					if(!response.existe){
+					var htmlItem =`
+					<li data-id="${id}" class="item uk-visible-toggle">
+                			<article >
+                  			<div  class="uk-grid-small" uk-grid>
+
+						<div class="uk-width-1-4">
+						   <div class="tm-ratio tm-ratio-4-3">
+                        		     	     <a class="tm-media-box" href="#">
+                          				<figure class="tm-media-box-wrap">
+                            			  	  <img src="${response.product[1]}" alt="${response.product[0]}">
+                          				</figure>                       
+                        		     	    </a>   
+                      				   </div>   
+                    				</div>     
+                   
+                   				<div class="uk-width-expand">   
+                      				 <a class="uk-link-heading uk-text-small" href="">${response.product[0]}</a>
+                      				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
+                        			 <div class="uk-text-bolder uk-text-small">${response.product[2]}</div>
+                        			 	<div class="uk-text-meta uk-text-xsmall">
+								<span><span data-id="${id}" class='total'>${response.product[3]}</span>×${response.product[2]}</span>
+							</div>
+                      				 </div>   
+                    				</div>     
+                                
+                    				<div>      
+                      				  <button data-id = "${id}" onclick="remove(this)" class="delete_from_cart uk-icon-link uk-text-danger uk-invisible-hover" uk-icon="icon: close; ratio: .75"
+						   uk-tooltip="{% trans 'supprimer' %}">
+						  </button>
+                    				</div> 
+					     </div>
+					   </article>
+					</li>`;
+						
+					listItems.innerHTML+=htmlItem;
+					}
+					document.querySelector('#totalPrice').innerHTML = response.total;
+					
+				}else {
+					console.log('The request failed!');
+				}
+			}
+			//xhr.open('GET', '/add_to_cart/'+id,true);
+			//xhr.send();
+			var csrftoken = getCookie('csrftoken');
+			xhr.open("POST", '/add_to_cart/', true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			xhr.setRequestHeader('X-CSRFToken', csrftoken);
+			xhr.send("id="+id);
+		})
+	})
+})();
+
 //      var map;
 //      function initMap() {
 //        map = new google.maps.Map(document.getElementById('js-map'), {
@@ -113,18 +297,18 @@ function increment(incrementor, target) {
 // Scroll to description
 
 (function() {
-  UIkit.scroll('.js-scroll-to-description', {
-    duration: 300,
-    offset: 58
-  });
+//  UIkit.scroll('.js-scroll-to-description', {
+//    duration: 300,
+//    offset: 58
+//  });
 })();
 
 // Update sticky tabs
 
 (function() {
-  UIkit.util.on('.js-product-switcher', 'show', function() {
-    UIkit.update();
-  });
+//  UIkit.util.on('.js-product-switcher', 'show', function() {
+//    UIkit.update();
+//  });
 })();
 
 // Add to cart

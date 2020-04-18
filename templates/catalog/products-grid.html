@@ -1,5 +1,5 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
-
+{% csrf_token %}
 <div class="uk-width-expand">
   <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
 <!--items-->
@@ -90,7 +90,7 @@
 					    </a>
 
 					</div>
-					<button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
+					<button data-id="{{ product.page_ptr_id }}" class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
 						<span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
 						<span class="uk-text-small tm-product-card-add-button-text">{% trans 'Ajouter au panier' %} </span>
 					</button>

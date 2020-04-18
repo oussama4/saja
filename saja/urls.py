@@ -1,10 +1,11 @@
-from django.conf import settings
+from django.conf import settings 
 from django.conf.urls import include, url
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.views import generic as generic_views
 
+from wagtail.images.views.serve import ServeView
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
@@ -18,6 +19,7 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'', include('allauth.urls')),
+    url(r'', include('checkout.urls',namespace='checkout')),
 
     url(r'^search/$', search_views.search, name='search'),
     # url(r'^signup/$', users_views.SignUp.as_view(), name='signup'),
@@ -30,7 +32,8 @@ urlpatterns = [
         generic_views.TemplateView.as_view(template_name='users/address.html'),
         name='address'),
     url(r'^profile/$', users_views.profile, name='profile'),
-
+    url(r'^images/([^/]*)/(\d*)/([^/]*)/[^/]*$', ServeView.as_view(), name='wagtailimages_serve'),
+    url(r'', include(wagtail_urls)),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:

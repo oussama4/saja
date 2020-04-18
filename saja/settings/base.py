@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'catalog',
     'search',
     'tools',
+    'checkout',
 
     'widget_tweaks',
 
@@ -98,6 +99,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'wagtail.contrib.settings.context_processors.settings',
+                'checkout.context_processors.cart',
             ],
         },
     },

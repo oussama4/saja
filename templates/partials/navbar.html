@@ -41,8 +41,7 @@
 	    </div>
 	   </li>
 	   <li>
-	    <div class="uk-margin-top.uk-margin-bottom">
-	     <a href="#" class="uk-link-reset">
+	    <div class="uk-margin-top" href="#" class="uk-link-reset">
 		<div class="uk-text-bolder">Roqvel</div>
 		<ul class="uk-nav uk-nav-default">
 			{%if roqvelCat%}
@@ -57,7 +56,7 @@
 	    </div>
 	   </li>
 	   <li>
-	    <div class="uk-margin-top.uk-margin-bottom">
+	    <div class="uk-margin-top uk-margin-bottom">
 	     <a href="#" class="uk-link-reset">
 		<div class="uk-text-bolder">Drammok</div>
 		<ul class="uk-nav uk-nav-default">
@@ -202,7 +201,7 @@
   <!-- this is the icon of cart -->
   <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas" onclick="return false">
 	  <span uk-icon="cart"></span>
-	  <span class="uk-badge">3</span>
+	  <span id="badge" class="uk-badge">{% if cart %}{{cart.total_quantity}}{%else%}0{% endif%}</span>
   </a>
  </div>
 </div>
