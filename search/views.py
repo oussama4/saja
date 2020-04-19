@@ -13,7 +13,7 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Product.objects.live().search(search_query, backend='pgfts')
+        search_results = Product.objects.prefetch_related('product_images').live().search(search_query, backend='pgfts')
         query = Query.get(search_query)
 
         # Record hit
