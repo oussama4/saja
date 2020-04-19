@@ -98,7 +98,7 @@ def remove_item_from_cart(request):
 class CartItems(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
-            cart = Cart.objects.get(user_id=self.request.user)
+            cart = Cart.objects.prefetch_related('items').get(user_id=self.request.user)
             context = {
                 'object': cart,
                 'discount':cart.total_price+cart.total_discount  
