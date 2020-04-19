@@ -15,7 +15,7 @@
             <ul id="listItems" class="uk-list uk-list-divider">
 		{% if request.user.is_authenticated %}
 		  {% if cart %}
-		  {% for item in cart.items.all %}
+		  {% for item in cart.0.items.all %}
 		  {% image item.product_id.first_image.product_image fill-200x150 as img %}
 		  <li data-id= "{{ item.product_id.page_ptr_id }}" class="item uk-visible-toggle">
         	        <article >
