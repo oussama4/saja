@@ -31,19 +31,24 @@ class Category(Page):
     def get_context(self, request, *args, **kwargs):
 
             context = super().get_context(request, *args, **kwargs)
-            all_categories = Category.objects.live().public()
+            descendant_categories = Category.objects.live().public().descendant_of(self)
             all_products = Product.objects.live().public().order_by("-last_published_at").descendant_of(self)
-            brandCat = None 
-            if self.get_parent().content_type == self.content_type:
-                brandCat = all_categories.descendant_of(self.get_parent().get_parent())
-            else:
-                brandCat = all_categories.descendant_of(self.get_parent())
+            
+            subCat = []
+            if descendant_categories:
+                    subCat = descendant_categories 
 
-            filtred_cat = {}
+            #brandCat = None 
+            #if self.get_parent().content_type == self.content_type:
+            #    brandCat = all_categories.descendant_of(self.get_parent().get_parent())
+            #else:
+            #    brandCat = all_categories.descendant_of(self.get_parent())
+
+            #filtred_cat = {}
         
-            for item in brandCat:
-                if not item.get_parent().content_type == self.content_type:
-                    filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, brandCat))
+            #for item in brandCat:
+            #    if not item.get_parent().content_type == self.content_type:
+            #        filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, brandCat))
 
 
             #pagination
@@ -60,7 +65,7 @@ class Category(Page):
             context['products'] = products 
             context['itemsSum'] = len(all_products)
             context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
-            context['categories'] = filtred_cat 
+            context['categories'] = subCat 
             return context
 
 
