@@ -1,7 +1,7 @@
 {% load wagtailcore_tags i18n static wagtailuserbar menu_tags %}
 
 <div class= "uk-navbar-container tm-navbar-container" uk-sticky="cls-active: tm-navbar-container-fixed">
- <div class="uk-container" uk-navbar>
+ <div class="uk-container" uk-navbar="dropbar: true">
  <div class="uk-nav-left">	 
   <button class="uk-navbar-toggle uk-hidden@m uk-display-inline-block" uk-toggle="target: #nav-offcanvas" uk-navbar-toggle-icon></button>
   <a class="uk-navbar-item uk-logo uk-display-inline-block " href="/">
@@ -13,8 +13,12 @@
 	   {% for brand in catalog %}
 			<li> 
 				<a href="{{ brand.url }}"> {{ brand.title }} </a> 
-				<div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-					<div class="uk-navbar-dropdown-grid uk-child-width-1-5" uk-grid>
+				<div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical"
+                    			uk-drop="pos: bottom-justify; delay-show: 125; delay-hide: 50;
+                            			duration: 75; boundary: .tm-navbar-container; boundary-align: true; 
+                            			pos: bottom-justify; 
+			    			flip: x">
+					<div class="uk-navbar-dropdown-grid uk-child-width-1-6" uk-grid>
 						{% for pcat in brand.children %}
 							<div>
 								<ul class="uk-nav uk-navbar-dropdown-nav">
@@ -84,7 +88,7 @@
   <!-- this is the icon of cart -->
   <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas" onclick="return false">
 	  <span uk-icon="cart"></span>
-	  <span id="badge" class="uk-badge">{% if cart %}{{cart.total_quantity}}{%else%}0{% endif%}</span>
+	  <span id="badge" class="uk-badge">{% if cart.0 %}{{cart.0.total_quantity}}{%else%}0{% endif%}</span>
   </a>
  </div>
 </div>
