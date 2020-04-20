@@ -52,7 +52,7 @@ class Category(Page):
 
 
             #pagination
-            paginator = Paginator(all_products, 12)
+            paginator = Paginator(all_products, 3)
             page = request.GET.get("page")
             
             try:
