@@ -20,7 +20,7 @@ def add_to_cart(request):
         cart, created = Cart.objects.get_or_create(
                 user_id = request.user,
         )
-        cart_item, create = CartItem.objects.get_or_create(
+        cart_item, create = CartItem.objects.select_related('product_id').get_or_create(
             cart_id = cart,
             product_id = item,
         )
@@ -30,8 +30,7 @@ def add_to_cart(request):
             cart_item.quantity = int(cart_item.quantity) + 1
             cart_item.save()
             cartItems['product'] = [str(cart_item.product_id.page_ptr_id),str(cart_item.quantity)]
-            cartItems['existe'] = True
-            print(cartItems)
+            cartItems['existe'] = True 
         if create:
             try:
                 image =str(generate_image_url(cart_item.product_id.first_image.product_image,'fill-200x150'))
@@ -44,7 +43,7 @@ def add_to_cart(request):
         cartItems['total'] = cart.total_price
         cartItems['totalItem'] = cart_item.total_price  
         cartItems['discount']  = cart.total_discount 
-        cartItems['totalDiscount'] = cart.total_price + cart.total_discount 
+        cartItems['totalDiscount'] = cart.price_without_discount  
         return JsonResponse(cartItems)
 
 
@@ -55,7 +54,7 @@ def remove_from_cart(request):
         item = get_object_or_404(product.Product, page_ptr_id=id)
         cart = Cart.objects.get(user_id = request.user)
 
-        cart_item = CartItem.objects.get(cart_id = cart,product_id = item)
+        cart_item = CartItem.objects.select_related('product_id').get(cart_id = cart,product_id = item)
         itemDelete = {}
         if cart_item:
             cart_item.delete()
@@ -66,7 +65,7 @@ def remove_from_cart(request):
         if cart:
             itemDelete['total'] = cart.total_price 
         itemDelete['discount']  = cart.total_discount 
-        itemDelete['totalDiscount'] = cart.total_price + cart.total_discount 
+        itemDelete['totalDiscount'] = cart.price_without_discount 
         return JsonResponse(itemDelete)
 
 @login_required
@@ -76,7 +75,7 @@ def remove_item_from_cart(request):
         item = get_object_or_404(product.Product, page_ptr_id=id)
         cart = Cart.objects.get(user_id = request.user)
 
-        cart_item = CartItem.objects.get(cart_id = cart, product_id = item)
+        cart_item = CartItem.objects.select_related('product_id').get(cart_id = cart, product_id = item)
         itemRemove = {}
         if cart_item:
             if cart_item.quantity > 1:
@@ -91,19 +90,19 @@ def remove_item_from_cart(request):
         if cart:
             itemRemove['total'] = cart.total_price
             itemRemove['discount']  = cart.total_discount
-            itemRemove['totalDiscount'] = cart.total_price + cart.total_discount 
+            itemRemove['totalDiscount'] = cart.price_without_discount 
         return JsonResponse(itemRemove)
 
 
 class CartItems(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
-        try:
-            cart = Cart.objects.prefetch_related('items').get(user_id=self.request.user)
-            context = {
-                'object': cart,
-                'discount':cart.total_price+cart.total_discount  
-            }
-            return render(self.request, 'checkout/cart.html', context)
-        except ObjectDoesNotExist:
-            messages.warning(self.request, "You do not have an active cart")
-            return redirect("/")
+       # try:
+       #     cart = Cart.objects.prefetch_related('items').get(user_id=self.request.user)
+       #     context = {
+       #         'object': cart,
+       #         'discount':cart.price_without_discount  
+       #     }
+        return render(self.request, 'checkout/cart.html')
+       # except ObjectDoesNotExist:
+       #     messages.warning(self.request, "You do not have an active cart")
+       #     return redirect("/")

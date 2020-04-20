@@ -35,7 +35,10 @@ class Cart(models.Model):
         for item in self.items.all():
             td+=item.item_discount
         return td 
-
+    
+    @property
+    def price_without_discount(self):
+        return self.total_price+self.total_discount 
 class CartItem(models.Model):
 
     cart_id = models.ForeignKey(Cart, related_name="items", on_delete=models.CASCADE)

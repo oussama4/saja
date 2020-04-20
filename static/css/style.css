@@ -3,13 +3,14 @@
 	border-radius: 18px;
 	border: 2px solid white;
   	margin: 0;
+	width:150px;
     	overflow: visible;
     	font: inherit;
     	color: black;
     	display: inline-block;
     	-webkit-box-sizing: border-box;
     	box-sizing: border-box;
-    	padding: 0 30px;
+    	padding: 0 10px;
     	vertical-align: middle;
     	font-size: .875rem;
     	line-height: 38px;

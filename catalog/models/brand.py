@@ -87,14 +87,14 @@ class Brand(RoutablePageMixin, Page):
 
     def get_context(self,request,*args,**kwargs):
         
-        all_categories = Category.objects.live().public().descendant_of(self)
-        filtred_cat = {}
-        for item in all_categories:
-            if item.get_parent().content_type == self.content_type:
-                filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, all_categories))
+       # all_categories = Category.objects.live().public().descendant_of(self)
+       # filtred_cat = {}
+       # for item in all_categories:
+       #     if item.get_parent().content_type == self.content_type:
+       #         filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, all_categories))
 
         context = super().get_context(request, *args, **kwargs)
-        context['categories'] = filtred_cat 
+       # context['categories'] = filtred_cat 
         context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
         return context
 
