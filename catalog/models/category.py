@@ -32,7 +32,7 @@ class Category(Page):
 
             context = super().get_context(request, *args, **kwargs)
             descendant_categories = Category.objects.live().public().descendant_of(self)
-            all_products = Product.objects.live().public().order_by("-last_published_at").descendant_of(self)
+            all_products = Product.objects.prefetch_related('product_images'). live().public().order_by("-last_published_at").descendant_of(self)
             
             subCat = []
             if descendant_categories:

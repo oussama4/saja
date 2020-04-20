@@ -10,14 +10,16 @@
 </div>
 
 <div class="uk-container">
-	<div class="uk-grid-small uk-child-width-expand uk-grid " uk-grid> 
+	<div class="subCat"> 
+	  <div style="width:1200px" class="uk-flex uk-flex-center">
 	  {% if categories %}
 	    {% for sub in categories %}
-	      <div >
-		      <a class="subButton">{{sub.title}}</a>
+	      <div class="subCat-item" >
+		      <a href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
 	      </div>
 	    {% endfor %}
 	  {% endif %}
+	  </div>
 	</div>
       <div class="uk-grid-medium uk-grid" uk-grid>
        {% if products %}

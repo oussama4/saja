@@ -14,61 +14,62 @@
           <div class="uk-card-body uk-overflow-auto">
             <ul id="listItems" class="uk-list uk-list-divider">
 		{% if request.user.is_authenticated %}
-		  {% if cart %}
+		  {% if cart.0 %}
 		  {% for item in cart.0.items.all %}
 		  {% image item.product_id.first_image.product_image fill-200x150 as img %}
 		  <li data-id= "{{ item.product_id.page_ptr_id }}" class="item uk-visible-toggle">
         	        <article >
                 	     <div  class="uk-grid-small" uk-grid>
 
-        
-
-						<div class="uk-width-1-4">
-						   <div class="tm-ratio tm-ratio-4-3">
-                        		     	     <a class="tm-media-box" href="#">
-                          				<figure class="tm-media-box-wrap">
-								<img src="{%if img.url %}{{ img.url }}{%else%}{% static 'img/images.png' %}{% endif %}" alt="{{ img.alt }}">
-                          				</figure>
-                        		     	    </a>   
-                      				   </div>   
-                    				</div>     
-                   
-                   				<div class="uk-width-expand">   
-							<a class="uk-link-heading uk-text-small" href="">{{ item.product_id.title }}</a>
-                      				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
-							 <div class="uk-text-bolder uk-text-small">{{ item.product_id.price }}</div>
-                        			 	<div class="uk-text-meta uk-text-xsmall">
-							  <span><span data-id= "{{ item.product_id.page_ptr_id }}" class='total'>{{ item.quantity }}</span>X{{item.product_id.price}}</span>
-							</div>
-                      				 </div>   
-                    				</div>     
-                                
-                    				<div>      
-							<button data-id = "{{ item.product_id.page_ptr_id }}" onclick="remove(this)" 
-						      class="delete_from_cart uk-icon-link uk-text-danger uk-invisible-hover" 
-	    						uk-icon="icon: close; ratio: .75"
-						   uk-tooltip="{% trans 'supprimer' %}"></button>
-                    				</div> 
-					       </div>
-					   
-					</article>
-				</li>
-	      {% endfor %}
-	   {% endif %}
-	{% endif %}
-            </ul>
-          </div>
-          <footer class="uk-card-footer">
-            <div class="uk-grid-small" uk-grid>
-		    <div class="uk-width-expand uk-text-muted uk-h4">{% trans 'Total'%}</div>
-		    <div class="uk-h4 uk-text-bolder"><span id="totalPrice">{% if cart %}{{cart.total_price}}{% endif %}</span>DH</div>
-            </div>
-            <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-margin-small" uk-grid>
-		    <div><a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="/cart">{% trans 'voir panier' %}</a></div>
-		    <div><a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="">{% trans 'payez' %}</a></div>
-            </div>
-        </footer>
-
-      </div>
-  </aside>
+				<div class="uk-width-1-4">
+				   <div class="tm-ratio tm-ratio-4-3">
+				     <a class="tm-media-box" href="#">
+					<figure class="tm-media-box-wrap">
+					    <img src="{%if img.url %}{{ img.url }}{%else%}{% static 'img/images.png' %}{% endif %}" 
+					     alt="{{ img.alt }}">
+					</figure>
+				    </a>   
+				   </div>   
+				</div>     
+   
+				<div class="uk-width-expand">   
+					<a class="uk-link-heading uk-text-small" href="">{{ item.product_id.title }}</a>
+				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
+					 <div class="uk-text-bolder uk-text-small">{{ item.product_id.price }}</div>
+					<div class="uk-text-meta uk-text-xsmall">
+					  <span>
+						<span data-id= "{{ item.product_id.page_ptr_id }}" class='total'>
+							  {{ item.quantity }}
+						</span>X{{item.product_id.price}}
+					  </span>
+					</div>
+				 </div>   
+				</div>     
+		
+				<div>      
+					<button data-id = "{{ item.product_id.page_ptr_id }}" onclick="remove(this)" 
+				      class="delete_from_cart uk-icon-link uk-text-danger uk-invisible-hover" 
+					uk-icon="icon: close; ratio: .75"
+				   uk-tooltip="{% trans 'supprimer' %}"></button>
+				</div> 
+			       </div> 
+			</article>
+			</li>
+	 	      	  {% endfor %}
+	   		 {% endif %}
+			{% endif %}
+		    </ul>
+		  </div>
+		  <footer class="uk-card-footer">
+		    <div class="uk-grid-small" uk-grid>
+			    <div class="uk-width-expand uk-text-muted uk-h4">{% trans 'Total'%}</div>
+			    <div class="uk-h4 uk-text-bolder"><span id="totalPrice">{% if cart %}{{cart.0.total_price}}{% endif %}</span>DH</div>
+		    </div>
+		    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-margin-small" uk-grid>
+			    <div><a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="/cart">{% trans 'MON PANIER' %}</a></div>
+			    <div><a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="">{% trans 'COMMANDER' %}</a></div>
+		    </div>
+		</footer>
+	   </div>
+     </aside>
 </div>

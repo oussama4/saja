@@ -84,7 +84,8 @@
    </div>
 </div>
 </div>
-	<div class="uk-container">
+{% comment %}	
+<div class="uk-container">
 	<div class=" uk-width-1-1 uk-margin-bottom" uk-grid>
 	   <div class= "uk-card uk-padding-remove uk-card-default uk-width-1-1 uk-card-small">
 		 <header class= "uk-card-header">
@@ -106,9 +107,8 @@
 		</div>
 	   </div>
 	</div>
-	</div>
-
-
+</div>
+{% endcomment %}
 {% for block in self.body %}    
     {% include_block block%}   
 {% endfor %}          
