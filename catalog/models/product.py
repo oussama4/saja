@@ -128,6 +128,16 @@ class Product(Page):
     def first_image(self):
         return self.product_images.first()
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        prefetch = models.Prefetch(
+                lookup='product_images',
+                queryset=ProductImages.objects.select_related('product_image'),
+                to_attr='pimages'
+        )
+        context['product'] = Product.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
+        return context
+
 
 class AttributeProduct(Orderable):
     """ intermediate model that assocaites a product with an attribute """

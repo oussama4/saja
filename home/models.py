@@ -61,6 +61,16 @@ class HomePage(Page):
         verbose_name = _("page d'accueil")
         verbose_name_plural = _("pages d'accueil")
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        prefetch = models.Prefetch(
+                'carousel_images',
+                queryset=CarouselImages.objects.select_related('carousel_image'),
+                to_attr='cimages'
+        )
+        context['home'] = HomePage.objects.prefetch_related(prefetch).live().public().get()
+        return context
+
     def get_admin_display_title(self):
         return _("Accueil")
 

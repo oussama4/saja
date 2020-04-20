@@ -38,7 +38,7 @@
 		<div class="uk-padding-remove uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slideshow="center:true; autoplay:true;max-height:340">
 		<div>
 		    <ul class="uk-slideshow-items " >
-			    {% for i in page.carousel_images.all %}
+			    {% for i in home.cimages %}
 			     {% image i.carousel_image fill-900x400 as img %}
 			<li class="">
 				    <img src="{{ img.url }}" alt="{{ img.alt }}">

@@ -1,6 +1,6 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
-{% image product.first_image.product_image fill-250x160 as img %}
+{% image product.pimages.0.product_image fill-250x160 as img %}
 <article class="tm-product-card" tabindex="0">
 
     <div class="tm-product-card-media inline-clip uk-transition-tog">
@@ -19,7 +19,7 @@
     </div>
     <div class="tm-product-card-body ">
 	<div class="tm-product-card-info">
-		<div class="uk-text-meta uk-margin-xsmall-bottom"><a class="uk-link-heading" href="{% pageurl product.get_parent %}">{{ product.get_parent.title }}</a></div>
+		{#<div class="uk-text-meta uk-margin-xsmall-bottom"><a class="uk-link-heading" href="{% pageurl product.get_parent %}">{{ product.get_parent.title }}</a></div>#}
 	    <h3 class="tm-product-card-title">
 		    <a class="uk-link-heading" href="{% pageurl product%}">
 			{{ product.title }}
