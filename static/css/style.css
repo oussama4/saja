@@ -1,3 +1,15 @@
+.subCat {
+	display:block;
+	margin:3%;
+	width:100vw;
+	overflow:auto
+}
+.subCat-item {
+	display:inline;
+	width:400px;
+	margin:10px
+}
+
 .subButton {
 	background: aliceblue;
 	border-radius: 18px;

@@ -10,11 +10,11 @@
 </div>
 
 <div class="uk-container">
-	<div style="display:block;margin:3%;width:100vw;overflow:auto"  class="uk-flex uk-flex-center"> 
+	<div class="subCat"> 
 	  <div style="width:1200px" class="uk-flex uk-flex-center">
 	  {% if categories %}
 	    {% for sub in categories %}
-	      <div style="display:inline;width:400px;margin:10px">
+	      <div class="subCat-item" >
 		      <a href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
 	      </div>
 	    {% endfor %}
