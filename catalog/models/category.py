@@ -1,11 +1,12 @@
 from django.db import models
+from django.db.models import Prefetch
 from django.utils.translation import gettext_lazy as _
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-from .product import Product
+from .product import Product, ProductImages 
 
 class Category(Page):
     subpage_types = ["catalog.Product", "catalog.Category"]
@@ -32,7 +33,12 @@ class Category(Page):
 
             context = super().get_context(request, *args, **kwargs)
             descendant_categories = Category.objects.live().public().descendant_of(self)
-            all_products = Product.objects.prefetch_related('product_images'). live().public().order_by("-last_published_at").descendant_of(self)
+            prefetch = Prefetch(
+                lookup='product_images',
+                queryset=ProductImages.objects.select_related('product_image'),
+                to_attr='pimages'
+            )
+            all_products = Product.objects.prefetch_related(prefetch).live().public().order_by("-last_published_at").descendant_of(self)
             
             subCat = []
             if descendant_categories:

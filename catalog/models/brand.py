@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Prefetch 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
 from django.utils.translation import gettext_lazy as _
 
@@ -92,9 +93,23 @@ class Brand(RoutablePageMixin, Page):
        # for item in all_categories:
        #     if item.get_parent().content_type == self.content_type:
        #         filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, all_categories))
+        prefetch = Prefetch(
+            lookup='carousel_images',
+            queryset = CarouselBrandImage.objects.select_related('carousel_image'),
+            to_attr='cimages',
+        )
+        prefetchP = Prefetch(
+            lookup='group_products',
+            queryset=GroupOfProducts.objects.select_related('group_product'),
+            to_attr='gproduct'
+        )
+
 
         context = super().get_context(request, *args, **kwargs)
        # context['categories'] = filtred_cat 
+        context['product'] = Brand.objects.prefetch_related(prefetchP).live().public().get(pk=self.pk)
+        context['images'] = Brand.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
+        context['categories'] = self.get_children()
         context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
         return context
 

@@ -10,7 +10,7 @@
 	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
     <ul class="uk-slideshow-items" >
-      {% for loop_cycle in self.carousel_images.all %}
+      {% for loop_cycle in images.cimages %}
 	{% image loop_cycle.carousel_image fill-900x400 as img %}
 	<li class="uk-width-1-1">
 	   <img src="{{ img.url}}"  alt="{{ img.alt}}" class=""  uk-cover>
@@ -26,24 +26,47 @@
 </div>
 <div class=" uk-margin-bottom" style="background:transparent;">
 	{% include './breadcrumb.html' %}
+
+	<div class="subCat"> 
+	  <div style="width:1200px" class="uk-flex uk-flex-center">
+	  {% if categories %}
+	    {% for sub in categories %}
+	      <div class="subCat-item" >
+		      <a href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
+	      </div>
+	    {% endfor %}
+	  {% endif %}
+	  </div>
+	</div>
+
+
 <div style="padding:10px">
    <div class="uk-text-capitalize uk-text-center">
 	<p class="title">{{ self.group_title }}</p>
    </div>
-   <div class="uk-child-width-1-4@m " uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 300;repeat: true">
-	   
-          {% for product in self.group_products.all %}
+   <div class="uk-container" uk-slider="center: false;autoplay:true">
+   <div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
+	   <ul class="uk-slider-items uk-child-width-1-4@s uk-grid">   
+          {% for product in product.gproduct %}
 	    {% image product.group_product.first_image.product_image fill-250x160 as img %}
-	   <div>
-		<div class="uk-card tm-product-card ">
-		    <div class=" tm-product-card-media uk-inline-clip uk-transition-toggle" tabindex="0">
-			<div class="tm-ratio tm-ratio-4-3">
+
+	   <li class="">
+		<div class="uk-card uk-card-default tm-product-card ">
+		    <div class=" tm-product-card-media uk-inline-clip uk-transition-tog" tabindex="0">
+			<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
 			      <figure class="tm-media-box-wrap">
 			           <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
 			      </figure>
 		          </a>
 		  	</div>
+			<div class="uk-position-cover upper uk-overlay uk-overlay-default">
+			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
+			   <div style="">
+                                  {{ product.group_product.description|richtext}}
+                           </div>
+			   </a>
+                        </div>
 		    </div>
 		    <div>
 			<div class=" tm-product-card-body" style="height:16vh;">
@@ -56,7 +79,7 @@
 			    </h3>
 			   </div>
 
-			    <div class="tm-product-card-shop"  style="bottom: 2vh;position:absolute;width: 18vw;">
+			    <div class="tm-product-card-shop"  style="bottom: 2vh;position: relative;width: 17vw;bottom:0">
 				    <div class="tm-product-card-prices">
 					{% if product.group_product.has_discount %}
 					<del class="uk-text-meta">{{ product.group_product.base_price}}DH</del>
@@ -77,10 +100,13 @@
 
 			</div>
 		    </div>
-		</div>
-		</div>
+		</li>
            {% endfor %}
- 		
+ 	</ul>
+	<a style="color:black;"class="uk-position-center-left uk-position-small uk-slidnav-large uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a style="color:black;"class="uk-position-center-right uk-position-small uk-slidnav-large uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+	</div>
+   	<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
    </div>
 </div>
 </div>
