@@ -11,11 +11,11 @@
 
 <div class="uk-container">
 	<div class="subCat"> 
-	  <div style="" class="uk-flex uk-flex-center">
+	  <div style="" class="uk-flex uk-flex-left">
 	  {% if categories %}
 	    {% for sub in categories %}
 	      <div class="subCat-item" >
-		      <a href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
+		      <a style="background-color:{{sub.color}}" href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
 	      </div>
 	    {% endfor %}
 	  {% endif %}

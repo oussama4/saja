@@ -7,14 +7,16 @@ body{
 	display:block;
 	margin:3%;
 	width:100vw;
-	overflow:auto
+	overflow:auto;
 }
 .subCat-item {
 	display:inline;
-	width:200px;
+	width:140px;
 	margin:10px;
 }
-
+.subCat::-webkit-scrollbar {
+	display: none;
+}
 .subButton {
 	background: aliceblue;
 	border-radius: 18px;

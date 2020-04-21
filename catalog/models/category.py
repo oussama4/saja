@@ -3,9 +3,15 @@ from django.db.models import Prefetch
 from django.utils.translation import gettext_lazy as _
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
 from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
+from wagtail.admin.edit_handlers import (
+        FieldPanel,
+        PageChooserPanel,
+        TabbedInterface,
+        ObjectList,
+    )
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from colorfield.fields import ColorField
 from .product import Product, ProductImages 
 
 class Category(Page):
@@ -23,11 +29,23 @@ class Category(Page):
             related_name="+",
             on_delete=models.SET_NULL,
     )
+    color = ColorField(default='#F8FCFF')
 
     content_panels = Page.content_panels + [
             FieldPanel("description"),
             ImageChooserPanel("image"),
     ]
+
+    color_panels = [FieldPanel('color')] 
+
+    edit_handler = TabbedInterface(
+            [       
+                ObjectList(content_panels, heading=_("contenu")),
+                ObjectList(color_panels, heading=_("couleur")),
+                ObjectList(Page.promote_panels, heading=_("Promotion")),
+                ObjectList(Page.settings_panels, heading=_("Paramètres")),
+            ]
+        )
 
     def get_context(self, request, *args, **kwargs):
 

@@ -26,7 +26,7 @@
                       {% image product.pimages.0.product_image original as img %}
                       <a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img.url}}">
                         <figure class="tm-media-box-wrap">
-                          <img src="{{img.url}}" alt="{{img.alt}}">
+                          <img data-src="{{img.url}}" alt="{{img.alt}}" uk-img>
                         </figure>
                       </a>
                       <figure class="tm-media-box-wrap">
@@ -37,7 +37,7 @@
                     {% image pic.product_image original as img2 %}
                     <li><a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img2.url}}">
                         <figure class="tm-media-box-wrap">
-                          <img src="{{img2.url}}" alt="{{img2.alt}}">
+                          <img data-src="{{img2.url}}" alt="{{img2.alt}}" uk-img>
                         </figure>
                       </a>
                     </li>
@@ -56,7 +56,7 @@
                                 <div class="tm-ratio tm-ratio-1-1">
                                   <a class="tm-media-box tm-media-box-frame" href="">
                                     <figure class="tm-media-box-wrap">
-                                      <img src="{{img.url}}" alt="{{img.alt}}">
+                                      <img data-src="{{img.url}}" alt="{{img.alt}}" uk-img>
                                     </figure>
                                   </a>
                                 </div>
@@ -67,7 +67,7 @@
                                 <div class="tm-ratio tm-ratio-1-1">
                                   <a class="tm-media-box tm-media-box-frame" href="">
                                     <figure class="tm-media-box-wrap">
-                                      <img src="{{img3.url}}" alt="{{img3.alt}}">
+                                      <img data-src="{{img3.url}}" alt="{{img3.alt}}" uk-img>
                                     </figure>
                                   </a>
                                 </div>

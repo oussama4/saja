@@ -13,7 +13,7 @@
       {% for loop_cycle in images.cimages %}
 	{% image loop_cycle.carousel_image fill-900x400 as img %}
 	<li class="uk-width-1-1">
-	   <img src="{{ img.url}}"  alt="{{ img.alt}}" class=""  uk-cover>
+	   <img data-src="{{ img.url}}"  alt="{{ img.alt}}" class="" uk-img uk-cover>
 	</li>
       {% endfor %}
     </ul>
@@ -28,11 +28,11 @@
 	{% include './breadcrumb.html' %}
 
 	<div class="subCat"> 
-	  <div style="width:1200px" class="uk-flex uk-flex-center">
+	  <div class="uk-flex uk-flex-left">
 	  {% if categories %}
 	    {% for sub in categories %}
 	      <div class="subCat-item" >
-		      <a href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
+		<a style="background-color:{{sub.color}}" href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
 	      </div>
 	    {% endfor %}
 	  {% endif %}
@@ -56,7 +56,7 @@
 			<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
 			      <figure class="tm-media-box-wrap">
-			           <img src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;">
+			          <img data-src="{{ img.url }}" style="height: 100%" alt="{{ img.alt }}&quot;" uk-img>
 			      </figure>
 		          </a>
 		  	</div>

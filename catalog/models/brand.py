@@ -109,7 +109,8 @@ class Brand(RoutablePageMixin, Page):
        # context['categories'] = filtred_cat 
         context['product'] = Brand.objects.prefetch_related(prefetchP).live().public().get(pk=self.pk)
         context['images'] = Brand.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
-        context['categories'] = self.get_children()
+        context['categories'] = self.get_children().specific()
+        print(context['categories'][0].title)
         context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
         return context
 

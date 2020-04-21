@@ -42,7 +42,7 @@
 				<a class="tm-media-box" href="product.href">
 					<figure class="tm-media-box-wrap">
 						{% if img.url %}
-							<img src="{{ img.url }}" alt="{{ img.alt }}">
+							<img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
 						{% else %}
 							<span class="uk-text-muted" uk-icon="icon: image; ratio: 3"></span>
 						{% endif %}
