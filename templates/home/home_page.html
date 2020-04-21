@@ -16,7 +16,7 @@
 	   <div style="max-height:140px" class="tm-ratio tm-ratio-4-3  uk-card uk-card-body uk-box-shadow-hover-large"> 
 	    <a style="padding:10px"class="uk-link-muted uk-text-center uk-display-block tm-media-box" href="/roqvel" title="XPEL">
 	      <figure class="tm-media-box-wrap">
-	        <img src="{% static 'img/ROQVEL.png' %}" alt="xpel">
+	        <img data-src="{% static 'img/ROQVEL.png' %}" alt="xpel" uk-img>
 	      </figure>
 	    </a>
 	   </div>
@@ -24,7 +24,7 @@
            <div style="max-height:140px" class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
 	     <a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block tm-media-box" href="/healthpoint" title="hp">
 	      <figure class="tm-media-box-wrap">
-	        <img src="{% static 'img/hp.png' %}" alt="hp">
+	        <img data-src="{% static 'img/hp.png' %}" alt="hp" uk-img>
 	      </figure>
 	     </a>
 	   </div>
@@ -38,10 +38,10 @@
 		<div class="uk-padding-remove uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slideshow="center:true; autoplay:true;max-height:340">
 		<div>
 		    <ul class="uk-slideshow-items " >
-			    {% for i in page.carousel_images.all %}
+			    {% for i in home.cimages %}
 			     {% image i.carousel_image fill-900x400 as img %}
 			<li class="">
-				    <img src="{{ img.url }}" alt="{{ img.alt }}">
+				    <img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
 			</li>
 			   {% endfor %}
 		    </ul>
@@ -62,14 +62,14 @@
 	    <div style="max-height:140px" class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
 	      <a style="padding:10px"class="uk-link-muted uk-text-center uk-display-block tm-media-box" href="/drammock" title="drammock">
 	       <figure class="tm-media-box-wrap">
-	         <img src="{% static 'img/drammock.png' %}" alt="drammock">
+	         <img data-src="{% static 'img/drammock.png' %}" alt="drammock" uk-img>
 	       </figure>
 	      </a>
 	    </div>  
 	    <div style="max-height:140px" class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
 	      <a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block uk-padding-small tm-media-box" href="/xpel" title="ROQVEL">
 	        <figure class="tm-media-box-wrap">
-	          <img src="{% static 'img/logo-xpel.png' %}" alt="roqvel">
+	          <img data-src="{% static 'img/logo-xpel.png' %}" alt="roqvel" uk-img>
 	        </figure>
 	      </a>
 	    </div>

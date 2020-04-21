@@ -23,21 +23,21 @@
                 <div>
                   <ul class="uk-slideshow-items" uk-lightbox>
                     <li>
-                      {% image self.first_image.product_image original as img %}
+                      {% image product.pimages.0.product_image original as img %}
                       <a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img.url}}">
                         <figure class="tm-media-box-wrap">
-                          <img src="{{img.url}}" alt="{{img.alt}}">
+                          <img data-src="{{img.url}}" alt="{{img.alt}}" uk-img>
                         </figure>
                       </a>
                       <figure class="tm-media-box-wrap">
                         <span class="uk-text-muted" uk-icon="icon: image; ratio: 5"></span>
                       </figure>
                     </li>
-                    {% for pic in self.product_images.all|slice:'1:' %}
+                    {% for pic in product.pimages.all|slice:'1:' %}
                     {% image pic.product_image original as img2 %}
                     <li><a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img2.url}}">
                         <figure class="tm-media-box-wrap">
-                          <img src="{{img2.url}}" alt="{{img2.alt}}">
+                          <img data-src="{{img2.url}}" alt="{{img2.alt}}" uk-img>
                         </figure>
                       </a>
                     </li>
@@ -56,18 +56,18 @@
                                 <div class="tm-ratio tm-ratio-1-1">
                                   <a class="tm-media-box tm-media-box-frame" href="">
                                     <figure class="tm-media-box-wrap">
-                                      <img src="{{img.url}}" alt="{{img.alt}}">
+                                      <img data-src="{{img.url}}" alt="{{img.alt}}" uk-img>
                                     </figure>
                                   </a>
                                 </div>
                               </li>
-                              {% for pic in self.product_images.all|slice:"1:" %}
+                              {% for pic in product.pimages.all|slice:"1:" %}
                               {% image pic.product_image fill-150x100 as img3 %}
                               <li uk-slideshow-item="{{forloop.counter}}">
                                 <div class="tm-ratio tm-ratio-1-1">
                                   <a class="tm-media-box tm-media-box-frame" href="">
                                     <figure class="tm-media-box-wrap">
-                                      <img src="{{img3.url}}" alt="{{img3.alt}}">
+                                      <img data-src="{{img3.url}}" alt="{{img3.alt}}" uk-img>
                                     </figure>
                                   </a>
                                 </div>
@@ -96,25 +96,25 @@
                     <div class="uk-grid-small uk-child-width-1-1" uk-grid>
                       <!--Prices-->
                       <div>
-                        {% if page.has_discount %}
-                        <del class="uk-text-meta"> {{ self.base_price }} DH </del>
+                        {% if product.has_discount %}
+                        <del class="uk-text-meta"> {{ product.base_price }} DH </del>
                         {% endif %}
-                        <div class="tm-product-price">{{ self.price }} DH </div>
+                        <div class="tm-product-price">{{ product.price }} DH </div>
                       </div>
                       <!--Add to cart-->
                       <div>
                         <div class="uk-grid-small" uk-grid>
                           <!--Quantity-->
                             <div class="">
-    				 <a data-id="{{self.page_ptr_id}}" onclick="remove_item(this)" uk-icon="icon: minus; ratio: .75" class="uk-icon"></a>
+    				 <a data-id="{{product.page_ptr_id}}" onclick="remove_item(this)" uk-icon="icon: minus; ratio: .75" class="uk-icon"></a>
 			<input class="uk-input tm-quantity-input" min='1'
-	  max='10000' step="1" data-id="{{self.page_ptr_id}}" type="number" readonly  value='1'>
-			<a data-id="{{ self.page_ptr_id }}" uk-icon="icon: plus; ratio: .75" class="add_to_cart uk-icon"></a> 
+	  max='10000' step="1" data-id="{{product.page_ptr_id}}" type="number" readonly  value='1'>
+			<a data-id="{{ product.page_ptr_id }}" uk-icon="icon: plus; ratio: .75" class="add_to_cart uk-icon"></a> 
 	
                           </div>
                           <!--Add to cart button-->
                           <div>
-				  <button data-id="{{self.page_ptr_id}}" 
+				  <button data-id="{{product.page_ptr_id}}" 
                               class="uk-button uk-button-primary add_to_cart tm-product-add-button tm-shine js-add-to-cart">{% trans "ajouter au panier" %}</button>
                           </div>
                           <!--Actions buttons-->
@@ -159,7 +159,7 @@
                   <div class="uk-text-lead uk-text-bolder">
                     {% trans 'Description' %}
                   </div>
-                  <p> {{ page.description|richtext }} </p>
+                  <p> {{ product.description|richtext }} </p>
                 </div>
                 <div class="uk-margin">
                   <div class="uk-grid-small" uk-grid>

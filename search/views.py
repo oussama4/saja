@@ -1,10 +1,11 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
+from django.db.models import Prefetch
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
-from catalog.models import Product
+from catalog.models import Product, ProductImages
 
 
 def search(request):
@@ -13,7 +14,12 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Product.objects.live().search(search_query, backend='pgfts')
+        prefetch = Prefetch(
+                lookup='product_images',
+                queryset=ProductImages.objects.select_related('product_image'),
+                to_attr='pimages'
+        )
+        search_results = Product.objects.prefetch_related(prefetch).live().search(search_query, backend='pgfts')
         query = Query.get(search_query)
 
         # Record hit
