@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'checkout',
 
     'widget_tweaks',
+    'colorfield',
 
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',

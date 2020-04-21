@@ -25,8 +25,7 @@
 				   <div class="tm-ratio tm-ratio-4-3">
 				     <a class="tm-media-box" href="#">
 					<figure class="tm-media-box-wrap">
-					    <img src="{%if img.url %}{{ img.url }}{%else%}{% static 'img/images.png' %}{% endif %}" 
-					     alt="{{ img.alt }}">
+					    <img data-src="{%if img.url %}{{ img.url }}{%else%}{% static 'img/images.png' %}{% endif %}" alt="{{ img.alt }}" uk-img>
 					</figure>
 				    </a>   
 				   </div>   
