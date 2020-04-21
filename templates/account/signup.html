@@ -4,32 +4,41 @@
 {% load account socialaccount %}
 
 {% block content %}
-    <div class="uk-container uk-margin uk-flex uk-flex-column uk-flex-center uk-width-1-3">
-	<form method="post" novalidate>
+    <div class="uk-container uk-margin uk-flex uk-flex-column uk-flex-center uk-width-1-1">
+	<div class="uk-margin-top uk-width-large uk-margin-auto uk-card uk-card-default uk-box-shadow-large">
+		<h3 class="uk-margin-top uk-card-title uk-text-normal uk-text-center"> 
+			{% trans "Créez votre compte" %} 
+		</h3>
+	<form class="uk-margin-small uk-card-body" method="post" novalidate>
 	    {% csrf_token %}
 	    {% for error in form.non_field_errors %}
 	    	<p class="uk-text-danger">{{ error }} </p>
 	    {% endfor %}
 
 	    {% for field in form %}
-	    <div class="uk-margin">
-		{% for error in field.errors %}
-	    	    <p class="uk-text-danger">{{ error }} </p>
-		{% endfor %}
-		<label for="{{ field.id_for_label }}" class="uk-form-label"> {{ field.label }} </label>
-		<div class="uk-form_controls"> {{ field|add_class:"uk-input" }} </div>
-	    </div>
+			<div class="uk-margin-small">
+				<div class="uk-inline uk-width-1-1">
+					{{ field|add_class:"uk-input uk-form-large"|add_error_class:"uk-form-danger" }}
+				</div>
+				{% for error in field.errors %}
+					<p class="uk-text-danger">{{ error }} </p>
+				{% endfor %}
+			</div>
 	    {% endfor %}
 
-	    <button class="uk-button uk-button-primary" type="submit"> {% trans "Créez votre compte" %} </button>
+	    <button class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit">
+		   	{% trans "Créez votre compte" %} 
+		</button>
+		<div class="uk-margin uk-text-right@s uk-text-center uk-text-small">
+		   	{% trans "Vous avez déjà un compte ?" %} 
+			<a href="{% url 'account_login' %}"> {% trans "Connectez-vous !" %} </a> 
+		</div>
+		<hr>
+		<a class="uk-button uk-button-danger uk-button-large uk-width-1-1" 
+			href="{% provider_login_url 'google' %}" uk-icon="icon: google; ratio:2">
+			{% trans "Créez votre compte avec google" %} 
+		</a>
 	</form>
-	<hr>
-	<a class="uk-button uk-button-danger" href="{% provider_login_url 'google' %}" uk-icon="icon: google; ratio:2">
-	    {% trans "Créez votre compte avec google" %} 
-	</a>
-	<hr>
-	<p> {% trans "Vous avez déjà un compte ?" %} 
-	    <a href="{% url 'account_login' %}"> {% trans "Connectez-vous !" %} </a> 
-	</p>
+	</div>
     </div>
 {% endblock %}
