@@ -9,7 +9,7 @@ class ProductAdmin(ModelAdmin):
     menu_order = 200
     add_to_settings_menu = False
     list_display = ('title', 'price', 'created')
-    list_filter = ('')
+    list_filter = ('has_discount', )
     search_fields = ('title')
 
 modeladmin_register(ProductAdmin)

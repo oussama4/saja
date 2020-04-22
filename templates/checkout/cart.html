@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static i18n wagtailcore_tags wagtailimages_tags %}
+
 {% block content %}
-{% csrf_token %}
 <section class="uk-section uk-section-small">
   <div class="uk-container">
    <div class="uk-grid-medium uk-child-width-1-1 uk-grid uk-grid-stack" uk-grid="">
@@ -30,8 +30,8 @@
 	      <!--Body-->
 	      {%if cart.0 %}
 	      {% for item in cart.0.items.all %}
-		  {% image item.product_id.first_image.product_image fill-200x140 as img %}
-	       <div  data-id="{{item.product_id.page_ptr_id}}" class="uk-card-body">
+		  {% image item.product.first_image.product_image fill-200x140 as img %}
+	       <div  data-id="{{item.product.pk}}" class="uk-card-body">
 		<div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>
 		  <!--Product cell-->
 		  <div>
@@ -52,7 +52,7 @@
 		      </div>
 		      <!--Info-->
 		      <div class="uk-width-expand">
-			      <a class="uk-link-heading" href="{% pageurl item.product_id%}">{{ item.product_id.title }}</a>
+			      <a class="uk-link-heading" href="{% url 'product_detail' item.product.slug %}">{{ item.product.title }}</a>
 		      </div>
 		    </div>
 		  </div>
@@ -64,23 +64,23 @@
 		      <!--Price-->
 		      <div>
 			      <div class="uk-text-muted uk-hidden@m">{% trans 'Prix' %}</div>
-			      <div>{{ item.product_id.price }}DH</div>
+			      <div>{{ item.product.price }}DH</div>
 		      </div>
 		      <!--Quantity-->
 		      <div class="tm-cart-quantity-column">
-			      <a data-id="{{item.product_id.page_ptr_id}}" onclick="remove_item(this)" uk-icon="icon: minus; ratio: .75" class="uk-icon"></a>
+			      <a data-id="{{item.product.pk}}" onclick="remove_item(this)" uk-icon="icon: minus; ratio: .75" class="uk-icon"></a>
 			<input class="uk-input tm-quantity-input" min='1'
-	  max='10000' step="1" data-id="{{item.product_id.page_ptr_id}}" type="number" readonly  value='{{item.quantity}}'>
-			<a data-id="{{ item.product_id.page_ptr_id }}" uk-icon="icon: plus; ratio: .75" class="add_to_cart uk-icon"></a> 
+	  max='10000' step="1" data-id="{{item.product.pk}}" type="number" readonly  value='{{item.quantity}}'>
+			<a data-id="{{ item.product.pk }}" uk-icon="icon: plus; ratio: .75" class="add_to_cart uk-icon"></a> 
 		      </div>
 		      <!--Sum-->
 		      <div>
 			      <div class="uk-text-muted uk-hidden@m">{% trans 'Somme' %}</div>
-			      <div class="totalItem" data-id="{{item.product_id.page_ptr_id}}">{{ item.total_price }}DH</div>
+			      <div class="totalItem" data-id="{{item.product.pk}}">{{ item.total_price }}DH</div>
 		      </div>
 		      <!--Actions-->
 		      <div class="uk-width-auto@s">
-			<a  data-id="{{item.product_id.page_ptr_id}}"class="uk-text-danger" onclick="remove(this)" uk-tooltip="Remove">
+			<a  data-id="{{item.product.pk}}"class="uk-text-danger" onclick="remove(this)" uk-tooltip="Remove">
 			  <span uk-icon="icon: close"></span>
 			</a>
 		      </div>

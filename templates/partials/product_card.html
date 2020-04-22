@@ -5,7 +5,7 @@
 
     <div class="tm-product-card-media inline-clip uk-transition-tog">
 	<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
-		<a class="tm-media-box" href="{% pageurl product %}">
+		<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
 	     <figure class="tm-media-box-wrap">
 		     <img data-src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;" uk-img>
 	     </figure>
@@ -21,7 +21,7 @@
 	<div class="tm-product-card-info">
 		{#<div class="uk-text-meta uk-margin-xsmall-bottom"><a class="uk-link-heading" href="{% pageurl product.get_parent %}">{{ product.get_parent.title }}</a></div>#}
 	    <h3 class="tm-product-card-title">
-		    <a class="uk-link-heading" href="{% pageurl product%}">
+		    <a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
 			{{ product.title }}
 		    </a>
 	    </h3>

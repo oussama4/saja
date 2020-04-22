@@ -3,7 +3,6 @@
 
 
 {% block content%}
-{% csrf_token %}
 <div class="brandBack" >
 <div  class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
    <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
@@ -54,14 +53,14 @@
 		<div class="uk-card uk-card-default tm-product-card ">
 		    <div class=" tm-product-card-media uk-inline-clip uk-transition-tog" tabindex="0">
 			<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
-			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
+			   <a class="tm-media-box" href="{% url product.group_product.slug %}">
 			      <figure class="tm-media-box-wrap">
 			          <img data-src="{{ img.url }}" style="height: 100%" alt="{{ img.alt }}&quot;" uk-img>
 			      </figure>
 		          </a>
 		  	</div>
 			<div class="uk-position-cover upper uk-overlay uk-overlay-default">
-			   <a class="tm-media-box" href="{% pageurl product.group_product %}">
+			   <a class="tm-media-box" href="{% url product.group_product.slug %}">
 			   <div style="">
                                   {{ product.group_product.description|richtext}}
                            </div>
@@ -71,9 +70,9 @@
 		    <div>
 			<div class=" tm-product-card-body" style="height:16vh;">
 			  <div class="tm-product-card-info" style="max-height:6vh">
-			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.group_product.get_parent.title }}</div>
+			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.group_product.range.category.title }}</div>
 			    <h3 class="tm-product-card-title" style="margin:0;">
-				    <a href="{% pageurl product.group_product %}" class="uk-link-heading">
+				    <a href="{% url product.group_product.slug %}" class="uk-link-heading">
 					    {{ product.group_product.title |slice:'35'}}
 				    </a>
 			    </h3>
@@ -92,7 +91,7 @@
 						<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
 					    </a>
 					</div>
-					<a data-id="{{ product.group_product.page_ptr_id}}" class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine">
+					<a data-id="{{ product.group_product.pk}}" class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine">
 					    <span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
 					</a>
 				    </div>

@@ -197,7 +197,7 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
     def save(self, *args, **kwargs):
         v = self.title
         if self.attributes:
-            for attribute in self.attributes:
+            for attribute in self.attributes.all():
                 v += attribute.value
         self.slug = slugify(v)
         super(Product, self).save(*args, **kwargs)
