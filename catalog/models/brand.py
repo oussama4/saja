@@ -14,7 +14,7 @@ from wagtail.admin.edit_handlers import (
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page, Orderable
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-
+from wagtail.snippets.edit_handlers import SnippetChooserPanel  
 from modelcluster.fields import ParentalKey
 
 from home import blocks
@@ -52,7 +52,7 @@ class GroupOfProducts(Orderable):
 
 
     panels = [
-            PageChooserPanel("group_product")
+            SnippetChooserPanel("group_product")
         ]
 
 

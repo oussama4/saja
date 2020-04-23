@@ -41,7 +41,9 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
-		{% include 'partials/navbar_next.html'  %}
+        {% if request.get_full_path|split != ""%}
+        {% include 'partials/navbar_next.html'  %}
+        {% endif %}
 	
 	{% block content %}{% endblock %}
 	{% include 'partials/footer.html' %}

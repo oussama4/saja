@@ -3,52 +3,91 @@
 
 
 {% block content%}
+{% csrf_token %}
+<div class="brandBack">
+	<div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
+		<div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
+			uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade">
+
 <div class="brandBack" >
 <div  class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
    <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
 	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
-    <ul class="uk-slideshow-items" >
-      {% for loop_cycle in images.cimages %}
-	{% image loop_cycle.carousel_image fill-900x400 as img %}
-	<li class="uk-width-1-1">
-	   <img data-src="{{ img.url}}"  alt="{{ img.alt}}" class="" uk-img uk-cover>
-	</li>
-      {% endfor %}
-    </ul>
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-    <div class="">
-    <ul class="uk-slideshow-nav uk-dotnav uk-flex-center "></ul>
-    </div>
-  </div>
-</div>
-<div class=" uk-margin-bottom" style="background:transparent;">
-	{% include './breadcrumb.html' %}
-
-	<div class="subCat"> 
-	  <div class="uk-flex uk-flex-left">
-	  {% if categories %}
-	    {% for sub in categories %}
-	      <div class="subCat-item" >
-		<a style="background-color:{{sub.color}}" href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
-	      </div>
-	    {% endfor %}
-	  {% endif %}
-	  </div>
+			<ul class="uk-slideshow-items">
+				{% for loop_cycle in images.cimages %}
+				{% image loop_cycle.carousel_image fill-900x400 as img %}
+				<li class="uk-width-1-1">
+					<img data-src="{{ img.url}}" alt="{{ img.alt}}" class="" uk-img uk-cover>
+				</li>
+				{% endfor %}
+			</ul>
+			<a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+				uk-slideshow-item="previous"></a>
+			<a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+				uk-slideshow-item="next"></a>
+			<div class="">
+				<ul class="uk-slideshow-nav uk-dotnav uk-flex-center "></ul>
+			</div>
+		</div>
 	</div>
+	<div class=" uk-margin-bottom" style="background:transparent;">
+		{% include './breadcrumb.html' %}
 
+		<div class="subCat">
+			<div class="uk-flex uk-flex-left">
+				{% if categories %}
+				{% for sub in categories %}
+				<div class="subCat-item">
+					<a style="background-color:{{sub.color}}" href="{% pageurl sub %}"
+						class="subButton">{{sub.title}}</a>
+				</div>
+				{% endfor %}
+				{% endif %}
+			</div>
+		</div>
 
-<div style="padding:10px">
-   <div class="uk-text-capitalize uk-text-center">
-	<p class="title">{{ self.group_title }}</p>
-   </div>
-   <div class="uk-container" uk-slider="center: false;autoplay:true">
-   <div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
-	   <ul class="uk-slider-items uk-child-width-1-4@s uk-grid">   
-          {% for product in product.gproduct %}
-	    {% image product.group_product.first_image.product_image fill-250x160 as img %}
+		<div style="padding:10px">
+			<div class="uk-text-capitalize uk-text-center">
+				<p class="title">{{ self.group_title }}</p>
+			</div>
+			<div class="uk-container" uk-slider="center: false;autoplay:true">
+				<div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
+					<ul class="uk-slider-items uk-child-width-1-4@s uk-grid">
+						{% for product in product.gproduct %}
+						{% image product.group_product.first_image.product_image fill-250x160 as img %}
 
+						<li class="">
+							<div class="uk-card uk-card-default tm-product-card ">
+								<div class=" tm-product-card-media uk-inline-clip uk-transition-tog" tabindex="0">
+									<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
+										<a class="tm-media-box" href="{% pageurl product.group_product %}">
+											<figure class="tm-media-box-wrap">
+												<img data-src="{{ img.url }}" style="height: 100%"
+													alt="{{ img.alt }}&quot;" uk-img>
+											</figure>
+										</a>
+									</div>
+									<div class="uk-position-cover upper uk-overlay uk-overlay-default">
+										<a class="tm-media-box" href="{% pageurl product.group_product %}">
+											<div style="">
+												{{ product.group_product.description|richtext}}
+											</div>
+										</a>
+									</div>
+								</div>
+								<div>
+									<div class=" tm-product-card-body" style="height:16vh;">
+										<div class="tm-product-card-info" style="max-height:6vh">
+											<div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">
+												{{ product.group_product.get_parent.title }}</div>
+											<h3 class="tm-product-card-title" style="margin:0;">
+												<a href="{% pageurl product.group_product %}" class="uk-link-heading">
+													{{ product.group_product.title |slice:'35'}}
+												</a>
+											</h3>
+										</div>
+=======
 	   <li class="">
 		<div class="uk-card uk-card-default tm-product-card ">
 		    <div class=" tm-product-card-media uk-inline-clip uk-transition-tog" tabindex="0">
@@ -96,46 +135,75 @@
 					</a>
 				    </div>
 				</div>
+>>>>>>> dev
 
+										<div class="tm-product-card-shop"
+											style="bottom: 2vh;position: relative;width: 17vw;bottom:0">
+											<div class="tm-product-card-prices">
+												{% if product.group_product.has_discount %}
+												<del class="uk-text-meta">{{ product.group_product.base_price}}DH</del>
+												{% endif %}
+												<div class="tm-product-card-price">{{ product.group_product.price}}
+												</div>
+											</div>
+											<div class="tm-product-card-add">
+												<div class="uk-text-meta tm-product-card-actions">
+													<a class="tm-product-card-action tm-action-button-active"
+														title="Add to favorites">
+														<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
+													</a>
+												</div>
+												<a data-id="{{ product.group_product.page_ptr_id}}"
+													class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine">
+													<span class="tm-product-card-add-button-icon uk-icon"
+														uk-icon="cart"></span>
+												</a>
+											</div>
+										</div>
+
+									</div>
+								</div>
+						</li>
+						{% endfor %}
+					</ul>
+					<a style="color:black;"
+						class="uk-position-center-left uk-position-small uk-slidnav-large uk-hidden-hover" href="#"
+						uk-slidenav-previous uk-slider-item="previous"></a>
+					<a style="color:black;"
+						class="uk-position-center-right uk-position-small uk-slidnav-large uk-hidden-hover" href="#"
+						uk-slidenav-next uk-slider-item="next"></a>
+				</div>
+				<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
 			</div>
-		    </div>
-		</li>
-           {% endfor %}
- 	</ul>
-	<a style="color:black;"class="uk-position-center-left uk-position-small uk-slidnav-large uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-        <a style="color:black;"class="uk-position-center-right uk-position-small uk-slidnav-large uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-	</div>
-   	<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
-   </div>
-</div>
-</div>
-{% comment %}	
-<div class="uk-container">
-	<div class=" uk-width-1-1 uk-margin-bottom" uk-grid>
-	   <div class= "uk-card uk-padding-remove uk-card-default uk-width-1-1 uk-card-small">
-		 <header class= "uk-card-header">
-		    <h2 class="uk-text-center">{% trans 'Categories' %}</h2>
-		 </header>
-		<div class= "uk-card-body uk-child-width-expand@s uk-grid-divider uk-child-width-1-4@m" uk-grid>
-		{% if categories %}
-		 {% for key, value in categories.items %}
-		    <div style="">
-			<h4 class="uk-link-muted"><a href="{% pageurl key %}">{{ key.title }}</a></h4>
-        		<ul class="uk-list " >
-			 {% for subCat in value %}
-			    <li class="uk-margin-remove"><a href="{% pageurl subCat %}">{{ subCat.title }}</a></li>
-			 {% endfor %}
-        		</ul>
-   		    </div>
-		 {% endfor %}
-	        {% endif %}
 		</div>
-	   </div>
 	</div>
-</div>
-{% endcomment %}
-{% for block in self.body %}    
-    {% include_block block%}   
-{% endfor %}          
+	{% comment %}
+	<div class="uk-container">
+		<div class=" uk-width-1-1 uk-margin-bottom" uk-grid>
+			<div class="uk-card uk-padding-remove uk-card-default uk-width-1-1 uk-card-small">
+				<header class="uk-card-header">
+					<h2 class="uk-text-center">{% trans 'Categories' %}</h2>
+				</header>
+				<div class="uk-card-body uk-child-width-expand@s uk-grid-divider uk-child-width-1-4@m" uk-grid>
+					{% if categories %}
+					{% for key, value in categories.items %}
+					<div style="">
+						<h4 class="uk-link-muted"><a href="{% pageurl key %}">{{ key.title }}</a></h4>
+						<ul class="uk-list ">
+							{% for subCat in value %}
+							<li class="uk-margin-remove"><a href="{% pageurl subCat %}">{{ subCat.title }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endcomment %}
+	{% for block in self.body %}
+	{% include_block block%}
+	{% endfor %}
 </div>
 {% endblock content %}

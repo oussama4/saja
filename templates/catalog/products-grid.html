@@ -13,13 +13,27 @@
 			<div class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
 				<span class="uk-margin-small-right uk-text-muted">{% trans 'Trier par' %}</span>
 			    <ul class="uk-subnav uk-margin-remove">
-				<li class="uk-active uk-padding-remove">
-					<a class="uk-text-lowercase" href="#">{% trans 'Pertinent' %}
-				    <span class="uk-margin-xsmall-left uk-icon" uk-icon="icon:chevron-down;ratio:.5;"></span>
-				    </a>
-				</li>
+				<li class="uk-active"><a class="uk-text-lowercase" href="#">{% trans 'Le plus récent' %}</a></li>
 				<li><a class="uk-text-lowercase" href="#">{% trans 'prix' %}</a></li>
-				<li><a class="uk-text-lowercase" href="#">{% trans 'Le plus récent' %}</a></li>
+				<li class="uk-visible@l">
+		   			
+				   	<div class="uk-grid-small uk-child-width-1-2 uk-text-small" uk-grid>
+		  				<div class="uk-display-inline">
+		    					<div class="uk-inline">
+			    					<span class="uk-form-icon uk-text-xsmall">{% trans 'De' %}</span>
+		      						<input class="uk-input" type="number" >
+		    					</div>
+		  				</div>
+		  				<div class="uk-display-inline">
+		    					<div class="uk-inline">
+			    					<span class="uk-form-icon uk-text-xsmall">{% trans 'À' %}</span>
+		      						<input class="uk-input" type="number">
+		    					</div>
+		  				</div>
+		 			</div>
+				</li>
+
+
 			    </ul>
 			</div>
 			<!-- Filters button & change view-->
