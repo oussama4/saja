@@ -15,7 +15,7 @@ def total (items):
 
 class Cart(models.Model):
 
-    user = models.ForeignKey(User,related_name="+",on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="carts", on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
     @property
@@ -83,7 +83,7 @@ class Order(models.Model):
 
     @property
     def total_price(self):
-        return total(self.items)
+        return total(self.items.all())
     @property
     def delivered(self):
         self.status = self.Delivred
