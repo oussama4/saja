@@ -17,6 +17,7 @@ function getCookie(name) {
 
 (function () {
 	var nav = document.querySelector("#Homenavbar");
+	if(nav){
 	window.addEventListener("scroll", function (e) {
 		if (pageYOffset == 0) {
 			nav.style.backgroundColor = 'transparent';
@@ -25,7 +26,7 @@ function getCookie(name) {
 			nav.style.backgroundColor = 'white';
 			nav.style.borderBottom = '1px solid #dbd9d9';
 		}
-	})
+	})}
 
 })();
 

@@ -1,3 +1,8 @@
+input[type="number"].uk-form-width-small::-webkit-inner-spin-button {
+
+  height:30px;
+  width:20px;
+}
 .background-home {
     background-repeat: no-repeat;
     background-attachment: fixed;
