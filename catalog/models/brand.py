@@ -100,15 +100,15 @@ class Brand(RoutablePageMixin, Page):
         )
         prefetchP = Prefetch(
             lookup='group_products',
-            queryset=GroupOfProducts.objects.select_related('group_product'),
+            queryset=GroupOfProducts.objects.select_related('group_product__product_range__category'),
             to_attr='gproduct'
         )
 
 
         context = super().get_context(request, *args, **kwargs)
        # context['categories'] = filtred_cat 
-        context['product'] = Brand.objects.prefetch_related(prefetchP).live().public().get(pk=self.pk)
-        context['images'] = Brand.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
+        context['brand'] = Brand.objects.prefetch_related(prefetch, prefetchP).live().public().get(pk=self.pk)
+        #context['images'] = Brand.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
         context['categories'] = self.get_children().specific()
         context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
         return context

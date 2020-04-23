@@ -32,7 +32,9 @@
 				</div>     
    
 				<div class="uk-width-expand">   
-					<a class="uk-link-heading uk-text-small" href="">{{ item.product.title }}</a>
+					<a class="uk-link-heading uk-text-small" href="{% url 'product_detail' item.product.slug %}">
+						{{ item.product.title }}
+					</a>
 				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
 					 <div class="uk-text-bolder uk-text-small">{{ item.product.price }}</div>
 					<div class="uk-text-meta uk-text-xsmall">
@@ -62,7 +64,7 @@
 		  <footer class="uk-card-footer">
 		    <div class="uk-grid-small" uk-grid>
 			    <div class="uk-width-expand uk-text-muted uk-h4">{% trans 'Total'%}</div>
-			    <div class="uk-h4 uk-text-bolder"><span id="totalPrice">{% if cart %}{{cart.0.total_price}}{% endif %}</span>DH</div>
+			    <div class="uk-h4 uk-text-bolder"><span id="totalPrice">{% if cart.0 %}{{cart.0.total_price}}{% endif %}</span>DH</div>
 		    </div>
 		    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-margin-small" uk-grid>
 			    <div><a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="/cart">{% trans 'MON PANIER' %}</a></div>
