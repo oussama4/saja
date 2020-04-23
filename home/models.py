@@ -15,7 +15,7 @@ from wagtail.admin.edit_handlers import (
         PageChooserPanel,
 )
 from wagtail.snippets.models import register_snippet
-
+from catalog.models.brand import Brand 
 from home import blocks
 
 class CarouselImages(Orderable):
@@ -27,10 +27,34 @@ class CarouselImages(Orderable):
             on_delete=models.SET_NULL,
             related_name="+",
     )
+    brand_page = models.ForeignKey(
+            Brand,
+            null=True,
+            blank=True,
+            on_delete=models.SET_NULL,
+            related_name='+',
+    )
+    text = models.CharField(
+            verbose_name= _("Phrase pour la Marque"),
+            null=True,
+            max_length=100,
+    )
+    logo =models.ForeignKey(
+            "wagtailimages.Image",          
+            null=True,         
+            blank=True,        
+            on_delete=models.SET_NULL,      
+            related_name="+",  
+    )
+
 
     panels= [
             ImageChooserPanel("carousel_image"),
+            ImageChooserPanel("logo"),
+            PageChooserPanel("brand_page"),
+            FieldPanel("text"),
     ]
+
 
 class HomePage(Page):
     template = 'home/home_page.html'

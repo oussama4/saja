@@ -6,204 +6,150 @@
 {% endblock %}
 
 {% block content %}
-<div class="uk-position-relative"
-	uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+<div class="uk-position-relative">
 
-
-
-	<div class="uk-margin">
-
-		<div class="uk-width-1-1 uk-margin-remove uk-grid-medium uk-grid" uk-grid>
-
-			<div class="uk-flex-first@m uk-margin uk-width-1-1 uk-width-1-6@m">
-
-				<div class="uk-margin uk-padding-remove uk-width-1-1 uk-child-width-1-2  uk-child-width-1-1@m " uk-grid>
-					<div style="max-height:140px"
-						class="tm-ratio tm-ratio-4-3  uk-card uk-card-body uk-box-shadow-hover-large">
-						<a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block tm-media-box"
-							href="/roqvel" title="XPEL">
-							<figure class="tm-media-box-wrap">
-								<img data-src="{% static 'img/ROQVEL.png' %}" alt="xpel" uk-img>
-							</figure>
-						</a>
+	<div uk-slideshow="animation: scale;max-height:700;autoplay:false" >
+		<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+			<ul class="uk-slideshow-items ">
+				{% for i in home.cimages %}
+				{% image i.carousel_image original as img %}
+				{% image i.logo original as logo %}
+				<li class="">
+					<img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
+					<div id="top-left" class="uk-position-top-left  uk-margin-left uk-text-justify uk-light">
+						<img heigth='70px' width='150px' data-src="{{ logo.url }}" alt="{{ logo.alt }}" uk-img>
+						<h2 style="color:black" class="uk-text-lead uk-margin-remove ">{{i.text}}</h2>
+						<a style="color:black" class="uk-button btn-three uk-text-bolder"
+							href="{% pageurl i.brand_page %}">{% trans 'Voir les produit' %}</a>
 					</div>
+				</li>
+				{% endfor %}
+			</ul>
 
-					<div style="max-height:140px"
-						class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
-						<a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block tm-media-box"
-							href="/healthpoint" title="hp">
-							<figure class="tm-media-box-wrap">
-								<img data-src="{% static 'img/hp.png' %}" alt="hp" uk-img>
-							</figure>
-						</a>
-					</div>
-
-				</div>
-
-			</div>
-
-			<div class="uk-grid uk-flex-first uk-padding-remove  uk-margin-remove uk-width-expand uk-child-width-expand"
-				uk-grid>
-
-				<div class="uk-padding-remove uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
-					uk-slideshow="center:true; autoplay:true;max-height:340">
-					<div>
-						<ul class="uk-slideshow-items ">
-							{% for i in home.cimages %}
-							{% image i.carousel_image fill-900x400 as img %}
-							<li class="">
-								<img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
-							</li>
-							{% endfor %}
-						</ul>
-
-						<a style="color:black;padding:5%"
-							class=" uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-large"
-							href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-						<a style="color:black"
-							class="uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-large"
-							href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-					</div>
-					<div>
-						<ul class="uk-slideshow-nav  uk-dotnav uk-flex-center"></ul>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="uk-flex-first@m uk-margin uk-width-1-1 uk-width-1-6@m">
-
-				<div class=" uk-padding-remove uk-margin-remove uk-width-1-1 uk-child-width-1-2  uk-child-width-1-1@m "
-					uk-grid>
-					<div style="max-height:140px"
-						class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
-						<a style="padding:10px" class="uk-link-muted uk-text-center uk-display-block tm-media-box"
-							href="/drammock" title="drammock">
-							<figure class="tm-media-box-wrap">
-								<img data-src="{% static 'img/drammock.png' %}" alt="drammock" uk-img>
-							</figure>
-						</a>
-					</div>
-					<div style="max-height:140px"
-						class="tm-ratio tm-ratio-4-3 uk-card uk-card uk-card-body uk-box-shadow-hover-large">
-						<a style="padding:10px"
-							class="uk-link-muted uk-text-center uk-display-block uk-padding-small tm-media-box"
-							href="/xpel" title="ROQVEL">
-							<figure class="tm-media-box-wrap">
-								<img data-src="{% static 'img/logo-xpel.png' %}" alt="roqvel" uk-img>
-							</figure>
-						</a>
-					</div>
-				</div>
+			<div class="uk-position-bottom-center uk-position-small">
+				<ul class="uk-slideshow-nav  uk-dotnav uk-flex-center"></ul>
 			</div>
 		</div>
 	</div>
+</div>
 
 
-	<div class="uk-position-top">
-		<nav class="uk-navbar-container uk-navbar-transparent uk-width-1-1" uk-navbar style="position: absolute; z-index: 980;"
-			uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-			<button class="uk-navbar-toggle uk-hidden@m uk-display-inline-block" uk-toggle="target: #nav-offcanvas"
-				uk-navbar-toggle-icon>
-			</button>
-			<div class="uk-navbar-left uk-margin-left uk-visible@m uk-display-inline-block">
+<div class="uk-position-top">
+	<nav style="border-bottom: 0;" id="Homenavbar"
+		class="uk-navbar-container uk-navbar-transparent uk-container tm-navbar-container uk-width-1-1" uk-navbar
+		style="position: relative; z-index: 980;"
+		uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+		<button class="uk-navbar-toggle uk-hidden@m uk-display-inline-block" uk-toggle="target: #nav-offcanvas"
+			uk-navbar-toggle-icon>
+		</button>
+		<div class="uk-navbar-left uk-margin-left uk-visible@m uk-display-inline-block">
 
-				<ul class="uk-navbar-nav">
-					{% catalog_menu as catalog %}
-					{% for brand in catalog %}
-					<li>
-						<a style="color:black" class="uk-text-bold" href="{{ brand.url }}"> {{ brand.title }} </a>
-						<div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical" uk-drop="pos: bottom-justify; delay-show: 125; delay-hide: 50;
-                            			duration: 75; boundary: .tm-navbar-container; boundary-align: true; 
-                            			pos: bottom-justify; flip: x">
-							<div class="uk-navbar-dropdown-grid uk-child-width-1-6" uk-grid>
-								{% for pcat in brand.children %}
-								<div>
-									<ul class="uk-nav uk-navbar-dropdown-nav">
-										<li class="uk-active uk-nav-header">
-											<a href="{{ pcat.url }}"> {{ pcat.title }} </a>
-										</li>
-										<li class="uk-nav-divider"></li>
-										{% for scat in pcat.children %}
-										<li>
-											<a href="{{ scat.url }}"> {{ scat.title }} </a>
-										</li>
-										{% endfor %}
-									</ul>
-								</div>
-								{% endfor %}
+			<ul class="uk-navbar-nav">
+				{% catalog_menu as catalog %}
+				{% for brand in catalog %}
+				<li>
+					<a style="color:black" class="navbar-item{{brand.title}} uk-text-bold" href="{{ brand.url }}">
+						{{ brand.title }} </a>
+					<div class="uk-navbar-dropdown uk-margin-remove uk-padding-remove-vertical" uk-drop="pos: bottom-justify; delay-show: 125; delay-hide: 50;
+							duration: 75; boundary: .tm-navbar-container; boundary-align: true; 
+							pos: bottom-justify; flip: x">
+						<div class="uk-navbar-dropdown-grid uk-child-width-1-6" uk-grid>
+							{% for pcat in brand.children %}
+							<div>
+								<ul class="uk-nav uk-navbar-dropdown-nav">
+									<li class="uk-active uk-nav-header">
+										<a href="{{ pcat.url }}"> {{ pcat.title }} </a>
+									</li>
+									<li class="uk-nav-divider"></li>
+									{% for scat in pcat.children %}
+									<li>
+										<a href="{{ scat.url }}"> {{ scat.title }} </a>
+									</li>
+									{% endfor %}
+								</ul>
 							</div>
+							{% endfor %}
 						</div>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-			<div class="uk-navbar-center">
-				<a class="uk-navbar-item uk-logo uk-display-inline-block " href="/">
-					<img data-src="{% static 'img/saja.png' %}" width="90" height="32" alt="logo" uk-img>
-				</a>
-			</div>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="uk-navbar-center">
+			<a class="uk-navbar-item uk-logo uk-display-inline-block " href="/">
+				<img data-src="{% static 'img/saja.png' %}" width="90" height="32" alt="logo" uk-img>
+			</a>
+		</div>
 
-			<div class="uk-navbar-right uk-margin-right">
-				<!-- serch icon and dropdown -->
-				<a class="uk-navbar-toggle tm-navbar-button" href="#" uk-search-icon></a>
-				<div class="uk-navbar-dropdown uk-padding-small uk-margin-remove" uk-drop="mode: click; 
+		<div class="uk-navbar-right uk-margin-right">
+			<!-- serch icon and dropdown -->
+			<a class="uk-navbar-toggle tm-navbar-button" href="#" uk-search-icon></a>
+			<div class="uk-navbar-dropdown uk-padding-small uk-margin-remove" uk-drop="mode: click; 
    						cls-drop:uk-navbar-dropdown; boundary: .tm-navbar-container;boundary-align:true; pos: bottom-justify; flip:x">
-					<div class="uk-container">
-						<div class="uk-grid-small uk-flex-middle" uk-grid>
-							<div class="uk-width-expand">
-								<!--pay attention this is a form (search)-->
-								<form class="uk-search uk-search-navbar uk-width-1-1" action="{% url 'search' %}"
-									method="get">
-									<input type="search" class="uk-search-input"
-										placeholder="{% trans "Recherche..." %}" name="query" {% if search_query %}
-										value="{{ search_query }}" {% endif %}>
-									<button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
-								</form>
-							</div>
-							<div class="uk-width-auto">
-								<a class="uk-navbar-dropdown-close" href="#" uk-close></a>
-							</div>
+				<div class="uk-container">
+					<div class="uk-grid-small uk-flex-middle" uk-grid>
+						<div class="uk-width-expand">
+							<!--pay attention this is a form (search)-->
+							<form class="uk-search uk-search-navbar uk-width-1-1" action="{% url 'search' %}"
+								method="get">
+								<input type="search" class="uk-search-input" placeholder="{% trans "Recherche..." %}"
+									name="query" {% if search_query %} value="{{ search_query }}" {% endif %}>
+								<button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
+							</form>
+						</div>
+						<div class="uk-width-auto">
+							<a class="uk-navbar-dropdown-close" href="#" uk-close></a>
 						</div>
 					</div>
 				</div>
-				</a>
-				<!--  #account link -->
-				<a class="uk-navbar-item uk-lind-muted tm-navbar-button" href="#" uk-icon="user"></a>
-				<div class="uk-padding-small uk-margin-remove"
-					uk-dropdown="pos: bottom-right; offset: -10; delay-hide:200;" style="min-width: 150px;">
-					<ul class="uk-nav uk-dropdown-nav">
-						{% if request.user.is_authenticated %}
-						<li>
-							<a href="{% url 'profile' %}"> {% trans "Profile" %} </a>
-						</li>
-						<li class="uk-nav-divider"></li>
-						<li>
-							<a href="{% url 'account_logout' %}"> Se déconnecter </a>
-						</li>
-						{% else %}
-						<li>
-							<a href="{% url 'account_signup' %}"> Créez votre compte </a>
-						</li>
-						<a href="{% url 'account_login' %}"> Se connecter </a>
-						<li>
-						</li>
-						{% endif %}
-					</ul>
-				</div>
-				<!-- this is the icon of cart -->
-				<a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas"
-					onclick="return false">
-					<span uk-icon="cart"></span>
-					<span id="badge" class="uk-badge">{% if cart.0 %}{{cart.0.total_quantity}}{%else%}0{% endif%}</span>
-				</a>
 			</div>
-		</nav>
-	</div>
-
+			</a>
+			<!--  #account link -->
+			<a class="uk-navbar-item uk-lind-muted tm-navbar-button" href="#" uk-icon="user"></a>
+			<div class="uk-padding-small uk-margin-remove" uk-dropdown="pos: bottom-right; offset: -10; delay-hide:200;"
+				style="min-width: 150px;">
+				<ul class="uk-nav uk-dropdown-nav">
+					{% if request.user.is_authenticated %}
+					<li>
+						<a href="{% url 'profile' %}"> {% trans "Profile" %} </a>
+					</li>
+					<li class="uk-nav-divider"></li>
+					<li>
+						<a href="{% url 'account_logout' %}"> Se déconnecter </a>
+					</li>
+					{% else %}
+					<li>
+						<a href="{% url 'account_signup' %}"> Créez votre compte </a>
+					</li>
+					<a href="{% url 'account_login' %}"> Se connecter </a>
+					<li>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+			<!-- this is the icon of cart -->
+			<a class="uk-navbar-item uk-link-muted tm-navbar-button" href="#" uk-toggle="target: #cart-offcanvas"
+				onclick="return false">
+				<span uk-icon="cart"></span>
+				<span id="badge" class="uk-badge">{% if cart.0 %}{{cart.0.total_quantity}}{%else%}0{% endif%}</span>
+			</a>
+		</div>
+	</nav>
 </div>
+
 {% for block in self.body %}
 {% include_block block %}
 {% endfor %}
+
+<div class="background-home uk-background-cover uk-light" data-src="{% static 'img/47.jpg' %}"
+	data-srcset="{% static 'img/47.jpg' %}" data-sizes="(min-width:100vw) 90vh,100vw" uk-img>
+	<div class="uk-card uk-card-default uk-card-body uk-width-1-3@m uk-position-relative uk-position-center">
+		<h3 class="uk-card-title uk-text-center">SAJA</h3>
+		<p class="uk-text-center">est un grossiste proposant une grande variété d'articles de luxe.
+			 Nous sommes un fournisseur fiable de produits de beauté</p>
+		<a class="">Lire plus</a>
+	</div>
+</div>
+
 
 {% endblock content %}

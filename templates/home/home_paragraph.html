@@ -1,22 +1,21 @@
 
 {% load wagtailimages_tags wagtailcore_tags %}
 
-<div class="uk-width-1-1 uk-width-3-4@m" style="">
+<div class="uk-width-1-1" style="background-color: white;">
  {% for brand in self.brands %}
-  <div style=" background:linear-gradient(190deg,#fff,#fff3e6)" class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+
      <div>
-        <div class="uk-card-body">
+        <div class="uk-card-body uk-text-center">
+         <h3 class="uk-card-title">{{ brand.title }}</h3>
             <div>{{ brand.text |richtext }}</div>
         </div>
      </div>
-
+<!-- 
      <div class="uk-card-media-left uk-flex uk-flex-right">
 	{% image brand.image fill-500x300 as img %}
 	<div style="padding: 3% 0" class="">
-	<img style="border: 6px solid #f1cb9f; border-radius: 15px 0px 0px 15px; border-right: 0" 
-	data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
-	</div>
-     </div>
+	<img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
+	</div> -->
   </div>
  {% endfor %}
 </div>

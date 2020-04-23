@@ -15,6 +15,19 @@ function getCookie(name) {
     return cookieValue;
 }
 
+(function () {
+	var nav = document.querySelector("#Homenavbar");
+	window.addEventListener("scroll", function (e) {
+		if (pageYOffset == 0) {
+			nav.style.backgroundColor = 'transparent';
+			nav.style.borderBottom = '0';
+		} else if (pageYOffset > 0) {
+			nav.style.backgroundColor = 'white';
+			nav.style.borderBottom = '1px solid #dbd9d9';
+		}
+	})
+
+})();
 
 
 function remove(e){
@@ -97,27 +110,6 @@ function remove_item(e){
         xhr.send("id="+id);
 
 
-}
-
- function initMap() {
-  var elements = document.querySelectorAll('.js-map');
-  Array.prototype.forEach.call(elements, function(el) {
-    var lat = +el.dataset.latitude,
-        lng = +el.dataset.longitude,
-        zoom = +el.dataset.zoom;
-    if ((lat !== '') && (lng !== '') && (zoom > 0)) {
-      var map = new google.maps.Map(el, {
-        zoom: zoom,
-        center: { lat: lat, lng: lng },
-        disableDefaultUI: true
-      });
-     var marker = new google.maps.Marker({
-        map: map,
-        animation: google.maps.Animation.DROP,
-        position: { lat: lat, lng: lng }
-      });
-    }
-  });
 }
 
 (function(){
@@ -281,49 +273,8 @@ function toggle (e){
 
 // Increment
 
-function increment(incrementor, target) {
-  var value = parseInt(document.getElementById(target).value, 10);
-  value = isNaN(value) ? 0 : value;
-  if(incrementor < 0) {
-    if(value > 1) {
-      value+=incrementor;
-    }
-  } else {
-    value+=incrementor;
-  }
-  document.getElementById(target).value = value;
-}
 
-// Scroll to description
 
-(function() {
-//  UIkit.scroll('.js-scroll-to-description', {
-//    duration: 300,
-//    offset: 58
-//  });
-})();
-
-// Update sticky tabs
-
-(function() {
-//  UIkit.util.on('.js-product-switcher', 'show', function() {
-//    UIkit.update();
-//  });
-})();
-
-// Add to cart
-
-(function() {
-  var addToCartButtons = document.querySelectorAll('.js-add-to-cart');
-
-  Array.prototype.forEach.call(addToCartButtons, function(el) {
-    el.onclick = function() {
-      UIkit.offcanvas('#cart-offcanvas').show();
-    };
-  });
-})();
-
-// Action buttons
 
 (function() {
   var addToButtons = document.querySelectorAll('.js-add-to');

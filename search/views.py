@@ -4,6 +4,7 @@ from django.db.models import Prefetch
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
+from wagtail.search.backends import get_search_backend
 
 from catalog.models import Product, ProductImages
 
@@ -14,12 +15,13 @@ def search(request):
 
     # Search
     if search_query:
+        s = get_search_backend(backend='pgfts')
         prefetch = Prefetch(
                 lookup='product_images',
                 queryset=ProductImages.objects.select_related('product_image'),
                 to_attr='pimages'
         )
-        search_results = Product.objects.prefetch_related(prefetch).live().search(search_query, backend='pgfts')
+        search_results = s.search(search_query, Product.objects.prefetch_related(prefetch))
         query = Query.get(search_query)
 
         # Record hit

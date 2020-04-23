@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models import Prefetch 
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
+from django.db.models import Prefetch
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -11,15 +11,15 @@ from wagtail.admin.edit_handlers import (
         PageChooserPanel,
         StreamFieldPanel,
     )
-from wagtail.core.fields import StreamField 
-from wagtail.core.models import Page, Orderable 
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page, Orderable
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.snippets.edit_handlers import SnippetChooserPanel  
+from modelcluster.fields import ParentalKey
 
-from modelcluster.fields import ParentalKey 
-
-from home import blocks 
+from home import blocks
 from .product import Product
-from .category import Category 
+from .category import Category
 
 class CarouselBrandImage(Orderable):
 
@@ -40,9 +40,9 @@ class CarouselBrandImage(Orderable):
 
 
 class GroupOfProducts(Orderable):
-    
+
     brand = ParentalKey("catalog.Brand", related_name="group_products")
-    
+
     group_product = models.ForeignKey(
             "Product",
             null=True,
@@ -52,7 +52,7 @@ class GroupOfProducts(Orderable):
 
 
     panels = [
-            PageChooserPanel("group_product")
+            SnippetChooserPanel("group_product")
         ]
 
 
@@ -61,9 +61,9 @@ class Brand(RoutablePageMixin, Page):
     template = "catalog/brand.html"
     parent_page_types = ["home.Homepage"]
     subpage_types = ["catalog.category"]
-        
+
     group_title = models.CharField(verbose_name=_("titre de groupe"), max_length= 100,null=True)
-    
+
     body = StreamField(
             [
                 (_("connect"),blocks.BrandConnect()),
@@ -71,9 +71,9 @@ class Brand(RoutablePageMixin, Page):
             ],
             null = True,
             blank = True,
-       
+
         )
-    
+
     content_panels = Page.content_panels + [
             InlinePanel("carousel_images", max_num=3, min_num=1, label = _("image")),
             MultiFieldPanel([
@@ -87,7 +87,7 @@ class Brand(RoutablePageMixin, Page):
 
 
     def get_context(self,request,*args,**kwargs):
-        
+
        # all_categories = Category.objects.live().public().descendant_of(self)
        # filtred_cat = {}
        # for item in all_categories:
@@ -110,14 +110,10 @@ class Brand(RoutablePageMixin, Page):
         context['product'] = Brand.objects.prefetch_related(prefetchP).live().public().get(pk=self.pk)
         context['images'] = Brand.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
         context['categories'] = self.get_children().specific()
-        print(context['categories'][0].title)
         context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
         return context
 
     class Meta:
         verbose_name = _("Marque")
         verbose_name_plural = _("Marques")
-
-    
-    
 

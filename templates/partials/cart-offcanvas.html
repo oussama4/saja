@@ -1,5 +1,5 @@
 {% load i18n static wagtailcore_tags  wagtailimages_tags %}
-{% csrf_token %}
+
 <div id="cart-offcanvas" uk-offcanvas="overlay: true; flip: true">
   <aside class="uk-offcanvas-bar uk-padding-remove">
       <div class="uk-card uk-card-default uk-card-small uk-height-1-1 uk-flex uk-flex-column tm-shadow-remove">
@@ -16,8 +16,8 @@
 		{% if request.user.is_authenticated %}
 		  {% if cart.0 %}
 		  {% for item in cart.0.items.all %}
-		  {% image item.product_id.first_image.product_image fill-200x150 as img %}
-		  <li data-id= "{{ item.product_id.page_ptr_id }}" class="item uk-visible-toggle">
+		  {% image item.product.first_image.product_image fill-200x150 as img %}
+		  <li data-id= "{{ item.product.pk }}" class="item uk-visible-toggle">
         	        <article >
                 	     <div  class="uk-grid-small" uk-grid>
 
@@ -32,21 +32,21 @@
 				</div>     
    
 				<div class="uk-width-expand">   
-					<a class="uk-link-heading uk-text-small" href="">{{ item.product_id.title }}</a>
+					<a class="uk-link-heading uk-text-small" href="">{{ item.product.title }}</a>
 				 <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
-					 <div class="uk-text-bolder uk-text-small">{{ item.product_id.price }}</div>
+					 <div class="uk-text-bolder uk-text-small">{{ item.product.price }}</div>
 					<div class="uk-text-meta uk-text-xsmall">
 					  <span>
-						<span data-id= "{{ item.product_id.page_ptr_id }}" class='total'>
+						<span data-id= "{{ item.product.pk }}" class='total'>
 							  {{ item.quantity }}
-						</span>X{{item.product_id.price}}
+						</span>X{{item.product.price}}
 					  </span>
 					</div>
 				 </div>   
 				</div>     
 		
 				<div>      
-					<button data-id = "{{ item.product_id.page_ptr_id }}" onclick="remove(this)" 
+					<button data-id = "{{ item.product.pk }}" onclick="remove(this)" 
 				      class="delete_from_cart uk-icon-link uk-text-danger uk-invisible-hover" 
 					uk-icon="icon: close; ratio: .75"
 				   uk-tooltip="{% trans 'supprimer' %}"></button>

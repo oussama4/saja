@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Prefetch
 from django.utils.translation import gettext_lazy as _
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import (
         FieldPanel,
@@ -12,10 +12,10 @@ from wagtail.admin.edit_handlers import (
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from colorfield.fields import ColorField
-from .product import Product, ProductImages 
+from .product import Product, ProductImages
 
 class Category(Page):
-    subpage_types = ["catalog.Product", "catalog.Category"]
+    subpage_types = ["catalog.Category"]
 
     description = models.TextField(
             verbose_name=_("Description"),
@@ -36,10 +36,10 @@ class Category(Page):
             ImageChooserPanel("image"),
     ]
 
-    color_panels = [FieldPanel('color')] 
+    color_panels = [FieldPanel('color')]
 
     edit_handler = TabbedInterface(
-            [       
+            [
                 ObjectList(content_panels, heading=_("contenu")),
                 ObjectList(color_panels, heading=_("couleur")),
                 ObjectList(Page.promote_panels, heading=_("Promotion")),
@@ -56,29 +56,16 @@ class Category(Page):
                 queryset=ProductImages.objects.select_related('product_image'),
                 to_attr='pimages'
             )
-            all_products = Product.objects.prefetch_related(prefetch).live().public().order_by("-last_published_at").descendant_of(self)
-            
+            all_products = Product.objects.prefetch_related(prefetch).filter(product_range__category=self)
+
             subCat = []
             if descendant_categories:
-                    subCat = descendant_categories 
-
-            #brandCat = None 
-            #if self.get_parent().content_type == self.content_type:
-            #    brandCat = all_categories.descendant_of(self.get_parent().get_parent())
-            #else:
-            #    brandCat = all_categories.descendant_of(self.get_parent())
-
-            #filtred_cat = {}
-        
-            #for item in brandCat:
-            #    if not item.get_parent().content_type == self.content_type:
-            #        filtred_cat[item] = list(filter(lambda cat : item.title == cat.get_parent().title, brandCat))
-
+                    subCat = descendant_categories
 
             #pagination
             paginator = Paginator(all_products, 3)
             page = request.GET.get("page")
-            
+
             try:
                 products = paginator.page(page)
             except PageNotAnInteger:
@@ -86,10 +73,10 @@ class Category(Page):
             except EmptyPage:
                 products = paginator.page(paginator.num_pages)
 
-            context['products'] = products 
+            context['products'] = all_products
             context['itemsSum'] = len(all_products)
             context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
-            context['categories'] = subCat 
+            context['categories'] = subCat
             return context
 
 
