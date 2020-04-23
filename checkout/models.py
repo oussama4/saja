@@ -68,7 +68,7 @@ class Order(models.Model):
             (Padding, 'Padding'),
             (Refund, 'Refund')
         ]
-    user = models.ForeignKey(User, related_name="+", on_delete=models.PROTECT)
+    user = models.ForeignKey(User, related_name="orders", on_delete=models.PROTECT)
     status = models.CharField(max_length=2,
             choices=order_status,
             default=Padding

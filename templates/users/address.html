@@ -3,11 +3,8 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="uk-container uk-margin uk-flex">
-	<div class="uk-margin-right uk-width-1-6">
-	    {% include "partials/profile_tab.html" with address="true" %}
-	</div>
-	<div class="uk-margin-large-left uk-width-1-3">
+    <div class="uk-container uk-margin uk-flex uk-flex-center">
+	<div class="uk-margin-auto">
     	{% if request.user.has_address %}
 	    <div class="uk-card uk-card-default">
 		<div class="uk-card-body">

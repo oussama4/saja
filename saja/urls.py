@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^profile/address/create/$', users_views.create_address, name='address_create'),
     path('profile/address/change/<int:pk>', users_views.ChangeAddress.as_view(), name='address_change'),
     path('profile/info/change/<int:pk>', users_views.UserUpdate.as_view(), name='info_change'),
+    path('profile/orders', users_views.OrdersList.as_view(), name='orders_list'),
     path('<slug:slug>', catalog_views.product, name='product_detail'),
     url(r'^profile/address/$',
         generic_views.TemplateView.as_view(template_name='users/address.html'),
