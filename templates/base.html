@@ -40,14 +40,14 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+	    {% catalog_menu as catalog %}
         {% if request.get_full_path|split != ""%}
-        {% include 'partials/navbar_next.html'  %}
+        {% include 'partials/navbar_next.html' with catalog=catalog  %}
         {% endif %}
 	
 	{% block content %}{% endblock %}
 	{% include 'partials/footer.html' %}
-	{% include 'partials/nav-offcanvas.html' %}
+	{% include 'partials/nav-offcanvas.html' with catalog=catalog %}
 	{% include 'partials/cart-offcanvas.html' %}
         {# Global javascript #}
 		<script type="text/javascript" src="{% static 'js/script.js' %}"></script>

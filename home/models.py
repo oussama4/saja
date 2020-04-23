@@ -89,7 +89,7 @@ class HomePage(Page):
         context = super().get_context(request)
         prefetch = models.Prefetch(
                 'carousel_images',
-                queryset=CarouselImages.objects.select_related('carousel_image'),
+                queryset=CarouselImages.objects.select_related('carousel_image', 'brand_page', 'logo'),
                 to_attr='cimages'
         )
         context['home'] = HomePage.objects.prefetch_related(prefetch).live().public().get()

@@ -56,7 +56,7 @@ class Category(Page):
                 queryset=ProductImages.objects.select_related('product_image'),
                 to_attr='pimages'
             )
-            all_products = Product.objects.prefetch_related(prefetch).filter(product_range__category=self)
+            all_products = Product.objects.select_related('product_range__category').prefetch_related(prefetch).filter(product_range__category=self)
 
             subCat = []
             if descendant_categories:

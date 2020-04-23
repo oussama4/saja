@@ -15,7 +15,7 @@
 	   uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade" >
 
 			<ul class="uk-slideshow-items">
-				{% for loop_cycle in images.cimages %}
+				{% for loop_cycle in brand.cimages %}
 				{% image loop_cycle.carousel_image fill-900x400 as img %}
 				<li class="uk-width-1-1">
 					<img data-src="{{ img.url}}" alt="{{ img.alt}}" class="" uk-img uk-cover>
@@ -54,14 +54,14 @@
 			<div class="uk-container" uk-slider="center: false;autoplay:true">
 				<div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
 					<ul class="uk-slider-items uk-child-width-1-4@s uk-grid">
-						{% for product in product.gproduct %}
+						{% for product in brand.gproduct %}
 						{% image product.group_product.first_image.product_image fill-250x160 as img %}
 
 						<li class="">
 							<div class="uk-card uk-card-default tm-product-card ">
 								<div class=" tm-product-card-media uk-inline-clip uk-transition-tog" tabindex="0">
 									<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
-										<a class="tm-media-box" href="{% pageurl product.group_product %}">
+										<a class="tm-media-box" href="{% url 'product_detail' product.group_product.slug %}">
 											<figure class="tm-media-box-wrap">
 												<img data-src="{{ img.url }}" style="height: 100%"
 													alt="{{ img.alt }}&quot;" uk-img>
@@ -69,7 +69,7 @@
 										</a>
 									</div>
 									<div class="uk-position-cover upper uk-overlay uk-overlay-default">
-										<a class="tm-media-box" href="{% pageurl product.group_product %}">
+										<a class="tm-media-box" href="{% url 'product_detail' product.group_product.slug %}">
 											<div style="">
 												{{ product.group_product.description|richtext}}
 											</div>
@@ -80,9 +80,9 @@
 									<div class=" tm-product-card-body" style="height:16vh;">
 										<div class="tm-product-card-info" style="max-height:6vh">
 											<div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">
-												{{ product.group_product.get_parent.title }}</div>
+												{{ product.group_product.product_range.category.title }}</div>
 											<h3 class="tm-product-card-title" style="margin:0;">
-												<a href="{% pageurl product.group_product %}" class="uk-link-heading">
+												<a href="{% url 'product_detail' product.group_product.slug %}" class="uk-link-heading">
 													{{ product.group_product.title |slice:'35'}}
 												</a>
 											</h3>
@@ -109,7 +109,7 @@
 		    <div>
 			<div class=" tm-product-card-body" style="height:16vh;">
 			  <div class="tm-product-card-info" style="max-height:6vh">
-			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.group_product.range.category.title }}</div>
+			    <div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">{{ product.group_product.product_range.category.title }}</div>
 			    <h3 class="tm-product-card-title" style="margin:0;">
 				    <a href="{% url product.group_product.slug %}" class="uk-link-heading">
 					    {{ product.group_product.title |slice:'35'}}
@@ -153,7 +153,7 @@
 														<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
 													</a>
 												</div>
-												<a data-id="{{ product.group_product.page_ptr_id}}"
+												<a data-id="{{ product.group_product.pk}}"
 													class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine">
 													<span class="tm-product-card-add-button-icon uk-icon"
 														uk-icon="cart"></span>

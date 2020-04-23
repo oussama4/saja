@@ -32,7 +32,7 @@
                         <span class="uk-text-muted" uk-icon="icon: image; ratio: 5"></span>
                       </figure>
                     </li>
-                    {% for pic in product.pimages.all|slice:'1:' %}
+                    {% for pic in product.pimages|slice:'1:' %}
                     {% image pic.product_image original as img2 %}
                     <li><a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{img2.url}}">
                         <figure class="tm-media-box-wrap">
@@ -60,7 +60,7 @@
                                   </a>
                                 </div>
                               </li>
-                              {% for pic in product.pimages.all|slice:"1:" %}
+                              {% for pic in product.pimages|slice:"1:" %}
                               {% image pic.product_image fill-150x100 as img3 %}
                               <li uk-slideshow-item="{{forloop.counter}}">
                                 <div class="tm-ratio tm-ratio-1-1">
@@ -104,18 +104,18 @@
                       <div>
                         <div class="uk-grid-small" uk-grid>
                           <!--Quantity-->
-                            <div class="">
-    				 <a data-id="{{product.pk}}" onclick="remove_item(this)" uk-icon="icon: minus; ratio: .75" class="uk-icon"></a>
-			<input class="uk-input tm-quantity-input" min='1'
-	  max='10000' step="1" data-id="{{product.pk}}" type="number" readonly  value='1'>
-			<a data-id="{{ product.pk }}" uk-icon="icon: plus; ratio: .75" class="add_to_cart uk-icon"></a> 
-	
-                          </div>
+			  <form method="post" action="/add_to_cart/" >
+				  {% csrf_token %}
+                            
+				<input name="quantity" style="height:30px;font-size: 20px" min="1" max="9999" class="uk-form-width-small" type="number" step="1">	
+                          
                           <!--Add to cart button-->
-                          <div>
-				  <button data-id="{{product.pk}}" 
-                              class="uk-button uk-button-primary add_to_cart tm-product-add-button tm-shine js-add-to-cart">{% trans "ajouter au panier" %}</button>
-                          </div>
+                          
+			    <button type="submit" value="{{product.pk}}" name="product"
+				    class="uk-button uk-margin-top uk-button-primary tm-product-add-button tm-shine js-add-to-cart">
+				    {% trans "ajouter au panier" %}</button>
+                          
+			  </form>
                           <!--Actions buttons-->
                           <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">
                             <a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to"
