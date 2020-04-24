@@ -1,10 +1,21 @@
 {% load i18n %}
 
-<ul class="uk-tab uk-tab-left uk-subnav-pill">
-    <li {% if info %} class="uk-active" {% endif %}>
-	<a href="{% url 'info_change' request.user.pk %}"> {% trans "information personel" %} </a> 
-    </li>
-    <li {% if address %} class="uk-active" {% endif %}>
-	<a href="{% url 'address' %}"> {% trans "adresse" %} </a> 
-    </li>
-</ul>
+<div class"">
+	<div>
+	<a class="uk-button uk-button-default uk-button-large uk-width-1-4 uk-margin-small-bottom" 
+		href="{% url 'info_change' request.user.pk %}"> 
+		{% trans "information personel" %} 
+	</a> 
+	</div>
+	<div>
+	<a class="uk-button uk-button-default uk-button-large uk-width-1-4 uk-margin-small-bottom" 
+		href="{% url 'address' %}">
+		{% trans "adresse" %}
+	</a> 
+	</div>
+	<div>
+	<a class="uk-button uk-button-default uk-button-large uk-width-1-4" href="{% url 'orders_list' %}">
+		{% trans "commandes" %}
+	</a> 
+	</div>
+</div>

@@ -67,8 +67,22 @@
 			    <div class="uk-h4 uk-text-bolder"><span id="totalPrice">{% if cart.0 %}{{cart.0.total_price}}{% endif %}</span>DH</div>
 		    </div>
 		    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-margin-small" uk-grid>
-			    <div><a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="/cart">{% trans 'MON PANIER' %}</a></div>
-			    <div><a class="uk-button uk-button-primary uk-margin-small uk-width-1-1 badge" href="">{% trans 'COMMANDER' %}</a></div>
+			    <div>
+					<a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="/cart">
+						{% trans 'MON PANIER' %}
+					</a>
+				</div>
+			    <div>
+					<a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="#modal-center" uk-toggle>
+						{% trans 'COMMANDER' %}
+					</a>
+					<div id="modal-center" class="uk-flex-top" uk-modal>
+						<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+							<button class="uk-modal-close-default" type="button" uk-close></button>
+							<p> {% trans "le service n'est pas encore disponible" %} </p>
+						</div>
+					</div>
+				</div>
 		    </div>
 		</footer>
 	   </div>

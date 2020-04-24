@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="uk-container uk-margin uk-flex uk-flex-column uk-flex-center uk-width-1-1">
+		<div class="uk-margin-auto uk-overflow-auto">
+			{% if request.user.orders %}
+				<div class="uk-text-lead uk-text-large uk-text-center">
+					{% trans "vos commandes" %}
+				</div>
+			<table class="uk-table uk-table-hover uk-table-divider">
+				<thead>
+					<tr>
+						<th> {% trans "NO" %} </th>
+						<th> {% trans "prix total" %} </th>
+						<th> {% trans "date" %} </th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for order in object_list %}
+					<tr>
+						<td> {{ forloop.counter }} </td>
+						<td> {{ order.total_price }} DH </td>
+						<td> {{ order.payment_date }} </td>
+						<td> <a class="uk-button uk-button-default" href="#"> {% trans "detail" %} </a> </td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+				<div class="uk-text-lead">
+					{% trans "vous n'avez pas encore de commande" %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

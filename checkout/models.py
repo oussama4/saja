@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 
 from users.models import User, Address
 
@@ -14,7 +15,7 @@ def total (items):
 
 class Cart(models.Model):
 
-    user = models.ForeignKey(User,related_name="+",on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="carts", on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
     @property
@@ -61,24 +62,28 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     Delivered = "D"
-    Padding = "P"
+    Pending = "P"
     Refund = "R"
     order_status = [
             (Delivered, 'Delivered'),
-            (Padding, 'Padding'),
+            (Pending, 'Pending'),
             (Refund, 'Refund')
         ]
-    user = models.ForeignKey(User, related_name="+", on_delete=models.PROTECT)
+    user = models.ForeignKey(User, related_name="orders", on_delete=models.PROTECT)
     status = models.CharField(max_length=2,
             choices=order_status,
-            default=Padding
+            default=Pending
         )
     payment_date = models.DateTimeField(auto_now_add=True)
     shipping_address = models.ForeignKey(Address, related_name="+",on_delete=models.PROTECT)
 
+    class Meta:
+        verbose_name = _("commande")
+        verbose_name_plural = _("commandes")
+
     @property
     def total_price(self):
-        return total(self.items)
+        return total(self.items.all())
     @property
     def delivered(self):
         self.status = self.Delivred
