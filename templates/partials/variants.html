@@ -1,0 +1,32 @@
+{% load i18n wagtailimages_tags %}
+
+<div class="uk-container uk-margin uk-flex uk-flex-column">
+<h3 class="uk-text-lead uk-text-center">
+	{% trans "variantes" %}
+</h3>
+
+<div uk-slider="center: true">
+	<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+		<ul class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-1@s uk-grid uk-grid-match">
+			{% for v in variants %}
+                {% image v.pimages.0.product_image original as img %}
+				<li class="">
+					<div class="uk-card uk-card-default">
+						<div class="uk-card-media-top">
+							<img src="{{ img.url }}" alt="{{ img.alt }}"/>
+						</div>
+						<div class="uk-card-body">
+							<a href="{% url 'product_detail' v.slug %}"><h3 class="uk-card-title"> {{ v.title }} </h3></a>
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+		<a class="uk-position-center-left uk-position-small uk-hidden-hover" 
+			href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+		<a class="uk-position-center-right uk-position-small uk-hidden-hover" 
+			href="#" uk-slidenav-next uk-slider-item="next"></a>
+	</div>
+	<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+</div>
+</div>

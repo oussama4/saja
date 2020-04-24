@@ -9,6 +9,7 @@ def product(request, slug):
         queryset=ProductImages.objects.select_related('product_image'),
         to_attr='pimages'
     )
-    p = get_object_or_404(Product.objects.prefetch_related(prefetch), slug=slug)
-    return render(request, "catalog/product.html", {'product': p})
+    p = get_object_or_404(Product.objects.select_related('product_range').prefetch_related(prefetch), slug=slug)
+    v = Product.objects.prefetch_related(prefetch).filter(product_range=p.product_range).all()
+    return render(request, "catalog/product.html", {'product': p, 'variants': v})
 

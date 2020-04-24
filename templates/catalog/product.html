@@ -90,6 +90,7 @@
             </div>
             <div class="uk-padding uk-width-1-1 uk-width-1-3@m tm-product-info">
               <div class="uk-card-body_class">
+				  <div class="uk-text-lead uk-text-bolder"> {{ product.title }} </div>
                 <div class="uk-margin">
                   <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded">
                     <div class="uk-grid-small uk-child-width-1-1" uk-grid>
@@ -116,13 +117,6 @@
 				    {% trans "ajouter au panier" %}</button>
                           
 			  </form>
-                          <!--Actions buttons-->
-                          <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">
-                            <a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to"
-                              href="" uk-tooltip="Add to favorites">
-                              <span uk-icon="icon: heart"></span>
-                            </a>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -183,6 +177,7 @@
           </div>
         </div>
       </div>
+	  {% include "partials/variants.html" with variants=variants %}
     </div>
   </div>
 </div>
