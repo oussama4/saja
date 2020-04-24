@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
     'colorfield',
+    'wagtailmodelchooser',
 
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',

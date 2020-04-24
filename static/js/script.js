@@ -17,6 +17,7 @@ function getCookie(name) {
 
 (function () {
 	var nav = document.querySelector("#Homenavbar");
+	if(nav){
 	window.addEventListener("scroll", function (e) {
 		if (pageYOffset == 0) {
 			nav.style.backgroundColor = 'transparent';
@@ -25,7 +26,7 @@ function getCookie(name) {
 			nav.style.backgroundColor = 'white';
 			nav.style.borderBottom = '1px solid #dbd9d9';
 		}
-	})
+	})}
 
 })();
 
@@ -212,16 +213,30 @@ if(mq.matches) {
 
 	var upper = document.querySelectorAll('.upper');
 	var tog = document.querySelectorAll('.uk-transition-tog');
+	var tflip = document.querySelectorAll('.uk-transition-flip');
+	var flip = document.querySelectorAll('.flip');
+	if(tflip){
+	tflip.forEach(el=>{
+		el.classList.remove('uk-transition-flip');
+	});	
+	}	
+	if(flip){
+	flip.forEach(el=>{
+		el.classList.remove('flip');
+	});}
+	if(tog){
 	tog.forEach(el=>{
 		el.classList.remove('uk-transition-tog');
-	});
+	});}
+	if(upper){
 	upper.forEach(el=>{
 		el.parentNode.removeChild(el);
-	})
+	})}
 
 }
 }
 )();
+
 function toggle (e){
 	var upper= document.querySelectorAll('.upper');
 	var tog = document.querySelectorAll('.uk-transition-tog');

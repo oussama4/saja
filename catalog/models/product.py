@@ -25,6 +25,7 @@ from wagtail.admin.edit_handlers import (
         ObjectList,
 )
 
+from wagtailmodelchooser import register_model_chooser
 
 class ProductBase(models.Model):
     """ abstract model for shared fields between product models and ranges """
@@ -120,7 +121,7 @@ class ProductImages(Orderable):
     panels = [
             ImageChooserPanel("product_image")
     ]
-
+@register_model_chooser 
 class Product(ProductBase, index.Indexed, ClusterableModel):
     features = StreamField(
             [

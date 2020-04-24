@@ -21,6 +21,8 @@ from home import blocks
 from .product import Product
 from .category import Category
 
+from wagtailmodelchooser.edit_handlers import ModelChooserPanel
+
 class CarouselBrandImage(Orderable):
 
     subpage_types = ["catalog.category"]
@@ -46,13 +48,13 @@ class GroupOfProducts(Orderable):
     group_product = models.ForeignKey(
             "Product",
             null=True,
-            on_delete = models.SET_NULL,
+            on_delete = models.CASCADE,
             related_name = "+",
         )
 
 
     panels = [
-            SnippetChooserPanel("group_product")
+            ModelChooserPanel("group_product")
         ]
 
 
@@ -106,9 +108,8 @@ class Brand(RoutablePageMixin, Page):
 
 
         context = super().get_context(request, *args, **kwargs)
-       # context['categories'] = filtred_cat 
         context['brand'] = Brand.objects.prefetch_related(prefetch, prefetchP).live().public().get(pk=self.pk)
-        #context['images'] = Brand.objects.prefetch_related(prefetch).live().public().get(pk=self.pk)
+
         context['categories'] = self.get_children().specific()
         context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
         return context
