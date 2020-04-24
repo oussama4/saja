@@ -1,5 +1,9 @@
 .brandBack {
-	background-image: linear-gradient(157deg, #666 31%,#999 70%, #e2e2e2 90%);
-	background-color: #999;
+	background-image: linear-gradient(157deg, rgb(182, 180, 180) 31%,rgb(218, 214, 214) 70%, #f3f3f3 90%);
+	background-color: rgb(197, 194, 194);
+}
+
+#badge, .badge{
+	background-color:rgb(182, 180, 180)!important;
 }
 

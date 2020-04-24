@@ -14,8 +14,9 @@ from .models import Cart, CartItem
 
 @login_required
 def add_to_cart(request):
-    quantityF = int(request.POST.get('quantity'))
+    quantityF = request.POST.get('quantity')
     productID = request.POST.get('product')
+    id = request.POST.get("id")
     if productID and quantityF:
         item = get_object_or_404(Product, pk=productID)
         cart , created = Cart.objects.get_or_create(
@@ -25,17 +26,14 @@ def add_to_cart(request):
                 cart = cart,
                 product = item,
         )
-        if create and quantityF > 0:
-            cart_item.quantity = quantityF 
+        if create and int(quantityF > 0):
+            cart_item.quantity = int(quantityF) 
             cart_item.save()
         elif not create and cart_item:
-            cart_item.quantity += quantityF 
+            cart_item.quantity += int(quantityF) 
             cart_item.save()
         return redirect('/cart/')
-
-        
-    if request.method == "POST":
-        id = request.POST.get("id")
+    elif request.method == "POST" and id :
         item = get_object_or_404(Product, pk=id)
         cart, created = Cart.objects.get_or_create(
                 user = request.user,

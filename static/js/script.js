@@ -213,16 +213,30 @@ if(mq.matches) {
 
 	var upper = document.querySelectorAll('.upper');
 	var tog = document.querySelectorAll('.uk-transition-tog');
+	var tflip = document.querySelectorAll('.uk-transition-flip');
+	var flip = document.querySelectorAll('.flip');
+	if(tflip){
+	tflip.forEach(el=>{
+		el.classList.remove('uk-transition-flip');
+	});	
+	}	
+	if(flip){
+	flip.forEach(el=>{
+		el.classList.remove('flip');
+	});}
+	if(tog){
 	tog.forEach(el=>{
 		el.classList.remove('uk-transition-tog');
-	});
+	});}
+	if(upper){
 	upper.forEach(el=>{
 		el.parentNode.removeChild(el);
-	})
+	})}
 
 }
 }
 )();
+
 function toggle (e){
 	var upper= document.querySelectorAll('.upper');
 	var tog = document.querySelectorAll('.uk-transition-tog');

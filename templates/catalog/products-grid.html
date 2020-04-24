@@ -1,149 +1,169 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
 <div class="uk-width-expand">
-  <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
-<!--items-->
-    <div>
-	<div class="uk-card uk-card-default uk-card-small tm-ignore-container">
-	    <div class="uk-grid-collapse uk-child-width-1-1" id="products" uk-grid="uk-grid">
-		<!---settings-->
-		<div class="uk-card-header">
-		    <div class="uk-grid-small uk-flex-middle" uk-grid="uk-grid">
-			<!--Sorting-->
-			<div class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
-				<span class="uk-margin-small-right uk-text-muted">{% trans 'Trier par' %}</span>
-			    <ul class="uk-subnav uk-margin-remove">
-				<li class="uk-active"><a class="uk-text-lowercase" href="#">{% trans 'Le plus récent' %}</a></li>
-				<li><a class="uk-text-lowercase" href="#">{% trans 'prix' %}</a></li>
-				<li class="uk-visible@l">
-		   			
-				   	<div class="uk-grid-small uk-child-width-1-2 uk-text-small" uk-grid>
-		  				<div class="uk-display-inline">
-		    					<div class="uk-inline">
-			    					<span class="uk-form-icon uk-text-xsmall">{% trans 'De' %}</span>
-		      						<input class="uk-input" type="number" >
-		    					</div>
-		  				</div>
-		  				<div class="uk-display-inline">
-		    					<div class="uk-inline">
-			    					<span class="uk-form-icon uk-text-xsmall">{% trans 'À' %}</span>
-		      						<input class="uk-input" type="number">
-		    					</div>
-		  				</div>
-		 			</div>
-				</li>
+	<div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+		<!--items-->
+		<div>
+			<div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+				<div class="uk-grid-collapse uk-child-width-1-1" id="products" uk-grid="uk-grid">
+					<!---settings-->
+					<div class="uk-card-header">
+						<div class="uk-grid-small uk-flex-middle" uk-grid="uk-grid">
+							<!--Sorting-->
+							<div
+								class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
+								<span class="uk-margin-small-right uk-text-muted">{% trans 'Trier par' %}</span>
+								<ul class="uk-subnav uk-margin-remove">
+									<li class="uk-active"><a class="uk-text-lowercase"
+											href="#">{% trans 'Le plus récent' %}</a></li>
+									<li><a class="uk-text-lowercase" href="#">{% trans 'prix' %}</a></li>
+									<li class="uk-visible@l">
+
+										<div class="uk-grid-small uk-child-width-1-2 uk-text-small" uk-grid>
+											<div class="uk-display-inline">
+												<div class="uk-inline">
+													<span class="uk-form-icon uk-text-xsmall">{% trans 'De' %}</span>
+													<input class="uk-input" type="number">
+												</div>
+											</div>
+											<div class="uk-display-inline">
+												<div class="uk-inline">
+													<span class="uk-form-icon uk-text-xsmall">{% trans 'À' %}</span>
+													<input class="uk-input" type="number">
+												</div>
+											</div>
+										</div>
+									</li>
 
 
-			    </ul>
-			</div>
-			<!-- Filters button & change view-->
-			<div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
-			    <!--//- Filters button-->
-			    <button class="uk-button uk-button-default uk-button-small uk-hidden@m" uk-toggle="target: #filters">
-				    <span class="uk-margin-xsmall-right uk-icon uk-text-uppercase" uk-icon="icon: settings; ratio: .75;">{% trans 'filtters' %}
-			    </button>
-			    <!-- //- Change view-->
-			    <div class="tm-change-view uk-margin-small-left">
-				<ul class="uk-subnav uk-iconnav js-change-view" uk-switcher="uk-switcher">
-				    <li><a class="uk-active" id="id" onclick='toggle(this)' data-view="grid" uk-icon="grid" uk-tooltip="Grid"></a></li>
-				    <li><a data-view="list" onclick="toggle(this)" uk-icon="list" uk-tooltip="List"></a></li>
-				</ul>
-			    </div>
-			</div>
-		    </div>
-		</div>
-
-
-		<!--ITEMS-->
-
-		<div class="uk-grid-margin uk-first-column">
-		    <div class="uk-grid-collapse uk-child-width-1-3 tm-products-grid js-products-grid" uk-grid="uk-grid">	
-		     {% for product in products %}
-			 {% image product.pimages.0.product_image fill-250x160 as img %}
-			<article class="tm-product-card" tabindex="0">
-			
-			    <div class="tm-product-card-media uk-inline-clip uk-transition-tog">
-				<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
-					<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
-				     <figure class="tm-media-box-wrap">
-					<img data-src="{{img.url}}" style="height:100%" alt="{{img.alt}}&quot;" uk-img>
-				     </figure>
-				    </a>
-				</div>
-                                <div class="uk-position-cover upper uk-overlay uk-overlay-default">
-				     <div style="">
-					    {{ product.description|richtext}}
-				     </div> 
-			        </div>
-			    </div>
-			    <div class="tm-product-card-body ">
-				<div class="tm-product-card-info">
-					<div class="uk-text-meta uk-margin-xsmall-bottom">
-						<a class="uk-link-heading" href="{% pageurl product.product_range.category %}">
-							{{ product.product_range.category.title }}
-						</a>
+								</ul>
+							</div>
+							<!-- Filters button & change view-->
+							<div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
+								<!--//- Filters button-->
+								<button class="uk-button uk-button-default uk-button-small uk-hidden@m"
+									uk-toggle="target: #filters">
+									<span class="uk-margin-xsmall-right uk-icon uk-text-uppercase"
+										uk-icon="icon: settings; ratio: .75;">{% trans 'filtters' %}
+								</button>
+								<!-- //- Change view-->
+								<div class="tm-change-view uk-margin-small-left">
+									<ul class="uk-subnav uk-iconnav js-change-view" uk-switcher="uk-switcher">
+										<li><a class="uk-active" id="id" onclick='toggle(this)' data-view="grid"
+												uk-icon="grid" uk-tooltip="Grid"></a></li>
+										<li><a data-view="list" onclick="toggle(this)" uk-icon="list"
+												uk-tooltip="List"></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
-				    <h3 class="tm-product-card-title">
-					    <a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
-						{{ product.title }}
-					    </a>
-				    </h3>
-				</div> 
-				<div class="tm-product-card-shop">
-				    <div class="tm-product-card-prices">
-					{% if product.has_discount %}
-					<del class="uk-text-meta">{{ product.base_price}}DH</del>
-					{% endif %}
-					<div class="tm-product-card-price">{{ product.price}}</div>
-				    </div>
-				    <div class="tm-product-card-add">
-					<div class="uk-text-meta tm-product-card-actions">
-					    <a class="tm-product-card-action
+
+
+					<!--ITEMS-->
+
+					<div class="uk-grid-margin uk-first-column">
+						<div class="uk-grid-collapse uk-child-width-1-3 tm-products-grid js-products-grid"
+							uk-grid="uk-grid">
+							{% for product in products %}
+							{% image product.pimages.0.product_image fill-250x160 as img %}
+							<article class="tm-product-card" tabindex="0">
+
+								<div class="tm-product-card-media uk-inline-clip uk-transition-tog">
+									<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
+										<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
+											<figure class="tm-media-box-wrap">
+												<img data-src="{{img.url}}" style="height:100%" alt="{{img.alt}}&quot;"
+													uk-img>
+											</figure>
+										</a>
+									</div>
+									<div class="uk-position-cover upper uk-overlay uk-overlay-default">
+										<section class="feature">
+											<div>
+												<p class="uk-text-lead"> Caractéristique</p>
+												<ul class="check-list">
+													{% for feature in product.features%}
+													{% include_block feature %}
+													{% endfor %}
+												</ul>
+											</div>
+										</section>
+									</div>
+								</div>
+								<div class="tm-product-card-body ">
+									<div class="tm-product-card-info">
+										<div class="uk-text-meta uk-margin-xsmall-bottom">
+											<a class="uk-link-heading"
+												href="{% pageurl product.product_range.category %}">
+												{{ product.product_range.category.title }}
+											</a>
+										</div>
+										<h3 class="tm-product-card-title">
+											<a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
+												{{ product.title }}
+											</a>
+										</h3>
+									</div>
+									<div class="tm-product-card-shop">
+										<div class="tm-product-card-prices">
+											{% if product.has_discount %}
+											<del class="uk-text-meta">{{ product.base_price}}DH</del>
+											{% endif %}
+											<div class="tm-product-card-price">{{ product.price}}</div>
+										</div>
+										<div class="tm-product-card-add">
+											<div class="uk-text-meta tm-product-card-actions">
+												<a class="tm-product-card-action
 						js-add-to js-add-to-favorites
 						tm-action-button-active
 						js-added-to" title="Add to favorites">
-						<span uk-icon="icon: heart; ratio: .75;"
-						class="uk-icon"></span>
-						<span class=" tm-product-card-action-text">{% trans 'Ajouter à favoris' %}</span>
-					    </a>
+													<span uk-icon="icon: heart; ratio: .75;" class="uk-icon"></span>
+													<span
+														class=" tm-product-card-action-text">{% trans 'Ajouter à favoris' %}</span>
+												</a>
 
+											</div>
+											<button data-id="{{ product.pk }}"
+												class="uk-button badge add_to_cart uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
+												<span class="badge tm-product-card-add-button-icon uk-icon"
+													uk-icon="cart"></span>
+												<span
+													class="uk-text-small badge tm-product-card-add-button-text">{% trans 'Ajouter au panier' %}
+												</span>
+											</button>
+										</div>
+									</div>
+								</div>
+
+
+							</article>
+							{% endfor %}
+						</div>
 					</div>
-					<button data-id="{{ product.pk }}" class="uk-button add_to_cart uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
-						<span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
-						<span class="uk-text-small tm-product-card-add-button-text">{% trans 'Ajouter au panier' %} </span>
-					</button>
-				    </div>
 				</div>
-			    </div>
-			    
-			    
-			</article>
-			{% endfor %}
-		    </div>
+			</div>
 		</div>
-	    </div>
-	  </div>
-      </div>
-   </div>
-   <!--PAGINATION-->
-   <div class="uk-margin">
-	{%if products.paginator.num_pages > 1%}
-	  <ul class="uk-pagination uk-flex-center">
-	   {% if products.has_previous %}
-	     <li><a href="?page={{ products.previous_page_number }}"><span uk-pagination-previous></span><a></li>
-	   {% endif %}
-	   {% for page in products.paginator.page_range %}
-	    {% if page == products.number %}
-	     <li class=" uk-active"><a href="?page={{page}}">{{ page }}</a></li>
-	    {% elif page > products.number|add:'-4' and page < products.number|add:'4' %}
-	     <li><a href="?page={{ page }}">{{page}}</a></li>
-	    {% endif %}
-	   {% endfor %}
-	   {% if products.has_next  %}
-	     <li><a href="?page={{ products.next_page_number }}"><span uk-pagination-next></span></a></li>
-	   {% endif %}
-	  </ul>
-	{% endif %}
-   </div>
+	</div>
+	<!--PAGINATION-->
+	<div class="uk-margin">
+		{%if products.paginator.num_pages > 1%}
+		<ul class="uk-pagination uk-flex-center">
+			{% if products.has_previous %}
+			<li><a href="?page={{ products.previous_page_number }}"><span uk-pagination-previous></span><a></li>
+			{% endif %}
+			{% for page in products.paginator.page_range %}
+			{% if page == products.number %}
+			<li class=" uk-active"><a href="?page={{page}}">{{ page }}</a></li>
+			{% elif page > products.number|add:'-4' and page < products.number|add:'4' %}
+			<li><a href="?page={{ page }}">{{page}}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if products.has_next  %}
+			<li><a href="?page={{ products.next_page_number }}"><span uk-pagination-next></span></a></li>
+			{% endif %}
+		</ul>
+		{% endif %}
+	</div>
 
 </div>

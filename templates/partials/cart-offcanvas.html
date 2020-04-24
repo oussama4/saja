@@ -49,7 +49,7 @@
 		
 				<div>      
 					<button data-id = "{{ item.product.pk }}" onclick="remove(this)" 
-				      class="delete_from_cart uk-icon-link uk-text-danger uk-invisible-hover" 
+				      class="delete_from_cart  uk-icon-link uk-text-danger uk-invisible-hover" 
 					uk-icon="icon: close; ratio: .75"
 				   uk-tooltip="{% trans 'supprimer' %}"></button>
 				</div> 
@@ -68,7 +68,7 @@
 		    </div>
 		    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-margin-small" uk-grid>
 			    <div><a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="/cart">{% trans 'MON PANIER' %}</a></div>
-			    <div><a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="">{% trans 'COMMANDER' %}</a></div>
+			    <div><a class="uk-button uk-button-primary uk-margin-small uk-width-1-1 badge" href="">{% trans 'COMMANDER' %}</a></div>
 		    </div>
 		</footer>
 	   </div>

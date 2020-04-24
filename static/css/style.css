@@ -1,5 +1,36 @@
-input[type="number"].uk-form-width-small::-webkit-inner-spin-button {
+section.feature {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 
+}
+.check-list {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+  
+.check-list li {
+    position: relative;
+    list-style-type: none;
+    padding-left: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+  
+.check-list li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 5px;
+    height: 11px;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    border-color: #00a8a8;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+}
+input[type="number"].uk-form-width-small::-webkit-inner-spin-button {
   height:30px;
   width:20px;
 }
@@ -98,7 +129,7 @@ body {
 .subButton {
 	background: aliceblue;
 	border-radius: 18px;
-	border: 2px solid white;
+	border: 1px solid white;
   	margin: 0;
 	width:150px;
     	overflow: visible;
@@ -122,7 +153,9 @@ body {
 }
 
 .subButton:hover {
-	background: transparent;
+    background-color: transparent!important;
+    box-shadow: 0px 0px 0px 0px!important;
+    
 }
 
 #top-left{
@@ -146,6 +179,9 @@ body {
     transform: rotateY(180deg);
 }
 
+.uk-transition-flipp{
+    transition: transform 1s, opacity 0.6s;
+}
 
 .uk-transition-tog:hover .uk-transition-flip,
 .uk-transition-tog:focus .uk-transition-flip,
