@@ -56,14 +56,16 @@ class Category(Page):
                 queryset=ProductImages.objects.select_related('product_image'),
                 to_attr='pimages'
             )
-            all_products = Product.objects.select_related('product_range__category').prefetch_related(prefetch).filter(product_range__category=self)
+            products_qs = Product.objects.select_related('product_range__category').prefetch_related(prefetch)
+            products = products_qs.filter(product_range__category=self)
 
             subCat = []
             if descendant_categories:
                     subCat = descendant_categories
+                    products = products_qs.filter(product_range__category__in=descendant_categories)
 
             #pagination
-            paginator = Paginator(all_products, 3)
+            paginator = Paginator(products, 3)
             page = request.GET.get("page")
 
             try:
@@ -73,8 +75,8 @@ class Category(Page):
             except EmptyPage:
                 products = paginator.page(paginator.num_pages)
 
-            context['products'] = all_products
-            context['itemsSum'] = len(all_products)
+            context['products'] = products
+            context['itemsSum'] = len(products)
             context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
             context['categories'] = subCat
             return context

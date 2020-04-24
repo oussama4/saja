@@ -26,11 +26,11 @@ def add_to_cart(request):
                 cart = cart,
                 product = item,
         )
-        if create and int(quantityF > 0):
-            cart_item.quantity = int(quantityF) 
+        if create and int(quantityF) > 0:
+            cart_item.quantity = int(quantityF)
             cart_item.save()
         elif not create and cart_item:
-            cart_item.quantity += int(quantityF) 
+            cart_item.quantity += int(quantityF)
             cart_item.save()
         return redirect('/cart/')
     elif request.method == "POST" and id :
