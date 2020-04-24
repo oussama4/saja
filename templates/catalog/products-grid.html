@@ -12,31 +12,25 @@
 							<!--Sorting-->
 							<div
 								class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
-								<span class="uk-margin-small-right uk-text-muted">{% trans 'Trier par' %}</span>
-								<ul class="uk-subnav uk-margin-remove">
-									<li class="uk-active"><a class="uk-text-lowercase"
-											href="#">{% trans 'Le plus récent' %}</a></li>
-									<li><a class="uk-text-lowercase" href="#">{% trans 'prix' %}</a></li>
-									<li class="uk-visible@l">
-
-										<div class="uk-grid-small uk-child-width-1-2 uk-text-small" uk-grid>
-											<div class="uk-display-inline">
-												<div class="uk-inline">
-													<span class="uk-form-icon uk-text-xsmall">{% trans 'De' %}</span>
-													<input class="uk-input" type="number">
-												</div>
-											</div>
-											<div class="uk-display-inline">
-												<div class="uk-inline">
-													<span class="uk-form-icon uk-text-xsmall">{% trans 'À' %}</span>
-													<input class="uk-input" type="number">
-												</div>
-											</div>
-										</div>
-									</li>
-
-
-								</ul>
+								<button class="uk-button uk-button-default">
+									{% trans "Trier par" %}
+								</button>
+								<div uk-dropdown="mode: click">
+									<ul class="uk-nav uk-dropdown-nav">
+										<li> <a href="{% pageurl page %}?order=title_asc">
+												{% trans "Titre, A à Z" %} 
+											</a> </li>
+											<li> <a href="{% pageurl page %}?order=title_desc">
+												{% trans "Titre, Z à A" %}
+											</a> </li>
+											<li> <a href="{% pageurl page %}?order=price_asc">
+												{% trans "Prix, croissant" %}
+											</a> </li>
+											<li> <a href="{% pageurl page %}?order=price_desc">
+												{% trans "Prix, décroissant" %}
+											</a> </li>
+									</ul>
+								</div>
 							</div>
 							<!-- Filters button & change view-->
 							<div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
