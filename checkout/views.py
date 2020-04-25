@@ -32,7 +32,7 @@ def add_to_cart(request):
         elif not create and cart_item:
             cart_item.quantity += int(quantityF)
             cart_item.save()
-        return redirect('/cart/')
+        return redirect('/cart')
     elif request.method == "POST" and id :
         item = get_object_or_404(Product, pk=id)
         cart, created = Cart.objects.get_or_create(

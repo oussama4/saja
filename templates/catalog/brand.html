@@ -18,6 +18,7 @@
 							{% for loop_cycle in brand.cimages %}
 							{% image loop_cycle.carousel_image fill-900x400 as img %}
 							<li class="uk-width-1-1">
+								<div class="uk-flex uk-flex-center uk-position-absolute"uk-spinner="ratio: 3" style="z-index:-100"></div>
 								<img data-src="{{ img.url}}" alt="{{ img.alt}}" class="" uk-img uk-cover>
 							</li>
 							{% endfor %}
@@ -33,13 +34,17 @@
 				</div>
 				<div class=" uk-margin-bottom" style="background:transparent;">
 					{% include './breadcrumb.html' %}
-
+					     {% with 'img/'|add:self.title|add:'.png' as image_static %}
+					     <div class="uk-padding uk-padding-bottom-small">
+					     <img style="height:60px;width:200px;" class=" uk-position-relative uk-position-center" src="{% static image_static %}" img>
+					     </div>
+					     {% endwith %}
 					<div class="subCat">
 						<div class="uk-flex uk-flex-left">
 							{% if categories %}
 							{% for sub in categories %}
 							<div class="subCat-item">
-								<a style="background:{{sub.color}};
+								<a style="border:2px solid {{sub.color}};
 							 box-shadow: 2px 1px 4px 1px {{sub.color}}" href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
 							</div>
 							{% endfor %}
@@ -50,9 +55,9 @@
 
 					<div style="padding:10px">
 						<div class="uk-text-capitalize uk-text-center">
-							<p class="title">{{ brand.title }}</p>
+							<p class="title">{{ brand.group_title }}</p>
 						</div>
-						<div class="uk-container" uk-slider="cente:false;autoplay:true;">
+						<div id="sliderP"class="uk-container" uk-slider="cente:false;pause-on-hover: true">
 							<div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
 								<ul class="uk-slider-items uk-child-width-1-4@m uk-grid">
 									{% for product in brand.gproduct %}
@@ -71,10 +76,10 @@
 													</a>
 												</div>
 												<div class="uk-position-cover upper uk-overlay uk-overlay-default">
-													<a class="tm-media-box" href="">
+													<a class="tm-media-box" href="{% url 'product_detail' product.group_product.slug %}">
 														<section class="feature">
 															<div>
-																<p class="uk-text-lead"> Caractéristique</p>
+																<p class="uk-text-lead uk-text-center">{% trans 'Caractéristique' %}</p>
 																<ul class="check-list">
 																	{% for feature in product.group_product.features%}
 																	{% include_block feature %}
@@ -89,10 +94,10 @@
 												<div class=" tm-product-card-body" style="height:16vh;">
 													<div class="tm-product-card-info" style="max-height:6vh">
 														<div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">
-															{{ product.group_product.range.category.title }}
+															<a href="{{ product.group_product.range.category.url }}">{{ product.group_product.range.category.title }}</a>
 														</div>
 														<h3 class="tm-product-card-title" style="margin:0;">
-															<a href="" class="uk-link-heading">
+															<a href="{% url 'product_detail' product.group_product.slug %}" class="uk-link-heading">
 																{{ product.group_product.title |slice:'35'}}
 															</a>
 														</h3>
@@ -105,8 +110,8 @@
 															<del
 																class="uk-text-meta">{{ product.group_product.base_price}}DH</del>
 															{% endif %}
-															<div class="tm-product-card-price">
-																{{ product.group_product.price}}
+															<div class="badgeT tm-product-card-price">
+																{{ product.group_product.price}}DH
 															</div>
 														</div>
 														<div class="tm-product-card-add">
