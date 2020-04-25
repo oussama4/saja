@@ -318,7 +318,8 @@ function toggle(e) {
 	 	items.forEach(function(el){
 	 		el.classList.remove('uk-transition-active');
 	 	})
-	 },200)
+		 
+	 },500)
  }
 })();
 
