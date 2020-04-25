@@ -5,10 +5,6 @@
 <div class="brandBack">
 <div class="uk-container  ">
   <div class="uk-margin-bottom uk-grid-medium uk-child-width-1-1 uk-grid" uk-grid>
-    <div class="uk-text-center">
-      {% include "../catalog/breadcrumb.html" %}
-    </div>
-
 
     <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
       <!--Product-->
@@ -91,7 +87,7 @@
             </div>
             <div class="uk-padding uk-width-1-1 uk-width-1-3@m tm-product-info">
               <div class="uk-card-body_class">
-				  <div class="uk-text-lead uk-text-bolder"> {{ product.title }} </div>
+				  <div class="uk-text-lead uk-text-bolder"> {{ product.display_title }} </div>
                 <div class="uk-margin">
                   <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded">
                     <div class="uk-grid-small uk-child-width-1-1" uk-grid>
@@ -109,7 +105,8 @@
 			  <form method="post" action="/add_to_cart/" >
 				  {% csrf_token %}
                             
-				<input name="quantity" style="height:30px;font-size: 20px" min="1" max="9999" class="uk-form-width-small" type="number" step="1">	
+				<input name="quantity" style="height:30px;font-size: 20px" min="1" max="9999" value="1" required 
+					class="uk-form-width-small" type="number" step="1">	
                           
                           <!--Add to cart button-->
                           
@@ -149,35 +146,18 @@
                     </div>
                   </div>
                 </div>
-                <div class="uk-margin">
-                  <div class="uk-text-lead uk-text-bolder">
-                    {% trans 'Description' %}
-                  </div>
-                  <p> {{ product.description|richtext }} </p>
-                </div>
-                <div class="uk-margin">
-                  <div class="uk-grid-small" uk-grid>
-                    <!--Rating-->
-                    <div class="uk-flex uk-flex-middle">
-                      <ul class="uk-iconnav uk-margin-xsmall-bottom tm-rating">
-                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
-                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
-                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
-                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
-                        <li><span class="uk-text-warning" uk-icon="icon: star"></span></li>
-                      </ul>
-                      <div class="uk-margin-xsmall-left">
-                        <a class="uk-text-meta js-scroll-to-description" href="#description"
-                          onclick="UIkit.switcher('.js-product-switcher').show(3);">(2)</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+		<div class="uk-margin">
+		  <div class="uk-text-lead uk-text-bolder">
+			{% trans 'Description' %}
+		  </div>
+		  <p> {{ product.description|richtext }} </p>
+		</div>
+		<hr>
 	  {% include "partials/variants.html" with variants=variants %}
     </div>
   </div>

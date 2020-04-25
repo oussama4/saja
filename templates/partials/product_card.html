@@ -1,25 +1,19 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
-{% image product.pimages.0.product_image fill-250x160 as img %}
+{% image product.pimages.0.product_image original as img %}
 <article class="tm-product-card" tabindex="0">
 
     <div class="tm-product-card-media inline-clip uk-transition-tog">
-	<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
+	<div class="tm-ratio tm-ratio-4-3">
 		<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
 	     <figure class="tm-media-box-wrap">
-		     <img data-src="{{ img.url }}" style="height: 100%"  alt="{{ img.alt }}&quot;" uk-img>
+			 <img data-src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" style="height: 100%"  alt="{{ img.alt }}&quot;" uk-img>
 	     </figure>
 	    </a>
 	</div>
-                    <div class="uk-position-cover upper uk-overlay uk-overlay-default">
-	     <div style="">
-		    {{ product.description|richtext}}
-	     </div> 
-        </div>
     </div>
     <div class="tm-product-card-body ">
 	<div class="tm-product-card-info">
-		{#<div class="uk-text-meta uk-margin-xsmall-bottom"><a class="uk-link-heading" href="{% pageurl product.get_parent %}">{{ product.get_parent.title }}</a></div>#}
 	    <h3 class="tm-product-card-title">
 		    <a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
 			{{ product.title }}
@@ -34,17 +28,6 @@
 		<div class="tm-product-card-price">{{ product.price}}</div>
 	    </div>
 	    <div class="tm-product-card-add">
-		<div class="uk-text-meta tm-product-card-actions">
-		    <a class="tm-product-card-action
-			js-add-to js-add-to-favorites
-			tm-action-button-active
-			js-added-to" title="Add to favorites">
-			<span uk-icon="icon: heart; ratio: .75;"
-			class="uk-icon"></span>
-			<span class=" tm-product-card-action-text">{% trans 'Ajouter à favoris' %}</span>
-		    </a>
-
-		</div>
 		<button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
 			<span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
 			<span class="uk-text-small tm-product-card-add-button-text">{% trans 'Ajouter au panier' %} </span>

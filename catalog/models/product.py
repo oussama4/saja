@@ -199,7 +199,7 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
         v = self.title
         if self.attributes:
             for attribute in self.attributes.all():
-                v += attribute.value
+                v += f' {attribute.value}'
         self.slug = slugify(v)
         super(Product, self).save(*args, **kwargs)
 
@@ -214,6 +214,14 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
     @property
     def first_image(self):
         return self.product_images.first()
+
+    @property
+    def display_title(self):
+        v = self.title
+        if self.attributes:
+            for a in self.attributes.all():
+                v += f' {a.value}'
+        return v
 
 
 class AttributeProduct(Orderable):
