@@ -299,5 +299,55 @@ function toggle(e) {
   }
 })();
 
-// Increment
+
+(function() {
+  var addToCartButtons = document.querySelectorAll('.js-add-to-cart');
+
+  Array.prototype.forEach.call(addToCartButtons, function(el) {
+    el.onclick = function() {
+      UIkit.offcanvas('#cart-offcanvas').show();
+    };
+  });
+ var sliderP = document.querySelector('#sliderP');
+ if (sliderP){
+//	UIkit.slider("#sliderP", 'itemshow',function(){
+//		console.log("dddd")
+//	});
+	 var items = document.querySelectorAll('li.uk-active')
+	 setInterval(function(){
+	 	items.forEach(function(el){
+	 		el.classList.remove('uk-transition-active');
+	 	})
+	 },200)
+ }
+})();
+
+(function() {
+  var addToButtons = document.querySelectorAll('.js-add-to');
+
+  Array.prototype.forEach.call(addToButtons, function(el) {
+    var link;
+    var message = '<span class="uk-margin-small-right" uk-icon=\'check\'></span>Added to '  ;
+    var links = {
+      favorites: '<a href="/favorites">favorites</a>',
+      compare: '<a href="/compare">compare</a>',
+    };
+    if(el.classList.contains('js-add-to-favorites')) {
+      link = links.favorites;
+    };
+    if(el.classList.contains('js-add-to-compare')) {
+      link = links.compare;
+    }
+    el.onclick = function() {
+      if(!this.classList.contains('js-added-to')) {
+        UIkit.notification({
+          message: message + link,
+          pos: 'bottom-right'
+        });
+      }
+      this.classList.toggle('tm-action-button-active');
+      this.classList.toggle('js-added-to');
+    };
+  });
+})();
 

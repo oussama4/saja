@@ -4,21 +4,37 @@
 
 {% block content %}
 <div class="brandBack">
+<div style="height:45vh;width"class="uk-child-width-1-2 uk-visible@m" uk-grid>
+	<div style="height:inherit">
+		<div class="uk-flex uk-flex-center uk-position-absolute"uk-spinner="ratio: 3" style="z-index:-100"></div>
+		{% image page.image fill-700x400 as img%}
+		<img style="height:inherit;width:100%" data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
+	</div>
+	<div class="uk-flex uk-flex-middle ">
+		<p class="uk-text-justify">{{ page.description }}</p>	 
+	</div>
+  
+</div>
 <div class="uk-container  uk-margin">
+	<div class="uk-position-absolute uk-position-top-right" style="margin-right:10px;top:70px">
    {% include './breadcrumb.html'%}
+   </div>
+   <h1 class="uk-margin-small-top uk-margin-remove-bottom uk-text-center" style="color:{{color}}">{{ self.title| title }}</h1>
    <p class="uk-text-center">{{ itemsSum}} {% trans 'Produit' %}</p>
 </div>
 
 <div class="uk-container">
 	<div class="subCat"> 
 	  <div style="" class="uk-flex uk-flex-left">
-	  {% if categories %}
-	    {% for sub in categories %}
-	      <div class="subCat-item" >
-		      <a style="background-color:{{sub.color}}" href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
-	      </div>
-	    {% endfor %}
-	  {% endif %}
+	{% if categories %}             
+          {% for sub in categories %}     
+             <div class="subCat-item">       
+               <a style="border:2px solid {{sub.color}};
+                box-shadow: 2px 1px 4px 1px {{sub.color}}" 
+		href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
+             </div>           
+          {% endfor %}     
+        {% endif %}     
 	  </div>
 	</div>
       <div class="uk-grid-medium uk-grid" uk-grid>

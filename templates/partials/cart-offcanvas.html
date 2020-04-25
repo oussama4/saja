@@ -14,7 +14,7 @@
           <div class="uk-card-body uk-overflow-auto">
             <ul id="listItems" class="uk-list uk-list-divider">
 		{% if request.user.is_authenticated %}
-		  {% if cart.0 %}
+		  {% if cart.0.items.all %}
 		  {% for item in cart.0.items.all %}
 		  {% image item.product.first_image.product_image fill-200x150 as img %}
 		  <li data-id= "{{ item.product.pk }}" class="item uk-visible-toggle">
@@ -57,7 +57,10 @@
 			</article>
 			</li>
 	 	      	  {% endfor %}
+			  {%else%}
+			  <p class="uk-text-large" style="position:absolute;z-index:0;">{% trans 'pas de produit' %}</p>
 	   		 {% endif %}
+			
 			{% endif %}
 		    </ul>
 		  </div>
@@ -73,7 +76,7 @@
 					</a>
 				</div>
 			    <div>
-					<a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="#modal-center" uk-toggle>
+					<a class="uk-button badge uk-button-primary uk-margin-small uk-width-1-1" href="#modal-center" uk-toggle>
 						{% trans 'COMMANDER' %}
 					</a>
 					<div id="modal-center" class="uk-flex-top" uk-modal>

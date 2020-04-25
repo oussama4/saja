@@ -1,3 +1,6 @@
+.brandBack {
+	background-color: white;
+}
 section.feature {
     max-width: 400px;
     margin-left: auto;
@@ -14,6 +17,9 @@ section.feature {
     list-style-type: none;
     padding-left: 2.5rem;
     margin-bottom: 0.5rem;
+}
+.check-list>ul,.check-list>ul>li{
+	margin:0;
 }
   
 .check-list li:before {
@@ -81,7 +87,7 @@ input[type="number"].uk-form-width-small::-webkit-inner-spin-button {
     z-index: 1;
     opacity: 0;
     transition: all 0.3s;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 2.5px solid rgba(255,255,255,0.5);
     transform: scale(1.2,1.2);
 }
 .btn-three:hover::after {
@@ -129,7 +135,6 @@ body {
 .subButton {
 	background: aliceblue;
 	border-radius: 18px;
-	border: 1px solid white;
   	margin: 0;
 	width:150px;
     	overflow: visible;
@@ -153,9 +158,10 @@ body {
 }
 
 .subButton:hover {
-    background-color: transparent!important;
-    box-shadow: 0px 0px 0px 0px!important;
-    
+	background-color: transparent!important;
+	box-shadow: 0px 0px 0px 0px!important;
+	color: black;
+ 
 }
 
 #top-left{
@@ -318,7 +324,7 @@ body {
     padding: 10px
 }
 
-uk-animation-slide-right {
+.uk-animation-slide-right {
     animation-name: uk-fade-right
 }
 
@@ -328,9 +334,8 @@ uk-animation-slide-right {
 
 .title {
     font-family: 'Merienda';
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 900;
-    color: white;
 }
 
 @keyframes uk-fade-left {

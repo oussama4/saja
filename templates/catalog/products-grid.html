@@ -13,7 +13,9 @@
 							<div
 								class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
 								<button class="uk-button uk-button-default">
-									{% trans "Trier par" %}
+								  <span class="uk-margin-xsmall-right uk-icon uk-text-uppercase" 
+									uk-icon="icon: settings; ratio: .75;"></span>
+								  {% trans "Trier par" %}
 								</button>
 								<div uk-dropdown="mode: click">
 									<ul class="uk-nav uk-dropdown-nav">
@@ -35,11 +37,6 @@
 							<!-- Filters button & change view-->
 							<div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
 								<!--//- Filters button-->
-								<button class="uk-button uk-button-default uk-button-small uk-hidden@m"
-									uk-toggle="target: #filters">
-									<span class="uk-margin-xsmall-right uk-icon uk-text-uppercase"
-										uk-icon="icon: settings; ratio: .75;">{% trans 'filtters' %}
-								</button>
 								<!-- //- Change view-->
 								<div class="tm-change-view uk-margin-small-left">
 									<ul class="uk-subnav uk-iconnav js-change-view" uk-switcher="uk-switcher">
@@ -73,6 +70,7 @@
 										</a>
 									</div>
 									<div class="uk-position-cover upper uk-overlay uk-overlay-default">
+										<a href="{% url 'product_detail' product.slug %}">
 										<section class="feature">
 											<div>
 												<p class="uk-text-lead"> Caractéristique</p>
@@ -83,6 +81,7 @@
 												</ul>
 											</div>
 										</section>
+										<a>
 									</div>
 								</div>
 								<div class="tm-product-card-body ">
@@ -120,10 +119,9 @@
 											</div>
 											<button data-id="{{ product.pk }}"
 												class="uk-button badge add_to_cart uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
-												<span class="badge tm-product-card-add-button-icon uk-icon"
-													uk-icon="cart"></span>
+												<span class="badge tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
 												<span
-													class="uk-text-small badge tm-product-card-add-button-text">{% trans 'Ajouter au panier' %}
+													class=" badge tm-product-card-add-button-text">{% trans 'Ajouter au panier' %}
 												</span>
 											</button>
 										</div>

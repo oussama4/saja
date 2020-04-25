@@ -29,7 +29,7 @@ class Category(Page):
             related_name="+",
             on_delete=models.SET_NULL,
     )
-    color = ColorField(default='#F8FCFF')
+    color = ColorField(default='#FFF')
 
     content_panels = Page.content_panels + [
             FieldPanel("description"),
@@ -78,7 +78,7 @@ class Category(Page):
                     products = products.order_by('-base_price')
 
             #pagination
-            paginator = Paginator(products, 3)
+            paginator = Paginator(products, 9)
             page = request.GET.get("page")
 
             try:
@@ -92,6 +92,7 @@ class Category(Page):
             context['itemsSum'] = len(products)
             context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
             context['categories'] = subCat
+            context['color'] = self.color
             return context
 
 
