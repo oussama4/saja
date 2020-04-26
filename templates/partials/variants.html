@@ -6,15 +6,15 @@
 </h2>
 
 <div uk-slider="center: true">
-	<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+	<div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
 		<ul class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-1@s uk-grid">
 			{% for v in variants %}
-                {% image v.pimages.0.product_image original as img %}
+                {% image v.pimages.0.product_image fill-500x300 as img %}
 				<li class="">
 					<div class="uk-card uk-card-default">
 						<div class="uk-card-media-top">
-							<img data-src="{{ img.url }}" alt="{{ img.alt }}" width="{{ img.width }}px" 
-							height="{{ img.height }}px" style="height: 100%" uk-img/>
+							<img data-src="{{ img.url }}" alt="{{ img.alt }}"
+							 style="" uk-img/>
 						</div>
 						<div class="uk-card-body">
 							<a class="" href="{% url 'product_detail' v.slug %}">
