@@ -18,7 +18,7 @@
 							{% for loop_cycle in brand.cimages %}
 							{% image loop_cycle.carousel_image fill-900x400 as img %}
 							<li class="uk-width-1-1">
-								<div class="uk-flex uk-flex-center uk-position-absolute"uk-spinner="ratio: 3" style="z-index:-100"></div>
+								<div class="uk-flex uk-flex-center uk-position-absolute" uk-spinner="ratio: 3" style="z-index:-100;top:20vh;left:40vw;"></div>
 								<img data-src="{{ img.url}}" alt="{{ img.alt}}" class="" uk-img uk-cover>
 							</li>
 							{% endfor %}
