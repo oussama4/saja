@@ -10,7 +10,7 @@
 <div class="uk-position-relative">
 
 	<div uk-slideshow="animation: scale;max-height:700;autoplay:true" >
-		<div class="uk-flex  uk-position-absolute" style="top:15vh;left:40vw;z-index:0;" uk-spinner="ratio: 3"></div>
+		<div class="uk-flex uk-position-absolute" style="top:16vh;left:43vw;z-index:0;" uk-spinner="ratio: 2"></div>
 		<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
 			<ul class="uk-slideshow-items ">
 				{% for i in home.cimages %}
@@ -18,7 +18,7 @@
 				{% image i.logo original as logo %}
 				<li class="">
 					<img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
-					<div id="top-left" class="uk-position-top-left  uk-margin-left uk-text-justify uk-light">
+					<div id="top-left" class="sliderButton uk-position-top-left  uk-margin-left uk-text-justify uk-light">
 						<img heigth='70px' width='150px' data-src="{{ logo.url }}" alt="{{ logo.alt }}" uk-img>
 						<h2 style="color:black" class="uk-text-lead uk-margin-remove ">{{i.text}}</h2>
 						<a style="color:black" class="uk-button btn-three uk-text-bolder"
@@ -77,7 +77,7 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div class="uk-navbar-center">
+		<div class="uk-navbar-center logoCenter">
 			<a class="uk-navbar-item uk-logo uk-display-inline-block " href="/">
 				<img data-src="{% static 'img/saja.png' %}" width="90" height="32" alt="logo" uk-img>
 			</a>
