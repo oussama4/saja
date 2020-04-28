@@ -8,4 +8,6 @@
 .badgeT {
         color: #0a559e;        
 } 
-
+.catBorder {
+	border-bottom: 8px solid #0a559e;
+}
