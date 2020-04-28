@@ -12,14 +12,14 @@
 			<div class="brandBack">
 				<div class="uk-grid-medium uk-child-width-1-1" uk-grid="uk-grid">
 					<div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1"
-						uk-slideshow="autoplay: true;autoplay-interval:5000;min-height: 200; max-height: 500; animation: fade">
+						uk-slideshow="autoplay: true;autoplay-interval:5000;target: !.uk-slideshow-items;min-height: 200; max-height: 500; animation: fade">
 
 						<ul class="uk-slideshow-items">
 							{% for loop_cycle in brand.cimages %}
-							{% image loop_cycle.carousel_image fill-900x400 as img %}
+							{% image loop_cycle.carousel_image original as img %}
 							<li class="uk-width-1-1">
-								<div class="uk-flex uk-flex-center uk-position-absolute"uk-spinner="ratio: 3" style="z-index:-100"></div>
-								<img data-src="{{ img.url}}" alt="{{ img.alt}}" class="" uk-img uk-cover>
+								<div class="uk-flex uk-position-absolute"uk-spinner="ratio:2" style="top:15vh;left42vw;z-index:-100"></div>
+								<img data-src="{{ img.url}}" alt="{{ img.alt}}" width="1800" height="600" uk-img uk-cover>
 							</li>
 							{% endfor %}
 						</ul>
@@ -61,7 +61,7 @@
 							<div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
 								<ul class="uk-slider-items uk-child-width-1-4@m uk-grid">
 									{% for product in brand.gproduct %}
-									{% image product.group_product.first_image.product_image fill-250x150 as img %}
+									{% image product.group_product.first_image.product_image original as img %}
 
 									<li class="uk-active">
 										<div class="uk-card uk-card-default tm-product-card ">
@@ -70,7 +70,7 @@
 												<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 													<a class="tm-media-box" href="">
 														<figure class="tm-media-box-wrap">
-															<img data-src="{{ img.url }}" style="height: 100%"
+															<img data-src="{{ img.url }}"
 																alt="{{ img.alt }}&quot;" uk-img>
 														</figure>
 													</a>
@@ -122,9 +122,9 @@
 																		class="uk-icon"></span>
 																</a>
 															</div>
-															<a data-id="{{ product.group_product.pk}}"
+															<a  data-id="{{ product.group_product.pk}}"
 																class="uk-button add_to_cart badge uk-button-primary tm-product-card-add-button tm-shine">
-																<span class="tm-product-card-add-button-icon  uk-icon"
+																<span class="js-add-to-cart tm-product-card-add-button-icon  uk-icon"
 																	uk-icon="cart"></span>
 															</a>
 														</div>

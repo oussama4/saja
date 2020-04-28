@@ -2,11 +2,11 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-<div class="brandBack">
-<div class="uk-container  ">
+
+<div class="uk-container">
   <div class="uk-margin-bottom uk-grid-medium uk-child-width-1-1 uk-grid" uk-grid>
 
-    <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+    <div class="uk-child-width-1-1" uk-grid>
       <!--Product-->
       <div>
         <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
@@ -160,6 +160,5 @@
 	  {% include "partials/variants.html" with variants=variants %}
     </div>
   </div>
-</div>
 </div>
 {% endblock %}

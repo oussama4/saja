@@ -1,3 +1,28 @@
+@media only screen and (max-width:600px){
+	.sliderButton{
+		max-width: 120px;
+		max-height: 100px;
+	}
+	.sliderButton>h2{
+		width: max-content!important;
+	}
+	.sliderButton>a{
+		width: 126px;
+		padding:0;
+
+	}
+}
+@media only screen and (max-width:400px){
+	.logoCenter{
+		left: 45%!important;
+		width: 90px;
+	}
+	.logoCenter>a{
+		padding: 0;
+		margin: 0;	
+	}
+}
+
 .brandBack {
 	background-color: white;
 }
@@ -11,9 +36,12 @@ section.feature {
     margin: 0;
     padding-left: 1.2rem;
 }
-  
+.check-list>ul {
+	padding-left: 0;
+} 
 .check-list li {
     position: relative;
+    padding-left: 20px!important;
     list-style-type: none;
     padding-left: 2.5rem;
     margin-bottom: 0.5rem;
@@ -45,6 +73,7 @@ input[type="number"].uk-form-width-small::-webkit-inner-spin-button {
     background-attachment: fixed;
     height: 129vh;
     width: 100vw;
+    background-size: 100vw 100vh;
 }
 
 
