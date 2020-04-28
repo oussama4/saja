@@ -23,16 +23,7 @@ ANYMAIL = {
     "MAILGUN_SENDER_DOMAIN": 'mail.sajacosmetics.com',
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = "osama@sajacosmetics.com"
-
-
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.zoho.com'
-#EMAIL_PORT = 465
-#EMAIL_USE_SSL = True
-#DEFAULT_FROM_EMAIL = 'admin@sajacosmetics.com'
-#EMAIL_HOST_USER = 'admin@sajacosmetics.com'
-#EMAIL_HOST_PASSWORD = 'Y5LBgSPcjACt'
+DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
 
 # logging
 LOGGING = {
