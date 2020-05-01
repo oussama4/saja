@@ -11,6 +11,9 @@
 		padding:0;
 
 	}
+	.subCat::-webkit-scrollbar {
+		display: none;
+	}
 }
 @media only screen and (max-width:400px){
 	.logoCenter{
@@ -155,17 +158,19 @@ body {
 }
 .subCat-item {
 	display:inline;
-	width:140px;
 	margin:10px;
+	width:inherit;
+	max-width:250px;
+	min-width:150px
 }
-.subCat::-webkit-scrollbar {
-	display: none;
-}
+
 .subButton {
 	background: aliceblue;
 	border-radius: 18px;
   	margin: 0;
-	width:150px;
+	width: fit-content!important;
+    	min-width: 200px!important;
+	max-width: 250px!important;
     	overflow: visible;
     	font: inherit;
     	color: black;

@@ -1,0 +1,13 @@
+#products {
+	box-shadow: 5px 8px 16px 2px #313280;
+}
+
+#badge, .badge{
+	background-color: #313280!important;
+}
+.badgeT {
+	color: #313280;
+}
+.catBorder {
+	border-bottom: 8px solid #313280;
+}
