@@ -103,6 +103,11 @@ class ProductRange(ProductBase):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        v = self.title
+        self.slug = slugify(v)
+        super(ProductRange, self).save(*args, **kwargs)
+
 
 class ProductImages(Orderable):
     product = ParentalKey(

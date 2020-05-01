@@ -15,9 +15,9 @@ from users import views as users_views
 from catalog import views as catalog_views
 
 urlpatterns = [
-    url(r'^django-admin/', admin.site.urls),
+    url(r'^django-codylia-2020/', admin.site.urls),
 
-    url(r'^admin/', include(wagtailadmin_urls)),
+    url(r'^codylia-2020/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'', include('allauth.urls')),
     url(r'', include('checkout.urls',namespace='checkout')),
