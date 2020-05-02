@@ -26,15 +26,17 @@
     </ul>
    </div>
    <div>
-     <nav class="uk-grid-small uk-child-width-1-2" uk-grid >
+     <nav class="uk-grid-small uk-child-width-1-1" uk-grid >
 	<div>
-		{% trans 'Nos Services' %} 
+		{% trans 'NOS SERCVICES' %} 
 	 <ul class="uk-nav uk-nav-default">
-	 {% if services %}
+{%comment%}}	 {% if services %}
 	  {% for item in services.footer_items.all %}
 	  <li><a href="{{ item.link}}">{{ item.title }}</a></li>
 	  {% endfor %}
-	 {% endif %}
+	 {% endif %}{%endcomment%}
+	 <li><a class="uk-link-muted">LIVRAISON ET RETOUR</a></li>
+	 <li><a class="uk-link-muted">PAIEMENT SÉCURISÉ</a></li>
 	 </ul>
 	</div>
 
@@ -45,7 +47,7 @@
     <div>
 	    {% trans 'SAJA COSMETICS' %}
     <ul class="uk-list uk-text-small">
-	 {% if saja %}
+{%comment%}	 {% if saja %}
 	 {% for item in saja.footer_items.all %}
 	<li>
 		<a class="uk-link-muted" href="{%if not item.link  %}# {% else %} {{ item.link }} {% endif %}">
@@ -53,7 +55,10 @@
 	  </a>
 	</li>
 	{% endfor %}
-	{% endif %}
+	{% endif %}{%endcomment%}
+          <li><a class="uk-link-muted">À PROPOS</a></li>
+          <li><a class="uk-link-muted">NOS MAGASINS</a></li>
+          <li><a class="uk-link-muted">NOUS CONTACTER</a></li>
     </ul>
     </div>
    </nav>
@@ -66,25 +71,25 @@
       <li>
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="receiver"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{% if info %}{{ info.footer_items.all.0.title }}{%endif%}</span>
+	   <span class=tm-pseudo">00212 7 06 65 11 05</span>
 	</a>
       </li>
-      <li>
+      <li >
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="location"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{%if info%}{{ info.footer_items.all.1.title }}{%endif%}</span>
+	   <span class="tm-pseudo ">SAJA cosmetics SARL AU BMO BP N:6423 MEKNES MAROC</span>
 	</a>
       </li>
       <li>
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="clock"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{%if info%}{{ info.footer_items.all.2.title }}{%endif%}</span>
+	   <span class=tm-pseudo">8:00 - 18:00</span>
 	</a>
       </li>     
       <li>
 	 <a class="uk-link-muted" href="#">
 	   <span uk-icon="mail"class="uk-margin-small-right"></span>
-	   <span class=tm-pseudo">{{ info.footer_items.all.3.title }}</span>
+	   <span class=tm-pseudo">saja@sajacosmetics.com</span>
 	</a>
       </li>
      </ul>

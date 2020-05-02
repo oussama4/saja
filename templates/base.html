@@ -14,10 +14,12 @@
                 {% endwith %}
             {% endblock %}
         </title>
-        <meta name="description" content="" />
+        <meta name="description" content="SAJA cosmetics une société de promotion de nombreu produits dermo 
+	cosmétique pour que tout le monde ait accès à une beauté naturelle et saine. 
+	Aussi" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
-
+	<link rel="icon" type="image/png" href="{% static 'img/saja.png'%}" />
         {# Global stylesheets #}
 	{% if  request.get_full_path|split == "xpel" %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/xpel.css' %}">
@@ -51,7 +53,6 @@
 	{% include 'partials/cart-offcanvas.html' %}
         {# Global javascript #}
 		<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-	<!--<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBJP4V-yCmlX5tkQ9mWAA2IoaCfBb91iRA&callback=initMap" async defer></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit.min.js"></script>
     	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit-icons.min.js"></script>
         {% block extra_js %}

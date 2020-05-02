@@ -73,8 +73,8 @@
 									<a href="{% url 'product_detail' product.slug %}">
 									<div class="uk-position-cover upper uk-overlay uk-overlay-default">
 										<section class="feature">
-											<div>
-												<p class="uk-text-lead"> Caractéristique</p>
+											<div class="uk-position-top-center uk-margin-top">
+												<p class="uk-text-lead"> Caractéristiqes:</p>
 												<ul class="check-list">
 													{% for feature in product.features%}
 													{% include_block feature %}
