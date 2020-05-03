@@ -35,11 +35,9 @@ INSTALLED_APPS = [
     'tools',
     'checkout',
 
-    'cookielaw',
     'widget_tweaks',
     'colorfield',
     'wagtailmodelchooser',
-    'storages',
 
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',
@@ -87,7 +85,6 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-
 ]
 
 ROOT_URLCONF = 'saja.urls'
@@ -178,14 +175,27 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'compressor.finders.CompressorFinder',
 ]
 
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # Javascript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
 # See https://docs.djangoproject.com/en/2.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
 
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+#STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_URL = '/media/'
 
 
 # Wagtail settings
@@ -222,33 +232,3 @@ WAGTAILSEARCH_BACKENDS = {
         },
 }
 
-AWS_ACCESS_KEY_ID = 'V362KOJSGAD0AL88UVIH'
-AWS_SECRET_ACCESS_KEY = 'gRqh9DCS9CHoC5EAABAbUuyhuoxMI0ndxCBwCGWq'
-AWS_STORAGE_BUCKET_NAME= 'saja'
-AWS_S3_REGION_NAME = "eu-central-1"
-#AWS_S3_CUSTOM_DOMAIN = '%s.linodeobjects.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-
-STATICFILES_LOCATION = 'static'
-
-AWS_S3_FILE_OVERWRITE =  False
-
-AWS_S3_ENDPOINT_URL  = "https://eu-central-1.linodeobjects.com"
-CORS_ORIGIN_ALLOW_ALL = True
-#CORS_ORIGIN_WHITELIST = ["https://eu-central-1.linodeobjects.com"]
-# aws settings
-AWS_DEFAULT_ACL = None 
-# s3 static settings
-AWS_LOCATION = 'saja/static_root/'
-STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
-STATIC_ROOT = f'https://{AWS_S3_ENDPOINT_URL}/'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/{MEDIAFILES_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'saja.settings.storage_backends.MediaStorage'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
