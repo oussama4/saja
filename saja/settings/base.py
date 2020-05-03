@@ -34,11 +34,13 @@ INSTALLED_APPS = [
     'search',
     'tools',
     'checkout',
+
     'cookielaw',
     'widget_tweaks',
     'colorfield',
     'wagtailmodelchooser',
     'storages',
+
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
@@ -176,40 +178,14 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 ]
 
-#<<<<<<< HEAD
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static'),
-#]
-#=======
-#COMPRESS_ENABLED = True
-#COMPRESS_OFFLINE = True
-
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static'),
-#]
-#>>>>>>> upstream/dev
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # Javascript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
 # See https://docs.djangoproject.com/en/2.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
+
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-
-#<<<<<<< HEAD
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-#STATIC_URL = '/static/'
-
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#MEDIA_URL = '/media/'
-#=======
-#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
-#STATIC_URL = '/static/'
-
-#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
-#MEDIA_URL = '/media/'
-#>>>>>>> upstream/dev
 
 
 # Wagtail settings
