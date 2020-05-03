@@ -1,0 +1,29 @@
+{% load i18n static %}
+
+{% load cookielaw_tags %}
+<script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+<div id="CookielawBanner" class="uk-overlay uk-overlay-default uk-width-1-1" style="position:fixed;top:80vh">
+<div class="cookie-content uk-grid-medium" uk-grid>
+    <div class="cookie-text uk-width-1-2 uk-width-3-4@m uk-text-bold">
+        {% trans 'This website uses cookies to make your experience better.' %}
+    </div>
+    <div class="cookie-buttons uk-width-1-2 uk-width-1-4@m">
+	    {%comment%}         <a class="btn-blue" href="{% url 'legal_advice' %}">{% trans "What are the cookies?" %}</a>{%endcomment%}
+         <a class="btn-orange uk-button uk-button-secondary" href="javascript:Cookielaw.createCookielawCookie();">{% trans "Okey" %}</a>
+    </div>
+    <div class="close-cookies uk-position-absolute uk-position-top-right uk-margin-right"><a uk-icon="icon:close; ratio:1.5"></a></div>
+</div>
+</div>
+
+<script type="application/javascript">
+(function(){
+	var close = document.querySelector('.close-cookies');
+	if(close){
+		var banner = document.querySelector('#CookielawBanner');
+		close.addEventListener('click',function(){
+			banner.style.display='none';
+		})
+	}
+})()
+
+</script>

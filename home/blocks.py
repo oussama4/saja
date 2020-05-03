@@ -8,16 +8,14 @@ class BrandsBlock(blocks.StructBlock):
     brands = blocks.ListBlock(
             blocks.StructBlock(
                 [
-                    ("title", blocks.CharBlock(required=False,max_length=100,help_text=_("Le titre"))),
                     ("image", ImageChooserBlock(required=False)),
-                    ("text", blocks.RichTextBlock(help_text=_("ajouter une paragraphe ici"),required=False)),
                 ]
             ),
-            label=_("Presentation")
+            label=_("Marques")
     )
 
     class Meta:
-        template = "home/home_paragraph.html"
+        template = "home/home_brands.html"
         icon = "placeholder"
         label = _("marques")
 

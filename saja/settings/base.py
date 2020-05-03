@@ -34,12 +34,11 @@ INSTALLED_APPS = [
     'search',
     'tools',
     'checkout',
-
+    'cookielaw',
     'widget_tweaks',
     'colorfield',
     'wagtailmodelchooser',
     'storages',
-    'corsheaders',
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
@@ -87,8 +86,6 @@ MIDDLEWARE = [
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'saja.urls'
@@ -257,23 +254,11 @@ AWS_S3_REGION_NAME = "eu-central-1"
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_LOCATION = 'static'
 
-#STATIC_URL = "/static/"
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-
-#MEDIA_URL = '/media/'
 STATICFILES_LOCATION = 'static'
 
 AWS_S3_FILE_OVERWRITE =  False
 
-AWS_PUBLIC_MEDIA_LOCATION = 'media'
-#MEDIAFILES_LOCATION = 'media'
-#DEFAULT_FILE_STORAGE = 'saja.settings.storage_backends.MediaStorage'
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_HEADERS = {
-    'Access-Control-Allow-Origin': '*'
-}
 AWS_S3_ENDPOINT_URL  = "https://eu-central-1.linodeobjects.com"
 CORS_ORIGIN_ALLOW_ALL = True
 #CORS_ORIGIN_WHITELIST = ["https://eu-central-1.linodeobjects.com"]
@@ -282,7 +267,7 @@ AWS_DEFAULT_ACL = None
 # s3 static settings
 AWS_LOCATION = 'saja/static_root/'
 STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
-STATIC_ROOT = f'https://{AWS_S3_ENDPOINT_URL}/saja/'
+STATIC_ROOT = f'https://{AWS_S3_ENDPOINT_URL}/'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)

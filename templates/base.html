@@ -1,5 +1,5 @@
 {% load static wagtailuserbar menu_tags %}
-
+{% load cookielaw_tags %}
 <!DOCTYPE html>
 <html class="no-js" lang="fr">
     <head>
@@ -46,6 +46,7 @@
         {% endif %}
 	
 	{% block content %}{% endblock %}
+	{% cookielaw_banner %}
 	{% include 'partials/footer.html' %}
 	{% include 'partials/nav-offcanvas.html' with catalog=catalog %}
 	{% include 'partials/cart-offcanvas.html' %}

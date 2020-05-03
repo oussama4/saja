@@ -14,6 +14,13 @@
 	.subCat::-webkit-scrollbar {
 		display: none;
 	}
+	.subCat-item {
+		display:inline-table!important;
+	}
+	.subButton {
+		min-width:45vw!important;
+		font-size: .675rem;
+	}
 }
 @media only screen and (max-width:400px){
 	.logoCenter{
@@ -159,9 +166,6 @@ body {
 .subCat-item {
 	display:inline;
 	margin:10px;
-	width:inherit;
-	max-width:250px;
-	min-width:150px
 }
 
 .subButton {
@@ -169,7 +173,7 @@ body {
 	border-radius: 18px;
   	margin: 0;
 	width: fit-content!important;
-    	min-width: 200px!important;
+    	min-width: 13vw;
 	max-width: 250px!important;
     	overflow: visible;
     	font: inherit;
@@ -179,7 +183,7 @@ body {
     	box-sizing: border-box;
     	padding: 0 10px;
     	vertical-align: middle;
-    	font-size: .875rem;
+    	font-size: .8rem;
     	line-height: 38px;
     	text-align: center;
     	text-decoration: none;
