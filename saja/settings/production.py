@@ -5,7 +5,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.sajacosmetics.com']
 
-INSTALLED_APPS = INSTALLED_APPS + ['anymail','storages']
+INSTALLED_APPS = INSTALLED_APPS + ['anymail','storages','cookielaw']
 
 SECRET_KEY = config.get('SECRET_KEY')
 SECURE_CONTENT_TYPE_NOSNIFF = True
