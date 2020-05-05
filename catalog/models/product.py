@@ -31,7 +31,7 @@ class ProductBase(models.Model):
     """ abstract model for shared fields between product models and ranges """
 
     title = models.CharField(verbose_name=_("Titre"), max_length=150)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=200)
     description = RichTextField(
             verbose_name=_("description"),
             null=True,
