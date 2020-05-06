@@ -1,4 +1,4 @@
-{% load static wagtailuserbar menu_tags %}
+{% load static i18n wagtailuserbar menu_tags account %}
 {% load cookielaw_tags %}
 <!DOCTYPE html>
 <html class="no-js" lang="fr">
@@ -35,7 +35,11 @@
 	{% endif %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> 
 	<link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">  	
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit-icons.min.js"></script>
+
+	<script defer type="text/javascript" src="{% static 'js/script.js' %}"></script>
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
@@ -46,18 +50,38 @@
         {% if request.get_full_path|split != ""%}
         {% include 'partials/navbar_next.html' with catalog=catalog  %}
         {% endif %}
-	
+	<div class="loader-wrapper">
+		<img src='{% static 'img/saja.png' %}' class="modal-saja uk-position-absolute uk-position-center">
+	</div>
+	<div id="modal-signup" uk-modal>
+    		<div class="uk-modal-dialog uk-modal-body">
+			<p>{% trans 'veuillez vous inscrire avec nous, afin que vous puissiez ajouter des produits. à votre panier si tu deja un compte click ici' %} <a href="{% url 'account_login' %}">se connecter</a>.</p>
+        		<p class="uk-text-right">
+            			<button class="uk-button uk-button-default uk-modal-close" type="button">Non, Merci</button>
+				<a href="{% url 'account_signup' %}"class="modal-button uk-button uk-button-primary" >créé un compte</a>
+        		</p>
+    		</div>
+	</div>
+
 	{% block content %}{% endblock %}
 	{% cookielaw_banner %}
 	{% include 'partials/footer.html' %}
 	{% include 'partials/nav-offcanvas.html' with catalog=catalog %}
 	{% include 'partials/cart-offcanvas.html' %}
         {# Global javascript #}
-		<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit-icons.min.js"></script>
-        {% block extra_js %}
+	        {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
+	{% if request.user.is_authenticated%}
+	<script>
+	var addToCartButtons = document.querySelectorAll(".js-add-to-cart");
+
+	 Array.prototype.forEach.call(addToCartButtons, function (el) {
+	    el.onclick = function () {
+	      UIkit.offcanvas("#cart-offcanvas").show();
+	    };
+	  });
+	</script>
+	{% endif %}
     </body>
 </html>

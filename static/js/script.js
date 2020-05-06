@@ -1,4 +1,7 @@
-// Google Maps
+window.addEventListener("load", function () {
+  var loader = document.querySelector(".loader-wrapper");
+  if(loader) loader.style.display = "none";
+});
 
 function getCookie(name) {
   var cookieValue = null;
@@ -69,7 +72,7 @@ function remove(e) {
     "Content-Type",
     "application/x-www-form-urlencoded; charset=UTF-8"
   );
-  xhr.setRequestHeader("X-CSRFToken", csrftoken);
+xhr.setRequestHeader("X-CSRFToken", csrftoken);
   xhr.send("id=" + id);
 }
 
@@ -125,31 +128,33 @@ function remove_item(e) {
       xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
           var response = JSON.parse(xhr.responseText);
-          var badge = document.querySelector("#badge");
-          var listItems = document.querySelector("#listItems");
+          if (response.auth) {
+            var badge = document.querySelector("#badge");
+            var listItems = document.querySelector("#listItems");
 
-          badge.innerHTML = parseInt(badge.innerHTML) + 1;
-          if (response.existe) {
-            document.querySelector(`span[data-id="${id}"]`).innerHTML =
-              response.product[1];
-            var input = document.querySelector(`input[data-id="${id}"]`);
-            if (input) input.value = response.product[1];
+            badge.innerHTML = parseInt(badge.innerHTML) + 1;
+            if (response.existe) {
+              document.querySelector(`span[data-id="${id}"]`).innerHTML =
+                response.product[1];
+              var input = document.querySelector(`input[data-id="${id}"]`);
+              if (input) input.value = response.product[1];
 
-            var totalItem = document.querySelector(
-              `.totalItem[data-id="${id}"]`
-            );
-            if (totalItem) totalItem.innerHTML = response.totalItem;
+              var totalItem = document.querySelector(
+                `.totalItem[data-id="${id}"]`
+              );
+              if (totalItem) totalItem.innerHTML = response.totalItem;
 
-            var totalCart = document.querySelector("#totalCart");
-            if (totalCart) totalCart.innerHTML = response.total;
+              var totalCart = document.querySelector("#totalCart");
+              if (totalCart) totalCart.innerHTML = response.total;
 
-            var discount = document.querySelector("#discount");
-            if (discount) discount.innerHTML = response.discount;
-            var totalDiscount = document.querySelector("#totalDiscount");
-            if (totalDiscount) totalDiscount.innerHTML = response.totalDiscount;
-          }
-          if (!response.existe) {
-            var htmlItem = `
+              var discount = document.querySelector("#discount");
+              if (discount) discount.innerHTML = response.discount;
+              var totalDiscount = document.querySelector("#totalDiscount");
+              if (totalDiscount)
+                totalDiscount.innerHTML = response.totalDiscount;
+            }
+            if (!response.existe) {
+              var htmlItem = `
 					<li data-id="${id}" class="item uk-visible-toggle">
                 			<article >
                   			<div  class="uk-grid-small" uk-grid>
@@ -183,9 +188,13 @@ function remove_item(e) {
 					   </article>
 					</li>`;
 
-            listItems.innerHTML += htmlItem;
+              listItems.innerHTML += htmlItem;
+            }
+            document.querySelector("#totalPrice").innerHTML = response.total;
+          } else if (!response.auth) {
+            e.preventDefault();
+            UIkit.modal("#modal-signup").show();
           }
-          document.querySelector("#totalPrice").innerHTML = response.total;
         } else {
           console.log("The request failed!");
         }
@@ -299,56 +308,34 @@ function toggle(e) {
   }
 })();
 
+(function () {
+//  var addToCartButtons = document.querySelectorAll(".js-add-to-cart");
 
-(function() {
-  var addToCartButtons = document.querySelectorAll('.js-add-to-cart');
-
-  Array.prototype.forEach.call(addToCartButtons, function(el) {
-    el.onclick = function() {
-      UIkit.offcanvas('#cart-offcanvas').show();
-    };
-  });
- var sliderP = document.querySelector('#sliderP');
- if (sliderP){
-//	UIkit.slider("#sliderP", 'itemshow',function(){
-//		console.log("dddd")
-//	});
-	 var items = document.querySelectorAll('li.uk-active')
-	 setInterval(function(){
-	 	items.forEach(function(el){
-	 		el.classList.remove('uk-transition-active');
-	 	})
-		 
-	 },500)
- }
+// Array.prototype.forEach.call(addToCartButtons, function (el) {
+//    el.onclick = function () {
+//      UIkit.offcanvas("#cart-offcanvas").show();
+//    };
+//  });
+  var sliderP = document.querySelector("#sliderP");
+  if (sliderP) {
+    //	UIkit.slider("#sliderP", 'itemshow',function(){
+    //		console.log("dddd")
+    //	});
+    var items = document.querySelectorAll("li.uk-active");
+    setInterval(function () {
+      items.forEach(function (el) {
+        el.classList.remove("uk-transition-active");
+      });
+    }, 500);
+  }
 })();
 
-(function() {
-  var addToButtons = document.querySelectorAll('.js-add-to');
+(function () {
+  var addToButtons = document.querySelectorAll(".js-add-to");
 
-  Array.prototype.forEach.call(addToButtons, function(el) {
-    var link;
-    var message = '<span class="uk-margin-small-right" uk-icon=\'check\'></span>Added to '  ;
-    var links = {
-      favorites: '<a href="/favorites">favorites</a>',
-      compare: '<a href="/compare">compare</a>',
-    };
-    if(el.classList.contains('js-add-to-favorites')) {
-      link = links.favorites;
-    };
-    if(el.classList.contains('js-add-to-compare')) {
-      link = links.compare;
-    }
-    el.onclick = function() {
-      if(!this.classList.contains('js-added-to')) {
-        UIkit.notification({
-          message: message + link,
-          pos: 'bottom-right'
-        });
-      }
-      this.classList.toggle('tm-action-button-active');
-      this.classList.toggle('js-added-to');
-    };
+  Array.prototype.forEach.call(addToButtons, function (el) {
+    this.classList.toggle("tm-action-button-active");
+    this.classList.toggle("js-added-to");
   });
 })();
 

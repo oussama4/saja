@@ -1,3 +1,27 @@
+.loader-wrapper {
+        width:100%;
+        z-index:9999;
+        height:100%;
+        position: absolute;
+        top:0;
+        left:0;
+        background-color: rgb(100,100,100,0.1);
+}
+@keyframes saja-flash {
+        from {width:60px;height:30px;opacity:0.3}
+        to {width: 120px;height:65px;opacity:1;}
+}
+.modal-saja {
+        z-index: 9999;
+        width: 60px;
+        height:30px;      
+        animation-name: saja-flash;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-out;
+}
+
 @media only screen and (max-width:600px){
 	.sliderButton{
 		max-width: 120px;
@@ -10,6 +34,16 @@
 		width: 126px;
 		padding:0;
 
+	}
+	.subCat::-webkit-scrollbar {
+		display: none;
+	}
+	.subCat-item {
+		display:inline-table!important;
+	}
+	.subButton {
+		min-width:45vw!important;
+		font-size: .675rem;
 	}
 }
 @media only screen and (max-width:400px){
@@ -155,17 +189,16 @@ body {
 }
 .subCat-item {
 	display:inline;
-	width:140px;
 	margin:10px;
 }
-.subCat::-webkit-scrollbar {
-	display: none;
-}
+
 .subButton {
 	background: aliceblue;
 	border-radius: 18px;
   	margin: 0;
-	width:150px;
+	width: fit-content!important;
+    	min-width: 13vw;
+	max-width: 250px!important;
     	overflow: visible;
     	font: inherit;
     	color: black;
@@ -174,7 +207,7 @@ body {
     	box-sizing: border-box;
     	padding: 0 10px;
     	vertical-align: middle;
-    	font-size: .875rem;
+    	font-size: .8rem;
     	line-height: 38px;
     	text-align: center;
     	text-decoration: none;

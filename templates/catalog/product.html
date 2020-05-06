@@ -5,7 +5,7 @@
 
 <div class="uk-container">
   <div class="uk-margin-bottom uk-grid-medium uk-child-width-1-1 uk-grid" uk-grid>
-
+	  <div>
     <div class="uk-child-width-1-1" uk-grid>
       <!--Product-->
       <div>
@@ -101,18 +101,16 @@
                       <div>
                         <div class="uk-grid-small" uk-grid>
                           <!--Quantity-->
-			  <form method="post" action="/add_to_cart/" >
+			  <form method="post" action="/add_to_cart_p/" >
 				  {% csrf_token %}
                             
 				<input name="quantity" style="height:30px;font-size: 20px" min="1" max="9999" value="1" required 
-					class="uk-form-width-small" type="number" step="1">	
-                          
+				   class="uk-form-width-small" type="number" step="1">
                           <!--Add to cart button-->
-                          
 			    <button type="submit" value="{{product.pk}}" name="product"
-				    class="uk-button uk-margin-top badge uk-button-primary tm-product-add-button tm-shine js-add-to-cart">
-				    {% trans "ajouter au panier" %}</button>
-                          
+				    class="uk-button uk-margin-top badge uk-button-primary tm-product-add-button tm-shine">
+				    {% trans "ajouter au panier" %}
+			    </button> 
 			  </form>
                         </div>
                       </div>
@@ -158,6 +156,7 @@
 		</div>
 		<hr>
 	  {% include "partials/variants.html" with variants=variants %}
+    </div>
     </div>
   </div>
 </div>

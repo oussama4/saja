@@ -80,15 +80,15 @@ class Category(Page):
             #pagination
             paginator = Paginator(products, 9)
             page = request.GET.get("page")
-
+            productsP = None 
             try:
-                products = paginator.page(page)
+                productsP = paginator.page(page)
             except PageNotAnInteger:
-                products = paginator.page(1)
+                productsP = paginator.page(1)
             except EmptyPage:
-                products = paginator.page(paginator.num_pages)
+                productsP = paginator.page(paginator.num_pages)
 
-            context['products'] = products
+            context['products'] = productsP
             context['itemsSum'] = len(products)
             context['ancestors'] = self.get_ancestors(inclusive=True)[1:]
             context['categories'] = subCat

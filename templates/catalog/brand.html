@@ -18,7 +18,8 @@
 							{% for loop_cycle in brand.cimages %}
 							{% image loop_cycle.carousel_image original as img %}
 							<li class="uk-width-1-1">
-								<div class="uk-flex uk-position-absolute"uk-spinner="ratio:2" style="top:15vh;left42vw;z-index:-100"></div>
+						            <div class="uk-flex uk-position-absolute" style="top:16vh;left:43vw;z-index:0;" uk-spinner="ratio: 2"></div>
+
 								<img data-src="{{ img.url}}" alt="{{ img.alt}}" width="1800" height="600" uk-img uk-cover>
 							</li>
 							{% endfor %}
@@ -93,12 +94,9 @@
 											<div>
 												<div class=" tm-product-card-body" style="height:16vh;">
 													<div class="tm-product-card-info" style="max-height:6vh">
-														<div class="uk-card-title uk-text-meta uk-margin-xsmall-bottom">
-															<a href="{{ product.group_product.range.category.url }}">{{ product.group_product.range.category.title }}</a>
-														</div>
 														<h3 class="tm-product-card-title" style="margin:0;">
 															<a href="{% url 'product_detail' product.group_product.slug %}" class="uk-link-heading">
-																{{ product.group_product.title |slice:'35'}}
+																{{ product.group_product.display_title |slice:'35'}}
 															</a>
 														</h3>
 													</div>

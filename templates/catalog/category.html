@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="brandBack">
-<div style="height:45vh;"class="uk-child-width-1-2 catBorder uk-visible@m" uk-grid>
+<div style="height:45vh;"class="uk-child-width-1-2  catBorder uk-visible@m" uk-grid>
 	<div style="height:inherit;border-bottom:2px solid black;">
 		<div class="uk-flex uk-flex-top-center uk-position-absolute"uk-spinner="ratio: 3" style="z-index:-100"></div>
 		{% image page.image fill-700x400 as img%}
@@ -15,11 +15,11 @@
 	</div>
   
 </div>
-<div class="uk-container  uk-margin">
+<div class="uk-container">
 	<div class="uk-position-absolute uk-position-top-right" style="margin-right:10px;top:70px">
    {% include './breadcrumb.html'%}
    </div>
-   <h1 class="uk-margin-small-top uk-margin-remove-bottom uk-text-center" style="color:{{color}}">{{ self.title| title }}</h1>
+   <h1 class="uk-margin-small-top uk-margin-remove-bottom uk-padding uk-text-center" style="color:{{color}}">{{ self.title| title }}</h1>
    <p class="uk-text-center">{{ itemsSum}} {% trans 'Produit' %}</p>
 </div>
 
