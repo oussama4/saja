@@ -10,6 +10,7 @@
 } 
 .catBorder {
 	border-bottom: 8px solid #888781;
-}     
-
-
+}
+.modal-button {
+	background-color:  #888781!important;
+} 

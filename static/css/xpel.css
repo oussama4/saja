@@ -11,4 +11,6 @@
 .catBorder {
 	border-bottom: 8px solid #F9D02F;
 }     
-~          
+ .modal-button {
+	background-color:  #F9D02F!important;
+}          

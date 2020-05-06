@@ -12,57 +12,66 @@ from catalog.models import Product
 from .models import Cart, CartItem
 
 
-@login_required
+def add_to_cart_p(request):
+    if request.user.is_authenticated:
+        quantityF = request.POST.get('quantity')
+        productID = request.POST.get('product')
+        id = request.POST.get("id")
+        if productID and quantityF:
+            item = get_object_or_404(Product, pk=productID)
+            cart , created = Cart.objects.get_or_create(
+                    user = request.user,
+            )
+            cart_item, create = CartItem.objects.select_related('product').get_or_create(
+                    cart = cart,
+                    product = item,
+            )
+            if create and int(quantityF) > 0:
+                cart_item.quantity = int(quantityF)
+                cart_item.save()
+            elif not create and cart_item:
+                cart_item.quantity += int(quantityF)
+                cart_item.save()
+            return redirect('/cart')
+    else:
+        return redirect('/signup/')
+
 def add_to_cart(request):
-    quantityF = request.POST.get('quantity')
-    productID = request.POST.get('product')
-    id = request.POST.get("id")
-    if productID and quantityF:
-        item = get_object_or_404(Product, pk=productID)
-        cart , created = Cart.objects.get_or_create(
-                user = request.user,
-        )
-        cart_item, create = CartItem.objects.select_related('product').get_or_create(
+    if request.user.is_authenticated:
+        id = request.POST.get('id')
+        if request.method == "POST" and id :
+            item = get_object_or_404(Product, pk=id)
+            cart, created = Cart.objects.get_or_create(
+                    user = request.user,
+            )
+            cart_item, create = CartItem.objects.select_related('product').get_or_create(
                 cart = cart,
                 product = item,
-        )
-        if create and int(quantityF) > 0:
-            cart_item.quantity = int(quantityF)
-            cart_item.save()
-        elif not create and cart_item:
-            cart_item.quantity += int(quantityF)
-            cart_item.save()
-        return redirect('/cart')
-    elif request.method == "POST" and id :
-        item = get_object_or_404(Product, pk=id)
-        cart, created = Cart.objects.get_or_create(
-                user = request.user,
-        )
-        cart_item, create = CartItem.objects.select_related('product').get_or_create(
-            cart = cart,
-            product = item,
-        )
+            )
 
-        cartItems = {}
-        if not create:
-            cart_item.quantity = int(cart_item.quantity) + 1
-            cart_item.save()
-            cartItems['product'] = [str(cart_item.product.id), str(cart_item.quantity)]
-            cartItems['existe'] = True
-        if create:
-            try:
-                image =str(generate_image_url(cart_item.product.first_image.product_image,'fill-200x150'))
-            except AttributeError:
-                image = '/static/img/images.png'
+            cartItems = {}
+            if not create:
+                cart_item.quantity = int(cart_item.quantity) + 1
+                cart_item.save()
+                cartItems['product'] = [str(cart_item.product.id), str(cart_item.quantity)]
+                cartItems['existe'] = True
+            if create:
+                try:
+                    image =str(generate_image_url(cart_item.product.first_image.product_image,'fill-200x150'))
+                except AttributeError:
+                    image = '/static/img/images.png'
 
-            cartItems['product']= [cart_item.product.title, image, cart_item.product.price, cart_item.quantity]
-            cartItems['existe'] = False
+                cartItems['product']=[cart_item.product.title, image, cart_item.product.price, cart_item.quantity]
+                cartItems['existe'] = False
 
-        cartItems['total'] = cart.total_price
-        cartItems['totalItem'] = cart_item.total_price
-        cartItems['discount']  = cart.total_discount
-        cartItems['totalDiscount'] = cart.price_without_discount
-        return JsonResponse(cartItems)
+            cartItems['total'] = cart.total_price
+            cartItems['totalItem'] = cart_item.total_price
+            cartItems['discount']  = cart.total_discount
+            cartItems['auth'] = True 
+            cartItems['totalDiscount'] = cart.price_without_discount
+            return JsonResponse(cartItems)
+    else:
+        return JsonResponse({'auth':False})
 
 
 @login_required

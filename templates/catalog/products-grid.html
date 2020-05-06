@@ -87,24 +87,18 @@
 								</div>
 								<div class="tm-product-card-body ">
 									<div class="tm-product-card-info">
-										<div class="uk-text-meta uk-margin-xsmall-bottom">
-											<a class="uk-link-heading"
-												href="{% pageurl product.product_range.category %}">
-												{{ product.product_range.category.title }}
-											</a>
-										</div>
 										<h3 class="tm-product-card-title">
 											<a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
-												{{ product.title }}
+												{{ product.display_title }}
 											</a>
 										</h3>
 									</div>
 									<div class="tm-product-card-shop">
 										<div class="tm-product-card-prices">
 											{% if product.has_discount %}
-											<del class="uk-text-meta">{{ product.base_price}}DH</del>
+											<div><del class="uk-text-meta">{{ product.base_price}}DH</del></div>
 											{% endif %}
-											<div class="tm-product-card-price">{{ product.price}}</div>
+											<span class="badgeT tm-product-card-price">{{ product.price}}DH</span>
 										</div>
 										<div class="tm-product-card-add">
 											<button data-id="{{ product.pk }}"
