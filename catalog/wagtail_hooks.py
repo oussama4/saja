@@ -8,9 +8,11 @@ class ProductAdmin(ModelAdmin):
     menu_icon = 'placeholder'
     menu_order = 200
     add_to_settings_menu = False
-    list_display = ('title', 'price', 'created')
-    list_filter = ('has_discount', )
+    list_per_page = 50
+    list_display = ('title', 'brand', 'category', 'price', 'created')
+    list_filter = ('has_discount', 'product_range__brand', 'product_range__category')
     search_fields = ('title')
+    inspect_view_enabled = True
 
 modeladmin_register(ProductAdmin)
 

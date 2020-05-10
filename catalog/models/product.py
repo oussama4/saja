@@ -126,6 +126,8 @@ class ProductImages(Orderable):
     panels = [
             ImageChooserPanel("product_image")
     ]
+
+
 @register_model_chooser 
 class Product(ProductBase, index.Indexed, ClusterableModel):
     ref = models.CharField(
@@ -233,6 +235,14 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
             for a in self.attributes.all():
                 v += f' {a.value}'
         return v
+
+    @property
+    def brand(self):
+        return self.product_range.brand
+    
+    @property
+    def category(self):
+        return self.product_range.category
 
 
 class AttributeProduct(Orderable):
