@@ -128,9 +128,14 @@ class ProductImages(Orderable):
     ]
 @register_model_chooser 
 class Product(ProductBase, index.Indexed, ClusterableModel):
+    ref = models.CharField(
+            verbose_name=_("code de référence"),
+            max_length=50,
+            default=""
+    )
     features = StreamField(
             [
-                ("features", ListBlock(CharBlock(min_length=5, max_length=150)))
+                ("features", ListBlock(CharBlock(min_length=5, max_length=150), label=_("caractéristique")))
             ],
             verbose_name=_("caractéristique"),
             help_text=_("caractéristiques du produit"),
@@ -163,6 +168,7 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
     ]
 
     panels = ProductBase.panels + [
+            FieldPanel("ref"),
             StreamFieldPanel("features"),
             SnippetChooserPanel("product_range")
     ]
