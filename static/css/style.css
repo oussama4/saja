@@ -35,8 +35,10 @@
         animation-direction: alternate;
         animation-timing-function: ease-out;
 }
-
 @media only screen and (max-width:600px){
+	.tm-media-box {
+		padding:0!important;
+	}
 	.modal-saja {
 	top: 40vh!important;
 	left: 38vw;

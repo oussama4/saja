@@ -92,6 +92,11 @@
 												{{ product.display_title }}
 											</a>
 										</h3>
+										<ul class="check-list uk-list tm-product-card-properties">
+												{% for feature in product.features%}
+												{% include_block feature %}
+												{% endfor %}
+										</ul>
 									</div>
 									<div class="tm-product-card-shop">
 										<div class="tm-product-card-prices">
