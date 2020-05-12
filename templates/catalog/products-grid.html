@@ -58,13 +58,13 @@
 							uk-grid="uk-grid">
 							{% for product in products %}
 							{% image product.pimages.0.product_image original as img %}
-							<article class="tm-product-card" tabindex="0">
+							<article class="tm-product-card" >
 
 								<div class="tm-product-card-media uk-inline-clip uk-transition-tog">
 									<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 										<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
 											<figure class="tm-media-box-wrap">
-												<img data-src="{{img.url}}"  alt="{{img.alt}}&quot;"
+												<img data-src="{{img.url}}"  alt="{{img.alt}}&quot;" style="height:100%"
 													uk-img>
 											</figure>
 										</a>
@@ -85,7 +85,7 @@
 									</div>
 									</a>
 								</div>
-								<div class="tm-product-card-body ">
+								<div class="tm-product-card-body" style="height:140px!important">
 									<div class="tm-product-card-info">
 										<h3 class="tm-product-card-title">
 											<a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">

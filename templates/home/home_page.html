@@ -9,7 +9,7 @@
 <div style="background-color:white" >
 <div class="uk-position-relative">
 
-	<div uk-slideshow="animation: scale;max-height:700;autoplay:true" >
+	<div uk-slideshow="animation: scale;min-height:360;max-height:700;autoplay:true" >
 		<div class="uk-flex uk-position-absolute" style="top:16vh;left:43vw;z-index:0;" uk-spinner="ratio: 2"></div>
 		<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
 			<ul class="uk-slideshow-items ">
@@ -17,7 +17,7 @@
 				{% image i.carousel_image original as img %}
 				{% image i.logo original as logo %}
 				<li class="">
-					<img data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
+					<img style="height:100%!important" data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
 					<div id="top-left" class="sliderButton uk-position-top-left  uk-margin-left uk-text-justify uk-light">
 						<img heigth='70px' width='150px' data-src="{{ logo.url }}" alt="{{ logo.alt }}" uk-img>
 						<h2 style="color:black" class="uk-text-lead uk-margin-remove ">{{i.text}}</h2>

@@ -48,6 +48,7 @@
     <body class="{% block body_class %}{% endblock %}">
 	    {% catalog_menu as catalog %}
         {% if request.get_full_path|split != ""%}
+	{% include 'partials/toolbar.html' %}
         {% include 'partials/navbar_next.html' with catalog=catalog  %}
         {% endif %}
 	<div class="loader-wrapper">
@@ -62,7 +63,6 @@
         		</p>
     		</div>
 	</div>
-
 	{% block content %}{% endblock %}
 	{% cookielaw_banner %}
 	{% include 'partials/footer.html' %}

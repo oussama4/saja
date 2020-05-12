@@ -126,7 +126,7 @@
                           <span class="uk-margin-xsmall-right" uk-icon="icon: cart"></span>
                           <div>
                             <div class="uk-text-bolder">{% trans "Livraison" %}</div>
-                            <div class="uk-text-xsmall uk-text-muted">{% trans "Gratuit" %}</div>
+                            <div class="uk-text-xsmall uk-text-muted">{% trans "Gratuit a partir de 300DH" %}</div>
                           </div>
                         </div>
                       </div>
@@ -142,6 +142,14 @@
                       </div>
                     </div>
                   </div>
+			<p class="uk-text-lead"> Caractéristiqes:</p>
+				<ul class="check-list">
+				{% for feature in product.features%}
+					{% include_block feature %}
+				{% endfor %}
+				</ul>
+
+
                 </div>
               </div>
             </div>
