@@ -31,7 +31,7 @@ class ProductBase(models.Model):
     """ abstract model for shared fields between product models and ranges """
 
     title = models.CharField(verbose_name=_("Titre"), max_length=150)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=200)
     description = RichTextField(
             verbose_name=_("description"),
             null=True,
@@ -126,11 +126,18 @@ class ProductImages(Orderable):
     panels = [
             ImageChooserPanel("product_image")
     ]
+
+
 @register_model_chooser 
 class Product(ProductBase, index.Indexed, ClusterableModel):
+    ref = models.CharField(
+            verbose_name=_("code de référence"),
+            max_length=50,
+            default=""
+    )
     features = StreamField(
             [
-                ("features", ListBlock(CharBlock(min_length=5, max_length=150)))
+                ("features", ListBlock(CharBlock(min_length=5, max_length=150), label=_("caractéristique")))
             ],
             verbose_name=_("caractéristique"),
             help_text=_("caractéristiques du produit"),
@@ -163,6 +170,7 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
     ]
 
     panels = ProductBase.panels + [
+            FieldPanel("ref"),
             StreamFieldPanel("features"),
             SnippetChooserPanel("product_range")
     ]
@@ -227,6 +235,14 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
             for a in self.attributes.all():
                 v += f' {a.value}'
         return v
+
+    @property
+    def brand(self):
+        return self.product_range.brand
+    
+    @property
+    def category(self):
+        return self.product_range.category
 
 
 class AttributeProduct(Orderable):
