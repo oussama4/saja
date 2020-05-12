@@ -48,10 +48,11 @@
     <body class="{% block body_class %}{% endblock %}">
 	    {% catalog_menu as catalog %}
         {% if request.get_full_path|split != ""%}
+	{% include 'partials/toolbar.html' %}
         {% include 'partials/navbar_next.html' with catalog=catalog  %}
         {% endif %}
 	<div class="loader-wrapper">
-		<img src='{% static 'img/saja.png' %}' class="modal-saja uk-position-absolute uk-position-center">
+		<img src='{% static 'img/saja.png' %}' class="modal-saja uk-position-absolute ">
 	</div>
 	<div id="modal-signup" uk-modal>
     		<div class="uk-modal-dialog uk-modal-body">
@@ -62,7 +63,6 @@
         		</p>
     		</div>
 	</div>
-
 	{% block content %}{% endblock %}
 	{% cookielaw_banner %}
 	{% include 'partials/footer.html' %}

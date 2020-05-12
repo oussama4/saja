@@ -191,6 +191,10 @@ function remove_item(e) {
               listItems.innerHTML += htmlItem;
             }
             document.querySelector("#totalPrice").innerHTML = response.total;
+		var noProduct = document.querySelector('#no-product');
+		  if(noProduct){
+			  noProduct.style.display = 'none';
+		  }
           } else if (!response.auth) {
             e.preventDefault();
             UIkit.modal("#modal-signup").show();
