@@ -85,7 +85,7 @@
 									</div>
 									</a>
 								</div>
-								<div class="tm-product-card-body" style="height:140px!important">
+								<div class="tm-product-card-body" >
 									<div class="tm-product-card-info">
 										<h3 class="tm-product-card-title">
 											<a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
@@ -100,13 +100,11 @@
 											{% endif %}
 											<span class="badgeT tm-product-card-price">{{ product.price}}DH</span>
 										</div>
-										<div class="tm-product-card-add">
+										<div class="">
 											<button data-id="{{ product.pk }}"
-												class="uk-button badge add_to_cart uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
-												<span class="badge tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
-												<span
-													class=" badge tm-product-card-add-button-text">{% trans 'Ajouter au panier' %}
-												</span>
+												
+		   class=" badge tm-shine js-add-to-cart add_to_cart uk-button-primary ys-product-card-add-button"> <span>{% trans 'Ajouter au panier' %}</span><span class="uk-margin-left" uk-icon="cart"></span>
+												
 											</button>
 										</div>
 									</div>

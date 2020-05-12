@@ -17,12 +17,12 @@
 				{% image i.carousel_image original as img %}
 				{% image i.logo original as logo %}
 				<li class="">
-					<img style="height:100%!important" data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
+					<img style="height:100%!important;width:100%" data-src="{{ img.url }}" alt="{{ img.alt }}" uk-img>
 					<div id="top-left" class="sliderButton uk-position-top-left  uk-margin-left uk-text-justify uk-light">
 						<img heigth='70px' width='150px' data-src="{{ logo.url }}" alt="{{ logo.alt }}" uk-img>
 						<h2 style="color:black" class="uk-text-lead uk-margin-remove ">{{i.text}}</h2>
 						<a style="color:black" class="uk-button btn-three uk-text-bolder"
-							href="{% pageurl i.brand_page %}">{% trans 'Voir les produit' %}</a>
+							href="{% pageurl i.brand_page %}">{% trans 'Voir produits' %}</a>
 					</div>
 				</li>
 				{% endfor %}
