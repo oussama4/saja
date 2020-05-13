@@ -1,0 +1,42 @@
+{% load i18n %}
+
+<html>
+	<body>
+		<div>
+			<div style="display:flex; flex-direction:row;justify-content:space-between;">
+			<div style="display:inline-block">
+				{{ order.user }} <br>
+				{{ order.user.email }} <br>
+				{{ order.shipping_address|linebreaks }}
+			</div>
+			<div style="width: fit-content;right: 0;margin-right: 10px;">
+				<p style="font-size:1.3em;text-align:right;margin-bottom:5px;"> {{ order.payment_date|date:"d M Y" }} </p>
+				<p style="text-align:right;margin-top:5px"> {% trans "Facture #" %}{{ order.pk }} </p>
+			</div>
+			</div>
+			<table id="ys">
+				<thead>
+					<tr>
+						<th> {% trans "code de produit" %} </th>
+						<th> {% trans "titre de produit" %} </th>
+						<th> {% trans "quantite" %} </th>
+						<th> {% trans "total" %} </th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in order.items.all %}
+						<tr>
+							<td> {{ item.ref }} </td>
+							<td> {{ item.product.display_title }} </td>
+							<td> {{ item.quantity }} </td>
+							<td> {{ item.total_price }} DH </td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div style="margin:10px">
+				<div style="font-size:1.5em;text-align:right"> {% trans "Total: " %}{{ order.total_price }} </div>
+			</div>
+		</div>
+	</body>
+</html>

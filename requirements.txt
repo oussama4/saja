@@ -7,3 +7,4 @@ django-allauth==0.41.0
 django-colorfield==0.3.0
 wagtail-modelchooser==2.3.1
 django-anymail==7.1.0
+WeasyPrint==51
