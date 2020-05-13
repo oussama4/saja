@@ -1,48 +1,69 @@
 {% load i18n %}
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.4.6/css/uikit.min.css" integrity="sha256-NrXXCv7bVx/3rjuSMahH9Zw6T79FMW2zIOaZGEuJ1Lg=" crossorigin="anonymous" />
-		<title></title>
-	</head>
-	<body>
-		<div class="uk-container">
-			<div class="uk-align-left">
-				SAJA cosmetics SARL 
-				AU BMO BP N:6423
-				MEKNES MAROC
+{% comment %}
+	<style>
+	#ys {
+	  margin-top:50px;
+	  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+	#ys td, #ys th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+	#ys tr:nth-child(even){background-color: #f2f2f2;}
+	#ys tr:hover {background-color: #ddd;}
+	#ys th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #4CAF50;
+		color: white;
+	}
+	</style>
+	{% endcomment %}
+		<div>
+			<div style="display:flex; flex-direction:row;justify-content:space-between;">
+			<div style="display:inline-block">
+				SAJA cosmetics SARL <br>
+				AU BMO BP N:6423 <br>
+				MEKNES MAROC <br>
 			</div>
-			<div class="uk-align-right">
-				<p class="uk-text-lead uk-text-bold uk-margin-remove-bottom"> {{ order.payment_date|date:"d M Y" }} </p>
-				<p class="uk-text-lead uk-margin-remove-top"> {% trans "Facture #" %}{{ order.pk }} </p>
+			<div style="width: fit-content;right: 0;margin-right: 10px;">
+				<p style="font-size:1.3em;text-align:right;margin-bottom:5px;"> {{ order.payment_date|date:"d M Y" }} </p>
+				<p style="text-align:right;margin-top:5px"> {% trans "Facture #" %}{{ order.pk }} </p>
 			</div>
-			<table class="uk-table uk-table-small uk-table-divider">
+			</div>
+			<table style="margin-top:50px;font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;">
 				<thead>
 					<tr>
-						<th> {% trans "code de produit" %} </th>
-						<th> {% trans "titre de produit" %} </th>
-						<th> {% trans "quantite" %} </th>
-						<th> {% trans "total" %} </th>
+						<th style="padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color: white;">
+							{% trans "code de produit" %}
+						</th>
+						<th style="padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color    : white;">
+							{% trans "titre de produit" %} 
+						</th>
+						<th style="padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color    : white;">
+							{% trans "quantite" %}
+						</th>
+						<th style="padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color    : white;">
+							{% trans "total" %}
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for item in order.items.all %}
 						<tr>
-							<td> {{ item.ref }} </td>
-							<td> {{ item.product.display_title }} </td>
-							<td> {{ item.quantity }} </td>
-							<td> {{ item.total_price }} DH </td>
+							<td style="border: 1px solid #ddd;padding: 8px;"> {{ item.ref }} </td>
+							<td style="border: 1px solid #ddd;padding: 8px;"> {{ item.product.display_title }} </td>
+							<td style="border: 1px solid #ddd;padding: 8px;"> {{ item.quantity }} </td>
+							<td style="border: 1px solid #ddd;padding: 8px;"> {{ item.total_price }} DH </td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
-			<div class="uk-align-right uk-text-lead">
-				{% trans "Total: " %}{{ order.total_price }}
+			<div style="margin:10px">
+				<div style="font-size:1.5em;text-align:right"> {% trans "Total: " %}{{ order.total_price }} </div>
+				<div> {% trans "Merci pour votre achat!" %} </div>
 			</div>
 		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.4.6/js/uikit.min.js" integrity="sha256-zCB4dy+o6i0ndqM7p9QuCM9nBSzWa28Y3L01xgTWhBc=" crossorigin="anonymous"></script>
-	</body>
-</html>
