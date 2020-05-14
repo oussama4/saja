@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'search',
     'tools',
     'checkout',
-    'cookielaw',
+    
     'widget_tweaks',
     'colorfield',
     'wagtailmodelchooser',

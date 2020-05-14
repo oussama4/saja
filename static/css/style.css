@@ -1,17 +1,31 @@
+.ys-product-card-add-button {
+	height: 35px;
+	padding: 0 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: medium;
+
+}
+#breadcrumb {
+	margin-right:15px;
+	top:110px;
+}
 .loader-wrapper {
         width:100%;
         z-index:9999;
-        height:100%;
+        height:1000vh;
         position: absolute;
         top:0;
         left:0;
-        background-color: rgb(100,100,100,0.1);
+        background-color: rgb(100,100,100,0.25);
 }
 @keyframes saja-flash {
         from {width:60px;height:30px;opacity:0.3}
         to {width: 120px;height:65px;opacity:1;}
 }
 .modal-saja {
+	top: 45vh!important;
+	left: 45vw;
         z-index: 9999;
         width: 60px;
         height:30px;      
@@ -21,8 +35,32 @@
         animation-direction: alternate;
         animation-timing-function: ease-out;
 }
-
 @media only screen and (max-width:600px){
+	.tm-media-box {
+		padding:0!important;
+	}
+	.modal-saja {
+	top: 40vh!important;
+	left: 38vw;
+	}
+	.tm-product-card-body {
+		height:200px!important;
+	}
+	.tm-product-card-shop {
+		display: block!important;
+		height: 200px!important;
+	}
+	.tm-product-card-shop>div{
+		position: relative;
+		bottom:-70px
+	}
+	#breadcrumb {
+		margin-right:15px;
+		top:70px;
+	}	
+	.brand-slider-image {
+		width:100vw!important;
+	}
 	.sliderButton{
 		max-width: 120px;
 		max-height: 100px;
@@ -117,7 +155,7 @@ input[type="number"].uk-form-width-small::-webkit-inner-spin-button {
 }
 @keyframes toglingM {
     from {top:100vh;opacity:0;}
-    to {top: 5vh;opacity:1;  }
+    to {top: 8vh;opacity:1;  }
 }
 
 .btn-three {
