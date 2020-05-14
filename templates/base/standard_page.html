@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="uk-container uk-margin-top">
+	<div class="uk-text-lead uk-text-center">
+	    {{ self.intro }}
+	</div>
+
+	{% for block in page.body %}
+	    {% include_block block %}
+	{% endfor %}
+    </div>
+{% endblock %}
