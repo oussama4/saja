@@ -21,7 +21,6 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'', include('allauth.urls')),
     url(r'', include('checkout.urls',namespace='checkout')),
-
     url(r'^search/$', search_views.search, name='search'),
     # url(r'^signup/$', users_views.SignUp.as_view(), name='signup'),
     # url(r'^login/$', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
