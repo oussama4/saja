@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404 
+from django.http import JsonResponse 
 import random
 
 from anymail.message import AnymailMessage
@@ -96,9 +97,6 @@ class HomePage(RoutablePageMixin, Page):
 
     def get_context(self, request):
 
-        def random_digits():
-            return "%0.12d" % random.randint(0, 999999999999)
-
         context = super().get_context(request)
         prefetch = models.Prefetch(
                 'carousel_images',
@@ -106,13 +104,21 @@ class HomePage(RoutablePageMixin, Page):
                 to_attr='cimages'
         )
 
+        context['form'] = EmailForm()
+        context['home'] = HomePage.objects.prefetch_related(prefetch).live().public().get()
+        return context
 
-        if request.method == "POST":
+    @route(r'^send/$')
+    def sendEmail(self, request):
+        def random_digits():
+            return "%0.12d" % random.randint(0, 999999999999)
+        message = ""
+        if request.method == "POST" :
             form = EmailForm(request.POST)
             if form.is_valid():
                 try:
                     sub = EmailSubscriber.objects.get(email = request.POST['email'])
-                    context['message'] = 'not good'
+                    message = 'email already existe'
                 except ObjectDoesNotExist:
                     sub = EmailSubscriber(email=request.POST['email'],conf_num =random_digits())
                     sub.save()
@@ -120,40 +126,16 @@ class HomePage(RoutablePageMixin, Page):
                             subject='Newsletter confirmation',
                             to = [sub.email],
                     )
-                    message.attach_alternative(f"<a href='{request.build_absolute_uri('/confirm/')}?email={sub.email}&conf_num={sub.conf_num}'>click here html</a>",'text/html')
+                    message.attach_alternative(f"confirm your subscribtion by entering<a href='{request.build_absolute_uri('/confirm/')}?email={sub.email}&conf_num={sub.conf_num}'>this link</a>",'text/html')
                     message.send()
-                    context['message'] = 'sent'
-
-
-        context['form'] = EmailForm()
-        context['home'] = HomePage.objects.prefetch_related(prefetch).live().public().get()
-        return context
-    @route(r'^confirm/$')
-    def confirm(self,request, *args, **kwargs):
-        context = self.get_context(request, *args, **kwargs)
-        sub = get_object_or_404(EmailSubscriber, email = request.GET['email'])
-        if sub.conf_num == request.GET['conf_num']:
-            sub.confirmed = True
-            sub.save()
-            context['message'] = 'confirmed'
-        else:
-            context['message'] = 'not confirmed'
-        return render(request, 'home/home_page.html',context)
-
-    @route(r'^delete/$')
-    def delete(self, request, *args, **kwargs):
-        context = self.get_context(request, *args, **kwargs)
-        sub = get_object_or_404(EmailSubscriber, email= request.GET['email'])
-        if sub.conf_num == request.GET['conf_num']:
-            sub.delete()
-            context['message'] = 'deleted'
-        else:
-            context['message'] = 'not deleted'
-        return render(request, 'home/home_page.html',context)
-
-    def get_admin_display_title(self):
-        return _("Accueil")
-
+                    message = 'has sent'
+            else:
+                message = 'email not valid'
+            return JsonResponse({"message":message})
+        
+        def get_admin_display_title(self):
+            return _("Accueil")
+   
 class MenuItem(Orderable):
     link_title = models.CharField(
             verbose_name=_("titre"),

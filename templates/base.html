@@ -1,5 +1,6 @@
 {% load static i18n wagtailuserbar menu_tags account %}
 {% load cookielaw_tags %}
+{% with fpath=request.get_full_path %}
 <!DOCTYPE html>
 <html class="no-js" lang="fr">
     <head>
@@ -21,16 +22,16 @@
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
 	<link rel="icon" type="image/png" href="{% static 'img/saja.png'%}" />
         {# Global stylesheets #}
-	{% if  request.get_full_path|split == "xpel" %}
+	{% if  fpath|split == "xpel" %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/xpel.css' %}">
 	{% endif %}
-	{% if  request.get_full_path|split == "drammock" %}
+	{% if  fpath|split == "drammock" %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/drammock.css' %}">
 	{% endif %}
-	{% if  request.get_full_path|split == "roqvel" %}
+	{% if  fpath|split == "roqvel" %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/roqvel.css' %}">
 	{% endif %}
-	{% if  request.get_full_path|split == "healthpoint" %}
+	{% if  fpath|split == "healthpoint" %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/healthpoint.css' %}">
 	{% endif %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> 
@@ -46,8 +47,8 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-	    {% catalog_menu as catalog %}
-        {% if request.get_full_path|split != ""%}
+	{% catalog_menu as catalog %}
+        {% if fpath|split != "" and fpath|split != "confirm" and fpath|split != "delete" %}
 	{% include 'partials/toolbar.html' %}
         {% include 'partials/navbar_next.html' with catalog=catalog  %}
         {% endif %}
@@ -84,4 +85,5 @@
 	</script>
 	{% endif %}
     </body>
+    {% endwith %}
 </html>

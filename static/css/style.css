@@ -36,6 +36,12 @@
         animation-timing-function: ease-out;
 }
 @media only screen and (max-width:600px){
+	.ys-product-card-add-button{
+		padding: 5px 4px;
+	}
+	.tm-product-card-price {
+	     font-size: 15px;
+	}
 	.tm-media-box {
 		padding:0!important;
 	}
@@ -43,12 +49,16 @@
 	top: 40vh!important;
 	left: 38vw;
 	}
+	.tm-product-card-media {
+		width: 45%!important;
+	}
 	.tm-product-card-body {
 		height:200px!important;
 	}
 	.tm-product-card-shop {
 		display: block!important;
-		height: 200px!important;
+		position: relative!important;
+   		bottom: 40%;
 	}
 	.tm-product-card-shop>div{
 		position: relative;
@@ -80,8 +90,8 @@
 		display:inline-table!important;
 	}
 	.subButton {
-		min-width:45vw!important;
-		font-size: .675rem;
+		min-width:35vw!important;
+		font-size: .670rem;
 	}
 }
 @media only screen and (max-width:400px){
@@ -220,14 +230,18 @@ body {
 }
 
 .subCat {
-	display:block;
-	margin:3%;
-	width:100vw;
-	overflow:auto;
+	display: block;
+	margin: 3%;
+	width: max-content;
 }
+.subCa {
+	overflow-x : auto;
+	width: 94vw;	
+}
+
 .subCat-item {
-	display:inline;
-	margin:10px;
+	display: inline;
+	margin: 10px;
 }
 
 .subButton {
@@ -236,8 +250,8 @@ body {
   	margin: 0;
 	width: fit-content!important;
     	min-width: 13vw;
-	max-width: 250px!important;
-    	overflow: visible;
+	max-width: max-content!important;
+    	overflow: hidden;
     	font: inherit;
     	color: black;
     	display: inline-block;
@@ -7730,13 +7744,14 @@ iframe.uk-cover {
 
 @media (min-width:640px) {
     .tm-product-card-media>.tm-ratio>.tm-media-box {
-        padding: 20px
+        padding: 5px
     }
 }
 
 @media (min-width:768px) {
     .tm-product-card-media {
-        width: 100%
+        width: 100%;
+	height: 43vh;
     }
 }
 
@@ -7762,7 +7777,7 @@ iframe.uk-cover {
 
 @media (min-width:768px) {
     .tm-product-card-body {
-        padding: 0 20px 20px
+        padding: 0 8px 20px
     }
 }
 
@@ -7815,7 +7830,7 @@ iframe.uk-cover {
 
 .tm-product-card-price {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1
 }
 

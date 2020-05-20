@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import new, confirm 
+from .views import new, confirm, delete  
 
 
 urlpatterns = [
-    path('new/', new, name = 'new'),
-    path('confirm/', confirm, name = 'confirm'),
+    path('confirm/', confirm, name = 'confirmEmail'),
+    path('delete/', delete, name = 'deleteEmail'),
 ]

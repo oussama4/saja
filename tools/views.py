@@ -37,6 +37,30 @@ def new(request):
 
     return render(request,'home/home_page.html')
 
+
+def confirm(request):
+    message = ''
+    sub = get_object_or_404(EmailSubscriber, email = request.GET['email'])
+    if sub.conf_num == request.GET['conf_num']:
+        sub.confirmed = True
+        sub.save()
+        message = 'Your email has been confirmed ! And you are welcome to sajacosmetics newsletter from now on you\'ll be notified to see all our offers and news stay tuned '
+    else:
+        message = 'not confirmed'
+    return render(request, 'partials/emailText.html', {'message':message})
+
+def delete(request):
+    message = ''
+    sub = get_object_or_404(EmailSubscriber, email= request.GET['email'])
+    if sub.conf_num == request.GET['conf_num']:
+        sub.delete()
+        message = 'Your email has been deleted! You want be able to receive our news from now on. Thank you'
+    else:
+        message = 'not deleted'
+    return render(request, 'partials/emailText.html', {'message':message})
+
+
+'''
 def confirm(request):
     sub = get_object_or_404(EmailSubscriber, email = request.GET['email'])
     if sub.conf_num == request.GET['conf_num']:
@@ -49,3 +73,5 @@ def delete(request):
     sub = get_object_or_404(EmailSubscriber, email = request.GET['email'])
     if sub.conf_num == request.GET['conf_num']:
         pass
+'''
+
