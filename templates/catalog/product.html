@@ -117,6 +117,14 @@
                     </div>
                   </div>
                 </div>
+
+
+		<div>
+		
+	  		{% include "partials/variants.html" with variants=variants %}
+		</div>
+
+
                 <div class="uk-margin">
                   <div class="uk-padding-small uk-background-muted uk-border-rounded">
                     <div class="uk-grid-small uk-child-width-1-1 uk-text-small" uk-grid>
@@ -163,7 +171,6 @@
 		  <p> {{ product.description|richtext }} </p>
 		</div>
 		<hr>
-	  {% include "partials/variants.html" with variants=variants %}
     </div>
     </div>
   </div>

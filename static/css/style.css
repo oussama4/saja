@@ -1,7 +1,7 @@
 .ys-product-card-add-button {
 	height: 35px;
 	padding: 0 10px;
-	border-radius: 4px;
+	;border-radius: 4px;
 	cursor: pointer;
 	font-size: medium;
 
@@ -36,6 +36,10 @@
         animation-timing-function: ease-out;
 }
 @media only screen and (max-width:600px){
+	.spinner {
+		top:20vh!important;
+		left:42vw!important;
+	}
 	.ys-product-card-add-button{
 		padding: 5px 4px;
 	}
@@ -46,8 +50,8 @@
 		padding:0!important;
 	}
 	.modal-saja {
-	top: 40vh!important;
-	left: 38vw;
+		top: 40vh!important;
+		left: 38vw;
 	}
 	.tm-product-card-media {
 		width: 45%!important;
