@@ -99,7 +99,7 @@
 										</ul>
 									</div>
 									<div class="tm-product-card-shop">
-										<div class="tm-product-card-prices">
+										<div class="tm-product-card-prices uk-margin-small-left">
 											{% if product.has_discount %}
 											<div><del class="uk-text-meta">{{ product.base_price}}DH</del></div>
 											{% endif %}
@@ -108,7 +108,7 @@
 										<div class="">
 											<button data-id="{{ product.pk }}"
 												
-		   class=" badge tm-shine js-add-to-cart add_to_cart uk-button-primary ys-product-card-add-button"> <span>{% trans 'Ajouter au panier' %}</span><span class="uk-margin-left" uk-icon="cart"></span>
+		   class=" badge tm-shine js-add-to-cart add_to_cart uk-button-primary ys-product-card-add-button"> <span>{% trans 'Ajouter au panier' %}</span><span class="uk-margin-small-left" uk-icon="cart"></span>
 												
 											</button>
 										</div>

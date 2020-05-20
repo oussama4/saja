@@ -9,8 +9,8 @@
 <div style="background-color:white" >
 <div class="uk-position-relative">
 
-	<div uk-slideshow="animation: scale;min-height:360;max-height:700;autoplay:true" >
-		<div class="uk-flex uk-position-absolute" style="top:16vh;left:43vw;z-index:0;" uk-spinner="ratio: 2"></div>
+	<div uk-slideshow="animation: scale;min-height:360;max-height:700;autoplay:true;pause-on-hover:false;autoplay-interval:4000" >
+		<div class="uk-flex uk-position-absolute spinner" style="top:45vh;left:47vw;z-index:0;" uk-spinner="ratio: 2"></div>
 		<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
 			<ul class="uk-slideshow-items ">
 				{% for i in home.cimages %}

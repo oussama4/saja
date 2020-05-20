@@ -13,11 +13,17 @@ ALLOWED_HOSTS = ['*']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # debug_toolbar
-INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar','django_extensions']
+INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar','django_extensions','anymail']
 MIDDLEWARE = MIDDLEWARE + [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 INTERNAL_IPS = ("127.0.0.1", )
+ANYMAIL = {
+    "MAILGUN_API_KEY": config.get('MAILGUN_API_KEY'),
+    "MAILGUN_SENDER_DOMAIN": 'mail.sajacosmetics.com',
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
 
 
 try:

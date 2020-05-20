@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 from wagtail.images.models import Image
 from wagtail.images.views.serve import generate_image_url
@@ -11,7 +12,7 @@ from wagtail.images.views.serve import generate_image_url
 from catalog.models import Product
 from .models import Cart, CartItem
 
-
+@csrf_protect 
 def add_to_cart_p(request):
     if request.user.is_authenticated:
         quantityF = request.POST.get('quantity')
@@ -36,6 +37,7 @@ def add_to_cart_p(request):
     else:
         return redirect('/signup/')
 
+@csrf_protect 
 def add_to_cart(request):
     if request.user.is_authenticated:
         id = request.POST.get('id')
@@ -73,7 +75,7 @@ def add_to_cart(request):
     else:
         return JsonResponse({'auth':False})
 
-
+@csrf_protect 
 @login_required
 def remove_from_cart(request):
     if request.method == "POST":
@@ -94,7 +96,7 @@ def remove_from_cart(request):
         itemDelete['discount']  = cart.total_discount 
         itemDelete['totalDiscount'] = cart.price_without_discount 
         return JsonResponse(itemDelete)
-
+@csrf_protect 
 @login_required
 def remove_item_from_cart(request):
     if request.method == "POST":

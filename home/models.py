@@ -1,5 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, get_object_or_404 
+from django.http import JsonResponse 
+import random
+
+from anymail.message import AnymailMessage
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -15,8 +21,11 @@ from wagtail.admin.edit_handlers import (
         PageChooserPanel,
 )
 from wagtail.snippets.models import register_snippet
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route 
 from catalog.models.brand import Brand 
 from home import blocks
+from tools.models import EmailSubscriber 
+from tools.forms import EmailForm 
 
 class CarouselImages(Orderable):
     page = ParentalKey("home.HomePage", related_name="carousel_images")
@@ -56,7 +65,7 @@ class CarouselImages(Orderable):
     ]
 
 
-class HomePage(Page):
+class HomePage(RoutablePageMixin, Page):
     template = 'home/home_page.html'
     max_count = 1
 
@@ -85,19 +94,48 @@ class HomePage(Page):
         verbose_name = _("page d'accueil")
         verbose_name_plural = _("pages d'accueil")
 
+
     def get_context(self, request):
+
         context = super().get_context(request)
         prefetch = models.Prefetch(
                 'carousel_images',
                 queryset=CarouselImages.objects.select_related('carousel_image', 'brand_page', 'logo'),
                 to_attr='cimages'
         )
+
+        context['form'] = EmailForm()
         context['home'] = HomePage.objects.prefetch_related(prefetch).live().public().get()
         return context
 
-    def get_admin_display_title(self):
-        return _("Accueil")
-
+    @route(r'^send/$')
+    def sendEmail(self, request):
+        def random_digits():
+            return "%0.12d" % random.randint(0, 999999999999)
+        message = ""
+        if request.method == "POST" :
+            form = EmailForm(request.POST)
+            if form.is_valid():
+                try:
+                    sub = EmailSubscriber.objects.get(email = request.POST['email'])
+                    message = 'email already existe'
+                except ObjectDoesNotExist:
+                    sub = EmailSubscriber(email=request.POST['email'],conf_num =random_digits())
+                    sub.save()
+                    message = AnymailMessage(
+                            subject='Newsletter confirmation',
+                            to = [sub.email],
+                    )
+                    message.attach_alternative(f"confirm your subscribtion by entering<a href='{request.build_absolute_uri('/confirm/')}?email={sub.email}&conf_num={sub.conf_num}'>this link</a>",'text/html')
+                    message.send()
+                    message = 'has sent'
+            else:
+                message = 'email not valid'
+            return JsonResponse({"message":message})
+        
+        def get_admin_display_title(self):
+            return _("Accueil")
+   
 class MenuItem(Orderable):
     link_title = models.CharField(
             verbose_name=_("titre"),

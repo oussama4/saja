@@ -13,7 +13,7 @@
 					{% for loop_cycle in brand.cimages %}
 					{% image loop_cycle.carousel_image original as img %}
 					<li class="uk-width-1-1">
-						<div class="uk-flex uk-position-absolute" style="top:16vh;left:43vw;z-index:0;"
+						<div class="uk-flex spinner uk-position-absolute" style="top:40vh;left:45vw;z-index:0;"
 							uk-spinner="ratio: 2"></div>
 
 						<img class="brand-slider-image" data-src="{{ img.url}}" alt="{{ img.alt}}"  uk-img uk-cover>
@@ -38,12 +38,12 @@
 			</div>
 			{% endwith %}
 			<div class="subCat">
-				<div class="uk-flex uk-flex-left">
+				<div class="subCa uk-flex uk-flex-left">
 					{% if categories %}
 					{% for sub in categories %}
-					<div class="subCat-item" style="max-width:21vw">
+					<div class="subCat-item" style="max-width:max-content">
 						<a style="border:2px solid {{sub.color}};
-							 box-shadow: 2px 1px 4px 1px {{sub.color}}; width:fit-content!important" href="{% pageurl sub %}"
+							 box-shadow: 2px 1px 4px 1px {{sub.color}}; width:max-content!important" href="{% pageurl sub %}"
 							class="subButton">{{sub.title}}</a>
 					</div>
 					{% endfor %}
