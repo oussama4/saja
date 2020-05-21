@@ -20,7 +20,8 @@
 						{% for pcat in brand.children %}
 							<div>
 								<ul class="uk-nav uk-navbar-dropdown-nav">
-									<li class="uk-active uk-nav-header">
+
+									<li  style="--tooltip-color:{{pcat.color}};"  class="uk-padding-small cat-color uk-active uk-nav-header">
 										<a href="{{ pcat.url }}"> {{ pcat.title }} </a>
 									</li>
 									<li class="uk-nav-divider"></li>

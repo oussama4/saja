@@ -3,7 +3,7 @@ from django import template
 from wagtail.core.models import Page
 
 from ..models import Menu
-
+from catalog.models import Category
 register = template.Library()
 
 
@@ -17,10 +17,12 @@ def catalog_menu():
     dump = Page.dump_bulk()
     brands = dump[0]['children'][0]['children']
     menu = []
+    ids = []
     for b in brands:
         d = {'title': b['data']['title'], 'url': reshape_url(b['data']['url_path']), 'children': []}
         for c1 in b.get('children', []):
-            d2 = {'title': c1['data']['title'], 'url': reshape_url(c1['data']['url_path']), 'children': []}
+            ids.append( c1['id'])
+            d2 = {'title': c1['data']['title'], 'url': reshape_url(c1['data']['url_path']), 'children': [],'id':c1['id']}
             for c2 in c1.get('children', []):
                 if c2['data']['show_in_menus']:
                     d3 = {'title': c2['data']['title'], 'url': reshape_url(c2['data']['url_path']), 'children': []}
@@ -28,6 +30,12 @@ def catalog_menu():
             d['children'].append(d2)
         menu.append(d)
 
+    categorys = Category.objects.filter(pk__in=ids)
+    for item in menu:
+        for i in item.get('children',[]):
+            for c in categorys:
+                if c.pk == i['id']:
+                    i['color'] = c.color
     return menu
 
 

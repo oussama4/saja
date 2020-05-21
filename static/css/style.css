@@ -1,3 +1,21 @@
+.cat-color {
+  background:
+     linear-gradient(
+       to bottom, var(--tooltip-color) 0%,
+      var(--tooltip-color) 100%
+     );
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    background-size: 4px 4px;
+  color: #000;
+  text-decoration: none;
+  transition: background-size .2s;
+}
+
+
+.cat-color:hover{
+	background-size: 4px 50px;
+}
 .ys-product-card-add-button {
 	height: 35px;
 	padding: 0 10px;

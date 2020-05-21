@@ -44,9 +44,9 @@ def confirm(request):
     if sub.conf_num == request.GET['conf_num']:
         sub.confirmed = True
         sub.save()
-        message = 'Your email has been confirmed ! And you are welcome to sajacosmetics newsletter from now on you\'ll be notified to see all our offers and news stay tuned '
+        message = 'Votre email a été confirmé! Et vous êtes désormais les bienvenus à la newsletter de saja cosmetics, vous serez averti pour voir toutes nos offres et actualités. '
     else:
-        message = 'not confirmed'
+        message = 'votre email n\'est pas encore confirmé. Veuillez réessayer'
     return render(request, 'partials/emailText.html', {'message':message})
 
 def delete(request):
@@ -54,9 +54,9 @@ def delete(request):
     sub = get_object_or_404(EmailSubscriber, email= request.GET['email'])
     if sub.conf_num == request.GET['conf_num']:
         sub.delete()
-        message = 'Your email has been deleted! You want be able to receive our news from now on. Thank you'
+        message = 'Votre email a été supprimé! Vous souhaitez désormais pouvoir recevoir nos actualités. Nous vous remercie'
     else:
-        message = 'not deleted'
+        message = 'votre email n\'est pas encore supprimé. Veuillez réessayer'
     return render(request, 'partials/emailText.html', {'message':message})
 
 
