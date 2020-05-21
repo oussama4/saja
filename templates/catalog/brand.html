@@ -56,7 +56,7 @@
 				<div class="uk-text-capitalize uk-text-center">
 					<p class="title">{{ brand.group_title }}</p>
 				</div>
-				<div id="sliderP" class="uk-container" uk-slider="cente:false;pause-on-hover: true">
+				<div id="sliderP" class="uk-container" uk-slider="autoplay-interval:4000;autoplay:true;cente:false;pause-on-hover: true">
 					<div class="uk-position-relative uk-visible-toggle uk-drak" tabindex="-1">
 						<ul class="uk-slider-items uk-child-width-1-4@m uk-grid">
 							{% for product in brand.gproduct %}

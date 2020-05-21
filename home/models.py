@@ -118,7 +118,7 @@ class HomePage(RoutablePageMixin, Page):
             if form.is_valid():
                 try:
                     sub = EmailSubscriber.objects.get(email = request.POST['email'])
-                    message = 'email already existe'
+                    message = f'{sub.email} existe déjà'
                 except ObjectDoesNotExist:
                     sub = EmailSubscriber(email=request.POST['email'],conf_num =random_digits())
                     sub.save()
@@ -128,9 +128,9 @@ class HomePage(RoutablePageMixin, Page):
                     )
                     message.attach_alternative(f"confirm your subscribtion by entering<a href='{request.build_absolute_uri('/confirm/')}?email={sub.email}&conf_num={sub.conf_num}'>this link</a>",'text/html')
                     message.send()
-                    message = 'has sent'
+                    message = f'Nous vous avons envoyé un e-mail de confirmation à {sub.email}'
             else:
-                message = 'email not valid'
+                message = 'Entrer un email valide'
             return JsonResponse({"message":message})
         
         def get_admin_display_title(self):
