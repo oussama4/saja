@@ -11,10 +11,9 @@
   text-decoration: none;
   transition: background-size .2s;
 }
-
-
 .cat-color:hover{
 	background-size: 4px 50px;
+	cursor: pointer;
 }
 .ys-product-card-add-button {
 	height: 35px;

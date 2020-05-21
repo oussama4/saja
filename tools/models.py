@@ -122,7 +122,7 @@ class Newsletter(models.Model):
                     subject = self.subject,
                     to = [sub.email],
                 )
-            content = contents+ f'<br><a href="{request.build_absolute_uri("/delete/")}?email={sub.email}&conf_num={sub.conf_num}">Unsubscribe</a>'
+            content = contents+ f'<br><a href="{request.build_absolute_uri("/delete/")}?email={sub.email}&conf_num={sub.conf_num}">Se désabonner</a>'
             message.attach_alternative(content,'text/html')
             message.send()
 

@@ -24,6 +24,7 @@ ANYMAIL = {
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
+SAJA_EMAIL = 'safae@sajacosmetics.com'
 
 # logging
 LOGGING = {

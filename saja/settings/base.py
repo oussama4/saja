@@ -28,13 +28,14 @@ with open('/etc/saja/config.json') as config_file:
 # Application definition
 
 INSTALLED_APPS = [
+    'base',
     'users',
     'home',
     'catalog',
     'search',
     'tools',
     'checkout',
-    'cookielaw',
+    
     'widget_tweaks',
     'colorfield',
     'wagtailmodelchooser',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.styleguide',
     
     'wagtail.contrib.settings',
     'wagtail.contrib.routable_page',

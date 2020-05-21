@@ -35,13 +35,14 @@ function getCookie(name) {
 
 function sendEmail(){
 	var xhr = new XMLHttpRequest();
-	var email = document.querySelector('#email').value;
+	var email = document.querySelector('#email');
 	xhr.onload = function (){
 		if(xhr.status>=200 && xhr.status < 300){
 			var response = JSON.parse(xhr.responseText);;
 			if(response.message){
-				console.log(response.message);
-				UIkit.modal.alert(response.message);
+				UIkit.modal.alert(response.message).then(function(){
+					email.value='';
+				});
 			}
 		}else{console.log('the request failed')}
 
@@ -53,7 +54,7 @@ function sendEmail(){
     	"application/x-www-form-urlencoded; charset=UTF-8"
  	);
   	xhr.setRequestHeader("X-CSRFToken", csrftoken);
-  	xhr.send("email="+email);
+  	xhr.send("email="+email.value);
 }
 
 
