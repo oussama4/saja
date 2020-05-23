@@ -13,6 +13,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 from users import views as users_views
 from catalog import views as catalog_views
+from checkout import views as checkout_views
 
 urlpatterns = [
     url(r'^django-codylia-2020/', admin.site.urls),
