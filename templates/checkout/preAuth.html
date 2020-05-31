@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+	<form method="post" id='preAuthForm' action="https://testpayment.cmi.co.ma/fim/est3Dgate">
+		{% for k, v in attrs.items %}
+			<input type="hidden" name="{{k}}" value="{{v}}"> 
+		{% endfor %}
+	</form>
+	<script>
+		window.addEventListener('load', function(event){
+			document.querySelector('#preAuthForm').submit()
+		})
+	</script>
+{% endblock content %}
