@@ -48,7 +48,7 @@
 
     <body class="{% block body_class %}{% endblock %}">
 	{% catalog_menu as catalog %}
-        {% if fpath|split != "" and fpath|split != "confirm" and fpath|split != "delete" %}
+        {% if fpath|split != "" %}
 	{% include 'partials/toolbar.html' %}
         {% include 'partials/navbar_next.html' with catalog=catalog  %}
         {% endif %}
@@ -57,7 +57,7 @@
 	</div>
 	<div id="modal-signup" uk-modal>
     		<div class="uk-modal-dialog uk-modal-body">
-			<p>{% trans 'veuillez vous inscrire avec nous, afin que vous puissiez ajouter des produits. à votre panier si tu deja un compte click ici' %} <a href="{% url 'account_login' %}">se connecter</a>.</p>
+			<p>{% trans 'veuillez vous inscrire avec nous, afin que vous puissiez ajouter des produits à votre panier. si vous avez deja un compte click ici' %} <a href="{% url 'account_login' %}">se connecter</a>.</p>
         		<p class="uk-text-right">
             			<button class="uk-button uk-button-default uk-modal-close" type="button">Non, Merci</button>
 				<a href="{% url 'account_signup' %}"class="modal-button uk-button uk-button-primary" >créé un compte</a>

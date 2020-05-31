@@ -23,25 +23,26 @@
    <p class="uk-text-center">{{ itemsSum}} {% trans 'Produit' %}</p>
 </div>
 
-<div class="uk-container">
-	<div class="subCat"> 
-	  <div style="" class="subCa uk-flex uk-flex-left">
-	{% if categories %}             
-          {% for sub in categories %}     
-             <div class="subCat-item" style="max-width:max-content" >       
-               <a style="border:2px solid {{sub.color}};
-                box-shadow: 2px 1px 4px 1px {{sub.color}}; width:max-content!important;" 
-		href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
-             </div>           
-          {% endfor %}     
-        {% endif %}     
-	  </div>
-	</div>
+ <div class="subCat"> 
+   <div style="" class="subCa uk-flex uk-flex-left">
+  {% if categories %}             
+   {% for sub in categories %}     
+      <div class="subCat-item" style="max-width:max-content" >       
+        <a style="border:2px solid {{sub.color}};
+	 box-shadow: 2px 1px 4px 1px {{sub.color}}; width:max-content!important;" 
+	 href="{% pageurl sub %}" class="subButton">{{sub.title}}</a>
+      </div>           
+   {% endfor %}     
+  {% endif %}     
+   </div>
+ </div>
+
+  <div class="uk-container">
       <div class="uk-grid-medium uk-grid" uk-grid>
        {% if products %}
 	 {% include './products-grid.html' %}
        {% endif %}
       </div>
-</div>
+  </div>
 </div>
 {% endblock %}
