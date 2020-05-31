@@ -127,10 +127,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    @property
     def has_address(self):
         """ checks if a user has an address """
 
         if self.address:
+            return True
+        return False
+
+    @property
+    def has_name(self):
+        """ checks if a user has a first_name and last_name """
+
+        if self.first_name and self.last_name:
+            return True
+        return False
+
+    @property
+    def is_complete(self):
+        """ checks if all nesseccery user information is provided """
+        if self.has_address and self.has_name:
             return True
         return False
 

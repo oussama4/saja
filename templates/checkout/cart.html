@@ -113,15 +113,9 @@
 			<div id="totalCart" class="uk-text-lead uk-text-bolder ">{{ cart.0.total_price }}</div><span>DH</span>
 		</div>
 
-			<a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="#modal-center" uk-toggle>
+		<a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="{% url 'checkout:pre_checkout' %}">
 				{% trans 'COMMANDER' %}
 			</a>
-			<div id="modal-center" class="uk-flex-top" uk-modal>
-				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-					<button class="uk-modal-close-default" type="button" uk-close></button>
-					<p> {% trans "le service n'est pas encore disponible" %} </p>
-				</div>
-			</div>
 	      </div>
 	    </div>
 	  </div>
