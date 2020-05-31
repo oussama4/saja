@@ -35,7 +35,7 @@
 	  <div class="uk-align-right uk-text-lead"> Total: {{ cart.0.total_price }} DH </div>
 	  <div class="uk-margin">
 		  <a class="uk-button uk-button-default" href="{% url 'checkout:cart' %}"> {% trans "Retourner" %} </a>
-		  <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>
+		  <a class="uk-button uk-button-default" href="{% url 'checkout:pre_payment' %}">
 			  {% trans "Passer la commande" %} 
 		  </a>
 			<div id="modal-center" class="uk-flex-top" uk-modal>
@@ -47,3 +47,4 @@
 	  </div>
 	</div>
 {% endblock %}
+

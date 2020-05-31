@@ -234,3 +234,7 @@ WAGTAILSEARCH_BACKENDS = {
         },
 }
 
+# payment
+CLIENT_ID = config.get('CLIENT_ID')
+STORE_TYPE = '3d_pay_hosting'
+TRANTYPE = 'PreAuth'

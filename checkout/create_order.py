@@ -13,4 +13,6 @@ def create_order(user):
             order_item = OrderItem.objects.create(order=o, product=item.product, quantity=item.quantity)
     except DatabaseError as err:
         raise err
+    finally:
+        return o
 

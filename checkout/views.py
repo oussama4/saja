@@ -11,6 +11,9 @@ from wagtail.images.views.serve import generate_image_url
 
 from catalog.models import Product
 from .models import Cart, CartItem
+from .create_order import create_order
+from .payment_req_attr import payment_request_attributes
+from .payment_request import generateHash
 
 @csrf_protect 
 def add_to_cart_p(request):
@@ -147,4 +150,14 @@ def pre_checkout(request):
         return redirect('info_change')
 
     return render(request, "checkout/pre_checkout.html")
+
+
+@login_required
+def pre_payment(request):
+    """ sends a hidden payment request form template """
+
+    o = create_order(request.user)
+    a = payment_request_attributes(o, request.user)
+    at = generateHash(a)
+    render(request, "checkout/preAuth_Form.html", {'attrs': at})
 
