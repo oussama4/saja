@@ -8,16 +8,17 @@ def payment_request_attributes(order, customer):
             'clientid': settings.CLIENT_ID,
             'storetype': settings.STORE_TYPE,
             'trantype': settings.TRANTYPE,
-            'amount': order.total_price,
-            'currency': 504,
-            'oid': order.pk,
-            'okUrl': reverse('ok-url'),
-            'failUrl': reverse('fail-url'),
+            'amount': str(order.total_price),
+            'currency': "504",
+            'oid': str(order.pk),
+            'okUrl': '/',
+            'failUrl': '/',
             'lang': get_language(),
             'email': customer.email,
             'BillToName': customer.get_full_name(),
             'rnd': str(now()),
             'hashAlgorithm': 'ver3',
+            'encoding': 'utf-8',
     }
     return req_attrs
 

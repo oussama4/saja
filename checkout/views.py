@@ -158,6 +158,6 @@ def pre_payment(request):
 
     o = create_order(request.user)
     a = payment_request_attributes(o, request.user)
-    at = generateHash(a)
-    render(request, "checkout/preAuth_Form.html", {'attrs': at})
+    at = generateHash(a, 'Codylia2020')
+    return render(request, "checkout/preAuth.html", {'attrs': at})
 
