@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
+from django.utils.crypto import get_random_string
 
 from users.models import User, Address
 
@@ -61,21 +62,25 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.title}"
 
 class Order(models.Model):
-    Delivered = "D"
-    Pending = "P"
-    Refund = "R"
+    DELIVERED = "D"
+    PENDING = "P"
+    REFUND = "R"
+    CANCELED = "C"
     order_status = [
-            (Delivered, 'Delivered'),
-            (Pending, 'Pending'),
-            (Refund, 'Refund')
+            (DELIVERED, 'Delivered'),
+            (PENDING, 'Pending'),
+            (REFUND, 'Refund'),
+            (CANCELED, 'Canceled'),
         ]
     user = models.ForeignKey(User, related_name="orders", on_delete=models.PROTECT)
     status = models.CharField(max_length=2,
             choices=order_status,
-            default=Pending
+            default=PENDING
         )
     payment_date = models.DateTimeField(auto_now_add=True)
     shipping_address = models.ForeignKey(Address, related_name="+",on_delete=models.PROTECT)
+    # random string, will be used for payment request hash comparaison
+    rnd = models.CharField(max_length=20, default=get_random_string)
 
     class Meta:
         verbose_name = _("commande")
