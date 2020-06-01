@@ -7,6 +7,7 @@ from .views import (
         add_to_cart_p,
         pre_checkout,
         pre_payment,
+        host_to_host_callback,
 )
 
 
@@ -20,5 +21,6 @@ urlpatterns = [
         path('cart', CartItems.as_view(), name='cart'),
         path('cart/checkout/', pre_checkout, name='pre_checkout'),
         path('cart/payment/request/', pre_payment, name='pre_payment'),
+        path('payment/callback/', host_to_host_callback, name='h2h'),
     ]
 

@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from wagtail.images.models import Image
 from wagtail.images.views.serve import generate_image_url
@@ -161,3 +161,8 @@ def pre_payment(request):
     at = generateHash(a, 'Codylia2020')
     return render(request, "checkout/preAuth.html", {'attrs': at})
 
+
+@csrf_exempt
+def host_to_host_callback(request):
+    print(request.POST)
+    return redirect('/')
