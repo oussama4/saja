@@ -11,14 +11,13 @@ def payment_request_attributes(order, customer):
             'amount': str(order.total_price),
             'currency': "504",
             'oid': str(order.pk),
-            'okUrl': '/',
-            'failUrl': '/',
-            'lang': get_language(),
+            'okUrl': 'localhost:8000',
+            'failUrl': 'localhost:8000',
+            'lang': 'fr',
             'email': customer.email,
             'BillToName': customer.get_full_name(),
             'rnd': str(now()),
             'hashAlgorithm': 'ver3',
-            'encoding': 'utf-8',
     }
     return req_attrs
 
