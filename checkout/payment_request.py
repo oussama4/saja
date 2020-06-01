@@ -2,25 +2,17 @@ import hashlib
 import base64
 
 
-def generateHash(attributes):
+def generateHash(attributes, sk):
 
-    ordredAttValues = [attributes.get(v,'') for v in sorted(attributes)]
+    ordredAttValues = [attributes.get(v,'') for v in sorted(attributes, key=str.casefold)]
     toHash = "|".join((ordredAttValues))
-
+    toHash += f"|{sk}"
+    
     h = hashlib.sha512()
-    h.update(toHash.encode())
+    h.update(toHash.encode().strip())
+    attributes['hash'] = base64.b64encode(h.digest()).decode('utf-8')
+    attributes['encoding'] = 'UTF-8'
 
-    attributes['hash']=base64.b64encode(h.digest())
-    print(attributes['hash'].decode())
-    return attributes
-
-
-d={
-        'amount':"44",
-        'clientid': "44445",
-        'billing': "154",
-}
-
-generateHash(d)
+    return attributes 
 
 
