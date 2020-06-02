@@ -2,10 +2,20 @@ import hashlib
 import base64
 
 
+def dot_to_document(v):
+
+    word = v + " " 
+    wordL = list(word)
+    wordL[word.find('document')+8] = '.'
+    dotedWord = "".join(wordL).strip()
+
+    return dotedWord 
+    
 def generateHash(attributes, sk):
 
-    ordredAttValues = [attributes.get(v,'') for v in sorted(attributes, key=str.casefold)]
+    ordredAttValues = [dot_to_document(attributes.get(v)) if "document" in attributes.get(v) else attributes.get(v,'')  for v in sorted(attributes, key=str.casefold) ]
     toHash = "|".join((ordredAttValues))
+    print(toHash)
     toHash += f"|{sk}"
     
     h = hashlib.sha512()
