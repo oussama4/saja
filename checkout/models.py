@@ -63,19 +63,21 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     DELIVERED = "D"
-    PENDING = "P"
+    ONGOING = "O"
+    PAID = "P"
     REFUND = "R"
     CANCELED = "C"
     order_status = [
+            (PAID, 'Paid'),
             (DELIVERED, 'Delivered'),
-            (PENDING, 'Pending'),
+            (ONGOING, 'Ongoing'),
             (REFUND, 'Refund'),
             (CANCELED, 'Canceled'),
         ]
     user = models.ForeignKey(User, related_name="orders", on_delete=models.PROTECT)
     status = models.CharField(max_length=2,
             choices=order_status,
-            default=PENDING
+            default=ONGOING
         )
     payment_date = models.DateTimeField(auto_now_add=True)
     shipping_address = models.ForeignKey(Address, related_name="+",on_delete=models.PROTECT)
