@@ -10,10 +10,7 @@ from wagtail.images.models import Image
 from wagtail.images.views.serve import generate_image_url
 
 from catalog.models import Product
-from .models import Cart, CartItem
-from .create_order import create_order
-from .payment_req_attr import payment_request_attributes
-from .payment_request import generateHash
+from checkout.models import Cart, CartItem
 
 @csrf_protect 
 def add_to_cart_p(request):
@@ -139,30 +136,3 @@ class CartItems(LoginRequiredMixin, View):
        #     messages.warning(self.request, "You do not have an active cart")
        #     return redirect("/")
 
-
-@login_required
-def pre_checkout(request):
-    """ checks if user info is complete and show a summery of the order """
-
-    if not request.user.has_address:
-        return redirect('address_create')
-    elif not request.user.has_name:
-        return redirect('info_change')
-
-    return render(request, "checkout/pre_checkout.html")
-
-
-@login_required
-def pre_payment(request):
-    """ sends a hidden payment request form template """
-
-    o = create_order(request.user)
-    a = payment_request_attributes(o, request.user)
-    at = generateHash(a, 'Codylia2020')
-    return render(request, "checkout/preAuth.html", {'attrs': at})
-
-
-@csrf_exempt
-def host_to_host_callback(request):
-    print(request.POST)
-    return redirect('/')
