@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from checkout.create_order import create_order
 from checkout.payment_req_attr import payment_request_attributes
-from checkout.payment_request import generateHash
+from checkout.payment_request import preAuth_gen_hash 
 
 
 @login_required
@@ -12,6 +12,6 @@ def pre_payment(request):
 
     o = create_order(request.user)
     a = payment_request_attributes(o, request.user)
-    at = generateHash(a, 'Codylia2020')
+    at = preAuth_gen_hash(a, 'Codylia2020')
     return render(request, "checkout/preAuth.html", {'attrs': at})
 
