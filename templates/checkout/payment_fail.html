@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+	<div class="uk-container uk-margin">
+		<div class="uk-text-danger uk-text-lead uk-margin-large uk-text-center">
+		<span uk-icon="icon: close; ratio: 3"></span>
+	  <div class="">
+		  {% trans "le paiement de la commande a échoué" %}
+	  </div>
+		</div>
+	  {% include "partials/order_detail.html" with order=order %}
+	  <div class="uk-margin">
+		  <a class="uk-button uk-button-primary" href="/"> {% trans "Retour au magasin" %} </a>
+	  </div>
+	</div>
+{% endblock %}
+
