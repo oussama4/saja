@@ -25,6 +25,8 @@ ANYMAIL = {
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
 
+STORE_KEY = "Codylia2020"
+
 
 try:
     from .local import *

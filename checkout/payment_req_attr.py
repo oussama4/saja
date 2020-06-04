@@ -11,15 +11,15 @@ def payment_request_attributes(order, customer):
             'amount': str(order.total_price),
             'currency': "504",
             'oid': str(order.pk),
-            'okUrl': 'http://7d22ccf32757.ngrok.io/payment/ok/',#reverse('checkout:h2h')',
-            'failUrl': 'http://7d22ccf32757.ngrok.io/payment/fail/',#reverse('checkout:h2h')',
+            'okUrl': 'http://75de5aec439a.ngrok.io/payment/ok/',#reverse('checkout:h2h')',
+            'failUrl': 'http://75de5aec439a.ngrok.io/payment/fail/',#reverse('checkout:h2h')',
             'lang': get_language()[:2],
             'email': customer.email,
             'BillToName': customer.get_full_name(),
             'rnd': order.rnd,
             'hashAlgorithm': 'ver3',
             'CallbackResponse': 'true',
-            'CallbackURL': 'http://7d22ccf32757.ngrok.io/callback/',#reverse('checkout:h2h'),
+            'CallbackURL': 'http://75de5aec439a.ngrok.io/payment/callback/',#reverse('checkout:h2h'),
             'shopurl': 'localhost:8000',
     }
     return req_attrs
