@@ -22,8 +22,9 @@ def payment_request_attributes(order, customer):
             'rnd': order.rnd,
             'hashAlgorithm': 'ver3',
             'CallbackResponse': 'true',
+            'AutoRedirect': 'true',
             'CallbackURL': 'http://c568dcfff1b1.ngrok.io/payment/callback/',#reverse('checkout:h2h'),
-            'shopurl': 'localhost:8000',
+            'shopurl': f'http://c568dcfff1b1.ngrok.io/payment/{order.pk}/cancel/',#reverse('checkout:h2h')',
     }
     return req_attrs
 
