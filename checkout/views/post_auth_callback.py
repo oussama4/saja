@@ -33,6 +33,5 @@ def host_to_host_callback(request):
     else:
         data = "FAILURE"
 
-    print(data)
     return HttpResponse(data)
 

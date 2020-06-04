@@ -10,12 +10,12 @@ from .fields import MAPostalCodeField, PhoneNumberField
 class Address(models.Model):
     line1 = models.CharField(
             verbose_name=_("adresse 1"),
-            max_length=100,
+            max_length=250,
             help_text=_("appartement, suite, unité, etc")
     )
     line2 = models.CharField(
             verbose_name=_("adresse 2"),
-            max_length=100,
+            max_length=250,
             help_text=_("adresse postale, boîte postale, etc")
     )
     postal_code = MAPostalCodeField(
@@ -23,7 +23,7 @@ class Address(models.Model):
             null=True,
             blank=True
     )
-    city = models.CharField(verbose_name=_("ville"), max_length=40)
+    city = models.CharField(verbose_name=_("ville"), max_length=64)
     phone = PhoneNumberField(verbose_name=_("numéro de téléphone"))
 
     class Meta:
@@ -32,6 +32,10 @@ class Address(models.Model):
 
     def __str__(self):
         return f'{self.line1} \n {self.line2} \n {self.postal_code}  {self.city} \n {self.phone}'
+
+    @property
+    def street(self):
+        return f'{self.line1} {self.line2}'
 
 
 class UserManager(BaseUserManager):
@@ -68,11 +72,12 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
-        verbose_name=_('adresse email'),
-        unique=True,
-        error_messages={
-            'unique': _('Un utilisateur avec cet email existe déjà.')
-        }
+            max_length=64,
+            verbose_name=_('adresse email'),
+            unique=True,
+            error_messages={
+                'unique': _('Un utilisateur avec cet email existe déjà.')
+            }
     )
     first_name = models.CharField(
             verbose_name=_('Prénom'), max_length=30
