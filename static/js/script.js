@@ -1,3 +1,15 @@
+(function  (){
+	var checkbox = document.querySelector('#check');
+	if (checkbox){
+		checkbox.addEventListener('change', function(){
+			if (checkbox.checked){
+				document.querySelector('#conditionsB').disabled=false;
+			}else{
+				document.querySelector('#conditionsB').disabled=true;
+			}
+		});
+	}
+})();
 window.addEventListener("load", function () {
   var loader = document.querySelector(".loader-wrapper");
   if(loader) loader.style.display = "none";

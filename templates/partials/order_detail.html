@@ -1,0 +1,31 @@
+{% load i18n %}
+	  <div class="uk-align-left">
+	  <div>
+		  {{ request.user }} <br>
+		  {{ request.user.email }} <br>
+		{{ request.user.address|linebreaks }} <br>
+	  </div>
+	  </div>
+	  <div class="uk-text-lead">
+		  {% trans "Votre commande" %}
+	  </div>
+	  <table class="uk-table uk-table-small uk-table-divider">
+	    <thead>
+	      <tr>
+			  <th> {% trans "Titre de produit" %} </th>
+			  <th> {% trans "Quantite" %} </th>
+			  <th> {% trans "Total" %} </th>
+	      </tr>
+	    </thead>
+	    <tbody>
+			{% for item in order.items.all %}
+				<tr>
+					<td> {{ item.product.title }} </td>
+					<td> {{ item.quantity }} </td>
+					<td> {{ item.total_price }} DH </td>
+				</tr>
+			{% endfor %}
+	    </tbody>
+	  </table>
+	  <div class="uk-align-right uk-text-lead"> Total: {{ order.total_price }} DH </div>
+
