@@ -11,8 +11,8 @@ def payment_request_attributes(order, customer):
             'amount': str(order.total_price),
             'currency': "504",
             'oid': str(order.pk),
-            'okUrl': 'https://c5a154a3ebd5.ngrok.io/paymént/document/',#reverse('checkout:h2h')',
-            'failUrl': 'https://c5a154a3ebd5.ngrok.io/payment/failUrl/',#reverse('checkout:h2h')',
+            'okUrl': 'https://sajacosmetics.com/payment/ok/',
+            'failUrl': 'https://sajacosmetics.com/payment/fail/',
             'lang': get_language()[:2],
             'email': customer.email,
             'BillToName': customer.get_full_name(),
@@ -23,8 +23,8 @@ def payment_request_attributes(order, customer):
             'hashAlgorithm': 'ver3',
             'CallbackResponse': 'true',
             'AutoRedirect': 'true',
-            'CallbackURL': 'http://c568dcfff1b1.ngrok.io/payment/callback/',#reverse('checkout:h2h'),
-            'shopurl': f'http://c568dcfff1b1.ngrok.io/payment/{order.pk}/cancel/',#reverse('checkout:h2h')',
+            'CallbackURL': 'https://sajacosmetics.com/payment/callback/',
+            'shopurl': f'https://sajacosmetics.com/payment/{order.pk}/cancel/',
     }
     return req_attrs
 
