@@ -10,6 +10,7 @@ from .views import (
         host_to_host_callback,
         ok,
         fail,
+        payment_cancel,
 )
 
 
@@ -26,5 +27,6 @@ urlpatterns = [
         path('payment/callback/', host_to_host_callback, name='h2h'),
         path('payment/ok/', ok, name='ok'),
         path('payment/fail/', fail, name='fail'),
+        path('payment/<int:oid>/cancel/', payment_cancel, name='payment_cancel'),
     ]
 

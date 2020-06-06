@@ -16,11 +16,15 @@ def payment_request_attributes(order, customer):
             'lang': get_language()[:2],
             'email': customer.email,
             'BillToName': customer.get_full_name(),
+            'tel': customer.address.phone,
+            'BillToStreet1': customer.address.street,
+            'BillToCity': customer.address.city,
             'rnd': order.rnd,
             'hashAlgorithm': 'ver3',
             'CallbackResponse': 'true',
-            'CallbackURL': 'http://c5a154a3ebd5.ngrok.io/payment/callback/',#reverse('checkout:h2h'),
-            'shopurl': 'localhost:8000',
+            'AutoRedirect': 'true',
+            'CallbackURL': 'http://c568dcfff1b1.ngrok.io/payment/callback/',#reverse('checkout:h2h'),
+            'shopurl': f'http://c568dcfff1b1.ngrok.io/payment/{order.pk}/cancel/',#reverse('checkout:h2h')',
     }
     return req_attrs
 
