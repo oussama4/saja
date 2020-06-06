@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n %}
+{% load i18n static %}
 
 {% block content %}
 	<div class="uk-container uk-margin">
@@ -32,19 +32,28 @@
 			{% endfor %}
 	    </tbody>
 	  </table>
-	  <div class="uk-align-right uk-text-lead"> Total: {{ cart.0.total_price }} DH </div>
+	  <div class="uk-margin-bottom uk-align-right uk-text-lead"> Total: {{ cart.0.total_price }} DH </div>
+	  <form method="GET" action="{% url 'checkout:pre_checkout' %}" >
+	  <div>
+		  <input class="uk-checkbox" id="check" type="checkbox" name="conditions" value="1">
+		  <label for="check">{% trans "J'ai lu les "%} <a href="/terms">CONDITIONS GENERALES DE VENTE</a></label>
+	  </div>
 	  <div class="uk-margin">
 		  <a class="uk-button uk-button-default" href="{% url 'checkout:cart' %}"> {% trans "Retourner" %} </a>
-		  <a class="uk-button uk-button-default" href="{% url 'checkout:pre_payment' %}">
+		  <button type='submit' id="conditionsB" disabled class="uk-button uk-button-default">
 			  {% trans "Passer la commande" %} 
-		  </a>
-			<div id="modal-center" class="uk-flex-top" uk-modal>
-				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-					<button class="uk-modal-close-default" type="button" uk-close></button>
-					<p> {% trans "le service n'est pas encore disponible" %} </p>
-				</div>
+		  </button>
+		  <div class="uk-margin-small-top uk-grid-small uk-child-width-1-2" style='width:350px' uk-grid>
+			  <div></div>
+			<div >
+			  <img src="{% static 'img/logo_cmi.png' %}" style="height:30px;width:40px;">
+			  <img src="{% static 'img/secure_code_logo.png' %}" style="height:30px;width:50px;">
+			  <img src="{% static 'img/tn_verified_by_visa.png' %}" style="height:30px;width:50px;">
 			</div>
+		  </div>
+
 	  </div>
+	  </form>
 	</div>
 {% endblock %}
 
