@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-
+from django.core.exceptions import ObjectDoesNotExist 
 from wagtail.images.models import Image
 from wagtail.images.views.serve import generate_image_url
 
@@ -82,8 +82,11 @@ def remove_from_cart(request):
         id = request.POST.get("id")
         item = get_object_or_404(Product, pk=id)
         cart = Cart.objects.get(user = request.user)
-
-        cart_item = CartItem.objects.select_related('product').get(cart = cart, product = item)
+        cart_item = None
+        try:
+            cart_item = CartItem.objects.select_related('product').get(cart = cart, product = item)
+        except ObjectDoesNotExist as err_msg:
+            print(err_msg)
         itemDelete = {}
         if cart_item:
             cart_item.delete()
@@ -103,9 +106,11 @@ def remove_item_from_cart(request):
         id = request.POST.get("id")
         item = get_object_or_404(Product, pk=id)
         cart = Cart.objects.get(user = request.user)
-
-        cart_item = CartItem.objects.select_related('product').get(cart = cart, product = item)
         itemRemove = {}
+        try:
+            cart_item = CartItem.objects.select_related('product').get(cart = cart, product = item)
+        except ObjectDoesNotExist as error:
+            itemRemove['delete']= True
         if cart_item:
             if cart_item.quantity > 1:
                 cart_item.quantity-=1
@@ -115,11 +120,12 @@ def remove_item_from_cart(request):
                 itemRemove['delete'] = False
             elif cart_item.quantity <= 1:
                 cart_item.delete()
-                cart_item['delete'] = True
+                itemRemove['delete'] = True
         if cart:
             itemRemove['total'] = cart.total_price
             itemRemove['discount']  = cart.total_discount
             itemRemove['totalDiscount'] = cart.price_without_discount 
+        print(itemRemove)
         return JsonResponse(itemRemove)
 
 

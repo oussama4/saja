@@ -127,7 +127,7 @@
 }
 
 .brandBack {
-	background-color: white;
+	background-color: white!important;
 }
 section.feature {
     max-width: 400px;
