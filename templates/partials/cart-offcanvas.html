@@ -76,9 +76,23 @@
 					</a>
 				</div>
 			    <div>
-					<a class="uk-button badge uk-button-primary uk-margin-small uk-width-1-1" href="{% url 'checkout:pre_checkout' %}">
+					<a class="uk-button badge uk-button-primary uk-margin-small uk-width-1-1" 
+					   href="{% if request.user.is_complete %}{% url 'checkout:pre_checkout' %}{% else %}#missing_info_modal{% endif %}" {% if not request.user.is_complete %} uk-toggle {% endif %}>
 						{% trans 'COMMANDER' %}
 					</a>
+					<div id="missing_info_modal" uk-modal>
+						<div class="uk-modal-dialog uk-modal-body">
+							<p> {% trans 'veuillez fournir les informations de profil manquantes' %} </p>
+							<p class="uk-text-right">
+								<button class="uk-button uk-button-default uk-modal-close" type="button">
+								   	{% trans 'Annuler' %}
+							   	</button>
+								<a class="uk-button uk-button-primary" href="{% url 'profile' %}">
+									{% trans 'aller au profil' %}
+								</a>
+							</p>
+						</div>
+					</div>
 				</div>
 		    </div>
 		</footer>

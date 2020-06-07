@@ -6,9 +6,6 @@ from django.urls import reverse
 def pre_checkout(request):
     """ checks if user info is complete and show a summery of the order """
 
-    if (not request.user.has_address) or (not request.user.has_name):
-        return redirect('profile')
-
     if request.GET.get('conditions') == '1':
         return redirect('checkout:pre_payment')
 
