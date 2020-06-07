@@ -9,4 +9,5 @@ from .pre_checkout import pre_checkout
 from .pre_auth import pre_payment
 from .post_auth_callback import host_to_host_callback
 from .ok_fail import ok, fail
+from .payment_cancel import payment_cancel
 

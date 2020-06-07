@@ -18,6 +18,6 @@ class PhoneNumberField(models.CharField):
     description = _("Phone number")
 
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 40
+        kwargs['max_length'] = 32
         super().__init__(*args, **kwargs)
 

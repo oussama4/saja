@@ -4,6 +4,26 @@
 
 {% block content %}
     <div class="uk-container uk-margin uk-flex uk-flex-column uk-flex-center uk-width-1-1">
+		<ul class="uk-margin-top uk-margin-auto uk-list">
+			{% if not request.user.has_address %}
+			<li class="uk-text-warning">
+				<span uk-icon="icon: warning; ratio: 2"></span>
+			<a href="{% url 'address_create' %}"
+				class="uk-width-1-1 uk-display-inline uk-button uk-button-link uk-margin-bottom uk-text-lead uk-text-warning"> 
+				{% trans "vous devez ajouter une adresse pour passer une commande" %}
+			</a>
+			</li>
+			{% endif %}
+			{% if not request.user.has_name %}
+			<li class="uk-text-warning">
+				<span uk-icon="icon: warning; ratio: 2"></span>
+			<a href="{% url 'info_change' request.user.pk %}" 
+				class="uk-width-1-1 uk-display-inline uk-button uk-button-link uk-margin-bottom uk-text-lead uk-text-warning"> 
+				{% trans "vous devez ajouter votre prénom et nom pour passer une commande" %}
+			</a>
+			</li>
+			{% endif %}
+		</ul>
 		<div class="uk-margin-auto uk-text-lead uk-text-emphasis"> {% trans "Votre compte" %} </div>
 		<div class="uk-margin-top uk-width-1-4@l uk-width-1-3@m uk-width-1-2@s uk-margin-auto">
 	<a class="uk-button uk-button-default uk-button-large uk-width-1-1 uk-margin-bottom" 
