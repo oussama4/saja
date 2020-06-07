@@ -13,6 +13,7 @@ from checkout.models import Order
 
 @csrf_exempt
 def ok(request):
+    print(request.POST)
     # verify hash
     hash_dict = {k:html.unescape(v)  for k, v in request.POST.items() if k != "HASH" and k != "encoding"}
     calculated_hash = postAuth_gen_hash(hash_dict, settings.STORE_KEY)
@@ -30,6 +31,7 @@ def ok(request):
 
 @csrf_exempt
 def fail(request):
+    print(request.POST)
     oid = request.POST.get('oid')
     errMsg = request.POST.get('ErrMsg')
     o = Order.objects.get(pk=int(oid))
