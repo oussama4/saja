@@ -24,7 +24,9 @@
 						<td> {{ forloop.counter }} </td>
 						<td> {{ order.total_price }} DH </td>
 						<td> {{ order.payment_date }} </td>
-						<td> <a class="uk-button uk-button-default" href="#"> {% trans "detail" %} </a> </td>
+						<td> <a class="uk-button uk-button-default" href="{% url 'order_detail' order.pk %}">
+							   	{% trans "detail" %}
+						   	</a> </td>
 					</tr>
 				{% endfor %}
 				</tbody>

@@ -60,3 +60,9 @@ def create_address(request):
         else:
             return render(request, 'users/address_create.html', {'form': f})
 
+
+@login_required
+def order_detail(request, oid):
+    o = Order.objects.get(pk=oid)
+    return render(request, 'users/order_detail.html', {'order': o})
+
