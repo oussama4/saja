@@ -20,11 +20,19 @@ class Address(models.Model):
     )
     postal_code = MAPostalCodeField(
             verbose_name=_("code postal"),
+            help_text=_("code postal"),
             null=True,
             blank=True
     )
-    city = models.CharField(verbose_name=_("ville"), max_length=64)
-    phone = PhoneNumberField(verbose_name=_("numéro de téléphone"))
+    city = models.CharField(
+            verbose_name=_("ville"),
+            help_text=_("ville"),
+            max_length=64
+    )
+    phone = PhoneNumberField(
+            verbose_name=_("numéro de téléphone"),
+            help_text=_("numéro de téléphone")
+    )
 
     class Meta:
         verbose_name = _("adresse")

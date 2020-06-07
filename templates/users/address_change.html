@@ -15,7 +15,6 @@
 		{% for error in field.errors %}
 	    	    <p class="uk-text-danger">{{ error }} </p>
 		{% endfor %}
-		<label for="{{ field.id_for_label }}" class="uk-form-label"> {{ field.label }} </label>
 		<div class="uk-form_controls">
 		    {% render_field field placeholder=field.help_text class+="uk-input" %} 
 		</div>
