@@ -99,7 +99,7 @@
 	    <div class="uk-card uk-card-default uk-card-small tm-ignore-container" uk-sticky="offset: 30; bottom: true; media: @m;">
 	      <div class="uk-card-body">
 		<div class="uk-grid-small" uk-grid>
-			<div class="uk-width-expand uk-text-muted">{% trans 'Total' %}</div>
+			<div class="uk-width-expand uk-text-muted">{% trans 'Sous-total' %}</div>
 			<div id="totalDiscount">{{ cart.0.price_without_discount }}</div><span>DH</span>
 		</div>
 		<div class="uk-grid-small" uk-grid>
@@ -108,8 +108,15 @@
 		</div>
 	      </div>
 	      <div class="uk-card-body">
+			  <div>
+			  <p id="liv-includ" class="uk-text-meta">
+			  {% if cart.0.total_price < 300 %}
+			  	{% trans "livraison non incluse(payé à la livraison)" %}
+			  {% endif %}
+			  </p>
+		  </div>
 		<div class="uk-grid-small uk-flex-middle" uk-grid>
-			<div class="uk-width-expand uk-text-muted ">{% trans 'Total Net'%}</div>
+			<div class="uk-width-expand uk-text-muted ">{% trans 'Total'%}</div>
 			<div id="totalCart" class="uk-text-lead uk-text-bolder ">{{ cart.0.total_price }}</div><span>DH</span>
 		</div>
 

@@ -80,17 +80,24 @@ function remove(e) {
         var listItems = document.querySelector("#listItems");
         var badge = document.querySelector("#badge");
         var cart = document.querySelector("#cart");
+	var liv_includ = document.querySelector('#liv-includ');
         listItems.removeChild(document.querySelector(`li[data-id="${id}"]`));
-        if (cart)
+        if (cart){
           cart.removeChild(document.querySelector(`div[data-id="${id}"]`));
+	 if(response.total<300 && liv_includ){
+		  liv_includ.innerHTML = "livraison non incluse (payé à la livraison)"
+		}else{
+		  liv_includ.innerHTML = ""; 
+		} 	
+	}
 
         document.querySelector(
           "#totalPrice"
         ).innerHTML = response.total.toString();
-        badge.innerHTML = parseInt(badge.innerHTML) - response.quantity;
+	if(parseInt(badge.innerHTML) > 0)
+        	badge.innerHTML = parseInt(badge.innerHTML) - response.quantity;
         var totalCart = document.querySelector("#totalCart");
         if (totalCart) totalCart.innerHTML = response.total;
-
         var discount = document.querySelector("#discount");
         if (discount) discount.innerHTML = response.discount;
         var totalDiscount = document.querySelector("#totalDiscount");
@@ -120,17 +127,34 @@ function remove_item(e) {
     if (xhr.status >= 200 && xhr.status <= 300) {
       var response = JSON.parse(xhr.responseText);
       var badge = document.querySelector("#badge");
-      badge.innerHTML = parseInt(badge.innerHTML) - 1;
-      document.querySelector("#totalPrice").innerHTML = response.total;
-      document.querySelector("#totalCart").innerHTML = response.total;
+      var liv_includ = document.querySelector("#liv-includ");
+      if(parseInt(badge.innerHTML)>0){
+      	badge.innerHTML = parseInt(badge.innerHTML) - 1;
+	console.log(badge.innerHTML);
+      	document.querySelector("#totalPrice").innerHTML = response.total;
+      	document.querySelector("#totalCart").innerHTML = response.total;
+	}
       if (response.delete) {
         var listItems = document.querySelector("#listItems");
 
         var cart = document.querySelector("#cart");
         listItems.removeChild(document.querySelector(`li[data-id="${id}"]`));
         if (cart)
-          cart.removeChild(document.querySelector(`div[data-id="${id}"]`));
+              cart.removeChild(document.querySelector(`div[data-id="${id}"]`));
+
+      	      document.querySelector("#totalPrice").innerHTML = response.total;
+      	      document.querySelector("#totalCart").innerHTML = response.total;
+	      document.querySelector("#discount").innerHTML = response.discount;
+              document.querySelector("#totalDiscount").innerHTML = response.totalDiscount;
+	 if(response.total<300 && liv_includ){
+		  liv_includ.innerHTML = "livraison non incluse (payé à la livraison)"
+		}else{
+		  liv_includ.innerHTML = ""; 
+		} 
+	     
+
       } else if (!response.delete) {
+
         document.querySelector(`input[data-id="${id}"]`).value =
           response.quantity;
         document.querySelector(`span[data-id="${id}"]`).innerHTML =
@@ -138,8 +162,14 @@ function remove_item(e) {
         document.querySelector(`.totalItem[data-id="${id}"]`).innerHTML =
           response.totalItem;
         document.querySelector("#discount").innerHTML = response.discount;
-        document.querySelector("#totalDiscount").innerHTML =
-          response.totalDiscount;
+        document.querySelector("#totalDiscount").innerHTML =response.totalDiscount;
+	      document.querySelector("#totalPrice").innerHTML = response.total;
+      	      document.querySelector("#totalCart").innerHTML = response.total;
+        if(response.total<300 && liv_includ){
+	  liv_includ.innerHTML = "livraison non incluse (payé à la livraison)"
+        }else{
+	  liv_includ.innerHTML = ""; 
+        } 
       }
     }
   };
@@ -175,7 +205,12 @@ function remove_item(e) {
                 response.product[1];
               var input = document.querySelector(`input[data-id="${id}"]`);
               if (input) input.value = response.product[1];
-
+	      var liv_includ = document.querySelector("#liv-includ");
+	      if(response.total<300){
+	 	liv_includ.innerHTML = "livraison non incluse (payé à la livraison)"
+	      }else{
+		liv_includ.innerHTML = " "; 
+	      } 
               var totalItem = document.querySelector(
                 `.totalItem[data-id="${id}"]`
               );
