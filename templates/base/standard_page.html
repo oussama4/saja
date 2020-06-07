@@ -3,13 +3,14 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-    <div class="uk-container uk-margin-top">
+    <div  class="brandBack uk-container uk-margin-top">
 	<div class="uk-text-lead uk-text-center">
-	    {{ self.intro }}
+		<h2 style="text-decoration:underline;">{{ self.intro }}</h2>
 	</div>
-
+	<div class="uk-text-center">
 	{% for block in page.body %}
 	    {% include_block block %}
 	{% endfor %}
+	</div>
     </div>
 {% endblock %}
