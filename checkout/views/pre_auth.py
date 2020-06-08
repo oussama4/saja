@@ -12,7 +12,7 @@ def pre_payment(request):
     """ sends a hidden payment request form template """
 
     o = create_order(request.user)
-    a = payment_request_attributes(o, request.user)
+    a = payment_request_attributes(o, request)
     at = preAuth_gen_hash(a, settings.STORE_KEY)
     return render(request, "checkout/preAuth.html", {'attrs': at})
 

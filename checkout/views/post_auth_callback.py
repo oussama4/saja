@@ -15,7 +15,7 @@ from checkout.models import Order
 @csrf_exempt
 @require_POST
 def host_to_host_callback(request):
-     
+    print(request.POST)     
     hash_dict = {k:html.unescape(v)  for k, v in request.POST.items() if k != "HASH" and k != "encoding"}
      
     try:
@@ -32,6 +32,6 @@ def host_to_host_callback(request):
             data = "APPROVED"
     else:
         data = "FAILURE"
-
+    print(data)
     return HttpResponse(data)
 
