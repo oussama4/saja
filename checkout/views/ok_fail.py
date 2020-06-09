@@ -2,6 +2,7 @@ import hashlib
 import html
 import base64
 
+from django.views.decorators.http import require_POST 
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -10,10 +11,10 @@ from django.conf import settings
 from checkout.payment_request import postAuth_gen_hash
 from checkout.models import Order
 
-
+@require_POST 
 @csrf_exempt
 def ok(request):
-    print(request.POST)
+    print("this is ok \n {}".format(request.POST))
     # verify hash
     hash_dict = {k:html.unescape(v)  for k, v in request.POST.items() if k != "HASH" and k != "encoding"}
     calculated_hash = postAuth_gen_hash(hash_dict, settings.STORE_KEY)
@@ -29,9 +30,10 @@ def ok(request):
             o.save()
     return render(request, "checkout/payment_ok.html", {'order': o})
 
+@require_POST
 @csrf_exempt
 def fail(request):
-    print(request.POST)
+    print("this is fail \n{}".format(request.POST))
     oid = request.POST.get('oid')
     errMsg = request.POST.get('ErrMsg')
     o = Order.objects.get(pk=int(oid))

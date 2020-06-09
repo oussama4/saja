@@ -15,7 +15,8 @@ from checkout.models import Order
 @csrf_exempt
 @require_POST
 def host_to_host_callback(request):
-    print(request.POST)     
+    print("this is callback {}".format(request.POST))
+    data = ""
     hash_dict = {k:html.unescape(v)  for k, v in request.POST.items() if k != "HASH" and k != "encoding"}
      
     try:
