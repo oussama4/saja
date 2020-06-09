@@ -40,6 +40,10 @@ class Cart(models.Model):
     def price_without_discount(self):
         return self.total_price+self.total_discount
 
+    @property
+    def is_empty(self):
+        return self.items.count() == 0
+
 
 class CartItem(models.Model):
 
