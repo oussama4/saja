@@ -68,6 +68,21 @@
 										<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 											<a class="tm-media-box" href="">
 												<figure class="tm-media-box-wrap">
+													<div class="uk-position-absolute uk-position-right badge-grid uk-child-width-1-1 uk-grid-small uk-grid" uk-grid >
+									   {% for block in product.group_product.features %}
+										{% if block.block_type == 'badges' %}
+										 {% for bimg in block.value %}
+										<div class="badge-grid-el">
+											{% image bimg original as imgb %}
+											<img style="height:100%;width:100%;" src="{{imgb.url}}">
+										</div>
+										 {% endfor %}
+										
+										{% endif %}
+									    {% endfor %}
+
+												</div>
+	
 													<img data-src="{{ img.url }}" alt="{{ img.alt }}&quot;" uk-img>
 												</figure>
 											</a>
@@ -81,7 +96,9 @@
 															{% trans 'Caractéristique' %}</p>
 														<ul class="check-list">
 															{% for feature in product.group_product.features%}
+															{% if feature.block_type == 'features' %}
 															{% include_block feature %}
+															{% endif %}
 															{% endfor %}
 														</ul>
 													</div>
@@ -100,7 +117,7 @@
 												</h3>
 											</div>
 
-											<div class="tm-product-card-shop"
+											<div class="tm-product-shop"
 												style="bottom: 2vh;position: relative;width: 17vw;bottom:0">
 												<div class="tm-product-card-prices">
 													{% if product.group_product.has_discount %}
@@ -111,16 +128,9 @@
 														{{ product.group_product.price}}DH
 													</div>
 												</div>
-												<div class="tm-product-card-add">
-													<div class="uk-text-meta tm-product-card-actions">
-														<a class="tm-product-card-action tm-action-button-active"
-															title="Add to favorites">
-															<span uk-icon="icon: heart; ratio: .75;"
-																class="uk-icon"></span>
-														</a>
-													</div>
+												<div class="tm-product-card-add uk-postion-relative uk-postion-right">
 													<a data-id="{{ product.group_product.pk}}"
-														class="uk-button add_to_cart badge uk-button-primary tm-product-card-add-button tm-shine">
+														class="uk-button add_to_cart_badge badge uk-button-primary tm-product-card-add-button tm-shine">
 														<span
 															class="js-add-to-cart tm-product-card-add-button-icon  uk-icon"
 															uk-icon="cart"></span>
