@@ -65,7 +65,7 @@
 										<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
 											<figure class="tm-media-box-wrap">
 												
-												<div class="uk-position-absolute  uk-position-right badge-grid uk-child-width-1-1 uk-grid-small uk-grid" uk-grid >
+												<div class="uk-position-absolute uk-position-right badge-grid uk-child-width-1-1 uk-grid-small uk-grid" uk-grid >
 									   {% for block in product.features %}
 										{% if block.block_type == 'badges' %}
 										 {% for bimg in block.value %}
@@ -78,7 +78,6 @@
 										{% endif %}
 									    {% endfor %}
 
-			<!--	<div class="badge-grid-el"><img style="height:100%;width:100%;"  src="{% static 'img/logo_cmi.png'%}"></div> -->
 												</div>
 											
 												<img data-src="{{img.url}}"  alt="{{img.alt}}&quot;" style="height:100%"

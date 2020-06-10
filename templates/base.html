@@ -46,7 +46,7 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body style="background:white" class="{% block body_class %}{% endblock %}">
 	{% catalog_menu as catalog %}
         {% if fpath|split != "" %}
 	{% include 'partials/toolbar.html' %}
