@@ -1,3 +1,17 @@
+.badge-grid {
+	height: 75%;
+	width: 16%;
+	z-index: 10;
+	left: 85%!important;
+	top: 10%;
+}
+.badge-grid-el {
+	width: calc(100% / 3);
+	height: calc(100%/3);
+        border-radius: 50%;
+	overflow: hidden;
+	padding: 0!important;
+}
 .cat-color {
   background:
      linear-gradient(
@@ -53,6 +67,10 @@
         animation-timing-function: ease-out;
 }
 @media only screen and (max-width:600px){
+	.badge-grid {
+		left: 70%!important;
+		width: 30%;
+}
 	.spinner {
 		top:20vh!important;
 		left:42vw!important;

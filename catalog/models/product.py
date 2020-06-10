@@ -11,6 +11,7 @@ from modelcluster.models import ClusterableModel
 from wagtail.search import index
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.core.blocks import ListBlock, CharBlock
 from wagtail.snippets.models import register_snippet
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -137,7 +138,8 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
     )
     features = StreamField(
             [
-                ("features", ListBlock(CharBlock(min_length=5, max_length=150), label=_("caractéristique")))
+                ("features", ListBlock(CharBlock(min_length=5, max_length=150), label=_("caractéristique"))),
+                ("badges", ListBlock(ImageChooserBlock(required=False), label= _("badge"))),
             ],
             verbose_name=_("caractéristique"),
             help_text=_("caractéristiques du produit"),

@@ -1,4 +1,4 @@
-{% load i18n wagtailcore_tags wagtailimages_tags %}
+{% load static i18n wagtailcore_tags wagtailimages_tags %}
 
 <div class="uk-width-expand">
 	<div class="uk-grid-medium uk-child-width-1-1" uk-grid>
@@ -64,6 +64,23 @@
 									<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
 										<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
 											<figure class="tm-media-box-wrap">
+												
+												<div class="uk-position-absolute  uk-position-right badge-grid uk-child-width-1-1 uk-grid-small uk-grid" uk-grid >
+									   {% for block in product.features %}
+										{% if block.block_type == 'badges' %}
+										 {% for bimg in block.value %}
+										<div class="badge-grid-el">
+											{% image bimg original as imgb %}
+											<img style="height:100%;width:100%;" src="{{imgb.url}}">
+										</div>
+										 {% endfor %}
+										
+										{% endif %}
+									    {% endfor %}
+
+			<!--	<div class="badge-grid-el"><img style="height:100%;width:100%;"  src="{% static 'img/logo_cmi.png'%}"></div> -->
+												</div>
+											
 												<img data-src="{{img.url}}"  alt="{{img.alt}}&quot;" style="height:100%"
 													uk-img>
 											</figure>
@@ -77,7 +94,9 @@
 												<p class="uk-text-lead"> Caractéristiqes:</p>
 												<ul class="check-list">
 													{% for feature in product.features%}
-													{% include_block feature %}
+													 {%if feature.block_type == 'features'%}
+													    {{feature}}
+													 {%endif%}
 													{% endfor %}
 												</ul>
 											</div>
