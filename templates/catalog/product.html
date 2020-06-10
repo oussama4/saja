@@ -171,6 +171,11 @@
 		  <p> {{ product.description|richtext }} </p>
 		</div>
 		<hr>
+		{% if product.video %}
+		<div>
+			<video src="{{ product.video.url }}" controls muted playsinline autoplay></video>
+		</div>
+		{% endif %}
     </div>
     </div>
   </div>

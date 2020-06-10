@@ -26,6 +26,8 @@ from wagtail.admin.edit_handlers import (
 )
 
 from wagtailmodelchooser import register_model_chooser
+from wagtailmedia.edit_handlers import MediaChooserPanel
+
 
 class ProductBase(models.Model):
     """ abstract model for shared fields between product models and ranges """
@@ -164,6 +166,13 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
             default=20,
             validators=[MaxValueValidator(90)]
     )
+    video = models.ForeignKey(
+            'wagtailmedia.Media',
+            null=True,
+            blank=True,
+            on_delete=models.SET_NULL,
+            related_name="+"
+    )
 
     search_fields = [
             index.SearchField("title", partial_match=True, boost=2)
@@ -174,8 +183,9 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
             StreamFieldPanel("features"),
             SnippetChooserPanel("product_range")
     ]
-    images_panels = [
+    media_panels = [
             InlinePanel("product_images", label="images de produit"),
+            MediaChooserPanel("video"),
     ]
     price_panels = [
             MultiFieldPanel(
@@ -194,7 +204,7 @@ class Product(ProductBase, index.Indexed, ClusterableModel):
     edit_handler = TabbedInterface(
             [
                 ObjectList(panels, heading=_('Contenu')),
-                ObjectList(images_panels, heading=_('Images')),
+                ObjectList(media_panels, heading=_('Media')),
                 ObjectList(price_panels, heading=_('Prix')),
                 ObjectList(attribute_panels, heading=_("Attributs de produit")),
             ]
