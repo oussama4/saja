@@ -26,5 +26,6 @@ def payment_request_attributes(order, request):
             'CallbackURL': request.build_absolute_uri("/payment/callback/"), #'http://localhost:8000/payment/callback/',
             'shopurl': request.build_absolute_uri(f"/payment/{order.pk}/cancel/"),
     }
+
     return req_attrs
 
