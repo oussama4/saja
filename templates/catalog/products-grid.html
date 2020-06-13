@@ -66,24 +66,6 @@
 		</div>
 	</div>
 	<!--PAGINATION-->
-	<div class="uk-margin">
-		{%if products.paginator.num_pages > 1%}
-		<ul class="uk-pagination uk-flex-center">
-			{% if products.has_previous %}
-			<li><a href="?page={{ products.previous_page_number }}"><span uk-pagination-previous></span><a></li>
-			{% endif %}
-			{% for page in products.paginator.page_range %}
-			{% if page == products.number %}
-			<li class=" uk-active"><a href="?page={{page}}">{{ page }}</a></li>
-			{% elif page > products.number|add:'-4' and page < products.number|add:'4' %}
-			<li><a href="?page={{ page }}">{{page}}</a></li>
-			{% endif %}
-			{% endfor %}
-			{% if products.has_next  %}
-			<li><a href="?page={{ products.next_page_number }}"><span uk-pagination-next></span></a></li>
-			{% endif %}
-		</ul>
-		{% endif %}
-	</div>
+	{% include "partials/pagination.html" with products=products %}
 
 </div>
