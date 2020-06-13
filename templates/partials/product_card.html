@@ -1,39 +1,80 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
 {% image product.pimages.0.product_image original as img %}
-<article class="tm-product-card" tabindex="0">
+<article class="tm-product-card" >
 
-    <div class="tm-product-card-media inline-clip uk-transition-tog">
-	<div class="tm-ratio tm-ratio-4-3">
-		<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
-	     <figure class="tm-media-box-wrap">
-			 <img data-src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" style="height: 100%"  alt="{{ img.alt }}&quot;" uk-img>
-	     </figure>
-	    </a>
+	<div class="tm-product-card-media uk-inline-clip uk-transition-tog">
+		<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
+			<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
+				<figure class="tm-media-box-wrap">
+					
+					<div class="uk-position-absolute uk-position-right badge-grid uk-child-width-1-1 uk-grid-small uk-grid" uk-grid >
+		   {% for block in product.features %}
+			{% if block.block_type == 'badges' %}
+			 {% for bimg in block.value %}
+			<div class="badge-grid-el">
+				{% image bimg original as imgb %}
+				<img style="height:100%;width:100%;" src="{{imgb.url}}">
+			</div>
+			 {% endfor %}
+			
+			{% endif %}
+			{% endfor %}
+
+					</div>
+				
+					<img data-src="{{img.url}}"  alt="{{img.alt}}&quot;" style="height:100%"
+						uk-img>
+				</figure>
+			</a>
+		</div>
+		
+		<a href="{% url 'product_detail' product.slug %}">
+		<div class="uk-position-cover upper uk-overlay uk-overlay-default">
+			<section class="feature">
+				<div class="uk-position-top-center uk-margin-top">
+					<p class="uk-text-lead"> Caractéristiqes:</p>
+					<ul class="check-list">
+						{% for feature in product.features%}
+						 {%if feature.block_type == 'features'%}
+							{{feature}}
+						 {%endif%}
+						{% endfor %}
+					</ul>
+				</div>
+			</section>
+		</div>
+		</a>
 	</div>
-    </div>
-    <div class="tm-product-card-body ">
-	<div class="tm-product-card-info">
-	    <h3 class="tm-product-card-title">
-		    <a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
-			{{ product.title }}
-		    </a>
-	    </h3>
-	</div> 
-	<div class="tm-product-card-shop">
-	    <div class="tm-product-card-prices">
-		{% if product.has_discount %}
-		<del class="uk-text-meta">{{ product.base_price}}DH</del>
-		{% endif %}
-		<div class="tm-product-card-price">{{ product.price}}</div>
-	    </div>
-	    <div class="tm-product-card-add">
-		<button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
-			<span class="tm-product-card-add-button-icon uk-icon" uk-icon="cart"></span>
-			<span class="uk-text-small tm-product-card-add-button-text">{% trans 'Ajouter au panier' %} </span>
-		</button>
-	    </div>
+	<div class="tm-product-card-body" >
+		<div class="tm-product-card-info">
+			<h3 class="tm-product-card-title">
+				<a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
+					{{ product.display_title }}
+				</a>
+			</h3>
+			<ul class="check-list uk-list tm-product-card-properties">
+					{% for feature in product.features%}
+					{% include_block feature %}
+					{% endfor %}
+			</ul>
+		</div>
+		<div class="tm-product-card-shop">
+			<div class="tm-product-card-prices uk-margin-small-left">
+				{% if product.has_discount %}
+				<div><del class="uk-text-meta">{{ product.base_price}}DH</del></div>
+				{% endif %}
+				<span class="tm-product-card-price">{{ product.price}}DH</span>
+			</div>
+			<div class="">
+				<button data-id="{{ product.pk }}"
+					
+class=" badge tm-shine js-add-to-cart add_to_cart uk-button-primary ys-product-card-add-button"> <span>{% trans 'Ajouter au panier' %}</span><span class="uk-margin-small-left" uk-icon="cart"></span>
+					
+				</button>
+			</div>
+		</div>
 	</div>
-    </div>
-    
+
+
 </article>
