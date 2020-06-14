@@ -57,7 +57,86 @@
 						<div class="uk-grid-collapse uk-child-width-1-3 tm-products-grid js-products-grid"
 							uk-grid="uk-grid">
 							{% for product in products %}
-								{% include "partials/product_card.html" with product=product %}
+							{% image product.pimages.0.product_image original as img %}
+							<article class="tm-product-card" >
+
+								<div class="tm-product-card-media uk-inline-clip uk-transition-tog">
+									<div class="tm-ratio tm-ratio-4-3 flip uk-transition-flip">
+										<a class="tm-media-box" href="{% url 'product_detail' product.slug %}">
+											<figure class="tm-media-box-wrap">
+												
+												<div class="uk-position-absolute uk-position-right badge-grid uk-child-width-1-1 uk-grid-small uk-grid" uk-grid >
+									   {% for block in product.features %}
+										{% if block.block_type == 'badges' %}
+										 {% for bimg in block.value %}
+										<div class="badge-grid-el">
+											{% image bimg original as imgb %}
+											<img style="height:100%;width:100%;" src="{{imgb.url}}">
+										</div>
+										 {% endfor %}
+										
+										{% endif %}
+									    {% endfor %}
+
+												</div>
+											
+												<img data-src="{{img.url}}"  alt="{{img.alt}}&quot;" style="height:100%"
+													uk-img>
+											</figure>
+										</a>
+									</div>
+									
+									<a href="{% url 'product_detail' product.slug %}">
+									<div class="uk-position-cover upper uk-overlay uk-overlay-default">
+										<section class="feature">
+											<div class="uk-position-top-center uk-margin-top">
+												<p class="uk-text-lead"> Caractéristiqes:</p>
+												<ul class="check-list">
+													{% for feature in product.features%}
+													 {%if feature.block_type == 'features'%}
+													    {{feature}}
+													 {%endif%}
+													{% endfor %}
+												</ul>
+											</div>
+										</section>
+									</div>
+									</a>
+								</div>
+								<div class="tm-product-card-body" >
+									<div class="tm-product-card-info">
+										<h3 class="tm-product-card-title">
+											<a class="uk-link-heading" href="{% url 'product_detail' product.slug %}">
+												{{ product.display_title }}
+											</a>
+										</h3>
+										<ul class="check-list uk-list tm-product-card-properties">
+												{% for feature in product.features%}
+												 {% if feature.block_type == 'features' %}
+													{% include_block feature %}
+												 {% endif %}
+												{% endfor %}
+										</ul>
+									</div>
+									<div class="tm-product-card-shop">
+										<div class="tm-product-card-prices uk-margin-small-left">
+											{% if product.has_discount %}
+											<div><del class="uk-text-meta">{{ product.base_price}}DH</del></div>
+											{% endif %}
+											<span class="tm-product-card-price">{{ product.price}}DH</span>
+										</div>
+										<div class="">
+											<button data-id="{{ product.pk }}"
+												
+		   class=" badge tm-shine js-add-to-cart add_to_cart uk-button-primary ys-product-card-add-button"> <span>{% trans 'Ajouter au panier' %}</span><span class="uk-margin-small-left" uk-icon="cart"></span>
+												
+											</button>
+										</div>
+									</div>
+								</div>
+
+
+							</article>
 							{% endfor %}
 						</div>
 					</div>
@@ -66,6 +145,24 @@
 		</div>
 	</div>
 	<!--PAGINATION-->
-	{% include "partials/pagination.html" with products=products %}
+	<div class="uk-margin">
+		{%if products.paginator.num_pages > 1%}
+		<ul class="uk-pagination uk-flex-center">
+			{% if products.has_previous %}
+			<li><a href="?page={{ products.previous_page_number }}"><span uk-pagination-previous></span><a></li>
+			{% endif %}
+			{% for page in products.paginator.page_range %}
+			{% if page == products.number %}
+			<li class=" uk-active"><a href="?page={{page}}">{{ page }}</a></li>
+			{% elif page > products.number|add:'-4' and page < products.number|add:'4' %}
+			<li><a href="?page={{ page }}">{{page}}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if products.has_next  %}
+			<li><a href="?page={{ products.next_page_number }}"><span uk-pagination-next></span></a></li>
+			{% endif %}
+		</ul>
+		{% endif %}
+	</div>
 
 </div>

@@ -153,7 +153,9 @@
 			<p class="uk-text-lead"> Caractéristiqes:</p>
 				<ul class="check-list">
 				{% for feature in product.features%}
+				  {% if feature.block_type == "features" %}
 					{% include_block feature %}
+				  {% endif %}
 				{% endfor %}
 				</ul>
 
