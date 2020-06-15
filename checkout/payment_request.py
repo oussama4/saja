@@ -1,5 +1,4 @@
-import hashlib
-import base64
+import hashlib, base64, re, unicodedata
 
 
 def dot_to_document(v):
@@ -35,4 +34,10 @@ def postAuth_gen_hash(attributes, sk):
 
     return h.digest()
 
+
+def normalize(param):
+    """ replace accents and remove special characters """
+
+    n = unicodedata.normalize('NFKD', param).encode('ascii', 'ignore').decode('utf-8')
+    return re.sub(r'[^a-zA-Z0-9_ ]', '', n)
 
