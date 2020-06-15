@@ -35,8 +35,10 @@ def ok(request):
 def fail(request):
     print("this is fail \n{}".format(request.POST))
     oid = request.POST.get('oid')
-    errMsg = request.POST.get('ErrMsg')
+    #errMsg = request.POST.get('ErrMsg')
     o = Order.objects.get(pk=int(oid))
-    o.delete()
-    return render(request, "checkout/payment_fail.html", {'oid': oid, 'err': errMsg})
+    if o.status != Order.CANCELED:
+        o.status = Order.CANCELED
+        o.save()
+    return render(request, "checkout/payment_fail.html", {'order': o})
 
