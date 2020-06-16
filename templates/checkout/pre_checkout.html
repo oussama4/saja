@@ -36,7 +36,7 @@
 	  <form method="GET" action="{% url 'checkout:pre_checkout' %}" >
 	  <div>
 		  <input class="uk-checkbox" id="check" type="checkbox" name="conditions" value="1">
-		  <label for="check">{% trans "J'ai lu les "%} <a href="/terms">CONDITIONS GENERALES DE VENTE</a></label>
+		  <label for="check">{% trans "J'ai lu les "%} <a href="/terms/">CONDITIONS GENERALES DE VENTE</a></label>
 	  </div>
 	  <div class="uk-margin">
 		  <a class="uk-button uk-button-default" href="{% url 'checkout:cart' %}"> {% trans "Retourner" %} </a>
