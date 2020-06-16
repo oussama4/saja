@@ -24,8 +24,8 @@ def host_to_host_callback(request):
     except:
         order = None
 
-    calculated_hash = postAuth_gen_hash(hash_dict, settings.STORE_KEY)
-    incoming_hash = base64.b64decode(request.POST.get('HASH'))
+    calculated_hash = base64.b64encode(postAuth_gen_hash(hash_dict, settings.STORE_KEY))
+    incoming_hash = request.POST.get('HASH')
     if calculated_hash == incoming_hash:
         if(str(request.POST['ProcReturnCode']) == '00'):
             order.status = Order.PAID
