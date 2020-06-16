@@ -24,7 +24,9 @@ def host_to_host_callback(request):
     except:
         order = None
 
-    if(str(order.total_price) == request.POST['amount'] and postAuth_gen_hash(hash_dict, "Codylia2020") == base64.b64decode(request.POST['HASH'])):
+    calculated_hash = postAuth_gen_hash(hash_dict, settings.STORE_KEY)
+    incoming_hash = base64.b64decode(request.POST.get('HASH'))
+    if calculated_hash == incoming_hash:
         if(str(request.POST['ProcReturnCode']) == '00'):
             order.status = Order.PAID
             order.save()
