@@ -10,6 +10,8 @@ from anymail.message import AnymailMessage
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.core.blocks import ListBlock, CharBlock, StructBlock, PageChooserBlock 
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -73,6 +75,13 @@ class HomePage(RoutablePageMixin, Page):
             [
                 ("brands", blocks.BrandsBlock()),
                 ("connect", blocks.BrandConnect()),
+                ("home_products", ListBlock(
+                    StructBlock([
+                            ('image', ImageChooserBlock(required=False)),
+                            ('text', CharBlock(required=False)),
+                            ('page', PageChooserBlock(required=False)),
+                        ])
+                    )), 
             ],
             verbose_name=_("corps"),
             help_text=_("corps de page"),
