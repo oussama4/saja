@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
+from django.conf import settings
 
 from checkout.payment_request import postAuth_gen_hash
 from checkout.models import Order
@@ -24,8 +25,8 @@ def host_to_host_callback(request):
     except:
         order = None
 
-    calculated_hash = base64.b64encode(postAuth_gen_hash(hash_dict, settings.STORE_KEY))
-    incoming_hash = request.POST.get('HASH')
+    calculated_hash = postAuth_gen_hash(hash_dict, settings.STORE_KEY)
+    incoming_hash = base64.b64decode(request.POST.get('HASH'))
     if calculated_hash == incoming_hash:
         if(str(request.POST['ProcReturnCode']) == '00'):
             order.status = Order.PAID
