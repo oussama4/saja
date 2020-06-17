@@ -206,15 +206,18 @@ function remove_item(e) {
               var input = document.querySelector(`input[data-id="${id}"]`);
               if (input) input.value = response.product[1];
 	      var liv_includ = document.querySelector("#liv-includ");
+	      if(liv_includ){
 	      if(response.total<300){
-	 	liv_includ.innerHTML = "livraison non incluse (payé à la livraison)"
+	 	liv_includ.innerHTML = "*livraison non incluse (payé à la livraison)"
 	      }else{
-		liv_includ.innerHTML = " "; 
-	      } 
+		liv_includ.innerHTML = "*livraison gratuite "; 
+	      	}
+	      }
               var totalItem = document.querySelector(
                 `.totalItem[data-id="${id}"]`
               );
               if (totalItem) totalItem.innerHTML = response.totalItem;
+		
 
               var totalCart = document.querySelector("#totalCart");
               if (totalCart) totalCart.innerHTML = response.total;
