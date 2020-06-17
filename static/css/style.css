@@ -1,3 +1,17 @@
+.promotions-title {
+	color: rgb(107, 134, 86);
+}
+#navbar-promotions:hover {
+	font-weight: 500;
+	font-size: medium;
+	text-decoration: none;
+}
+#navbar-promotions {
+	color: rgb(107, 134, 86);
+}
+.saja-brand-color {
+	color: rgb(107, 134, 86);
+}
 .home-product-grid-item {
 	height:fit-content;
 	width:fit-content;

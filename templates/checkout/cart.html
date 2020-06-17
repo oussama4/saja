@@ -111,7 +111,9 @@
 			  <div>
 			  <p id="liv-includ" class="uk-text-meta">
 			  {% if cart.0.total_price < 300 %}
-			  	{% trans "livraison non incluse(payé à la livraison)" %}
+			  	{% trans "*livraison non incluse (payé à la livraison)" %}
+			  {% else %}
+			        {% trans "*livraison gratuite "%}
 			  {% endif %}
 			  </p>
 		  </div>

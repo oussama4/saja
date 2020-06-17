@@ -125,7 +125,6 @@ def remove_item_from_cart(request):
             itemRemove['total'] = cart.total_price
             itemRemove['discount']  = cart.total_discount
             itemRemove['totalDiscount'] = cart.price_without_discount 
-        print(itemRemove)
         return JsonResponse(itemRemove)
 
 
