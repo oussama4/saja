@@ -17,8 +17,8 @@ def ok(request):
     print("this is ok \n {}".format(request.POST))
     # verify hash
     hash_dict = {k:html.unescape(v)  for k, v in request.POST.items() if k != "HASH" and k != "encoding"}
-    calculated_hash = base64.b64encode(postAuth_gen_hash(hash_dict, settings.STORE_KEY))
-    incoming_hash = request.POST.get('HASH')
+    calculated_hash = postAuth_gen_hash(hash_dict, settings.STORE_KEY)
+    incoming_hash = base64.b64decode(request.POST.get('HASH'))
 
     oid = request.POST.get('oid')
     o = Order.objects.get(pk=int(oid))
