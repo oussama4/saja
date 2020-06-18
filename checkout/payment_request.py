@@ -12,7 +12,7 @@ def dot_to_document(v):
     
 def preAuth_gen_hash(attributes, sk):
 
-    ordredAttValues = [dot_to_document(attributes.get(v)) if "document" in attributes.get(v) else attributes.get(v,'')  for v in sorted(attributes, key=str.casefold) ]
+    ordredAttValues = [dot_to_document(attributes.get(v).strip()) if "document" in attributes.get(v) else attributes.get(v,'')  for v in sorted(attributes, key=str.casefold) ]
     toHash = "|".join((ordredAttValues))
     toHash += f"|{sk}"
     
@@ -25,7 +25,7 @@ def preAuth_gen_hash(attributes, sk):
 
 def postAuth_gen_hash(attributes, sk):
 
-    ordredAttValues = [attributes.get(v,'')  for v in sorted(attributes, key=str.casefold)]
+    ordredAttValues = [attributes.get(v,'').strip()  for v in sorted(attributes, key=str.casefold)]
     toHash = "|".join((ordredAttValues)) 
     toHash += f"|{sk}"
 

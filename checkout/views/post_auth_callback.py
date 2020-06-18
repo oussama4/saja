@@ -1,6 +1,7 @@
 import hashlib
 import html
 import base64
+import logging
 
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -12,11 +13,11 @@ from checkout.payment_request import postAuth_gen_hash
 from checkout.models import Order
 
 
+logger = logging.getLogger('django')
 
 @csrf_exempt
 @require_POST
 def host_to_host_callback(request):
-    print("this is callback {}".format(request.POST))
     data = ""
     hash_dict = {k:html.unescape(v)  for k, v in request.POST.items() if k != "HASH" and k != "encoding"}
      
@@ -36,6 +37,6 @@ def host_to_host_callback(request):
             data = "APPROVED"
     else:
         data = "FAILURE"
-    print(data)
+    logger.warning(data)
     return HttpResponse(data)
 
