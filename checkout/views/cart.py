@@ -12,6 +12,10 @@ from wagtail.images.views.serve import generate_image_url
 from catalog.models import Product
 from checkout.models import Cart, CartItem
 
+import logging
+
+logging.basicConfig(filename="test.log",level=logging.DEBUG)
+
 @csrf_protect 
 def add_to_cart_p(request):
     if request.user.is_authenticated:
