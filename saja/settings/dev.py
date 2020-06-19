@@ -26,7 +26,7 @@ EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
 
 STORE_KEY = "Codylia2020"
-
+PAYMENT_GATEWAY_URL = "https://testpayment.cmi.co.ma/fim/est3Dgate"
 
 try:
     from .local import *

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-	<form method="post" id='preAuthForm' action="https://testpayment.cmi.co.ma/fim/est3Dgate">
+	<form method="post" id='preAuthForm' action="{{ attrs.gatewayUrl }}">
 		{% for k, v in attrs.items %}
+		 {% if k != "gatewayUrl"%}
 			<input type="hidden" name="{{k}}" value="{{v}}"> 
+		 {% endif %}
 		{% endfor %}
 	</form>
 	<script>

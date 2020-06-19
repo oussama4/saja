@@ -14,5 +14,6 @@ def pre_payment(request):
     o = create_order(request.user)
     a = payment_request_attributes(o, request)
     at = preAuth_gen_hash(a, settings.STORE_KEY)
+    at['gatewayUrl'] = settings.PAYMENT_GATEWAY_URL
     return render(request, "checkout/preAuth.html", {'attrs': at})
 

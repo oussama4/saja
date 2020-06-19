@@ -80,6 +80,7 @@ MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/{MEDIAFILES_LOCATION}/'
 DEFAULT_FILE_STORAGE = 'saja.settings.storage_backends.MediaStorage'
 
 STORE_KEY = config.get('STORE_KEY')
+PAYMENT_GATEWAY_URL = "https://payment.cmi.co.ma/fim/est3Dgate"
 
 try:
     from .local import *
