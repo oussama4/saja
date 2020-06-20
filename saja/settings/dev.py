@@ -10,7 +10,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['*'] 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # debug_toolbar
 INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar','django_extensions','anymail', 'cookielaw']
@@ -24,6 +24,7 @@ ANYMAIL = {
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
+SAJA_EMAIL = 'oussamazouaki4@gmail.com'
 
 STORE_KEY = "Codylia2020"
 

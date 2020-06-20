@@ -8,12 +8,9 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.html import strip_tags
 
-from .models import Order
 
-def send_invoice(order_id):
+def send_invoice(order):
     """ sends an invoice mail to customer after a successful order """
-
-    order = Order.objects.get(pk=order_id)
 
     # prepare invoice e-mail
     subject = _(f"Sajacosmetics - Facture #{order.id}")
@@ -28,10 +25,8 @@ def send_invoice(order_id):
     )
 
 
-def send_order(order_id):
+def send_order(order):
     """ sends a notification email after a successful order """
-
-    order = Order.objects.get(pk=order_id)
 
     # prepare mail
     subject = _(f"Sajacosmetics - Commande #{order.id}")
