@@ -84,7 +84,7 @@
 }
 .loader-wrapper {
         width:100%;
-        z-index:9999;
+        z-index:9998;
         height:400vh;
         position: absolute;
         top:0;
@@ -92,8 +92,8 @@
         background-color: rgb(100,100,100,0.25);
 }
 @keyframes saja-flash {
-        from {width:60px;height:30px;opacity:0.3}
-        to {width: 120px;height:65px;opacity:1;}
+        from {width:60px;height:30px;opacity:0.4}
+        to {width: 140px;height:70px;opacity:1;}
 }
 .modal-saja {
 	top: 45vh!important;
@@ -141,7 +141,7 @@
 	}
 	.modal-saja {
 		top: 40vh!important;
-		left: 38vw;
+		left: 35vw;
 	}
 	.tm-product-card-media {
 		width: 45%!important;

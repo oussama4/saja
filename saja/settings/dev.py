@@ -27,7 +27,7 @@ DEFAULT_FROM_EMAIL = "admin@sajacosmetics.com"
 SAJA_EMAIL = 'oussamazouaki4@gmail.com'
 
 STORE_KEY = "Codylia2020"
-
+PAYMENT_GATEWAY_URL = "https://testpayment.cmi.co.ma/fim/est3Dgate"
 
 try:
     from .local import *
